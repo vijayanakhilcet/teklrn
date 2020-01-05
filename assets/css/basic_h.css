@@ -1,0 +1,229 @@
+* {box-sizing: border-box;}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.item1 { grid-area: header; }
+.item2 { grid-area: icon; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: menu; }
+.item6 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header header'
+    'icon main main main main right right'
+    'icon main main main main right right'
+    'menu menu menu menu menu menu menu'
+    'menu menu menu menu menu menu menu'
+	  'menu menu menu menu menu menu menu'
+    'menu menu menu menu menu menu menu'
+    'footer footer footer footer footer footer footer';
+  
+  background-color:#fafafb;
+  padding: 0px;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+}
+
+.grid-container > div {
+  background-color: #fafafb;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+.open-button {
+  background-color:  darkolivegreen;
+  color: white;
+  padding: 16px 20px;
+  border: 3px;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 180px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.form-popup1 {  
+  border: 2px solid #666;
+  z-index: 9;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.form-popup1 input[type=text] {
+  background-color: ghostwhite;
+}
+
+.loginPopup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+/* Add styles to the form container */
+
+.select-style{
+  background-color: transparent; 
+  border: none; 
+  overflow: hidden; 
+  outline: none;
+  width:100%;
+  display: none;
+
+}
+
+option:hover{
+  background: rgba(12,13,14,0.05);
+}
+.option-style{  
+  height:30px;
+  font-weight: 400;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  margin-top: 2px;
+  color: rgba(0,0,0,0.5);
+  word-spacing: 1px;
+  font: inherit;
+  width:100%;
+  padding-left: 20%;
+  border-radius: 5%;
+}
+
+.imageicon
+{   
+    width: 10%;
+    float: left;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: #e8e9eb;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+  font-size: 15px;
+  font-weight: 500;
+  color: #5b5b65;
+  text-shadow: 0 1px 0 #fff;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  background: ghostwhite;
+  padding: .6em .7em;
+  border: 1px solid rgb(200,200,200);
+  border-radius: 3px;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: ghostwhite;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+
+
+.level-select:hover{
+  color: darkolivegreen;
+  background-color: darkolivegreen;
+}
+
+.form-container .btn {
+  color: white;
+  padding: 0.8em;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  font-family: inherit;
+  background-color: rgb(0, 149, 255);
+  border: 1px solid rgb(0, 119, 204);
+  font-weight: normal;
+  box-shadow: rgb(102, 191, 255) 0px 1px 0px inset;
+  display: inline;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: dodgerblue;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.collapsible {
+  background-color: #f7f1d5;
+  color: #737063;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-family:  -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-weight: 100;
+  
+}
+
+.active, .collapsible:hover {
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: #005999;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #ffff;
+  color: #0064bd;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  vertical-align: baseline;
+}

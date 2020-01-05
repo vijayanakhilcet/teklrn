@@ -1,0 +1,12 @@
+<!-- templates/webapp/buy.html -->
+<h2>Buy for $5.00</h2>
+<form action="charge/" method="post">
+    {% csrf_token %}
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7"
+    data-description="A Django Charge"
+    data-amount="500"
+    data-locale="auto">
+</script>
+
+</form> 

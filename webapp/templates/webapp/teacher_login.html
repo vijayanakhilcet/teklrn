@@ -1,0 +1,86 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="{% static 'css/basic.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/topnav.css' %}" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{% static 'js/load_teacher_login.js' %}"></script>
+</head>
+<body>
+    
+             
+<div class="grid-container">
+  <div class="item1">
+    <div class="topnav">
+      <img src="static/image/companyname2.png" class="imageicon">
+      <a href="/">Home</a>
+      <a href="/contact">CONTACT</a>
+      <a href="/about">About</a>
+      
+          <button  id="logout" style="border-radius: 3px;
+          float: right;
+          margin-top: .5%;
+          margin-right: 1%;
+          padding: .8em;
+          height: 35px;
+          color: #39739d;
+          background-color: #e1ecf4;
+          border-color: #7aa7c7;
+          font-family: inherit;
+          font-weight: normal;
+          box-shadow: inset 0 1px 0 #66bfff;">Logout</button>
+          <a  style="align-content: right; float:right">{{name}}</a>
+      </div>
+      <div class="searchbox">
+        <input name="course-search" placeholder="Enter Course.." id="course-search">
+       
+      </div> 
+</div>
+  <div class="item2">
+<select  id="level-select" size="30" id="level-select" class="select-style" onchange="levelChange(this);"> 
+    <option value="1" class="option-style" >Select Levels</option>
+</select>
+
+
+       
+  </div>
+  <div class="item3">
+   <iframe id="course-pdf" src="static/image/{{course}}_{{level}}.pdf" width="100%" height="100%"></iframe>
+  </div>  
+  <div class="item4" style="overflow: scroll">
+    <div style="text-align: right;">
+      <button id = "four" class="collapsible">Trainings Given</button>
+      <div id="divfour" class="content">
+      <form id = "pfour" style="height: 100%; max-width: fit-content;">
+         </form>
+      </div>
+      <button id = "three" class="collapsible">Trainings Inprogress</button>
+      <div id="divthree" class="content">
+          <form id = "pthree" style="height: 100%; max-width: fit-content;">
+            </form>
+      </div>
+      <button id = "two" class="collapsible">Trainings Pending</button>
+      <div id="divtwo" class="content">
+          <form id = "ptwo" style="height: 100%; max-width: fit-content;">
+            </form>
+      </div>
+      <button id = "one" class="collapsible">Pick a schedule for Training</button>
+      <div id="divone" class="content">
+        <form id = "pone" style="height: 100%; max-width: fit-content;">
+        </form>
+        
+      </div>
+</div>
+ <!-- <div class="item5">Footer</div>-->
+</div>
+
+
+
+</div>
+
+</body>
+</html>
