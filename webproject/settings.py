@@ -25,7 +25,7 @@ SECRET_KEY = 'l-x61q2e!d^qvwgx0#w5+*0hi25(my5l_y-u+cgk#w(nfwb0jz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-18-222-232-200.us-east-2.compute.amazonaws.com']
 
 STRIPE_SECRET_KEY = 'sk_test_yt4k3CWdEQgIJIXoPM4tEZak00XxxVpPdw'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7' 
@@ -34,7 +34,7 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7'
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
+    'dal',  
     'dal_select2',
     'webapp.apps.WebappConfig',
     'django.contrib.admin',
