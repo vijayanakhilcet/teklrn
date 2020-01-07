@@ -10,6 +10,8 @@ import dateutil.parser
 from django.db.models import Q
 from django.conf import settings
 import stripe # new
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 
@@ -148,7 +150,9 @@ class LoginTeacherView(FormView):
             request.session['password']=None
         return render(request, page, {'name': request.session['name'], 'course': course_name, 'level': '1'})
 
+
 class LoginStudentView(FormView):
+    @method_decorator(csrf_exempt)
     def post(self,request,*args,**kwargs):
         email_id = request.POST['email']
         pwd = request.POST['pwd']

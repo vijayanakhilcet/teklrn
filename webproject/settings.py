@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['ec2-18-222-232-200.us-east-2.compute.amazonaws.com', 'localhos
 STRIPE_SECRET_KEY = 'sk_test_yt4k3CWdEQgIJIXoPM4tEZak00XxxVpPdw'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7' 
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 
 # Application definition
 
@@ -45,15 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'webproject.urls'
 
