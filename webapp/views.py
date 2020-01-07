@@ -189,8 +189,14 @@ class LoginStudentView(FormView):
 class RegisterStudentView(FormView):
     def post(self,request,*args,**kwargs):
         results= []
-        course_name = request.POST['course']
-        course_level = request.POST['level']
+        if 'course' not in request.POST:
+          course_name = "Java"
+        else:
+          course_name = request.POST['course']
+        if 'level' not in request.POST:
+          course_level = "1"
+        else:
+          course_level = request.POST['level']
         student_name = request.POST['name']
         email_id = request.POST['email']
         pwd = request.POST['pwd']
