@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="{% static 'js/load_teacher_login.js' %}"></script>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>TEKLRN</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                 <ul class="list-unstyled CTAs">
+                <li>
+                    <input  name="course-search" id="course-search" class="form-control" placeholder="Enter Course">
+                </li>
+                
+            </ul>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Levels</a>
+                    <ul  class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Level 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 3</a>
+                        </li>
+<li>
+                            <a href="#">Level 4</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 5</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 6</a>
+                        </li>
+<li>
+                            <a href="#">Level 7</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 8</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 9</a>
+                        </li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#trainerbookCrse" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Book Trainings</a>
+                    <ul class="collapse list-unstyled" id="trainerbookCrse">
+                        <li>
+                            <a href="#">Oct 31, 2020 03:03T19:30 EST
+                            <button style="font-size: x-small;    border: 1px solid transparent;
+                            background-color: #17a2b8;
+                            font-size: x-small;
+                            color: white;
+                            border-radius: .25rem;
+                        ">Mark complete</button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">Join session</button><button style="font-size: x-small;    border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">View syllabus</button></a>
+                          
+                        </li>
+                        <li>
+                          <a href="#">Apr 31, 2020 03:03T19:30 EST
+                            <button style="font-size: x-small;    border: 1px solid transparent;
+                            background-color: #17a2b8;
+                            font-size: x-small;
+                            color: white;
+                            border-radius: .25rem;
+                        ">Mark complete</button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">Join session</button><button style="font-size: x-small;    border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">View syllabus</button> </a>
+                        </li>
+                        <li>
+                          <a href="#">May 31, 2020 03:03T19:30 EST
+                            <button style="font-size: x-small;    border: 1px solid transparent;
+                            background-color: #17a2b8;
+                            font-size: x-small;
+                            color: white;
+                            border-radius: .25rem;
+                        ">Mark complete</button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">Join session</button><button style="font-size: x-small;    border: 1px solid transparent;
+    background-color: #17a2b8;
+    font-size: x-small;
+    color: white;
+    border-radius: .25rem;
+">View syllabus</button> </a>
+                        </li>
+                        <li>
+                            <a href="#">Dec 01, 2020 03:03T19:30 EST
+                              <button style="font-size: x-small;">Mark complete</button><button style="font-size: x-small;">Join session</button><button style="font-size: x-small;">View Syllabus</button></a>
+                            </li>
+                        <li>
+                          <a href="#">Sep 21, 2020 03:03T19:30 EST</a>
+
+                        </li>
+                        <li>
+                            <a href="#">Level 3</a>
+                        </li>
+<li>
+                            <a href="#">Level 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#trainerSched" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Scheduled Trainings    </a>
+                    <ul class="collapse list-unstyled" id="trainerSched">
+                       
+                        <li>
+                            <a href="#">Level 10</a>
+                        </li>
+<li>
+                            <a href="#">Level 11</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 12</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 13</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#trainerCompl" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Trainings Completed   </a>
+                    <ul class="collapse list-unstyled" id="trainerCompl">
+                       
+                        <li>
+                            <a href="#">Level 10</a>
+                        </li>
+<li>
+                            <a href="#">Level 11</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 12</a>
+                        </li>
+                        <li>
+                            <a href="#">Level 13</a>
+                        </li>
+                    </ul>
+                </li>
+
+               
+
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+  <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+
+           
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+							<li class="nav-item">
+                                <a class="nav-link" href="/"> Home </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#"> Contact </a>
+                            </li>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#"> About </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#"><i> Welcome {{name}} </i></a>
+                          </li>
+           
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <button id="login_l" type="button" id="sidebarCollapse" class="btn btn-info"> <span>User Profile</span>
+                                </button>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+							
+                            <li class="nav-item">
+                                 <button type="button" id="logout" class="btn btn-info"> <span> Logout</span>
+                                </button>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+          
+<iframe id="course-pdf" src="static/image/Html_6.pdf"  style="width : 100%; height : 100%;"></iframe>
+ 
+           </div>
+    </div>
+
+   <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

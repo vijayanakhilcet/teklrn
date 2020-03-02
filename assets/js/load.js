@@ -19,6 +19,25 @@ for (i = 0; i < coll.length; i++) {
     } 
   });
 }
+
+var u = document.getElementById("touse").innerHTML;
+if (u &&  u=="true") {
+    openFormLogin();
+    document.getElementById("hiddenTxt").style.display="block";
+    
+} else {
+   
+}
+
+var uTeacher = document.getElementById("touseTeacher").innerHTML;
+if (uTeacher &&  uTeacher=="true") {
+    openTeacherFormLogin();
+    document.getElementById("hiddenTxtTeacher").style.display="block";
+    
+} else {
+   
+}
+
             $("#course-search").autocomplete({
                 source: "/autocomplete",
                 dataType: 'json',
@@ -43,6 +62,8 @@ for (i = 0; i < coll.length; i++) {
     elm.appendChild(df); 
         }
             });
+
+           // onLoadAComplete();
 
             $("#myFormemail").submit(function(event) {
 
@@ -113,7 +134,7 @@ for (i = 0; i < coll.length; i++) {
 
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)
-                var mail_id = $('input[name=email]').val();
+                var mail_id = $('input[name=email_name]').val();
                 var pwd = $('input[name=psw]').val();
                 var image_name = 
         
@@ -175,18 +196,19 @@ for (i = 0; i < coll.length; i++) {
                 var mail_id = $('input[id=register-email]').val();
                 var name = $('input[name=name-register]').val();
                 var pwd = $('input[name=psw-register]').val();
+                var e = document.getElementById('timezone-offset');
+                var tz_n = e.options[e.selectedIndex].text;
         
                 // process the form
                 $.ajax({
                     url         : "/register_student", // the url where we want to POST
                     type        : 'post',
-                    data        : {"course": course_name, "level": course_level, "email":mail_id, "name": name, "pwd":pwd, "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+                    data        : {"course": course_name, "level": course_level, "email":mail_id, "name": name, "pwd":pwd, "tz_info":tz_n , "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
                 })
                     // using the done promise callback
                     .done(function(data) {
-                        closeFormLogin(); 
                         document.open("text/html", "load")
                         document.write(data);
                         document.close();
@@ -208,12 +230,14 @@ for (i = 0; i < coll.length; i++) {
             var pwd = $('input[name=teacher-psw-register]').val();
             var course_name = $('input[name=teacher-course-register]').val();
             var meeting_link= $('input[name=teacher-meeting-link]').val();
+            var e = document.getElementById('timezone-offset-teacher');
+            var tz_n = e.options[e.selectedIndex].text;
     
             // process the form
             $.ajax({
                 url         : "/register_teacher", // the url where we want to POST
                 type        : 'post',
-                data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link,  "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+                data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link, "tz_info": tz_n,  "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
                 dataType    : "html", // what type of data do\ we expect back from the server
                 encode      : true
             })
@@ -248,6 +272,16 @@ for (i = 0; i < coll.length; i++) {
             return cookieValue;
         }
 
+        function onLoadAComplete(){
+
+          
+           $("#course-search").val('JavaScript'); 
+            $("#course-search").autocomplete("search", "JavaScript");
+            $('#course-search').autocomplete({autoFocus:true});
+            
+
+               
+        }
 function levelChange(selectObj) { 
  // get the index of the selected option 
  var idx = selectObj.selectedIndex; 

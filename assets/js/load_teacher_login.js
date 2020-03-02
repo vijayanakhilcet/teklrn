@@ -4,6 +4,98 @@ var course_level;
 
 $(function() {
 
+  
+  $.ajax({
+    url         : "/get_pending_course_assignments", // the url where we want to POST
+    data        : {"course":"ab"}, // our data object
+    dataType    : "json", // what type of data do\ we expect back from the server
+    encode      : true
+})
+    // using the done promise callback
+    .done(function(data) {
+      $('#trainerbookCrse').empty();
+                  var elm = document.getElementById('trainerbookCrse');
+                 elm.innerHTML="";
+
+     $.each(data, function(index) {
+        var li_element = document.createElement('li'); // create the option element
+       
+        //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
+        var aHtml = '<a href="#">'+data[index].date+
+        '<button style="font-size: x-small;    border: 1px solid transparent;  background-color: #17a2b8; font-size: x-small;color: white; border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="bookThis(event, '+data[index].pk+')">Book</button><button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus</button></a>';
+      
+        //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
+         //  var ele = document.createElement('div');
+         li_element.innerHTML+=aHtml;
+        //  ele.appendChild(node);
+         // elm.appendChild(ele);
+          
+         elm.appendChild(li_element); 
+      });
+
+}); 
+
+$.ajax({
+  url         : "/get_pending_trainings", // the url where we want to POST
+  data        : {"course":"ab"}, // our data object
+  dataType    : "json", // what type of data do\ we expect back from the server
+  encode      : true
+})
+  // using the done promise callback
+  .done(function(data) {
+    $('#trainerSched').empty();
+                var elm = document.getElementById('trainerSched');
+               elm.innerHTML="";
+
+   $.each(data, function(index) {
+      var li_element = document.createElement('li'); // create the option element
+     
+      //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
+      var aHtml = '<a href="#">'+data[index].date+
+      '<button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join session</button><button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus</button></a>';
+    
+      //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
+       //  var ele = document.createElement('div');
+       li_element.innerHTML+=aHtml;
+      //  ele.appendChild(node);
+       // elm.appendChild(ele);
+        
+       elm.appendChild(li_element); 
+    });
+
+}); 
+
+$.ajax({
+  url         : "/get_given_trainings", // the url where we want to POST
+  data        : {"course":"ab"}, // our data object
+  dataType    : "json", // what type of data do\ we expect back from the server
+  encode      : true
+})
+  // using the done promise callback
+  .done(function(data) {
+    $('#trainerCompl').empty();
+                var elm = document.getElementById('trainerCompl');
+               elm.innerHTML="";
+
+   $.each(data, function(index) {
+      var li_element = document.createElement('li'); // create the option element
+     
+      //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
+      var aHtml = '<a href="#">'+data[index].date+
+      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus</button></a>';
+    
+      //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
+       //  var ele = document.createElement('div');
+       li_element.innerHTML+=aHtml;
+      //  ele.appendChild(node);
+       // elm.appendChild(ele);
+        
+       elm.appendChild(li_element); 
+    });
+
+}); 
+
+
 /*
 var coll = document.getElementsByClassName("collapsible");
 var i;

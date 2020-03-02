@@ -10,6 +10,7 @@ class Course(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=30)
+    time_zn = models.CharField(max_length=30)
     courses = models.ManyToManyField(Course, through='StudentCourse')
     password = models.CharField(max_length=100)    
     def __str__(self):
@@ -18,6 +19,7 @@ class Student(models.Model):
 class Teacher(models.Model):
      name = models.CharField(max_length=100)
      email = models.CharField(max_length=30)
+     time_zn = models.CharField(max_length=30)
      courses = models.ManyToManyField(Course, through='TeacherCourse')
      password = models.CharField(max_length=100)
      meetingLink = models.URLField(max_length=400)

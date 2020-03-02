@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 32px;
+    }
+    
+    .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE10 */
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+    
+    /* Create four equal columns that sits next to each other */
+    .column {
+      -ms-flex: 25%; /* IE10 */
+      flex: 25%;
+      max-width: 25%;
+      padding: 0 4px;
+    }
+    
+    .column img {
+      margin-top: 8px;
+      vertical-align: middle;
+      width: 100%;
+    }
+    
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 800px) {
+      .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+    
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+    </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="{% static 'css/basic_h.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/topnav.css' %}" type="text/css" />
+<script src="{% static 'js/home.js' %}"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+</head>
+<body>
+    
+    
+             
+<div class="grid-container">
+  <div class="item1">
+    <div class="topnav sticky">
+      <img src="static/image/companyname2.png" class="imageicon">
+      <a href="/">Home</a>
+      <a href="/contact">CONTACT</a>
+      <a href="/about">About</a>
+  </div>
+  
+
+ 
+      <div class="topnav sticky">
+          <img src="static/image/companyname2.png" class="imageicon">
+          <a href="/">Home</a>
+          <a href="/contact">CONTACT</a>
+          <a href="/about">About</a>
+      </div>
+      
+     
+</div>
+  <div class="item2">
+ <img src="static/image/teklrn.png" class="imageicon" style="width: 110%; margin-top: 20%;">
+  </div>
+  <div class="item3" style="margin-top: 12%;">
+
+    <div class="row"> 
+      <div class="column">
+        <img src="static/image/tech_icon_java.png" style="width:100%">
+        <img src="static/image/tech_icon_javascript.png" style="width:100%">
+        <img src="static/image/tech_icon_ruby.png" style="width:100%">
+        <img src="static/image/tech_icon_django.png" style="width:100%">
+        <img src="static/image/tech_icon_aws.png" style="width:100%">
+        <img src="static/image/tech_icon_oracle.png" style="width:100%">
+        <img src="static/image/tech_icon_cpp.png" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="static/image/tech_icon_typescript.png" style="width:100%">
+        <img src="static/image/tech_icon_scala.png" style="width:100%">
+        <img src="static/image/tech_icon_html.png" style="width:100%">
+        <img src="static/image/tech_icon_azure.png" style="width:100%">
+        <img src="static/image/tech_icon_ubuntu.png" style="width:100%">
+        <img src="static/image/tech_icon_batch.png" style="width:100%">
+        <img src="static/image/tech_icon_informatica.png" style="width:100%">
+      </div>  
+      <div class="column">
+        <img src="static/image/tech_icon_python.png" style="width:100%">
+        <img src="static/image/tech_icon_hibernate.png" style="width:100%">
+        <img src="static/image/tech_icon_mysql.png" style="width:100%">
+        <img src="static/image/tech_icon_postgresql.png" style="width:100%">
+        <img src="static/image/tech_icon_unix.png" style="width:100%">
+        <img src="static/image/tech_icon_elixir.png" style="width:100%">
+        <img src="static/image/tech_icon_redhat.png" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="static/image/tech_icon_spring.png" style="width:100%">
+        <img src="static/image/tech_icon_django.png" style="width:100%">
+        <img src="static/image/tech_icon_aws.png" style="width:100%">
+        <img src="static/image/tech_icon_windows.png" style="width:100%">
+        <img src="static/image/tech_icon_kotlin.png" style="width:100%">
+        <img src="static/image/tech_icon_devops.png" style="width:100%">
+        <img src="static/image/tech_icon_clojure.png" style="width:100%">
+      </div>
+    </div>
+   </div>  
+  <div class="item4" style="margin-top: 35%;">
+    <button  id="launch" onclick="doLaunch(event)" style="border-radius: 3px;
+    padding: .8em;
+    height: 35px;
+    color: white;
+    font-family: inherit;
+    background-color: #0095ff;
+    border: 1px solid #07c;
+    font-weight: normal;
+    box-shadow: inset 0 1px 0 #66bfff;">Get Trained/Start Training</button>      
+     
+  </div>
+
+  <div class="item5">
+     
+  </div>
+
+  <div class="item6">
+    <div class="footernav">
+      <img src="static/image/companyname2.png" class="imageicon">
+      <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-google"></a>
+      <a href="#" class="fa fa-linkedin"></a>
+      <a href="#" class="fa fa-youtube"></a>
+      <a href="#" class="fa fa-instagram"></a>
+  </div>
+  </div>
+</div>
+
+</body>
+</html>

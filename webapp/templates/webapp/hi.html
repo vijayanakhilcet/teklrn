@@ -1,199 +1,142 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="{% static 'css/basic.css' %}" type="text/css" />
-<link rel="stylesheet" href="{% static 'css/topnav.css' %}" type="text/css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="{% static 'js/load.js' %}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="{% static 'js/landing.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    
-    
-             
-<div class="grid-container">
-  <div class="item1">
-    <div class="topnav">
-      <img src="static/image/companyname2.png" class="imageicon">
-      <a href="/">Home</a>
-      <a href="/contact">CONTACT</a>
-      <a href="/about">About</a>
-  </div>
-      <div class="searchbox">
-        <input name="course-search" placeholder="Enter Course.." id="course-search">
-        <button  id="req_btn" onclick="openForm()" style="border-radius: 3px;
-        padding: .8em;
-        height: 35px;
-        color: white;
-        font-family: inherit;
-        background-color: #0095ff;
-        border: 1px solid #07c;
-        font-weight: normal;
-        box-shadow: inset 0 1px 0 #66bfff;">Request Training</button>        
-        <button  onclick="openteacherFormemail()" style="border-radius: 3px;
-        padding: .8em;
-        height: 35px;
-        color: white;
-        font-family: inherit;
-        background-color: #0095ff;
-        border: 1px solid #07c;
-        font-weight: normal;
-        box-shadow: inset 0 1px 0 #66bfff;">Trainer Login</button>    
-         <button  onclick="openStudentForm()" style="border-radius: 3px;
-         padding: .8em;
-         height: 35px;
-         color: white;
-         font-family: inherit;
-         background-color: #0095ff;
-         border: 1px solid #07c;
-         font-weight: normal;
-         box-shadow: inset 0 1px 0 #66bfff;">Student Login</button>    
-      </div> 
-</div>
-  <div class="item2">
-<select  id="level-select" size="30" id="level-select" class="select-style" onchange="levelChange(this);"> 
-    <option value="1" class="option-style" >Select Levels</option>
-</select>
-  </div>
-  <div class="item3">
-   <iframe id="course-pdf" src="static/image/Java_1.pdf"  style="width : 100%; height : 100%;"></iframe>
-  </div>  
-  <div class="item4" style="overflow: scroll;">
-      <div style="text-align: right; max-width: fit-content;">
-          <button class="collapsible">Instructions to Book a Course</button>
-          <div class="content">
-                  <p>Enter the Technology on the search box at top and select the level for Training.</p>
-                  <p>Click on the Request Training Button to book a time. You can check the status of the </p>        
-                  <p>booking and will know once a traiiner is assigned</p>
-          </div>
-          <button class="collapsible">Instructions for Trainer Registartion</button>
-          <div class="content">
-            <p>Click Tariner Login Button on top right. Register with your technology and</p>
-            <p> your personal video sharing link is mandatory to take training. You can</p>
-            <p> check the available open requests and book a training schedule based on time </p>
-            <p> Every session is for one level and you can see the syllabus. Its mandatory to complete      </p>
-            <p>the session in 1 hour and student has to mark completion of the course for your payment tobe made</p>
-          </div>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>TEKLRN</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                 <ul class="list-unstyled CTAs">
+                <li>
+                    <input  name="course-search" id="course-search" class="form-control" placeholder="Enter Course">
+                </li>
+                
+            </ul>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Levels</a>
+                    <ul  class="collapse list-unstyled" id="homeSubmenu">
+                        
+                    </ul>
+                </li>
+                
+
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+  <li>
+                    <a href="#">About</a>
+                </li>
+            </ul>
+
+           
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+							<li class="nav-item">
+                                <a class="nav-link" href="/"> Home </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#"> Contact </a>
+                            </li>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#"> About </a>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+                            <li class="nav-item">
+                                <button id="book_course" type="button"  class="btn btn-info"> <span>Book Course</span>
+                                </button>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <button id="login_l" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Learner Login</span>
+                                </button>
+                            </li>
+							<li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
+							
+                            <li class="nav-item">
+                                 <button id="login_t" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Trainer Login</span>
+                                </button>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </nav>
           
+<iframe id="course-pdf" src="static/image/Html_6.pdf"  style="width : 100%; height : 100%;"></iframe>
+ 
+           </div>
     </div>
-    </div>
-   <!-- <div class="item5">Footer</div>-->
-  </div>
- <!-- <div class="item5">Footer</div>-->
-</div>
-<div id="emailPopup" class="loginPopup">
-<div class="form-popup1" id="myFormemail">
-  <form action="" class="form-container">
-    <h1 style="font-size: inherit;  font-family: auto;">Enter Email</h1>
-    <label style="font-size: inherit;  font-family: auto;" for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-    <button type="submit" class="btn">Submit</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-</div>
 
-<div id="alertPopup" class="loginPopup">
-  <div class="form-popup1" id="myFormemail">
-    <form action="" class="form-container">
-      <h1 style="font-size: inherit;  font-family: auto;">Enter Course and select Level to proceed</h1>
-      <button type="button" class="btn cancel" onclick="closePopup()">Close</button>
-    </form>
-  </div>
-  </div>
+   <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-<div id="temailPopup" class="loginPopup">
-<div class="form-popup1" id="teacherFormemail">
-  <form action="" class="form-container">
-    <h1>Enter Email</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="teacheremail" name="teacheremail" required>
-    <button type="submit" class="btn">Submit</button>
-    <button type="button" class="btn cancel" onclick="closeteacherFormemail()">Close</button>
-  </form>
-</div>
-</div>
-
-<div id="loginPopup" class="loginPopup">
-<div class="form-popup1" id="myFormlogin">
-  <form action="" class="form-container">
-    <h1>Login</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="email-id" name="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit" class="btn">Login</button>
-    <button type="button" class="btn cancel" onclick="closeFormLogin()">Close</button>
-  </form>
-</div>
-</div>
-
-<div id="tloginPopup" class="loginPopup">
-<div class="form-popup1" id="teacherFormLogin">
-  <form action="" class="form-container">
-    <h1>Login</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="teacher-email-id" name="teacher-email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="teacher-psw" required>
-
-    <button type="submit" class="btn">Login</button>
-    <button type="button" class="btn cancel" onclick="closeTeacherFormLogin()">Close</button>
-  </form>
-</div>
-</div>
-
-
-<div id="registerPopup" class="loginPopup">
-<div class="form-popup1" id="myFormRegister">
-  <form action="" class="form-container">
-    <h1>Register Student</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="register-email" name="email" readonly>
-    <label for="name"><b>Name</b></label>
-    <input type="text" placeholder="Enter Name" name="name-register" required>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw-register" required>
-
-    <button type="submit" class="btn">Register</button>
-    <button type="button" class="btn cancel" onclick="closeFormRegister()">Close</button>
-  </form>
-  </div>
-</div>
-
-<div id="tRegisterPopup" class="loginPopup">
-<div class="form-popup1" id="teacherFormRegister">
-    <form action="" class="form-container">
-      <h1>Register Teacher</h1>
-  
-      <label for="teacher-email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" id="teacher-email-register" name="email" readonly>
-      <label for="teacher-name"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="teacher-name-register" required>
-      <label for="teacher-psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="teacher-psw-register" required>
-      <label for="teacher-course"><b>Course</b></label>
-      <input type="text" placeholder="Enter Course" name="teacher-course-register" required>
-      <label for="teacher-course"><b>Meeting Link</b></label>
-      <input type="text" placeholder="Enter Meeting Link" name="teacher-meeting-link" required>  
-      <button type="submit" class="btn">Register</button>
-      <button type="button" class="btn cancel" onclick="closeTeacherFormRegister()">Close</button>
-    </form>
-  
-</div>
-
-
-</div>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
+
 </html>
