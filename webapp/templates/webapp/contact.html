@@ -1,124 +1,197 @@
 {% load static %}
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+
 <html>
-<head>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    
-    body {
-      margin: 0;
-      font-family: Arial;
-    }
-    
-    .header {
-      text-align: center;
-      padding: 32px;
-    }
-    
-    .row {
-      display: -ms-flexbox; /* IE10 */
-      display: flex;
-      -ms-flex-wrap: wrap; /* IE10 */
-      flex-wrap: wrap;
-      padding: 0 4px;
-    }
-    
-    /* Create four equal columns that sits next to each other */
-    .column {
-      -ms-flex: 25%; /* IE10 */
-      flex: 25%;
-      max-width: 25%;
-      padding: 0 4px;
-    }
-    
-    .column img {
-      margin-top: 8px;
-      vertical-align: middle;
-      width: 100%;
-    }
-    
-    /* Responsive layout - makes a two column-layout instead of four columns */
-    @media screen and (max-width: 800px) {
-      .column {
-        -ms-flex: 50%;
-        flex: 50%;
-        max-width: 50%;
-      }
-    }
-    
-    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-    @media screen and (max-width: 600px) {
-      .column {
-        -ms-flex: 100%;
-        flex: 100%;
-        max-width: 100%;
-      }
-    }
-    </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
-<link rel="stylesheet" href="{% static 'css/basic_h.css' %}" type="text/css" />
-<link rel="stylesheet" href="{% static 'css/topnav.css' %}" type="text/css" />
-<script src="{% static 'js/home.js' %}"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<head>
+		<title>TEKLRN</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<script src="{% static 'js/skel.min.js' %}"></script>
+		<script src="{% static 'js/skel-layers.min.js' %}"></script>
+		<script src="{% static 'js/init.js' %}"></script>
+		<script src="{% static 'js/home.js' %}"></script>
+		<noscript>
+			<link rel="stylesheet" href="{% static 'css/skel.css' %}" type="text/css" />
+			<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+			<link rel="stylesheet" href="{% static 'css/style-xlarge.css' %}" type="text/css" />
+		</noscript>	
+	</head>
+	<body id="top">
 
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="#">TEKLRN</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/contact">Contact</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/about">Refrences</a></li>
+						<li><a href="#" id="launch" onclick="doLaunch(event)" class="button special">New Courses</a></li>
+					</ul>
+				</nav>
+			</header>
 
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h2>TEKLRN</h2>
+					<p>A technology learning platform</p>
+					<ul class="actions">
+						<li><a href="#content" id="launch1" onclick="doLaunch(event)" class="button big special">Get Started</a></li>
+						<li><a href="#elements" class="button big alt">Learn More</a></li>
+					</ul>
+				</div>
+			</section>
 
-</head>
-<body>
-    
-    
-             
-<div class="grid-container">
-  <div class="item1">
-      <div class="topnav sticky">
-          <img src="../static/image/companyname2.png" class="imageicon">
-          <a href="/">Home</a>
-          <a href="/contact">Contact</a>
-          <a href="/about">About</a>
-      </div>
-     
-</div>
-  <div class="item2">
- <img src="../static/image/teklrn.png" class="imageicon" style="width: 78%; margin-top: 15%;">
-  </div>
-  <div class="item3" style="margin-top: 12%; color: #E42217; margin-right: 10%;">
-<h1>For Queries</h1>
+		<!-- One -->
+			<section id="one" class="wrapper style1">
+				<header class="major">
+					<h2>TEKLRN approach</h2>
+					<p>An on demand learning experience with complete control to the learner on what they want to learn. 	</p>
+				</header>
+				<div class="container">
+					<div class="row">
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-area-chart major"></i>
+								<h3>Technology Trends 2020</h3>
+								<p>Technology industry is more volatile than ever. With new releases of existing technologies and new technologies arising to solve complex business problems  </p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-refresh major"></i>
+								<h3>Certified Professional Trainers</h3>
+								<p>Teklrn Courses are booked per Level with a timing of choice, Our qualified Trainers pick up the booking and the Trainee is notified when trainer is  assigned to the Booking </p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-cog major"></i>
+								<h3>Our approach to training</h3>
+								<p>We divide technology into multiple levels. The Trainee has the choice to get trained in level of choice. Syllabus for each level is freely accessible on our website. That aids deciding the level to book</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+		<!-- Two -->
+			<section id="two" class="wrapper style2">
+				<header class="major">
+					<h2>Technologies in Demand</h2>
+					<p>The list of technology trainings most requested by our customers</p>
+				</header>
+				<div class="container">
+					<div class="row">
+						<div class="6u">
+							<section class="special">
+								<a href="#" class="image fit"><img src="static/image/images/pic01.jpg" alt="" /></a>
+								<h3>Java</h3>
+								<p>The latest versions are Java 13, released in October 2019, and Java 11, a currently supported long-term support (LTS) version, released on September 25, 2018; Oracle released for the "legacy" Java 8 LTS the last free "public update" in January 2019 for commercial use, while it will otherwise still support Java 8 with public updates for personal use up to at least December 2020.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+						</div>
+						<div class="6u">
+							<section class="special">
+								<a href="#" class="image fit"><img src="static/image/images/pic02.jpg" alt="" /></a>
+								<h3>Python</h3>
+								<p>The Python 2 language, i.e. Python 2.7.x, was officially discontinued on January 1, 2020 (first planned for 2015) after which security patches and other improvements will not be released for it. With Python 2's end-of-life, only Python 3.5.x and later are supported. Python interpreters are available for many operating systems.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>
 
-<p> Akhil Vijayan, CEO at TEKLRN
-</p>
-    
-    <p> Ph: +1 437-220-7050
-    </p>
+		<!-- Three -->
+			<section id="three" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="8u">
+							<section>
+								<h2>Whom our courses benefit</h2>
+								<a href="#" class="image fit"><img src="static/image/images/pic03.jpg" alt="" /></a>
+								<p>Beginners with no programming experience (Recommended approach is to start from Level 1 of the Technology). Experienced Professional who want to Learn New technology (Recommended approach is to start with Level 1 and reach the Level required for their need. Its adviced to read the Syllabus of each level to decide what to learn).
+								Highly experienced professionals who want to learn higher level of the technology they already know(Recommended approach is to check the levels and figure out the level they want to start learning and book the courses)</p>
+							</section>
+						</div>
+						<div class="4u">
+							<section>
+								<h3>Instructions for Trainees</h3>
+								<p>Click the button "Get Started" on the Home Page. Enter the technology on the search box and select the option from the list. Select the level on the left panel of the screen to view the syllabus. To book a level for training click "Book Course" button. </p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+							<hr />
+							<section>
+								<h3>Quick Links</h3>
+								<ul class="alt">
+									<li><a href="#">Java</a></li>
+									<li><a href="#">Python</a></li>
+									<li><a href="#">HTML</a></li>
+									<li><a href="#">Javascript</a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section>			
+			
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+									<h3>Accumsan</h3>
+									<ul class="alt">
+										<li><a href="#">Nascetur nunc varius</a></li>
+										<li><a href="#">Vis faucibus sed tempor</a></li>
+										<li><a href="#">Massa amet lobortis vel</a></li>
+										<li><a href="#">Nascetur nunc varius</a></li>
+									</ul>
+								</div>
+								<div class="6u">
+									<h3>Faucibus</h3>
+									<ul class="alt">
+										<li><a href="#">Nascetur nunc varius</a></li>
+										<li><a href="#">Vis faucibus sed tempor</a></li>
+										<li><a href="#">Massa amet lobortis vel</a></li>
+										<li><a href="#">Nascetur nunc varius</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+							<h2>TEKLRN CEO</h2>
+							<p>Akhil Vijayan, Ph: +1 437-220-7050, email: vijayan.akhil.cet@gmail.com, Toronto, Ontario, Canada</p>
+							<ul class="icons">
+								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+							</ul>
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design: <a href="http://templated.co">Akhil Vijayan</a></li>
+						<li>Images: <a href="http://unsplash.com">Akhil Vijayan</a></li>
+					</ul>
+				</div>
+			</footer>
 
-    <p>
-      Email: Vijayan.Akhil.CET@gmail.com
-    </p>
-   </div>  
-  <div class="item4" style="margin-top: 35%;">
-   
-  </div>
-
-  <div class="item5">
-     
-  </div>
-
-  <div class="item6">
-    <div class="footernav">
-      <img src="../static/image/companyname2.png" class="imageicon">
-      <a href="#" class="fa fa-facebook"></a>
-      <a href="#" class="fa fa-twitter"></a>
-      <a href="#" class="fa fa-google"></a>
-      <a href="#" class="fa fa-linkedin"></a>
-      <a href="#" class="fa fa-youtube"></a>
-      <a href="#" class="fa fa-instagram"></a>
-  </div>
-
-  </div>
-</div>
-
-</body>
+	</body>
 </html>

@@ -160,7 +160,7 @@ var mail_id_login;
             $("#book_course").click(function(event) {
 
                 if(course_name==null || course_level==null){
-                    alert('Enter a course in the search box and select a level review the syllabus of the level before you proceed with booking');
+                  //  alert('Enter a course in the search box and select a level review the syllabus of the level before you proceed with booking');
               }else{
                 booklogin();
               }
@@ -477,12 +477,15 @@ function levelClick(event) {
     $.ajax({
       url         : "/markCompletion", // the url where we want to POST
       data        : {"pk":val}, // our data object
-      dataType    : "json", // what type of data do\ we expect back from the server
+      dataType    : "html", // what type of data do\ we expect back from the server
       encode      : true
 
   })
       // using the done promise callback
       .done(function(data) {
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
           
       });   
       event.preventDefault();

@@ -478,14 +478,16 @@ function thisisSelected(val){
             $.ajax({
                 url         : "/teacherbooking", // the url where we want to POST
                 data        : {"pk":pk}, // our data object
-                dataType    : "json", // what type of data do\ we expect back from the server
+                dataType    : "html", // what type of data do\ we expect back from the server
                 encode      : true
         
             })
                 // using the done promise callback
                 .done(function(data) {
         
-                //     alert(data);
+                  document.open("text/html", "load")
+                  document.write(data);
+                  document.close();
                 });
                 setTimeout(afterDelayOne, 10);
               }else{}

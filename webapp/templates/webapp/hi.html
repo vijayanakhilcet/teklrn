@@ -16,10 +16,11 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
+    <script src="{% static 'js/dist/attention.js' %}"></script>
     <script src="{% static 'js/landing.js' %}"></script>
     <script src="{% static 'js/modal.js' %}"></script>
     
@@ -50,7 +51,7 @@
                     </ul>
                 </li>
                 
-
+<!--
                 <li>
                     <a href="/">Home</a>
                 </li>
@@ -59,7 +60,7 @@
                 </li>
   <li>
                     <a href="#">About</a>
-                </li>
+                </li> -->
             </ul>
 
            
@@ -85,17 +86,17 @@
                                 <a class="nav-link" href="/"> Home </a>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="#"> Contact </a>
+                                <a class="nav-link" href="/"> Contact </a>
                             </li>
                             </li>
 							<li class="nav-item">
-                                <a class="nav-link" href="#"> About </a>
+                                <a class="nav-link" href="/"> About </a>
                             </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="#">  </a>
                             </li>
                             <li class="nav-item">
-                                <button id="book_course" type="button"  class="btn btn-info"> <span>Book Course</span>
+                                <button id="book_course" type="button"  class="btn btn-info new-alert"> <span>Book Course</span>
                                 </button>
                             </li>
 							<li class="nav-item">
@@ -136,6 +137,15 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+
+        document.querySelector('.new-alert').addEventListener('click', function() {
+                new Attention.Alert({
+                    title: 'Missing Information',
+                    content: 'Enter a course in the search box and select a level review the syllabus of the level before you proceed with booking',
+
+                        
+                });
+            });
     </script>
 </body>
 

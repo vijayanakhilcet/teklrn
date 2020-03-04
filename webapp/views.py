@@ -293,8 +293,7 @@ class TeacherBookCourseView(FormView):
         studCourse_obj.save()
         studCourse_obj.teacher=teacher_obj
         studCourse_obj.save()
-        mimetype = 'application/json'
-        return render(request, "webapp/hi.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email'], 'password': request.session['password']})
+        return render(request, "webapp/hi_login_t.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email'], 'password': request.session['password']})
 
 
 class MarkCourseCompletionView(FormView):
@@ -303,8 +302,9 @@ class MarkCourseCompletionView(FormView):
         studCourse_obj=StudentCourse.objects.get(id=pk)
         studCourse_obj.status='C'
         studCourse_obj.save()
-        mimetype = 'application/json'
-        return HttpResponse(None, mimetype)
+        return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+   
+        """return HttpResponse(None, mimetype)"""
 
 class TeacherGivenTrainingsView(FormView):       
     def get(self,request,*args,**kwargs):
