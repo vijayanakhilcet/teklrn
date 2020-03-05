@@ -260,8 +260,7 @@ class BookCourseView(FormView):
         request.session['name']=request.session['name']
         request.session['course']=course_name
         request.session['level']=course_level
-       # return render(request, "webapp/hi_login.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email'], 'password': request.session['password']})
-        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email'], 'password': request.session['password']})
+        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
 class TeacherPickCourseView(FormView):
     def get(self,request,*args,**kwargs):
