@@ -25,7 +25,7 @@ SECRET_KEY = 'l-x61q2e!d^qvwgx0#w5+*0hi25(my5l_y-u+cgk#w(nfwb0jz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.teklrn.com', 'teklrn.com']
+ALLOWED_HOSTS = ['www.teklrn.com', 'teklrn.com', 'localhost']
 
 STRIPE_SECRET_KEY = 'sk_test_yt4k3CWdEQgIJIXoPM4tEZak00XxxVpPdw'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7' 
