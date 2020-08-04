@@ -43,6 +43,30 @@ def contact(request):
 def hi(request):
     return render(request, 'webapp/hi.html')
 
+def privacy(request):
+    return render(request, 'webapp/privacy.html')
+
+def refund(request):
+    return render(request, 'webapp/refund.html')
+
+def terms(request):
+    return render(request, 'webapp/terms.html')
+
+def help(request):
+    return render(request, 'webapp/help.html')    
+
+def press(request):
+    return render(request, 'webapp/press.html')
+
+def teach(request):
+    return render(request, 'webapp/teach.html')
+
+def business(request):
+    return render(request, 'webapp/business.html')
+
+def careers(request):
+    return render(request, 'webapp/careers.html')
+
 def home(request):
     return render(request, 'webapp/home.html')
 
@@ -192,6 +216,26 @@ class LoginStudentView(FormView):
             request.session['email']=email_id
         return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'course_level':  request.session['level'], 'course_name':  request.session['course'] })
 
+class ResetStudentPwdView(FormView):
+    def post(self,request,*args,**kwargs):
+        email_id = request.POST['email']
+        pwd = request.POST['pwd']
+        page="webapp/login.html"
+        student = Student.objects.get(email=email_id)   
+        student.password = pwd
+        student.save()
+        return render(request, page)
+        
+class ResetTrainerPwdView(FormView):
+    def post(self,request,*args,**kwargs):
+        email_id = request.POST['email']
+        pwd = request.POST['pwd']
+        page="webapp/loginT.html"
+        teacher = Teacher.objects.get(email=email_id)   
+        teacher.password = pwd
+        teacher.save()
+        return render(request, page)   
+
 class RegisterStudentView(FormView):
     def post(self,request,*args,**kwargs):
         results= []
@@ -219,8 +263,14 @@ class RegisterStudentView(FormView):
 class LandingBackView(FormView):
     def get(self,request,*args,**kwargs):
         return render(request, "webapp/hi.html", {'name': 'name'})
-
-
+        
+class ResetPasswordView(FormView):
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/resetPassword.html", {'name': 'name'})
+        
+class ResetPasswordTView(FormView):
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/resetPasswordT.html", {'name': 'name'})  
 
 class RegisterTeacherView(FormView):
     def post(self,request,*args,**kwargs):

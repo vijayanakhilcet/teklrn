@@ -22,6 +22,43 @@ function backtolanding(event){
 event.preventDefault();
 }
 
+function resetPassword(event){
+
+    $.ajax({
+        url         : "/reset_password", // the url where we want to POST
+        data        : {"email":"email"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+event.preventDefault();
+}
+
+function resetPasswordT(event){
+
+    $.ajax({
+        url         : "/reset_password_t", // the url where we want to POST
+        data        : {"email":"email"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+
+event.preventDefault();
+}
+
 
 
 
@@ -71,6 +108,63 @@ function checkTrainerExists(event){
 
         event.preventDefault();
 }
+
+function traineeResetPassword(event){   
+
+                // get the form data
+                // there are many ways to get this data using jQuery (you can use the class or id also)
+                var mail_id = $('input[name=email]').val();
+                var pwd = $('input[name=pass]').val();
+                var image_name = 
+        
+                // process the form
+                $.ajax({
+                    url         : "/reset_student_password", // the url where we want to POST
+                    type        : 'post',
+                    data        : {"email":mail_id, "pwd":pwd}, // our data object
+                    dataType    : "html", // what type of data do\ we expect back from the server
+                    encode      : true
+                })
+                    // using the done promise callback
+                   .done(function(data) {
+                    document.open("text/html", "load")
+                    document.write(data);
+                    document.close();
+                        // here we will handle errors and validation messages
+                    });
+                   
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+}
+
+function trainerResetPassword(event){   
+
+                // get the form data
+                // there are many ways to get this data using jQuery (you can use the class or id also)
+                var mail_id = $('input[name=email]').val();
+                var pwd = $('input[name=pass]').val();
+                var image_name = 
+        
+                // process the form
+                $.ajax({
+                    url         : "/reset_trainer_password", // the url where we want to POST
+                    type        : 'post',
+                    data        : {"email":mail_id, "pwd":pwd}, // our data object
+                    dataType    : "html", // what type of data do\ we expect back from the server
+                    encode      : true
+                })
+                    // using the done promise callback
+                   .done(function(data) {
+                    document.open("text/html", "load")
+                    document.write(data);
+                    document.close();
+                        // here we will handle errors and validation messages
+                    });
+                   
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+}
+
 
 function traineeLogin(event){   
 
