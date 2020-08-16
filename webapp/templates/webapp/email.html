@@ -35,7 +35,7 @@
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" id="dfg" onsubmit="checkTraineeExists(event)">
 					<span class="login100-form-title p-b-49">
-						TEKLRN Account
+						TEKLRN Trainee Account
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Valid email is: a@b.c">
@@ -72,7 +72,7 @@
 					</div>
 
 					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
+						<a href="{% url 'social:begin' 'facebook' %}" class="login100-social-item bg1">
 							<i class="fa fa-facebook"></i>
 						</a>
 

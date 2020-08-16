@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
 
 # Create your models here.
 class Course(models.Model):
@@ -7,21 +10,21 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+#extend user model
 class Student(models.Model):
-    name = models.CharField(max_length=100)
     email = models.CharField(max_length=30)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     time_zn = models.CharField(max_length=30)
     courses = models.ManyToManyField(Course, through='StudentCourse')
-    password = models.CharField(max_length=100)    
     def __str__(self):
-        return self.email
+        return self.user.username
+
 
 class Teacher(models.Model):
-     name = models.CharField(max_length=100)
      email = models.CharField(max_length=30)
+     user = models.OneToOneField(User, on_delete=models.CASCADE)
      time_zn = models.CharField(max_length=30)
      courses = models.ManyToManyField(Course, through='TeacherCourse')
-     password = models.CharField(max_length=100)
      meetingLink = models.URLField(max_length=400)
 
 
@@ -36,3 +39,4 @@ class StudentCourse(models.Model):
 class TeacherCourse(models.Model):    
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     course =  models.ForeignKey(Course, on_delete=models.CASCADE)
+ 

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
@@ -14,9 +15,20 @@ import stripe # new
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+from .utils import token_generator
+from django.shortcuts import redirect
+from .forms import StudentForm, ExtendedUserCreationForm
+from django.contrib.auth.models import User
+import socket
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
-
+HOSTNAME = settings.APP_HOST_NAME
 # Create your views here.
 
 def get_context_data(self, **kwargs): # new
@@ -37,10 +49,99 @@ def charge(request): # new
 def about(request):
     return render(request, 'webapp/about.html')
 
+
+def register(request):
+    if request.method == 'POST':
+        user_time_zone  = request.session.get('user_time_zone', None)
+        form = ExtendedUserCreationForm(request.POST)
+        #student_form = StudentForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+            user_obj = form.save()
+            freegeoip_response = requests.get('http://ip-api.com/json/')
+            freegeoip_response_json = freegeoip_response.json()
+            user_time_zone = freegeoip_response_json['timezone']
+            student = Student.objects.create(user=user_obj, time_zn=user_time_zone, email=username)
+            student.save()
+            domain = get_current_site(request).domain        
+            uidb64 = urlsafe_base64_encode(force_bytes(user_obj.pk))
+            link=reverse('activate', kwargs={
+                     'uidb64': uidb64, 'token': token_generator.make_token(user_obj)})
+            activate_url = 'http://'+domain+link
+            email_subject = 'Teklrn Account Activation'
+            email_body = 'Hello '+user_obj.first_name+ ', \nPlease use this link to verify your Teklrn Student Account\n' + activate_url
+            email_test = EmailMessage(
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                [user_obj.email],
+            )
+            email_test.send(fail_silently=False)
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
+    else:
+        form = ExtendedUserCreationForm()
+        #student_form = StudentForm()
+
+    context = {'form' : form}
+    return render(request, 'webapp/register.html', context)
+
+def register_t(request):
+    if request.method == 'POST':
+        user_time_zone  = request.session.get('user_time_zone', None)
+        form = ExtendedUserCreationForm(request.POST)
+        #student_form = StudentForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+            course_name =  request.POST['course-register-t']
+            meeting_link = request.POST['meeting-link-register-t']
+            course_obj = Course.objects.get(name=course_name)
+            user_obj = form.save()
+            freegeoip_response = requests.get('http://ip-api.com/json/')
+            freegeoip_response_json = freegeoip_response.json()
+            user_time_zone = freegeoip_response_json['timezone']
+            teacher = Teacher.objects.create(user=user_obj, time_zn=user_time_zone, email=username, meetingLink=meeting_link)
+            teacher.save()
+            teacherCourse = TeacherCourse.objects.create(teacher=teacher, course=course_obj)
+            teacherCourse.save()
+            domain = get_current_site(request).domain        
+            uidb64 = urlsafe_base64_encode(force_bytes(user_obj.pk))
+            link=reverse('activate', kwargs={
+                     'uidb64': uidb64, 'token': token_generator.make_token(user_obj)})
+            activate_url = 'http://'+domain+link
+            email_subject = 'Teklrn Account Activation'
+            email_body = 'Hello '+user_obj.first_name+ ', \nPlease use this link to verify your Teklrn Trainer Account\n' + activate_url
+            email_test = EmailMessage(
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                [user_obj.email],
+            )
+            email_test.send(fail_silently=False)
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+    else:
+        form = ExtendedUserCreationForm()
+        #student_form = StudentForm()
+
+    context = {'form' : form}
+    return render(request, 'webapp/registerT.html', context)
+
+def login_page(request):
+    return render(request, 'webapp/login.html')
+
+def login_page_t(request):
+    return render(request, 'webapp/loginT.html')
+
 def contact(request):
     return render(request, 'webapp/contact.html')
 
 def hi(request):
+    if(request.user.is_authenticated):
+        return render(request, 'webapp/hi_login.html')
+    
     return render(request, 'webapp/hi.html')
 
 def privacy(request):
@@ -118,18 +219,20 @@ class CheckUserExistsView(FormView):
         email_id = data.get("email")
         if email_id:
             try:
-               student = Student.objects.get(email=email_id) 
+               student = User.objects.get(username=email_id) 
             except ObjectDoesNotExist:
                student = None
              
         if student:
             request.session['email']=email_id
-            page="webapp/login.html"
-        else:
-            request.session['email']=email_id
-            page="webapp/register.html"
-            
-        return render(request, page, {'email': request.session['email']})
+            return HttpResponseRedirect(HOSTNAME+'login')
+        # render(request, page, {'email': request.session['email']})
+        return HttpResponseRedirect(HOSTNAME+'register')
+
+
+def logout_view(request): 
+        logout(request)            
+        return render(request, "webapp/home.html")
 
 class CheckTeacherExistsView(FormView):
   
@@ -144,12 +247,9 @@ class CheckTeacherExistsView(FormView):
              
         if teacher:
             request.session['email']=email_id
-            page="webapp/loginT.html"
-        else:
-            request.session['email']=email_id
-            page="webapp/registerT.html"
-            
-        return render(request, page, {'email': request.session['email']})
+            return HttpResponseRedirect(HOSTNAME+'loginT')
+        # render(request, page, {'email': request.session['email']})
+        return HttpResponseRedirect(HOSTNAME+'registerT')
 
 
 
@@ -175,46 +275,52 @@ class BookCourseFormView(FormView):
         course_level = data.get("level")
         return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level })
 
-class LoginTeacherView(FormView):
+class LoginTeacherView(FormView):    
     def post(self,request,*args,**kwargs):
         email_id = request.POST['email']
         pwd = request.POST['pwd']
-        page="webapp/hi_login_t.html"
-        teacher = Teacher.objects.get(email=email_id)   
-        name = teacher.name
-        email_id= teacher.email
-        passwd = teacher.password
-        if(pwd==passwd): 
-            request.session['name']=name
-            request.session['email']=email_id
-            page = "webapp/hi_login_t.html"
-        else:
-            page = "webapp/login.html"
-            request.session['name']=None
-            request.session['email']=email_id
+        teacher = Teacher.objects.get(email=email_id)
+        page = "webapp/loginT.html"
+        if teacher is not None:
+            user = authenticate(request, username = email_id, password = pwd)
+            if user is not None:
+                login(request, user)
+                page="webapp/hi_login_t.html"               
+                name = teacher.user.first_name
+                email_id = teacher.user.username
+                request.session['name']=name
+                request.session['email']=email_id
+            else:
+                request.session['name']=None
+                request.session['email']=email_id
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/login_t.html")
+
 
 class LoginStudentView(FormView):
     def post(self,request,*args,**kwargs):
         email_id = request.POST['email']
         pwd = request.POST['pwd']
-        page="webapp/hi_login.html"
-        student = Student.objects.get(email=email_id)   
-        name = student.name
-        email_id= student.email
-        passwd = student.password
-        if(pwd==passwd): 
-            request.session['name']=name
-            request.session['email']=email_id
-            if(request.session['level']):
-              page = "webapp/bookCourse.html"
+        student = Student.objects.get(email=email_id)
+        page = "webapp/login.html"
+        if student is not None:
+            user = authenticate(request, username = email_id, password = pwd)
+            if user is not None:
+                login(request, user)
+                page="webapp/hi_login.html"               
+                name = student.user.first_name
+                email_id = student.user.username
+                request.session['name']=name
+                request.session['email']=email_id
+                page = "webapp/hi_login.html"
             else:
-              page = "webapp/hi_login.html"
-        else:
-            page = "webapp/login.html"
-            request.session['name']=None
-            request.session['email']=email_id
-        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'course_level':  request.session['level'], 'course_name':  request.session['course'] })
+                request.session['name']=None
+                request.session['email']=email_id
+        return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/login.html")
+
 
 class ResetStudentPwdView(FormView):
     def post(self,request,*args,**kwargs):
@@ -236,6 +342,32 @@ class ResetTrainerPwdView(FormView):
         teacher.save()
         return render(request, page)   
 
+class ActivateTrainerView(FormView):
+    def get(self,request,uidb64,token):
+        try:
+            uid=force_text(urlsafe_base64_decode(uidb64))
+            user=User.objects.get(pk=uid)
+        except Exception as identifier:
+            user=None
+        if user is not None and token_generator.check_token(user, token):
+            user.is_active=True
+            user.save()
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+        return HttpResponseRedirect(HOSTNAME+'?toerrorT')
+
+class ActivateStudentView(FormView):
+    def get(self,request,uidb64,token):
+        try:
+            uid=force_text(urlsafe_base64_decode(uidb64))
+            user=User.objects.get(pk=uid)
+        except Exception as identifier:
+            user=None
+        if user is not None and token_generator.check_token(user, token):
+            user.is_active=True
+            user.save()
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
+        return HttpResponseRedirect(HOSTNAME+'?toerror')
+
 class RegisterStudentView(FormView):
     def post(self,request,*args,**kwargs):
         results= []
@@ -253,6 +385,20 @@ class RegisterStudentView(FormView):
         pwd = request.POST['pwd']
         student =  Student.objects.create(name=student_name, email=email_id,password=pwd, time_zn = tz_info)
         student.save()
+        domain = get_current_site(request).domain        
+        uidb64 = urlsafe_base64_encode(force_bytes(student.pk))
+        link=reverse('activate', kwargs={
+                     'uidb64': uidb64, 'token': token_generator.make_token(student)})
+        activate_url = 'http://'+domain+link
+        email_subject = 'Teklrn Account Activation'
+        email_body = 'Hello '+student.name+ ', \nPlease use this link to verify your Teklrn Student Account\n' + activate_url
+        email_test = EmailMessage(
+            email_subject,
+            email_body,
+            'teklrn.inc@gmail.com',
+            [student.email],
+        )
+        email_test.send(fail_silently=False)
         request.session['name']=student_name
         request.session['course']=course_name
         request.session['level']=course_level
@@ -417,8 +563,8 @@ class TeacherPendingTrainingsView(FormView):
 
 class PendingStudentTrainingsView(FormView):       
     def get(self,request,*args,**kwargs):
-        t_email= request.session['email']
-        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=t_email)), status='P')
+        student_email = request.user.email
+        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=student_email)), status='P')
         results = []
         
         for studCourse_obj in studCourse_objs:
@@ -426,7 +572,7 @@ class PendingStudentTrainingsView(FormView):
             studCourse_json['pk'] = studCourse_obj.id
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name
-            tz = pytz.timezone(Student.objects.get(email=t_email).time_zn)
+            tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
             new_ct = my_ct.astimezone(tz)
             studCourse_json['date'] = new_ct.isoformat()
@@ -439,8 +585,8 @@ class PendingStudentTrainingsView(FormView):
 
 class AcceptedStudentTrainingsView(FormView):       
     def get(self,request,*args,**kwargs):
-        t_email= request.session['email']
-        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=t_email)), status='A')
+        student_email = request.user.email
+        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=student_email)), status='A')
         results = []
         
         for studCourse_obj in studCourse_objs:
@@ -448,7 +594,7 @@ class AcceptedStudentTrainingsView(FormView):
             studCourse_json['pk'] = studCourse_obj.id
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name
-            tz = pytz.timezone(Student.objects.get(email=t_email).time_zn)
+            tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
             new_ct = my_ct.astimezone(tz)
             studCourse_json['date'] = new_ct.isoformat()
@@ -479,8 +625,8 @@ class InprogressStudentTrainingsView(FormView):
         
 class CompletedStudentTrainingsView(FormView):       
     def get(self,request,*args,**kwargs):
-        t_email= request.session['email']
-        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=t_email)), status='C')
+        student_email = request.user.email
+        studCourse_objs = StudentCourse.objects.filter(student=(Student.objects.get(email=student_email)), status='C')
         results = []
         
         for studCourse_obj in studCourse_objs:
@@ -488,7 +634,7 @@ class CompletedStudentTrainingsView(FormView):
             studCourse_json['pk'] = studCourse_obj.id
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name
-            tz = pytz.timezone(Student.objects.get(email=t_email).time_zn)
+            tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
             new_ct = my_ct.astimezone(tz)
             studCourse_json['date'] = new_ct.isoformat()

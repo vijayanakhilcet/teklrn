@@ -104,7 +104,6 @@ var mail_id_login;
 
 
             $("#myFormemail").click(function(event) {
-                alert('hi');
 
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)
@@ -381,8 +380,20 @@ var mail_id_login;
 
 
             $("#logout").click(function() {
-                sessionStorage.clear();
-                window.location.href = '';
+                $.ajax({
+                    url         : "/logout", // the url where we want to POST
+                    data        : {"email":'hi'}, // our data object
+                    dataType    : "html", // what type of data do\ we expect back from the server
+                    encode      : true
+                })
+                    .done(function(data) {
+                        document.open("text/html", "load")
+                        document.write(data);
+                        document.close();
+        });
+        
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
               });   
         
 

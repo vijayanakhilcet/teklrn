@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    {% if user.is_authenticated %}
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -238,7 +239,7 @@
                                 <a class="nav-link" href="#">  </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#"><i> Welcome {{name}} </i></a>
+                              <a class="nav-link" href="#"><i> Welcome {{user.first_name}}</i></a>
                           </li>
             <li class="nav-item">
                               <a class="nav-link" href="#">  </a>
@@ -288,6 +289,7 @@
 
         
     </script>
+    <{% endif %}
 </body>
 
 </html>

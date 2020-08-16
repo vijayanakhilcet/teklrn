@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+APP_HOST_NAME='http://localhost:8000/'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -45,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'agora',
 ]
 
 MIDDLEWARE = [  
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 SESSION_COOKIE_SECURE = False
@@ -72,13 +77,28 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'hi/'
+LOGIN_REDIRECT_URL = 'hi/'
+LOGOUT_REDIRECT_URL = '/'
+
 WSGI_APPLICATION = 'webproject.wsgi.application'
 
+SOCIAL_AUTH_FACEBOOK_KEY = '356459022033335'
+SOCIAL_AUTH_FACEBOOK_SECRET = '92c76f8e19e76a09e06327fc0a4fafcd'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -108,6 +128,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+THIRD_PARTY_APPS = [
+    'social_django',
+]
+
+#email settings
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'teklrn.inc@gmail.com'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'teklrn.inc@gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'PAssw0RD8#'
 
 
 # Internationalization

@@ -1,9 +1,17 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url
 from . import views
+from agora.views import Agora
+from django.contrib import admin
+
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('agora/', Agora.as_view(app_id='77295eb8cbfb49c086f1ff4dd6322cff',  channel='teklrn_conference'), name="agora"),
+    path('oauth/', include('social_django.urls', namespace='social')),
+    path('activate/<uidb64>/<token>', views.ActivateStudentView.as_view(), name="activate"),    
+    path('activateT/<uidb64>/<token>', views.ActivateTrainerView.as_view(), name="activateT"),
     path('contact/', views.contact, name='contact-Page'),
     path('about/', views.about, name='about-Page'),
     path('hi/', views.hi, name='hi-Page'),
@@ -22,12 +30,18 @@ urlpatterns = [
     path('book_course_form/',views.BookCourseFormView.as_view()), 
     path('bookingForm/',views.BookCourseFormView.as_view()),    
     path('checkuser/',views.CheckUserExistsView.as_view()),
+    path('logout/',views.logout_view, name='logout'),
     path('register_student',views.RegisterStudentView.as_view()),
+    path('register/', views.register, name='register'), 
+    path('registerT/', views.register_t, name='registerT'), 
+    path('login/', views.login_page, name='login'), 
+    path('loginT/', views.login_page_t, name='loginT'), 
+    path('accounts/', include('django.contrib.auth.urls')),
     path('back_to_landing_page/',views.LandingBackView.as_view()),
     path('reset_password/',views.ResetPasswordView.as_view()),
     path('reset_password_t/',views.ResetPasswordTView.as_view()),
     path('login_student',views.LoginStudentView.as_view()),
-    path('reset_student_password',views.ResetStudentPwdView.as_view()),
+    path('reset_student_password',views.ResetStudentPwdView.as_view(), name='reset'),
     path('reset_trainer_password',views.ResetStudentPwdView.as_view()),
     path('book_course',views.BookCourseView.as_view()),
     path('checkTrainer/',views.CheckTeacherExistsView.as_view()),
