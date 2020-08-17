@@ -217,6 +217,7 @@ class CheckUserExistsView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
         email_id = data.get("email")
+        student = None
         if email_id:
             try:
                student = User.objects.get(username=email_id) 
