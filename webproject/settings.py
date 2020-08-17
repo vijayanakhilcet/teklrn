@@ -129,9 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-THIRD_PARTY_APPS = [
-    'social_django',
-]
+
 
 #email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -21,7 +21,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{% static 'js/dist/attention.js' %}"></script>
-    <script src="{% static 'js/landing.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
     <script src="{% static 'js/modal.js' %}"></script>
     
     <!-- Font Awesome JS -->
@@ -104,7 +104,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button id="login_l" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Learner Login</span>
+                                <button id="login_l1" type="submit" class="btn btn-info" onclick="login_l(event)"> <span>Learner Login</span>
                                 </button>
                             </li>
 							<li class="nav-item">
@@ -112,7 +112,7 @@
                             </li>
 							
                             <li class="nav-item">
-                                 <button id="login_t" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Trainer Login</span>
+                                 <button id="login_t1" type="submit" class="btn btn-info" onclick="login_t(event)"> <span>Trainer Login</span>
                                 </button>
                             </li>
                            

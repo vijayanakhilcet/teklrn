@@ -287,7 +287,6 @@ class LoginTeacherView(FormView):
                 login(request, user)
                 page="webapp/hi_login_t.html"               
                 name = teacher.user.first_name
-                email_id = teacher.user.username
                 request.session['name']=name
                 request.session['email']=email_id
             else:
