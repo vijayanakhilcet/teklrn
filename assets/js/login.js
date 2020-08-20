@@ -1,7 +1,7 @@
 
         $(function() {
 
-            $("#course-search").autocomplete({
+            $("#course-search").autocomplete({  
                 source: "/autocomplete",
                 dataType: 'json',
                 select: function( event , ui ) {
@@ -26,6 +26,13 @@
             });
 
 });
+
+function levelClick(event) {
+
+    document.getElementById("course-pdf").src = "/static/image/"+image_name+event.id+".pdf";
+    course_level = event.id;
+   
+    }
 
 
 function login_l(event) {
@@ -297,6 +304,36 @@ function trainerLogin(event){
             // here we will handle errors and validation messages
         });
        
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+}
+
+function bookCrseClick(event) {
+
+    if(course_name==null || course_level==null){
+        //Alert will be shown 
+    }else{
+        
+    bookcrse();
+  }
+}
+
+function bookcrse(){
+    $.ajax({
+        url         : "/loginForm", // the url where we want to POST
+        data        : {"email":'login'}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+
+            // here we will handle errors and validation messages
+        });
+
     // stop the form from submitting the normal way and refreshing the page
     event.preventDefault();
 }

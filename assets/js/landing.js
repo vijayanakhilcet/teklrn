@@ -169,8 +169,8 @@ var mail_id_login;
             $("#book_course_login").click(function(event) {
 
                 if(course_name==null || course_level==null){
-                    alert('Enter a course in the search box and select a level review the syllabus of the level before you proceed with booking');
-              }else{
+                    //Alert will be shown
+                }else{
                 bookcrse();
               }
             });
