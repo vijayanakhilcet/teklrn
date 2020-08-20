@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phone_field import PhoneField
 
 
 
@@ -22,10 +23,13 @@ class Student(models.Model):
 
 class Teacher(models.Model):
      email = models.CharField(max_length=30)
+     dob = models.DateField(max_length=8)     
      user = models.OneToOneField(User, on_delete=models.CASCADE)
+     phone = PhoneField(blank=True, help_text='Contact phone number')
      time_zn = models.CharField(max_length=30)
      courses = models.ManyToManyField(Course, through='TeacherCourse')
      meetingLink = models.URLField(max_length=400)
+     is_teklrn_authorized = models.BooleanField(default=False)
 
 
 class StudentCourse(models.Model):    

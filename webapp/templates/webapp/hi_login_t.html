@@ -16,6 +16,13 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
 
+<link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
+<script src="{% static 'js/dist/attention.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>  
+
+
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
@@ -26,6 +33,7 @@
 </head>
 
 <body>
+    {% if user.is_authenticated %}
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -42,34 +50,8 @@
             </ul>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Levels</a>
-                    <ul  class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Level 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 3</a>
-                        </li>
-<li>
-                            <a href="#">Level 4</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 5</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 6</a>
-                        </li>
-<li>
-                            <a href="#">Level 7</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 8</a>
-                        </li>
-                        <li>
-                            <a href="#">Level 9</a>
-                        </li>
+                    <ul  class="collapse show list-unstyled" id="homeSubmenu">
+                      
                     </ul>
                 </li>
                  <li>
@@ -239,7 +221,7 @@
                                 <a class="nav-link" href="#">  </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#"><i> Welcome {{name}} </i></a>
+                              <a class="nav-link" href="#"><i> Welcome {{user.first_name}} </i></a>
                           </li>
            
 							<li class="nav-item">
@@ -247,7 +229,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button id="login_l" type="button" id="sidebarCollapse" class="btn btn-info"> <span>User Profile</span>
+                                <button id="user_profile_t" type="button" id="sidebarCollapse" class="btn btn-info"> <span>User Profile</span>
                                 </button>
                             </li>
 							<li class="nav-item">
@@ -281,6 +263,7 @@
             });
         });
     </script>
+      {% endif %}
 </body>
 
 </html>

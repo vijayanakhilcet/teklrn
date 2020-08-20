@@ -1,6 +1,32 @@
 
         $(function() {
+
+            $("#course-search").autocomplete({
+                source: "/autocomplete",
+                dataType: 'json',
+                select: function( event , ui ) {
+                    $('#homeSubmenu').empty();
+                    var elm = document.getElementById('homeSubmenu');
+                   
+        df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
+        course_name = ui.item.value;
+        image_name = ui.item.value+'_';
+        course_level = null;
+    for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
+        var li_element = document.createElement('li'); // create the option element
+        var a_element = document.createElement('a');       
+        a_element.id=i;
+        a_element.setAttribute("onclick", "levelClick(this)");
+        a_element.appendChild(document.createTextNode("Level " + i));
+        li_element.appendChild(a_element);
+        elm.appendChild(li_element); 
+    }
+   
+        }
+            });
+
 });
+
 
 function login_l(event) {
 

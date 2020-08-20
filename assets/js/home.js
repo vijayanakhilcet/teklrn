@@ -1,14 +1,23 @@
 $( document ).ready(
 function to_login() {
 var tech = window.location.search.substring(1); 
+var n = tech.localeCompare("redirecttologinT");
+var page = "hi";
 if(tech){
+if(!n){
+    page = "/login_teacher"
+
+}
+else{
+    page = "/login_student"
+}
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)
                 
         
                 // process the form
                 $.ajax({
-                    url         : "/login_student", // the url where we want to POST
+                    url         : page, // the url where we want to POST
                     data        : {"email":'login'}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
@@ -24,6 +33,7 @@ if(tech){
         
                 
             }
+
 }
 );
 

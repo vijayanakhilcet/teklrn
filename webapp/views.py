@@ -87,6 +87,16 @@ def register(request):
     context = {'form' : form}
     return render(request, 'webapp/register.html', context)
 
+
+def user_profile_t(request):
+    if request.method == 'POST':    
+            t = Teacher.objects.get(email=request.user.email)
+            phone = request.POST['phone']
+            t.phone = phone
+            t.save()
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+    return render(request, 'webapp/userProfileT.html')
+
 def register_t(request):
     if request.method == 'POST':
         user_time_zone  = request.session.get('user_time_zone', None)
@@ -98,12 +108,14 @@ def register_t(request):
             password = form.cleaned_data.get('password1')
             course_name =  request.POST['course-register-t']
             meeting_link = request.POST['meeting-link-register-t']
+            phone = request.POST['phone']
+            dob = request.POST['start']
             course_obj = Course.objects.get(name=course_name)
             user_obj = form.save()
             freegeoip_response = requests.get('http://ip-api.com/json/')
             freegeoip_response_json = freegeoip_response.json()
             user_time_zone = freegeoip_response_json['timezone']
-            teacher = Teacher.objects.create(user=user_obj, time_zn=user_time_zone, email=username, meetingLink=meeting_link)
+            teacher = Teacher.objects.create(user=user_obj, time_zn=user_time_zone, email=username, meetingLink=meeting_link, dob = dob, phone = phone)
             teacher.save()
             teacherCourse = TeacherCourse.objects.create(teacher=teacher, course=course_obj)
             teacherCourse.save()
@@ -139,10 +151,16 @@ def contact(request):
     return render(request, 'webapp/contact.html')
 
 def hi(request):
+    page = 'webapp/hi.html'
     if(request.user.is_authenticated):
-        return render(request, 'webapp/hi_login.html')
-    
-    return render(request, 'webapp/hi.html')
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page)
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page)    
+    return render(request, page)
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
@@ -235,6 +253,10 @@ def logout_view(request):
         logout(request)            
         return render(request, "webapp/home.html")
 
+def logout_t_view(request): 
+        logout(request)            
+        return render(request, "webapp/home.html")
+
 class CheckTeacherExistsView(FormView):
   
     def get(self,request,*args,**kwargs):
@@ -282,7 +304,7 @@ class LoginTeacherView(FormView):
         pwd = request.POST['pwd']
         teacher = Teacher.objects.get(email=email_id)
         page = "webapp/loginT.html"
-        if teacher is not None:
+        if teacher is not None and teacher.is_teklrn_authorized:
             user = authenticate(request, username = email_id, password = pwd)
             if user is not None:
                 login(request, user)
@@ -295,7 +317,10 @@ class LoginTeacherView(FormView):
                 request.session['email']=email_id
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/login_t.html")
+        page = "webapp/loginT.html"
+        if(request.user.is_authenticated):
+           page="webapp/hi_login_t.html"  
+        return render(request, page)
 
 
 class LoginStudentView(FormView):
@@ -313,13 +338,15 @@ class LoginStudentView(FormView):
                 email_id = student.user.username
                 request.session['name']=name
                 request.session['email']=email_id
-                page = "webapp/hi_login.html"
             else:
                 request.session['name']=None
                 request.session['email']=email_id
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/login.html")
+        page = "webapp/login.html"
+        if(request.user.is_authenticated):
+           page="webapp/hi_login.html"  
+        return render(request, page)
 
 
 class ResetStudentPwdView(FormView):
@@ -427,8 +454,10 @@ class RegisterTeacherView(FormView):
         course_name =  request.POST['course']
         meeting_link = request.POST['meetingLink']
         tz_info = request.POST['tz_info']
+        phone = request.POST['phone']
+        dob = request.POST['start']
         course_obj = Course.objects.get(name=course_name)
-        teacher =  Teacher.objects.create(name=teacher_name, email=email_id,password=pwd, meetingLink=meeting_link, time_zn = tz_info)
+        teacher =  Teacher.objects.create(name=teacher_name, email=email_id,password=pwd, meetingLink=meeting_link, time_zn = tz_info, phone = phone, dob = dob)
         teacher.save()
         teacherCourse = TeacherCourse.objects.create(teacher=teacher, course=course_obj)
         teacherCourse.save()
@@ -488,7 +517,7 @@ class TeacherBookCourseView(FormView):
         studCourse_obj.save()
         studCourse_obj.teacher=teacher_obj
         studCourse_obj.save()
-        return render(request, "webapp/hi_login_t.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email'], 'password': request.session['password']})
+        return render(request, "webapp/hi_login_t.html" )
 
 
 class MarkCourseCompletionView(FormView):

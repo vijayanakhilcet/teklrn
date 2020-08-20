@@ -112,11 +112,6 @@ for (i = 0; i < coll.length; i++) {
   });
 }*/
 
-$("#logout").click(function() {
-  sessionStorage.clear();
-  window.location.href = '';
-});
-
 
 $("#booking-close").click(function() {
   document.getElementById("bookCourse").style.display = "none";
@@ -224,6 +219,34 @@ $("#two").click(function(event) {
 setTimeout(afterDelayTwo, 500);
 });
 
+$("#logout").click(function() {
+  $.ajax({
+      url         : "/logout_t", // the url where we want to POST
+      data        : {"email":'hi'}, // our data object
+      dataType    : "html", // what type of data do\ we expect back from the server
+      encode      : true
+  })
+      .done(function(data) {
+          document.open("text/html", "load")
+          document.write(data);
+          document.close();
+}); event.preventDefault();
+});
+
+$("#user_profile_t").click(function() {
+  $.ajax({
+      url         : "/userProfileT", // the url where we want to POST
+      data        : {"email":'login'}, // our data object
+      dataType    : "html", // what type of data do\ we expect back from the server
+      encode      : true
+  })
+      .done(function(data) {
+          document.open("text/html", "load")
+          document.write(data);
+          document.close();
+}); event.preventDefault();
+});
+
 $("#one").click(function(event) {
     // get the form data
     // there are many ways to get this data using jQuery (you can use the class or id also)
@@ -258,27 +281,30 @@ setTimeout(afterDelayOne, 500);
 });
 
 $("#course-search").autocomplete({
-                source: "/autocomplete",
-                dataType: 'json',
-                select: function( event , ui ) {
-                    $('#level-select').empty();
-                    var elm = document.getElementById('level-select');// get the select
-                    elm.style.display = "block";
-                    var elm1 = document.getElementById('course-pdf');// get the select
-                    elm1.style.display = "block";
-        df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-        course_name = ui.item.value;
-        image_name = ui.item.value+'_';
-    for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
-        var option = document.createElement('option'); // create the option element
-        option.className="option-style";
-        option.value = i; // set the value property
-        option.appendChild(document.createTextNode("Level " + i)); // set the textContent in a safe way.
-        df.appendChild(option); // append the option to the document fragment
-    }
-    elm.appendChild(df); 
-        }
+  source: "/autocomplete",
+  dataType: 'json',
+  select: function( event , ui ) {
+      $('#homeSubmenu').empty();
+      var elm = document.getElementById('homeSubmenu');
+     
+df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
+course_name = ui.item.value;
+image_name = ui.item.value+'_';
+course_level = null;
+for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
+var li_element = document.createElement('li'); // create the option element
+var a_element = document.createElement('a');       
+a_element.id=i;
+a_element.setAttribute("onclick", "levelClick(this)");
+a_element.appendChild(document.createTextNode("Level " + i));
+li_element.appendChild(a_element);
+elm.appendChild(li_element); 
+}
+
+}
 });
+
+
 
 $("#myFormemail").submit(function(event) {
 
@@ -306,6 +332,8 @@ $("#myFormemail").submit(function(event) {
         
                         // here we will handle errors and validation messages
 });
+
+
         
                 // stop the form from submitting the normal way and refreshing the page
                 event.preventDefault();
@@ -387,6 +415,12 @@ if (content.style.maxHeight){
 } 
         }
 
+function bookingSyllabus(event, val) {
+  var page = "/static/image/"+val+".pdf";
+  document.getElementById("course-pdf").src = page;
+  event.preventDefault();
+} 
+
 function afterDelayThree(){
             
             var t = document.getElementById("three");
@@ -424,6 +458,11 @@ function afterDelayThree(){
                                       content.style.maxHeight = content.scrollHeight + "px";
                                     } 
                                             }
+
+function levelClick(event) {
+   document.getElementById("course-pdf").src = "/static/image/"+image_name+event.id+".pdf";
+   course_level = event.id;
+}
 
 function pendingSelected(val){
 
@@ -467,33 +506,46 @@ function thisisSelected(val){
             event.preventDefault();
            }
 
+function bookThis(event, val){
+  new Attention.Confirm({title: 'Confirm Booking',
+  content: 'Kindly review the syllabus before booking',
+  buttonCancel: false, // custom button text
+  buttonConfirm: false,
+  
+  onCancel(component) {
+  },
+  onConfirm(component) {
+    onAcceptEv(val);
+   }
+  
+});
+}
+function onAcceptEv(val)
+{
+  var pk = val;
+  // process the form
+  $.ajax({
+      url         : "/teacherbooking", // the url where we want to POST
+      data        : {"pk":pk}, // our data object
+      dataType    : "html", // what type of data do\ we expect back from the server
+      encode      : true
 
-           function bookThis(event, val){
+  })
+      // using the done promise callback
+      .done(function(data) {
 
-            if(confirm('Confirm Booking')){
-            // get the form data
-            // there are many ways to get this data using jQuery (you can use the class or id also)
-            var pk = val;
-            // process the form
-            $.ajax({
-                url         : "/teacherbooking", // the url where we want to POST
-                data        : {"pk":pk}, // our data object
-                dataType    : "html", // what type of data do\ we expect back from the server
-                encode      : true
-        
-            })
-                // using the done promise callback
-                .done(function(data) {
-        
-                  document.open("text/html", "load")
-                  document.write(data);
-                  document.close();
-                });
-                setTimeout(afterDelayOne, 10);
-              }else{}
-        
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
+      });
+      setTimeout(afterDelayOne, 10);
+      
+//event.preventDefault(); 
+}
+
+
+
             // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-            }
+         
         
   
