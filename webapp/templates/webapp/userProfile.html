@@ -32,14 +32,14 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form id="myFormRegister" method="POST" action="{% url 'user_profile_t' %}" class="contact100-form validate-form">
+			<form id="myFormRegister" method="POST" action="{% url 'user_profile' %}" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					TEKLRN Trainer Profile Update
+					TEKLRN Student Profile Update
 				</span>
 
-				<div class="wrap-input100 validate-input" data-validate="Phone Number is required">
-					<span class="label-input100">Phone Number</span>				
-					<input class="input100"  required type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="focus-input100"></span>
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">Name</span>				
+					<input class="input100"  type="text" id="name" name="name" required><span class="focus-input100"></span>
 				</div>				
 				
 				

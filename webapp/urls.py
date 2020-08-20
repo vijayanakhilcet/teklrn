@@ -35,6 +35,7 @@ urlpatterns = [
     path('register_student',views.RegisterStudentView.as_view()),
     path('register/', views.register, name='register'), 
     path('registerT/', views.register_t, name='registerT'), 
+    path('userProfile/', views.user_profile, name='user_profile'), 
     path('userProfileT/', views.user_profile_t, name='user_profile_t'), 
     path('login/', views.login_page, name='login'), 
     path('loginT/', views.login_page_t, name='loginT'), 

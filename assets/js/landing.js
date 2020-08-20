@@ -175,6 +175,22 @@ var mail_id_login;
               }
             });
 
+            
+            $("#user_profile").click(function() {
+                $.ajax({
+                    url         : "/userProfile", // the url where we want to POST
+                    data        : {"email":'login'}, // our data object
+                    dataType    : "html", // what type of data do\ we expect back from the server
+                    encode      : true
+                })
+                    .done(function(data) {
+                        document.open("text/html", "load")
+                        document.write(data);
+                        document.close();
+              }); event.preventDefault();
+              });
+              
+
 
             $("#login_l").click(function(event) {
 
@@ -483,7 +499,24 @@ function levelClick(event) {
   }
 
   function markCompletion(event, val){
-      
+
+    
+  new Attention.Confirm({title: 'Mark Complete',
+  content: 'Kindly mark it as complete if the course has been completed by the trainer',
+  buttonCancel: false, // custom button text
+  buttonConfirm: false,
+  
+  onCancel(component) {
+  },
+  onConfirm(component) {
+    onAcceptEv(val);
+   }
+  
+});
+  }
+
+  function onAcceptEv(val)
+  {     
 
     $.ajax({
       url         : "/markCompletion", // the url where we want to POST

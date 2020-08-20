@@ -88,6 +88,17 @@ def register(request):
     return render(request, 'webapp/register.html', context)
 
 
+
+def user_profile(request):
+    if request.method == 'POST':    
+            u = User.objects.get(username=request.user.email)
+            name = request.POST['name']
+            u.first_name = name
+            u.save()
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
+    return render(request, 'webapp/userProfile.html')
+
+
 def user_profile_t(request):
     if request.method == 'POST':    
             t = Teacher.objects.get(email=request.user.email)
