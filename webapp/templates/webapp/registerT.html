@@ -37,6 +37,27 @@
 					TEKLRN Register
 				</span>
 
+				<div style="font-family: Poppins-Regular;
+				font-size: 12px;
+				color: red">
+					<i>
+				
+						{% if form.errors %}
+							{% for field in form %}
+							  {% if field.errors %}
+								{% for error in field.errors %}
+								** {{ error|escape }} **</br>
+								{% endfor %}
+							  {% endif %}
+							{% endfor %}
+						  {% if form.non_field_errors %}
+							{{ form.non_field_errors }}
+						  {% endif %}
+					  {% endif %}
+					
+					</i> </div>
+
+
 				<div class="wrap-input100 validate-input" data-validate="Name is required">
 					<span class="label-input100">{{form.first_name.label}}</span>
 					{{form.first_name}}
@@ -65,11 +86,24 @@
 					<span class="focus-input100"></span>
 				
 				</div>
-				<div class="wrap-input100 validate-input" data-validate="Course is required">
+				<!--<div class="wrap-input100 validate-input" data-validate="Course is required">
 					<span class="label-input100">Course</span>
 					<input class="input100" type="text" name="course-register-t" id="course-register-t" required placeholder="Enter your technology">
 					<span class="focus-input100"></span>
+				</div> -->
+
+				<div class="wrap-input100 input100-select">
+					<span class="label-input100">Technology</span>
+					<div>
+					<select class="selection-2" name="course-register-t" id="course-register-t">
+											{% for tech in list_technology %}
+							<option value='{{tech.name}}'>{{ tech.name }}</option>
+						{% endfor %}
+					</select>
+					</div>
+					<span class="focus-input100"></span>
 				</div>
+				
 
 				<div class="wrap-input100 validate-input" data-validate="Course is required">
 					<span class="label-input100">Meeting Link</span>
@@ -84,7 +118,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Course is required">
-					<span class="label-input100">Phone Number</span>				
+					<span class="label-input100">Phone Number xxx-xxx-xxxx</span>				
 					<input class="input100"  type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="focus-input100"></span>
 				</div>				
 				

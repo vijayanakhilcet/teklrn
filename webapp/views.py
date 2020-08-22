@@ -79,10 +79,10 @@ def register(request):
                 [user_obj.email],
             )
             email_test.send(fail_silently=False)
-            return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
     else:
         form = ExtendedUserCreationForm()
-        #student_form = StudentForm()
+        form.fields["email"].initial = request.session['email']
 
     context = {'form' : form}
     return render(request, 'webapp/register.html', context)
@@ -132,7 +132,7 @@ def register_t(request):
             teacherCourse.save()
             domain = get_current_site(request).domain        
             uidb64 = urlsafe_base64_encode(force_bytes(user_obj.pk))
-            link=reverse('activate', kwargs={
+            link=reverse('activateT', kwargs={
                      'uidb64': uidb64, 'token': token_generator.make_token(user_obj)})
             activate_url = 'http://'+domain+link
             email_subject = 'Teklrn Account Activation'
@@ -144,19 +144,27 @@ def register_t(request):
                 [user_obj.email],
             )
             email_test.send(fail_silently=False)
-            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinTA')
     else:
         form = ExtendedUserCreationForm()
-        #student_form = StudentForm()
+        form.fields["email"].initial = request.session['email']
 
-    context = {'form' : form}
+    list_technology = Course.objects.all()
+    context = {'form' : form, 'list_technology' : list_technology}
     return render(request, 'webapp/registerT.html', context)
 
 def login_page(request):
     return render(request, 'webapp/login.html')
+    
 
 def login_page_t(request):
     return render(request, 'webapp/loginT.html')
+
+def login_page_t_a(request):
+    return render(request, 'webapp/loginTActivate.html')
+
+def login_page_a(request):
+    return render(request, 'webapp/loginActivate.html')
 
 def contact(request):
     return render(request, 'webapp/contact.html')
@@ -249,7 +257,7 @@ class CheckUserExistsView(FormView):
         student = None
         if email_id:
             try:
-               student = User.objects.get(username=email_id) 
+               student = Student.objects.get(email=email_id) 
             except ObjectDoesNotExist:
                student = None
              
@@ -257,6 +265,7 @@ class CheckUserExistsView(FormView):
             request.session['email']=email_id
             return HttpResponseRedirect(HOSTNAME+'login')
         # render(request, page, {'email': request.session['email']})
+        request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'register')
 
 
@@ -283,6 +292,7 @@ class CheckTeacherExistsView(FormView):
             request.session['email']=email_id
             return HttpResponseRedirect(HOSTNAME+'loginT')
         # render(request, page, {'email': request.session['email']})
+        request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'registerT')
 
 
@@ -326,7 +336,7 @@ class LoginTeacherView(FormView):
             else:
                 request.session['name']=None
                 request.session['email']=email_id
-        return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
+        return render(request, page, {'email': request.session['email']})
     def get(self,request,*args,**kwargs):
         page = "webapp/loginT.html"
         if(request.user.is_authenticated):
@@ -390,6 +400,7 @@ class ActivateTrainerView(FormView):
         if user is not None and token_generator.check_token(user, token):
             user.is_active=True
             user.save()
+            request.session['email'] = user.email
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
         return HttpResponseRedirect(HOSTNAME+'?toerrorT')
 
@@ -403,6 +414,7 @@ class ActivateStudentView(FormView):
         if user is not None and token_generator.check_token(user, token):
             user.is_active=True
             user.save()
+            request.session['email'] = user.email
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
         return HttpResponseRedirect(HOSTNAME+'?toerror')
 

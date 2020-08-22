@@ -4,12 +4,18 @@ var tech = window.location.search.substring(1);
 var n = tech.localeCompare("redirecttologinT");
 var page = "hi";
 if(tech){
-if(!n){
+if(tech == 'redirecttologinT'){
     page = "/login_teacher"
 
 }
-else{
+else if(tech == 'redirecttologin'){
     page = "/login_student"
+}
+else if(tech == 'redirecttologinTA'){
+    page = "/loginTA"
+}
+else if(tech == 'redirecttologinA'){
+    page = "/loginA"
 }
                 // get the form data
                 // there are many ways to get this data using jQuery (you can use the class or id also)

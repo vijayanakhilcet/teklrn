@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True,  widget= forms.EmailInput
-                           (attrs={'placeholder':'Enter email address', 'class': 'input100'}))
+                           (attrs={'placeholder':'Enter email address', 'class': 'input100', 'readonly': 'readonly'}))
     first_name = forms.CharField(max_length=30,  widget= forms.TextInput
                            (attrs={'placeholder':'Enter first name', 'class': 'input100'}))
     last_name = forms.CharField(max_length=30,  widget= forms.TextInput
