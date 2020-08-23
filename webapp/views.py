@@ -26,6 +26,7 @@ from django.shortcuts import redirect
 from .forms import StudentForm, ExtendedUserCreationForm
 from django.contrib.auth.models import User
 import socket
+from dateutil.relativedelta import *
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 HOSTNAME = settings.APP_HOST_NAME
@@ -318,7 +319,7 @@ class BookCourseFormView(FormView):
         course_name = data.get("course")
         course_level = data.get("level")
         tz = Student.objects.get(email=request.user.email).time_zn
-        now = datetime.datetime.now().astimezone(pytz.timezone(tz))
+        now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(months=2)
         dt = now.strftime('%Y-%m-%dT%H:%M')
         return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : 2, 'tz': tz })
 
