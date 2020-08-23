@@ -317,7 +317,10 @@ class BookCourseFormView(FormView):
         data = request.GET
         course_name = data.get("course")
         course_level = data.get("level")
-        return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level })
+        tz = Student.objects.get(email=request.user.email).time_zn
+        now = datetime.datetime.now().astimezone(pytz.timezone(tz))
+        dt = now.strftime('%Y-%m-%dT%H:%M')
+        return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : 2, 'tz': tz })
 
 class LoginTeacherView(FormView):    
     def post(self,request,*args,**kwargs):
@@ -498,9 +501,8 @@ class BookCourseView(FormView):
         course_name = request.POST['course']
         course_level = request.POST['level']
         timeval = request.POST['datetimeval']
-        zone = request.POST['zone']
-        timezone = pytz.timezone(zone)
-        d_aware = timezone.localize(dateutil.parser.parse(timeval))
+        tz = Student.objects.get(email=request.user.email).time_zn
+        d_aware = datetime.datetime.strptime(timeval, '%Y-%m-%dT%H:%M').astimezone(pytz.timezone(tz))
         student_obj = Student.objects.get(email=request.session['email'])
         course_obj= Course.objects.get(name=course_name)
         assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=course_level, status="P", date_joined=d_aware, teacher=None)
@@ -522,9 +524,9 @@ class TeacherPickCourseView(FormView):
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name
             tz = pytz.timezone(Teacher.objects.get(email=t_email).time_zn)
-            my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
+            my_ct = studCourse_obj.date_joined.astimezone(tz)
+            new_ct = my_ct.strftime('%c')
+            studCourse_json['date'] = new_ct
             results.append(studCourse_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -566,9 +568,9 @@ class TeacherGivenTrainingsView(FormView):
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name            
             tz = pytz.timezone(Teacher.objects.get(email=t_email).time_zn)
-            my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
+            my_ct = studCourse_obj.date_joined.astimezone(tz)
+            new_ct = my_ct.strftime('%c')
+            studCourse_json['date'] = new_ct
             results.append(studCourse_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -589,7 +591,7 @@ class TeacherInProgressTrainingsView(FormView):
             studCourse_json['date'] = studCourse_obj.date_joined.isoformat()
             results.append(studCourse_json)
         data = json.dumps(results)
-        mimetype = 'application/json'
+        mimetype = 'application/json'   
         return HttpResponse(data, mimetype)
 
 class TeacherPendingTrainingsView(FormView):       
@@ -604,9 +606,9 @@ class TeacherPendingTrainingsView(FormView):
             studCourse_json['level'] = studCourse_obj.level
             studCourse_json['course'] = studCourse_obj.course.name
             tz = pytz.timezone(Teacher.objects.get(email=t_email).time_zn)
-            my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
+            my_ct = studCourse_obj.date_joined.astimezone(tz)
+            new_ct = my_ct.strftime('%c')
+            studCourse_json['date'] = new_ct
             studCourse_json['meetingLink'] = Teacher.objects.get(email=t_email).meetingLink
             results.append(studCourse_json)
         data = json.dumps(results)
@@ -626,9 +628,8 @@ class PendingStudentTrainingsView(FormView):
             studCourse_json['course'] = studCourse_obj.course.name
             tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
-            #studCourse_json['date'] = studCourse_obj.date_joined.isoformat()
+            new_ct = my_ct.strftime('%c')
+            studCourse_json['date'] = new_ct
             results.append(studCourse_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -648,9 +649,8 @@ class AcceptedStudentTrainingsView(FormView):
             studCourse_json['course'] = studCourse_obj.course.name
             tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
-           # studCourse_json['date'] = studCourse_obj.date_joined.isoformat()
+            new_ct = my_ct.strftime('%c')
+            studCourse_json['date'] = new_ct
             studCourse_json['meetingLink'] = studCourse_obj.teacher.meetingLink
             results.append(studCourse_json)
         data = json.dumps(results)
@@ -688,8 +688,8 @@ class CompletedStudentTrainingsView(FormView):
             studCourse_json['course'] = studCourse_obj.course.name
             tz = pytz.timezone(Student.objects.get(email=student_email).time_zn)
             my_ct = studCourse_obj.date_joined
-            new_ct = my_ct.astimezone(tz)
-            studCourse_json['date'] = new_ct.isoformat()
+            new_ct = my_ct.strftime('%c ')
+            studCourse_json['date'] = new_ct
             studCourse_json['meetingLink'] = studCourse_obj.teacher.meetingLink
             results.append(studCourse_json)
         data = json.dumps(results)

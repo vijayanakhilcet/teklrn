@@ -350,7 +350,7 @@ function bookc(event) {
     $.ajax({
         url         : "/book_course", // the url where we want to POST
         type        : 'post',
-        data        : {"course":course, "level":level, "datetimeval": datetimeval , "zone":sel.options[sel.selectedIndex].text}, // our data object
+        data        : {"course":course, "level":level, "datetimeval": datetimeval}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
