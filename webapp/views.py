@@ -265,6 +265,12 @@ class CheckUserExistsView(FormView):
         if student:
             request.session['email']=email_id
             return HttpResponseRedirect(HOSTNAME+'login')
+        try:
+            teacher = Teacher.objects.get(email=email_id)
+        except ObjectDoesNotExist:
+            teacher = None
+        if teacher:
+            return HttpResponseRedirect(HOSTNAME+'loginForm')
         # render(request, page, {'email': request.session['email']})
         request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'register')
@@ -293,6 +299,12 @@ class CheckTeacherExistsView(FormView):
             request.session['email']=email_id
             return HttpResponseRedirect(HOSTNAME+'loginT')
         # render(request, page, {'email': request.session['email']})
+        try:
+            student = Student.objects.get(email=email_id)
+        except ObjectDoesNotExist:
+            student = None
+        if student:
+            return HttpResponseRedirect(HOSTNAME+'loginFormT')
         request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'registerT')
 
@@ -462,7 +474,7 @@ class RegisterStudentView(FormView):
 
 class LandingBackView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi.html", {'name': 'name'})
+        return render(request, "webapp/hi_login.html", {'name': 'name'})
         
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):

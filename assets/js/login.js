@@ -108,6 +108,45 @@ function backtolanding(event){
 event.preventDefault();
 }
 
+function backtolandingmain(event){
+
+    $.ajax({
+        url         : "/hi", // the url where we want to POST
+        data        : {"email":"email"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+
+event.preventDefault();
+}
+
+function backtolandingmainT(event){
+
+    $.ajax({
+        url         : "/hi", // the url where we want to POST
+        data        : {"email":"email"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+
+event.preventDefault();
+}
+
+
 function resetPassword(event){
 
     $.ajax({
