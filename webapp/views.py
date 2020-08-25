@@ -20,6 +20,7 @@ from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeEr
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import views as auth_views
 from django.urls import reverse
 from .utils import token_generator
 from django.shortcuts import redirect
@@ -49,6 +50,9 @@ def charge(request): # new
    
 def about(request):
     return render(request, 'webapp/about.html')
+
+def RedirectToLandingStudentView(request):
+    return  HttpResponseRedirect(HOSTNAME+'?GFTfgTRFghHGfdjkJHGVCDSdnHHHH')
 
 
 def register(request):
@@ -358,6 +362,7 @@ class LoginTeacherView(FormView):
         if(request.user.is_authenticated):
            page="webapp/hi_login_t.html"  
         return render(request, page)
+        
 
 
 class LoginStudentView(FormView):

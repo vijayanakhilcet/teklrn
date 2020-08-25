@@ -3,6 +3,7 @@ from django.conf.urls import url
 from . import views
 from agora.views import Agora
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 
 
@@ -43,9 +44,13 @@ urlpatterns = [
     path('loginTA/', views.login_page_t_a, name='loginT'), 
     path('accounts/', include('django.contrib.auth.urls')),
     path('back_to_landing_page/',views.LandingBackView.as_view()),
-    path('reset_password/',views.ResetPasswordView.as_view()),
+    path('reset_password/',auth_views.PasswordResetView.as_view(template_name='webapp/resetPassword.html'), name='reset_password'),
+    path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name='webapp/passwordResetConfirm.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='webapp/resetPasswordEnter.html'), name='password_reset_confirm'),
+    path('reset_password_complete/', views.RedirectToLandingStudentView, name='password_reset_complete'),
     path('reset_password_t/',views.ResetPasswordTView.as_view()),
     path('login_student',views.LoginStudentView.as_view()),
+    path('redirect_to_landing_page/', views.RedirectToLandingStudentView, name='redirectToLandingStudentView'),
     path('reset_student_password',views.ResetStudentPwdView.as_view(), name='reset'),
     path('reset_trainer_password',views.ResetStudentPwdView.as_view()),
     path('book_course',views.BookCourseView.as_view()),
