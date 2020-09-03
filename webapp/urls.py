@@ -57,6 +57,7 @@ urlpatterns = [
     path('checkTrainer/',views.CheckTeacherExistsView.as_view()),
     path('register_teacher',views.RegisterTeacherView.as_view()),
     path('login_teacher',views.LoginTeacherView.as_view()),
+    path('login_teacher_authorize',views.login_teacher_authorize, name='login_authorize'),
     path('get_pending_course_assignments',views.TeacherPickCourseView.as_view()),
     path('teacherbooking/',views.TeacherBookCourseView.as_view()),
     path('markCompletion/',views.MarkCourseCompletionView.as_view()),

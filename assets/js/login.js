@@ -108,6 +108,11 @@ function backtolanding(event){
 event.preventDefault();
 }
 
+function backtolandingTest(event){
+
+    window.location.href = "https://teklrn.com";
+}
+
 function backtolandingmain(event){
 
     $.ajax({

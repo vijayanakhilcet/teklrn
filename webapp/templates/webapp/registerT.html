@@ -37,9 +37,10 @@
 					TEKLRN Register
 				</span>
 
-				<div style="font-family: Poppins-Regular;
-				font-size: 12px;
-				color: red">
+				<div  style="font-size: xx-small;
+				color: ghostwhite;
+				font-style: italic;
+				background: linear-gradient(45deg, #00dbde, #fc00ff);" >
 					<i>
 				
 						{% if form.errors %}
@@ -106,8 +107,12 @@
 				
 
 				<div class="wrap-input100 validate-input" data-validate="Course is required">
-					<span class="label-input100">Meeting Link</span>
-					<input class="input100" type="text" name="meeting-link-register-t" id="meeting-link-register-t"  required placeholder="Enter your meeting link">
+					<span class="label-input100">Zoom Personal Meeting ID</span>
+					<span style="font-size: xx-small;
+					color: ghostwhite;
+					font-style: italic;
+					background: linear-gradient(45deg, #00dbde, #fc00ff);" class="label-input100">(eg: https://us04web.zoom.us/j/485534?pwd=RreEN)</span>
+					<input class="input100" type="url" pattern="https?://.+" name="meeting-link-register-t" id="meeting-link-register-t"  required placeholder="Enter your meeting link">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -118,7 +123,12 @@
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Phone Number is required">
-					<span class="label-input100">Phone Number xxx-xxx-xxxx</span>				
+					<span class="label-input100">Phone Number</span>	
+					<span style="font-size: xx-small;
+					color: ghostwhite;
+					font-style: italic;
+					background: linear-gradient(45deg, #00dbde, #fc00ff);" class="label-input100">(Format: xxx-xxx-xxxx)</span>
+								
 					<input class="input100"  type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="focus-input100"></span>
 				</div>				
 				
@@ -138,7 +148,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button type="submit"  onclick="backtolanding(event)"  class="contact100-form-btn" >
+						<button type="button"  onclick="backtolandingTest(event)"  class="contact100-form-btn" >
 							<span>
 								Back
 								<i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>

@@ -161,6 +161,9 @@ def register_t(request):
 def login_page(request):
     return render(request, 'webapp/login.html')
     
+def login_teacher_authorize(request):
+    return render(request, 'webapp/login_t_auth.html')    
+    
 
 def login_page_t(request):
     return render(request, 'webapp/loginT.html')
@@ -422,6 +425,15 @@ class ActivateTrainerView(FormView):
             user.is_active=True
             user.save()
             request.session['email'] = user.email
+            email_subject = 'Teklrn Trainer Registered Alert'
+            email_body = 'Teklrn Backend Team, \nPlease verify and authorize the User Registered as Trainer\n'+ 'User Email : '+user.email
+            email_test = EmailMessage(  
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                ['teklrn@yahoo.com',],
+            )
+            email_test.send(fail_silently=False)
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
         return HttpResponseRedirect(HOSTNAME+'?toerrorT')
 
@@ -479,7 +491,7 @@ class RegisterStudentView(FormView):
 
 class LandingBackView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi_login.html", {'name': 'name'})
+        return render(request, "webapp/hi.html", {'name': 'name'})
         
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):
@@ -560,6 +572,25 @@ class TeacherBookCourseView(FormView):
         studCourse_obj.save()
         studCourse_obj.teacher=teacher_obj
         studCourse_obj.save()
+        email_subject = 'Teklrn Trainer Assigned'
+        email_body = 'Hello, \n \nTrainer Assigned to your course Booking. \n\nKindly login to your Teklrn Account to get more information. \n\n Thanks And Regards, \n Teklrn Backend Team'
+        email_test = EmailMessage(
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                [studCourse_obj.student.email],
+            )
+        email_test.send(fail_silently=False)
+
+        email_subject = 'Teklrn Booking Accepted'
+        email_body = 'Hello, \n\n You have Accepted the Booking on Teklrn. \n\nKindly review the Syllabus and prepare before starting the Session. \n\n It is mandatory to guide the Trainee to mark the Course Complete on his Screen. \n\nUnless Trainee marks the course completed the Payment will be blocked. \n\n Thanks And Regards, \n Teklrn Backend Team'
+        email_test = EmailMessage(
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                [teacher_obj.email],
+            )
+        email_test.send(fail_silently=False)
         return render(request, "webapp/hi_login_t.html" )
 
 

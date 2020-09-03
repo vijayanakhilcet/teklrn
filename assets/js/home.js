@@ -5,7 +5,7 @@ var n = tech.localeCompare("redirecttologinT");
 var page = "hi";
 if(tech){
 if(tech == 'redirecttologinT'){
-    page = "/login_teacher"
+    page = "/login_teacher_authorize"
 
 }
 else if(tech == 'redirecttologin'){
