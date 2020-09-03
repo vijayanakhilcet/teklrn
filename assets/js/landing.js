@@ -477,7 +477,24 @@ var mail_id_login;
         }
 function levelClick(event) {
 
- document.getElementById("course-pdf").src = "/static/image/"+image_name+event.id+".pdf";
+// document.getElementById("course-pdf").src = "/static/image/"+image_name+event.id+".pdf";
+ pdfjsLib.getDocument("./static/image/"+image_name+event.id+".pdf").promise.then(doc =>{
+    console.log("This file has "+doc._pdfInfo.numPages + " pages");
+  
+    doc.getPage(1).then(page =>{
+        var myCanvas = document.getElementById("my_canvas");
+        var context =  myCanvas.getContext("2d");
+  
+        var viewport = page.getViewport({scale:3});
+        myCanvas.width = viewport.width;
+        myCanvas.height = viewport.height;
+        page.render({
+            canvasContext:context,
+            viewport:viewport
+        });
+    });
+  });
+
  course_level = event.id;
 
  }
@@ -485,7 +502,24 @@ function levelClick(event) {
  function bookingSyllabus(event, val) {
      
   var page = "/static/image/"+val+".pdf";
-  document.getElementById("course-pdf").src = page;
+  //document.getElementById("course-pdf").src = page;
+  pdfjsLib.getDocument("./static/image/"+val+".pdf").promise.then(doc =>{
+    console.log("This file has "+doc._pdfInfo.numPages + " pages");
+  
+    doc.getPage(1).then(page =>{
+        var myCanvas = document.getElementById("my_canvas");
+        var context =  myCanvas.getContext("2d");
+  
+        var viewport = page.getViewport({scale:3});
+        myCanvas.width = viewport.width;
+        myCanvas.height = viewport.height;
+        page.render({
+            canvasContext:context,
+            viewport:viewport
+        });
+    });
+  });
+
   event.preventDefault();
    
     } 
