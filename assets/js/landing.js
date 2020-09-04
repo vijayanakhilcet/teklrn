@@ -264,6 +264,22 @@ var mail_id_login;
         li_element.appendChild(a_element);
         elm.appendChild(li_element); 
     }
+    pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
+        console.log("This file has "+doc._pdfInfo.numPages + " pages");
+      
+        doc.getPage(1).then(page =>{
+            var myCanvas = document.getElementById("my_canvas");
+            var context =  myCanvas.getContext("2d");
+      
+            var viewport = page.getViewport({scale:3});
+            myCanvas.width = viewport.width;
+            myCanvas.height = viewport.height;
+            page.render({
+                canvasContext:context,
+                viewport:viewport
+            });
+        });
+      });
    
         }
             });
