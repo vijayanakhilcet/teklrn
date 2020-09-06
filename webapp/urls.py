@@ -44,6 +44,7 @@ urlpatterns = [
     path('loginTA/', views.login_page_t_a, name='loginT'), 
     path('accounts/', include('django.contrib.auth.urls')),
     path('back_to_landing_page/',views.LandingBackView.as_view()),
+    path('back_to_landing_login_page/',views.LandingBackLoginView.as_view()),
     path('reset_password/',auth_views.PasswordResetView.as_view(template_name='webapp/resetPassword.html'), name='reset_password'),
     path('reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name='webapp/passwordResetConfirm.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='webapp/resetPasswordEnter.html'), name='password_reset_confirm'),

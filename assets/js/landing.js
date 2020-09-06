@@ -22,7 +22,7 @@ var mail_id_login;
                    
                   //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
                      var aHtml = '<a href="#">'+data[index].date+
-                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
+                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
                    
                   //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
                    //  var ele = document.createElement('div');
@@ -54,7 +54,7 @@ var mail_id_login;
                
               //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
                  var aHtml = '<a href="#">'+data[index].date+
-                 '<button style="font-size: x-small;    border: 1px solid transparent;  background-color: #17a2b8; font-size: x-small;color: white; border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark complete</button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join session</button><button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
+                 '<button style="font-size: x-small;    border: 1px solid transparent;  background-color: #17a2b8; font-size: x-small;color: white; border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark complete</button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join session</button><button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
                
               //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
                //  var ele = document.createElement('div');
@@ -88,7 +88,7 @@ var mail_id_login;
            
           //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
              var aHtml = '<a href="#">'+data[index].date+
-             '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="bookingSyllabus(event, this.value)">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
+             '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
            
           //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
            //  var ele = document.createElement('div');
@@ -256,13 +256,20 @@ var mail_id_login;
         image_name = ui.item.value+'_';
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
-        var li_element = document.createElement('li'); // create the option element
+     /*   var li_element = document.createElement('li'); // create the option element
         var a_element = document.createElement('a');       
         a_element.id=i;
         a_element.setAttribute("onclick", "levelClick(this)");
         a_element.appendChild(document.createTextNode("Level " + i));
         li_element.appendChild(a_element);
-        elm.appendChild(li_element); 
+        elm.appendChild(li_element); */
+        var li_element = document.createElement('li'); // create the option element
+                      var aHtml = '<a href="#">Level '+i+ ' '+
+                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="bookcrseNew('+i+')"'+ '>Book '+'</button></a>';
+                    li_element.innerHTML+=aHtml;
+                     
+                   elm.appendChild(li_element); 
     }
     pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
         console.log("This file has "+doc._pdfInfo.numPages + " pages");
@@ -481,6 +488,31 @@ var mail_id_login;
             return cookieValue;
         }
 
+        (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:false};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 420px;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+="</div>";html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div class="modal-footer">';if(b.closeButton===true){html+='<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+
+/*
+* Here is how you use it
+*/
+function lvlclk(pg){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+        $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;        
+     }
+     function lvlclk1(crse){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+crse+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+        $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;        
+     }
+
+
         function onLoadAComplete(){
 
           
@@ -584,6 +616,26 @@ function levelClick(event) {
       });   
       event.preventDefault();
   }
+
+  function bookcrseNew(leveChekced){
+    $.ajax({
+        url         : "/bookingForm", // the url where we want to POST
+        data        : {"course": course_name, "level": leveChekced}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+
+            // here we will handle errors and validation messages
+        });
+
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+}
  
   function bookcrse(){
     $.ajax({

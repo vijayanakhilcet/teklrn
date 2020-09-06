@@ -492,7 +492,11 @@ class RegisterStudentView(FormView):
 class LandingBackView(FormView):
     def get(self,request,*args,**kwargs):
         return render(request, "webapp/hi.html", {'name': 'name'})
-        
+
+class LandingBackLoginView(FormView):
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/hi_login.html", {'name': 'name'})       
+
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):
         return render(request, "webapp/resetPassword.html", {'name': 'name'})
