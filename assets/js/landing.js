@@ -266,7 +266,7 @@ var mail_id_login;
         var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">Level '+i+ ' '+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="bookcrseNew('+i+')"'+ '>Book '+'</button></a>';
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
@@ -617,10 +617,10 @@ function levelClick(event) {
       event.preventDefault();
   }
 
-  function bookcrseNew(leveChekced){
+  function bookcrseNew(crse, leveChekced){
     $.ajax({
         url         : "/bookingForm", // the url where we want to POST
-        data        : {"course": course_name, "level": leveChekced}, // our data object
+        data        : {"course": crse, "level": leveChekced}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })

@@ -321,8 +321,8 @@ class CheckTeacherExistsView(FormView):
 class LoginView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
-        course_name = data.get("course")
-        course_level = data.get("level")
+        course_name = data.get("course_name")
+        course_level = data.get("course_level")
         request.session['course']=course_name
         request.session['level']=course_level
         return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level })
@@ -378,7 +378,15 @@ class LoginStudentView(FormView):
             user = authenticate(request, username = email_id, password = pwd)
             if user is not None:
                 login(request, user)
-                page="webapp/hi_login.html"               
+                if(request.session['course'] is not None and request.session['level'] is not None):
+                    course_name = request.session['course']
+                    course_level = request.session['level']
+                    tz = Student.objects.get(email=user.email).time_zn
+                    now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(months=2)
+                    dt = now.strftime('%Y-%m-%dT%H:%M')
+                    return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : 2, 'tz': tz })
+                else:
+                    page="webapp/hi_login.html"               
                 name = student.user.first_name
                 email_id = student.user.username
                 request.session['name']=name
@@ -541,7 +549,7 @@ class BookCourseView(FormView):
         course_obj= Course.objects.get(name=course_name)
         assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=course_level, status="P", date_joined=d_aware, teacher=None)
         assignCourse.save()
-        request.session['name']=request.session['name']
+        request.session['name']=request.user.first_name
         request.session['course']=course_name
         request.session['level']=course_level
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})

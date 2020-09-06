@@ -23,7 +23,7 @@
           var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">Level '+i+ ' '+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event)"'+ '>Book '+'</button></a>';
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #17a2b8;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
@@ -75,16 +75,11 @@ function levelClick(event) {
     }
 
 
-function login_l(event) {
-
-    // get the form data
-    // there are many ways to get this data using jQuery (you can use the class or id also)
-    
-
-    // process the form
+function login_l(event, crse, lvl) {
+    //alert(crse+lvl);
     $.ajax({
         url         : "/loginForm", // the url where we want to POST
-        data        : {"email":'login'}, // our data object
+        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
