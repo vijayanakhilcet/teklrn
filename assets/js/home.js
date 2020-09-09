@@ -158,6 +158,55 @@ function doLaunchRefund(event) {
                                 });
         event.preventDefault();
 }
+
+function login_l(event, crse, lvl) {
+    //alert(crse+lvl);
+    $.ajax({
+        url         : "/loginForm", // the url where we want to POST
+        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+
+            // here we will handle errors and validation messages
+        });
+
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+}
+
+
+function login_t(event) {
+
+    // get the form data
+    // there are many ways to get this data using jQuery (you can use the class or id also)
+    
+
+    // process the form
+    $.ajax({
+        url         : "/loginFormT", // the url where we want to POST
+        data        : {"email":'login'}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+
+            // here we will handle errors and validation messages
+        });
+
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+}
+
 function doLaunchPrivacy(event) {
         $.ajax({
             url         : "privacy", // the url where we want to POST
