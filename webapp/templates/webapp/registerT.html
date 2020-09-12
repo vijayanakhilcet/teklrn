@@ -40,7 +40,7 @@
 				<div  style="font-size: xx-small;
 				color: ghostwhite;
 				font-style: italic;
-				background: linear-gradient(45deg, #00dbde, #fc00ff);" >
+				background: #629DD1;" >
 					<i>
 				
 						{% if form.errors %}
@@ -127,10 +127,12 @@
 					<span style="font-size: xx-small;
 					color: ghostwhite;
 					font-style: italic;
-					background: linear-gradient(45deg, #00dbde, #fc00ff);" class="label-input100">(Format: xxx-xxx-xxxx)</span>
+					background: #629DD1;" class="label-input100">(Format: xxxxxxxxxx)</span>
 								
-					<input class="input100"  type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="focus-input100"></span>
-				</div>				
+					<!--<input class="input100"  type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><span class="focus-input100"></span>-->
+				
+					<input class="input100"  type="tel" id="phone" name="phone" pattern="[0-9]{10}"><span class="focus-input100"></span>
+			</div>				
 				
 				
 				<div class="container-contact100-form-btn">
