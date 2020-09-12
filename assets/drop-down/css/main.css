@@ -121,7 +121,7 @@ textarea:-ms-input-placeholder { color: #adadad;}
 button {
 	outline: none !important;
 	border: none;
-	background: transparent;
+	background: #629DD1;
 }
 
 button:hover {
@@ -161,7 +161,8 @@ iframe {
   background: -webkit-linear-gradient(45deg, #00dbde, #fc00ff);
   background: -o-linear-gradient(45deg, #00dbde, #fc00ff);
   background: -moz-linear-gradient(45deg, #00dbde, #fc00ff);
-  background: linear-gradient(45deg, #00dbde, #fc00ff);
+  /*background: linear-gradient(45deg, #00dbde, #fc00ff);*/
+  background: #f2f2f2;
   
 }
 
