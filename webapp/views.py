@@ -123,7 +123,8 @@ def register_t(request):
             username = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
             course_name =  request.POST['course-register-t']
-            meeting_link = request.POST['meeting-link-register-t']
+           # meeting_link = request.POST['meeting-link-register-t']
+            meeting_link = 'https://us04web.zoom.us/j/3181485588?pwd=RU1ENGg4aHB6ZzhWWTBDOGIremEwQT09'
             phone = request.POST['phone']
             dob = request.POST['start']
             course_obj = Course.objects.get(name=course_name)
