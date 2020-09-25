@@ -3,6 +3,8 @@ var course_name;
 var course_level;
 var mail_id_login;
         $(function() {
+            image_name = 'Java_';
+        course_name = 'Java';   
                $.ajax({
                 url         : "/get_pending_student_trainings", // the url where we want to POST
                 data        : {"course":"ab"}, // our data object
@@ -512,6 +514,44 @@ function lvlclk(pg){
         return false;        
      }
 
+
+     function associated_tech(){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+'Associated.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+        $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;   
+     }
+
+     function version_history(){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+'Version.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+         $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;   
+     }
+     function dev_trends(){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+'Dev.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+         $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;   
+     }
+     function industry_acceptance(){ 
+        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+'Industry.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+         $.createModal({
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;   
+     }
 
         function onLoadAComplete(){
 
