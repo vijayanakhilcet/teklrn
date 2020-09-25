@@ -5,7 +5,7 @@ var course_level;
 $(function() {
   image_name = 'Java_';
         course_name = 'Java';   
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : 21, Cost per Level : $13';
 
   
   $.ajax({
@@ -294,7 +294,7 @@ df = document.createDocumentFragment(); // create a document fragment to hold th
 course_name = ui.item.value;
 image_name = ui.item.value+'_';
 course_level = null;
-setTechnology();
+setTechnology(ui.item.levels);
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
 /*var li_element = document.createElement('li'); // create the option element
 var a_element = document.createElement('a');       
@@ -456,8 +456,8 @@ if (content.style.maxHeight){
           });
           return false;        
        }
-       function setTechnology(){
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+       function setTechnology(level_val){
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : '+level_val+', Cost per Level : $13';
     }
   
 

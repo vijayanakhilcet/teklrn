@@ -5,7 +5,8 @@ var mail_id_login;
         $(function() {
             image_name = 'Java_';
         course_name = 'Java';   
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : 21, Cost per Level : $13';
+
                $.ajax({
                 url         : "/get_pending_student_trainings", // the url where we want to POST
                 data        : {"course":"ab"}, // our data object
@@ -257,7 +258,7 @@ var mail_id_login;
         df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
         course_name = ui.item.value;
         image_name = ui.item.value+'_';
-        setTechnology();
+        setTechnology(ui.item.levels);
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
@@ -582,8 +583,9 @@ function levelClick(event) {
 
  }
 
- function setTechnology(){
-    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+ function setTechnology(level_val){
+    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : '+level_val+', Cost per Level : $13';
+
 }
 
  function bookingSyllabus(event, val) {
