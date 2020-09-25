@@ -5,8 +5,8 @@ var course_level;
 $(function() {
   image_name = 'Java_';
         course_name = 'Java';   
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : 21, Cost per Level : $13';
-
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+        document.getElementById('level_field').innerHTML = 'Total Levels : 21';
   
   $.ajax({
     url         : "/get_pending_course_assignments", // the url where we want to POST
@@ -457,8 +457,9 @@ if (content.style.maxHeight){
           return false;        
        }
        function setTechnology(level_val){
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : '+level_val+', Cost per Level : $13';
-    }
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+        document.getElementById('level_field').innerHTML = 'Total Levels : '+level_val;
+      }
   
 
        function associated_tech(){ 

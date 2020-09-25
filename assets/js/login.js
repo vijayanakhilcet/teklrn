@@ -2,7 +2,9 @@
         $(function() {
         image_name = 'Java_';
         course_name = 'Java';   
-        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : 21, Cost per Level : $13';
+        
+    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+    document.getElementById('level_field').innerHTML = 'Total Levels : 21';
 
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -457,7 +459,8 @@ function bookCrseClick(event) {
   }
 }
 function setTechnology(level_val){
-    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name + ', Total Levels : '+level_val+', Cost per Level : $13';
+    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+    document.getElementById('level_field').innerHTML = 'Total Levels : '+level_val;
 
 }
 
