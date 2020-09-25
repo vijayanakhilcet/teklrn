@@ -5,6 +5,7 @@ var mail_id_login;
         $(function() {
             image_name = 'Java_';
         course_name = 'Java';   
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
                $.ajax({
                 url         : "/get_pending_student_trainings", // the url where we want to POST
                 data        : {"course":"ab"}, // our data object
@@ -256,15 +257,9 @@ var mail_id_login;
         df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
         course_name = ui.item.value;
         image_name = ui.item.value+'_';
+        setTechnology();
         course_level = null;
-    for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
-     /*   var li_element = document.createElement('li'); // create the option element
-        var a_element = document.createElement('a');       
-        a_element.id=i;
-        a_element.setAttribute("onclick", "levelClick(this)");
-        a_element.appendChild(document.createTextNode("Level " + i));
-        li_element.appendChild(a_element);
-        elm.appendChild(li_element); */
+    for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">Level '+i+ ' '+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
@@ -586,6 +581,10 @@ function levelClick(event) {
  course_level = event.id;
 
  }
+
+ function setTechnology(){
+    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+}
 
  function bookingSyllabus(event, val) {
      

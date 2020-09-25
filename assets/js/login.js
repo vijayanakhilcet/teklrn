@@ -2,6 +2,7 @@
         $(function() {
         image_name = 'Java_';
         course_name = 'Java';   
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
 
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -29,6 +30,7 @@
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
+                   setTechnology();
     }
     
    
@@ -453,6 +455,9 @@ function bookCrseClick(event) {
         
     bookcrse();
   }
+}
+function setTechnology(){
+    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
 }
 
 function bookcrse(){

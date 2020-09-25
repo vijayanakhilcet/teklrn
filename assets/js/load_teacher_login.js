@@ -5,6 +5,7 @@ var course_level;
 $(function() {
   image_name = 'Java_';
         course_name = 'Java';   
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
 
   
   $.ajax({
@@ -293,6 +294,7 @@ df = document.createDocumentFragment(); // create a document fragment to hold th
 course_name = ui.item.value;
 image_name = ui.item.value+'_';
 course_level = null;
+setTechnology();
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
 /*var li_element = document.createElement('li'); // create the option element
 var a_element = document.createElement('a');       
@@ -454,6 +456,9 @@ if (content.style.maxHeight){
           });
           return false;        
        }
+       function setTechnology(){
+        document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
+    }
   
 
        function associated_tech(){ 
