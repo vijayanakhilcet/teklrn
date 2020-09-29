@@ -8,6 +8,7 @@ from phone_field import PhoneField
 class Course(models.Model):
     name = models.CharField(max_length=30)
     levels = models.IntegerField(default=170)    
+    category = models.CharField(max_length=30, default='Java')  
     def __str__(self):
         return self.name
 

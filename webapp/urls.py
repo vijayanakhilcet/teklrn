@@ -60,6 +60,7 @@ urlpatterns = [
     path('login_teacher',views.LoginTeacherView.as_view()),
     path('login_teacher_authorize',views.login_teacher_authorize, name='login_authorize'),
     path('get_pending_course_assignments',views.TeacherPickCourseView.as_view()),
+    path('get_associated',views.AssociatedTechView.as_view()),
     path('teacherbooking/',views.TeacherBookCourseView.as_view()),
     path('markCompletion/',views.MarkCourseCompletionView.as_view()),
     path('get_given_trainings/',views.TeacherGivenTrainingsView.as_view()),

@@ -5,6 +5,7 @@
         
     document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
     document.getElementById('level_field').innerHTML = 'Total Levels : 21';
+    setAssociatedTechnology();
 
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -17,14 +18,8 @@
         course_name = ui.item.value;
         image_name = ui.item.value+'_';
         course_level = null;
-    for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
-       /* var li_element = document.createElement('li'); // create the option element
-        var a_element = document.createElement('a');       
-        a_element.id=i;
-        a_element.setAttribute("onclick", "levelClick(this)");
-        a_element.appendChild(document.createTextNode("Level " + i));
-        li_element.appendChild(a_element);
-        elm.appendChild(li_element); */
+    for (var i = 1; i <= ui.item.levels; i++) { 
+      
           var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">Level '+i+ ' '+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
@@ -32,10 +27,11 @@
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
-                   setTechnology(ui.item.levels);
+                   
     }
     
-   
+    setTechnology(ui.item.levels);
+    setAssociatedTechnology();   
         }
             });
 
@@ -462,6 +458,78 @@ function setTechnology(level_val){
     document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
     document.getElementById('level_field').innerHTML = 'Total Levels : '+level_val;
 
+}
+
+function openMainView(val){
+   // $("#course-search").val("Php").trigger("select");
+ //  $("#course-search").val('Java');
+  // $("#course-search").data("ui-autocomplete").search("Hadoop");
+  // $("#course-search").data("ui-autocomplete").menu.element.children().first().click();
+  //$("#course-search").data("ui-autocomplete").menu.val("Java");
+  //$("#course-search").data("ui-autocomplete").menu.element.children().first().click();
+  $("#course-search").val(val);
+ // $("#course-search").data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:val}});
+ 
+ $.ajax({
+    url         : "/autocomplete", // the url where we want to POST
+    data        : {"term":val}, // our data object
+    dataType    : "json", // what type of data do\ we expect back from the server
+    encode      : true
+})
+    // using the done promise callback
+    .done(function(data) {
+        
+        
+       
+       
+df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
+course_name = val;
+image_name = val+'_';
+course_level = null;
+
+  $.each(data, function(index) {
+    $('#homeSubmenu').empty();
+    var elm = document.getElementById('homeSubmenu');
+    for (var i = 1; i <= data[0].levels; i++) { 
+        console.log (data[index].levels);
+var li_element = document.createElement('li'); // create the option element
+          var aHtml = '<a href="#">Level '+i+ ' '+
+         '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
+        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
+        li_element.innerHTML+=aHtml;
+         
+       elm.appendChild(li_element); 
+       setTechnology(data[0].levels);
+       setAssociatedTechnology();
+    
+    }
+    });
+});
+  
+}
+
+function setAssociatedTechnology(){
+    $.ajax({
+        url         : "/get_associated", // the url where we want to POST
+        data        : {"course":course_name}, // our data object
+        dataType    : "json", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            
+            
+                      var elm = document.getElementById('associated_t');
+                     elm.innerHTML="";
+                     var aHtml ="";
+    
+         $.each(data, function(index) {
+
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+                     
+          });
+          elm.innerHTML=aHtml; 
+        });
 }
 
 
