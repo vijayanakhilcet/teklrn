@@ -44,4 +44,8 @@ class StudentCourse(models.Model):
 class TeacherCourse(models.Model):    
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     course =  models.ForeignKey(Course, on_delete=models.CASCADE)
- 
+
+class CourseLevel(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    level_number = models.IntegerField(default=1)   
+    description = models.CharField(max_length=100)

@@ -32,6 +32,27 @@
     
     setTechnology(ui.item.levels);
     setAssociatedTechnology();   
+    resetSearchTopic();
+        }
+            });
+
+
+            $("#search-topics").autocomplete({  
+                source: '/searchtopics',
+                dataType: 'json',
+                select: function( event , ui ) {
+                    $('#searchtopics').empty();
+                    var elm = document.getElementById('searchtopics');
+       var li_element = document.createElement('li'); // create the option element
+                      var aHtml = '<br>'+
+                      '<h4 id="tech_field" style="background-color: #629DD1; color: white;">'+course_name+' Level '+ui.item.level+ '  '+
+                          '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+ui.item.level+')"'+ '> View syllabus '+'</button>'+
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+ui.item.levels+')"'+ '> Book '+'</button></h4>';
+                    li_element.innerHTML+=aHtml;
+                     
+                   elm.appendChild(li_element); 
+                   
+    
         }
             });
 
@@ -501,13 +522,17 @@ var li_element = document.createElement('li'); // create the option element
        elm.appendChild(li_element); 
        setTechnology(data[0].levels);
        setAssociatedTechnology();
+       resetSearchTopic();
     
     }
     });
 });
   
 }
-
+function resetSearchTopic(){
+    $("#search-topics").val("");    
+    $('#searchtopics').empty();
+}
 function setAssociatedTechnology(){
     $.ajax({
         url         : "/get_associated", // the url where we want to POST

@@ -297,6 +297,7 @@ image_name = ui.item.value+'_';
 course_level = null;
 setTechnology(ui.item.levels);
 setAssociatedTechnology();   
+resetSearchTopic();
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
 /*var li_element = document.createElement('li'); // create the option element
 var a_element = document.createElement('a');       
@@ -333,6 +334,24 @@ pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
 }
 });
 
+$("#search-topics").autocomplete({  
+  source: '/searchtopics',
+  dataType: 'json',
+  select: function( event , ui ) {
+      $('#searchtopics').empty();
+      var elm = document.getElementById('searchtopics');
+var li_element = document.createElement('li'); // create the option element
+        var aHtml = '<br>'+
+        '<h4 id="tech_field" style="background-color: #629DD1; color: white;">'+course_name+' Level '+ui.item.level+ '  '+
+            '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+ui.item.level+')"'+ '> View syllabus '+'</button>'+
+      ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+ui.item.levels+')"'+ '> Book '+'</button></h4>';
+      li_element.innerHTML+=aHtml;
+       
+     elm.appendChild(li_element); 
+     
+
+}
+});
 
 
 
@@ -449,6 +468,12 @@ if (content.style.maxHeight){
 
 
 
+        function resetSearchTopic(){
+          $("#search-topics").val("");    
+          $('#searchtopics').empty();
+      }
+      
+
         function lvlclk(pg){ 
           var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
           $.createModal({
@@ -501,7 +526,7 @@ if (content.style.maxHeight){
             elm.appendChild(li_element); 
             setTechnology(data[0].levels);
             setAssociatedTechnology();
-         
+            resetSearchTopic();
          }
          });
      });

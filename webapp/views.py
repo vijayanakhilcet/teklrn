@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Course, Student, StudentCourse, Teacher, TeacherCourse
+from webapp.models import Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -31,6 +31,7 @@ from dateutil.relativedelta import *
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 HOSTNAME = settings.APP_HOST_NAME
+technology_view='Java'
 # Create your views here.
 
 def get_context_data(self, **kwargs): # new
@@ -217,11 +218,36 @@ def careers(request):
 def home(request):
     return render(request, 'webapp/home.html')
 
+    
+class AutoCompleteSearchTopicsView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        topic = data.get("term")
+        temp = Course.objects.get(name=technology_view)
+        if topic:
+            courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )           
+        else:
+            courses = CourseLevel.objects.all()
+            results = []
+        for course in courses:
+            course_json = {}
+            course_json['level'] = course.level_number
+            course_json['value'] = course.description
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+    
+
 class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
         courseName = data.get("term")
+        global technology_view
+        technology_view = courseName
         if courseName:
             courses = Course.objects.filter(name__icontains=courseName)           
         else:
@@ -559,7 +585,9 @@ class BookCourseView(FormView):
 class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
+        global technology_view
         course = d.get("course")
+        technology_view = course
         cat = Course.objects.get(name=course).category 
         associated_techs = Course.objects.filter(category=cat)
         results = []
