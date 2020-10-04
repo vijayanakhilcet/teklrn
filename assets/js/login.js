@@ -5,7 +5,6 @@
         
     document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
     document.getElementById('level_field').innerHTML = 'Total Levels : 21';
-    setAssociatedTechnology();
     setdefaultLevels();
 
             $("#course-search").autocomplete({  
@@ -138,7 +137,6 @@ function levelClick(event) {
 
 
     function setView(crse) {
-        //alert(crse+lvl);
         $.ajax({
             url         : "/setview", // the url where we want to POST
             data        : {"course_name":crse}, // our data object
@@ -540,6 +538,7 @@ var li_element = document.createElement('li'); // create the option element
        elm.appendChild(li_element); 
        setTechnology(data[0].levels);
        setAssociatedTechnology();
+       setView(val);
        resetSearchTopic();
     
     }

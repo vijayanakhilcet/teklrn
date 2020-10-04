@@ -690,6 +690,7 @@ function levelClick(event) {
         elm.appendChild(li_element); 
         setTechnology(data[0].levels);
         setAssociatedTechnology();
+        setView(val);
         resetSearchTopic();
      
      }

@@ -223,8 +223,7 @@ class AutoCompleteSearchTopicsView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        topic = data.get("term")        
-        global technology_view
+        topic = data.get("term")   
         temp = Course.objects.get(name=technology_view)
         if topic:
             courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )           
@@ -246,8 +245,7 @@ class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        courseName = data.get("term")
-     
+        courseName = data.get("term")     
         if courseName:
             courses = Course.objects.filter(name__icontains=courseName)           
         else:
