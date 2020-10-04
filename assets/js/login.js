@@ -16,7 +16,6 @@
                    
         df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
         course_name = ui.item.value;
-        setView(course_name);
         image_name = ui.item.value+'_';
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
@@ -33,13 +32,14 @@
     
     setTechnology(ui.item.levels);
     setAssociatedTechnology();   
-    resetSearchTopic();
+    resetSearchTopic(); 
         }
             });
 
-
+/*
             $("#search-topics").autocomplete({  
-                source: '/searchtopics',
+                source: '/searchtopics?crse='+course_name,
+                data: {"course_name":course_name},
                 dataType: 'json',
                 select: function( event , ui ) {
                     $('#searchtopics').empty();
@@ -55,7 +55,7 @@
                    
     
         }
-            });
+            });*/
 
 });
 
@@ -134,21 +134,35 @@ function levelClick(event) {
     course_level = event.id;
    
     }
+   
 
-
-    function setView(crse) {
-        $.ajax({
-            url         : "/setview", // the url where we want to POST
-            data        : {"course_name":crse}, // our data object
-            dataType    : "json", // what type of data do\ we expect back from the server
-            encode      : true
-        })
+    function search(ele) {
+        if(event.key === 'Enter') {
+            $.ajax({               
+                url          : "/searchtopics", // the url where we want to POST
+                data         : {"course_name":course_name, "keyword_data": ele.value},
+                dataType     : 'json',
+                encode       : true
+            })
+                // using the done promise callback
+                 .done(function(data) {   
+                    var elm = document.getElementById('searchtopics');
+                    elm.innerHTML="";
+                    var aHtml ="";
+                    $.each(data, function(index) {
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                     
+                     
+                    });
+                    elm.innerHTML=aHtml;    
+        });
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
           
-           
-    
-                event.preventDefault();
+        }
     }
-    
 
 
 function login_l(event, crse, lvl) {
@@ -538,7 +552,6 @@ var li_element = document.createElement('li'); // create the option element
        elm.appendChild(li_element); 
        setTechnology(data[0].levels);
        setAssociatedTechnology();
-       setView(val);
        resetSearchTopic();
     
     }

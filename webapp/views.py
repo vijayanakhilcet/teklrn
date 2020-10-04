@@ -28,11 +28,12 @@ from .forms import StudentForm, ExtendedUserCreationForm
 from django.contrib.auth.models import User
 import socket
 from dateutil.relativedelta import *
+import threading
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 HOSTNAME = settings.APP_HOST_NAME
-technology_view='Java'
-# Create your views here.
+
+
 
 def get_context_data(self, **kwargs): # new
     context = super().get_context_data(**kwargs)
@@ -223,8 +224,9 @@ class AutoCompleteSearchTopicsView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        topic = data.get("term")   
-        temp = Course.objects.get(name=TechView.technology_view)
+        topic = data.get("keyword_data")   
+        c = data.get("course_name")
+        temp = Course.objects.get(name=c)
         if topic:
             courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )           
         else:
@@ -239,9 +241,7 @@ class AutoCompleteSearchTopicsView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
-    
-class TechView(object):
-    technology_view  = "Java"
+
 
 class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):
@@ -343,16 +343,7 @@ class CheckTeacherExistsView(FormView):
 
 
 
-class SetView(FormView):
-    def get(self,request,*args,**kwargs):
-        data = request.GET
-        course_name = data.get("course_name")
-        TechView.technology_view = course_name
-        results = []
-        data = json.dumps(results)
-        mimetype = 'application/json'
-        return HttpResponse(data, mimetype)
-     
+   
 
 class LoginView(FormView):
     def get(self,request,*args,**kwargs):
@@ -595,7 +586,6 @@ class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
         course = d.get("course")
-        TechView.technology_view = course
         cat = Course.objects.get(name=course).category 
         associated_techs = Course.objects.filter(category=cat)
         results = []

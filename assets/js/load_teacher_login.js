@@ -336,26 +336,6 @@ pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
 }
 });
 
-$("#search-topics").autocomplete({  
-  source: '/searchtopics',
-  dataType: 'json',
-  select: function( event , ui ) {
-      $('#searchtopics').empty();
-      var elm = document.getElementById('searchtopics');
-var li_element = document.createElement('li'); // create the option element
-        var aHtml = '<br>'+
-        '<h4 id="tech_field" style="background-color: #629DD1; color: white;">'+course_name+' Level '+ui.item.level+ '  '+
-            '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+ui.item.level+')"'+ '> View syllabus '+'</button>'+
-      ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+ui.item.levels+')"'+ '> Book '+'</button></h4>';
-      li_element.innerHTML+=aHtml;
-       
-     elm.appendChild(li_element); 
-     
-
-}
-});
-
-
 
 $("#myFormemail").submit(function(event) {
 
@@ -469,6 +449,35 @@ $("#bookCourse").submit(function(event) {
                    
       }
       }
+
+ 
+      function search(ele) {
+        if(event.key === 'Enter') {
+            $.ajax({               
+                url          : "/searchtopics", // the url where we want to POST
+                data         : {"course_name":course_name, "keyword_data": ele.value},
+                dataType     : 'json',
+                encode       : true
+            })
+                // using the done promise callback
+                 .done(function(data) {   
+                    var elm = document.getElementById('searchtopics');
+                    elm.innerHTML="";
+                    var aHtml ="";
+                    $.each(data, function(index) {
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                     
+                     
+                    });
+                    elm.innerHTML=aHtml;    
+        });
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+          
+        }
+    }     
     
         
 function afterDelayFour(){
@@ -563,7 +572,7 @@ if (content.style.maxHeight){
             elm.appendChild(li_element); 
             setTechnology(data[0].levels);
             setAssociatedTechnology();
-            setView(val);
+            setView(va);
             resetSearchTopic();
          }
          });
