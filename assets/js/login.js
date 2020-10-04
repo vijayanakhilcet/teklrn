@@ -6,6 +6,7 @@
     document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
     document.getElementById('level_field').innerHTML = 'Total Levels : 21';
     setAssociatedTechnology();
+    setdefaultLevels();
 
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -532,6 +533,23 @@ var li_element = document.createElement('li'); // create the option element
 function resetSearchTopic(){
     $("#search-topics").val("");    
     $('#searchtopics').empty();
+}
+
+function setdefaultLevels(){
+    $("#course-search").val("Java");
+    $('#homeSubmenu').empty();
+    var elm = document.getElementById('homeSubmenu');
+    df = document.createDocumentFragment();
+    for (var i = 1; i <= 21; i++) { 
+       var li_element = document.createElement('li'); // create the option element
+                var aHtml = '<a href="#">Level '+i+ ' '+
+               '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
+              ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book '+'</button></a>';
+              li_element.innerHTML+=aHtml;
+               
+             elm.appendChild(li_element); 
+             
+}
 }
 function setAssociatedTechnology(){
     $.ajax({
