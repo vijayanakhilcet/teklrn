@@ -224,7 +224,7 @@ class AutoCompleteSearchTopicsView(FormView):
         results= []
         data = request.GET
         topic = data.get("term")   
-        temp = Course.objects.get(name=technology_view)
+        temp = Course.objects.get(name=TechView.technology_view)
         if topic:
             courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )           
         else:
@@ -240,6 +240,8 @@ class AutoCompleteSearchTopicsView(FormView):
         return HttpResponse(data, mimetype)
 
     
+class TechView(object):
+    technology_view  = "Java"
 
 class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):
@@ -345,8 +347,7 @@ class SetView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
         course_name = data.get("course_name")
-        global technology_view
-        technology_view = course_name
+        TechView.technology_view = course_name
         results = []
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -593,9 +594,8 @@ class BookCourseView(FormView):
 class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
-        global technology_view
         course = d.get("course")
-        technology_view = course
+        TechView.technology_view = course
         cat = Course.objects.get(name=course).category 
         associated_techs = Course.objects.filter(category=cat)
         results = []
