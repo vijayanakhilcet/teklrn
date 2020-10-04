@@ -299,6 +299,7 @@ course_level = null;
 setTechnology(ui.item.levels);
 setAssociatedTechnology();   
 resetSearchTopic();
+setView(course_name);
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
 /*var li_element = document.createElement('li'); // create the option element
 var a_element = document.createElement('a');       
@@ -485,6 +486,23 @@ if (content.style.maxHeight){
         (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:false};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 420px;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+="</div>";html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div class="modal-footer">';if(b.closeButton===true){html+='<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 
+        function setView(crse) {
+          //alert(crse+lvl);
+          $.ajax({
+              url         : "/setview", // the url where we want to POST
+              data        : {"course_name":crse}, // our data object
+              dataType    : "json", // what type of data do\ we expect back from the server
+              encode      : true
+          })
+            
+             
+      
+                  event.preventDefault();
+      }
+      
+  
+  
+  
 
         function resetSearchTopic(){
           $("#search-topics").val("");    
@@ -529,6 +547,7 @@ if (content.style.maxHeight){
      course_name = val;
      image_name = val+'_';
      course_level = null;
+     setView(course_name);
      
        $.each(data, function(index) {
          $('#homeSubmenu').empty();

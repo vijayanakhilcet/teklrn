@@ -263,6 +263,7 @@ var mail_id_login;
         setTechnology(ui.item.levels);
         setAssociatedTechnology();   
         resetSearchTopic();
+        setView(course_name);
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
@@ -494,6 +495,23 @@ var mail_id_login;
     
     });
 
+    function setView(crse) {
+        //alert(crse+lvl);
+        $.ajax({
+            url         : "/setview", // the url where we want to POST
+            data        : {"course_name":crse}, // our data object
+            dataType    : "json", // what type of data do\ we expect back from the server
+            encode      : true
+        })
+          
+           
+    
+                event.preventDefault();
+    }
+    
+
+
+
     function setdefaultLevels(){
         $("#course-search").val("Java");
         $('#homeSubmenu').empty();
@@ -656,6 +674,7 @@ function levelClick(event) {
  course_name = val;
  image_name = val+'_';
  course_level = null;
+ setView(course_name);
  
    $.each(data, function(index) {
      $('#homeSubmenu').empty();

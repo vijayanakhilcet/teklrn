@@ -247,8 +247,7 @@ class AutoCompleteView(FormView):
         results= []
         data = request.GET
         courseName = data.get("term")
-        global technology_view
-        technology_view = courseName
+     
         if courseName:
             courses = Course.objects.filter(name__icontains=courseName)           
         else:
@@ -340,11 +339,21 @@ class CheckTeacherExistsView(FormView):
             student = None
         if student:
             return HttpResponseRedirect(HOSTNAME+'loginFormT')
-        request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'registerT')
 
 
 
+class SetView(FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        course_name = data.get("course_name")
+        global technology_view
+        technology_view = course_name
+        results = []
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+     
 
 class LoginView(FormView):
     def get(self,request,*args,**kwargs):

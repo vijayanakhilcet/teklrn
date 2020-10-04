@@ -17,6 +17,7 @@
                    
         df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
         course_name = ui.item.value;
+        setView(course_name);
         image_name = ui.item.value+'_';
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
@@ -134,6 +135,22 @@ function levelClick(event) {
     course_level = event.id;
    
     }
+
+
+    function setView(crse) {
+        //alert(crse+lvl);
+        $.ajax({
+            url         : "/setview", // the url where we want to POST
+            data        : {"course_name":crse}, // our data object
+            dataType    : "json", // what type of data do\ we expect back from the server
+            encode      : true
+        })
+          
+           
+    
+                event.preventDefault();
+    }
+    
 
 
 function login_l(event, crse, lvl) {
