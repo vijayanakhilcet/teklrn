@@ -228,7 +228,9 @@ class AutoCompleteSearchTopicsView(FormView):
         c = data.get("course_name")
         temp = Course.objects.get(name=c)
         if topic:
-            courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )           
+            courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )  
+            if not courses:
+                 courses = CourseLevel.objects.filter(course=temp)         
         else:
             courses = CourseLevel.objects.all()
             results = []
