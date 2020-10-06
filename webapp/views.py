@@ -325,6 +325,7 @@ class CheckTeacherExistsView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
         email_id = data.get("email")
+        request.session['email'] = email_id
         if email_id:
             try:
                teacher = Teacher.objects.get(email=email_id) 
