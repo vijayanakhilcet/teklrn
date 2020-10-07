@@ -5,7 +5,8 @@
         
     document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
     document.getElementById('level_field').innerHTML = 'Total Levels : 21';
-    setdefaultLevels();
+    setdefaultLevels();    
+    setMostSoughtTechnologies();
 
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -33,29 +34,12 @@
     setTechnology(ui.item.levels);
     setAssociatedTechnology();   
     resetSearchTopic(); 
+    setMostSoughtTechnologies();
+
         }
             });
 
-/*
-            $("#search-topics").autocomplete({  
-                source: '/searchtopics?crse='+course_name,
-                data: {"course_name":course_name},
-                dataType: 'json',
-                select: function( event , ui ) {
-                    $('#searchtopics').empty();
-                    var elm = document.getElementById('searchtopics');
-       var li_element = document.createElement('li'); // create the option element
-                      var aHtml = '<br>'+
-                      '<h4 id="tech_field" style="background-color: #629DD1; color: white;">'+course_name+' Level '+ui.item.level+ '  '+
-                          '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+ui.item.level+')"'+ '> View syllabus '+'</button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+ui.item.levels+')"'+ '> Book '+'</button></h4>';
-                    li_element.innerHTML+=aHtml;
-                     
-                   elm.appendChild(li_element); 
-                   
-    
-        }
-            });*/
+
 
 });
 
@@ -511,16 +495,10 @@ function setTechnology(level_val){
 
 }
 
+
+
 function openMainView(val){
-   // $("#course-search").val("Php").trigger("select");
- //  $("#course-search").val('Java');
-  // $("#course-search").data("ui-autocomplete").search("Hadoop");
-  // $("#course-search").data("ui-autocomplete").menu.element.children().first().click();
-  //$("#course-search").data("ui-autocomplete").menu.val("Java");
-  //$("#course-search").data("ui-autocomplete").menu.element.children().first().click();
   $("#course-search").val(val);
- // $("#course-search").data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:val}});
- 
  $.ajax({
     url         : "/autocomplete", // the url where we want to POST
     data        : {"term":val}, // our data object
@@ -553,7 +531,7 @@ var li_element = document.createElement('li'); // create the option element
        setTechnology(data[0].levels);
        setAssociatedTechnology();
        resetSearchTopic();
-    
+       setMostSoughtTechnologies();
     }
     });
 });
@@ -580,6 +558,34 @@ function setdefaultLevels(){
              
 }
 }
+
+
+function setMostSoughtTechnologies(){
+    $.ajax({
+        url         : "/get_most_sought", // the url where we want to POST
+        data        : {"course":course_name}, // our data object
+        dataType    : "json", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            
+            
+                      var elm = document.getElementById('most_t');
+                     elm.innerHTML="";
+                     var aHtml ="";
+    
+         $.each(data, function(index) {
+
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+                     
+          });
+          elm.innerHTML=aHtml; 
+        });
+}
+
+
+
 function setAssociatedTechnology(){
     $.ajax({
         url         : "/get_associated", // the url where we want to POST

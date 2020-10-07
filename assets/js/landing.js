@@ -9,6 +9,7 @@ var mail_id_login;
         document.getElementById('level_field').innerHTML = 'Total Levels : 21';
         setAssociatedTechnology();
         setdefaultLevels();
+        setMostSoughtTechnologies()
                $.ajax({
                 url         : "/get_pending_student_trainings", // the url where we want to POST
                 data        : {"course":"ab"}, // our data object
@@ -264,6 +265,7 @@ var mail_id_login;
         setAssociatedTechnology();   
         resetSearchTopic();
         setView(course_name);
+        setMostSoughtTechnologies()
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
@@ -520,6 +522,31 @@ var mail_id_login;
         }
     }
 
+    function setMostSoughtTechnologies(){
+        $.ajax({
+            url         : "/get_most_sought", // the url where we want to POST
+            data        : {"course":course_name}, // our data object
+            dataType    : "json", // what type of data do\ we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                
+                
+                          var elm = document.getElementById('most_t');
+                         elm.innerHTML="";
+                         var aHtml ="";
+        
+             $.each(data, function(index) {
+    
+              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+                         
+              });
+              elm.innerHTML=aHtml; 
+            });
+    }
+    
+    
 
     function setdefaultLevels(){
         $("#course-search").val("Java");
@@ -684,7 +711,10 @@ function levelClick(event) {
  image_name = val+'_';
  course_level = null;
  setView(course_name);
- 
+ setMostSoughtTechnologies();
+ setAssociatedTechnology(); 
+ resetSearchTopic();
+
    $.each(data, function(index) {
      $('#homeSubmenu').empty();
      var elm = document.getElementById('homeSubmenu');
@@ -698,9 +728,6 @@ function levelClick(event) {
           
         elm.appendChild(li_element); 
         setTechnology(data[0].levels);
-        setAssociatedTechnology();
-        setView(val);
-        resetSearchTopic();
      
      }
      });

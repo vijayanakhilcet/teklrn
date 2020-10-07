@@ -9,6 +9,7 @@ $(function() {
         document.getElementById('level_field').innerHTML = 'Total Levels : 21';        
         setAssociatedTechnology();
         setdefaultLevels();
+        setMostSoughtTechnologies();
   
   $.ajax({
     url         : "/get_pending_course_assignments", // the url where we want to POST
@@ -300,6 +301,7 @@ setTechnology(ui.item.levels);
 setAssociatedTechnology();   
 resetSearchTopic();
 setView(course_name);
+setMostSoughtTechnologies();
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
 /*var li_element = document.createElement('li'); // create the option element
 var a_element = document.createElement('a');       
@@ -450,6 +452,31 @@ $("#bookCourse").submit(function(event) {
       }
       }
 
+      function setMostSoughtTechnologies(){
+        $.ajax({
+            url         : "/get_most_sought", // the url where we want to POST
+            data        : {"course":course_name}, // our data object
+            dataType    : "json", // what type of data do\ we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                
+                
+                          var elm = document.getElementById('most_t');
+                         elm.innerHTML="";
+                         var aHtml ="";
+        
+             $.each(data, function(index) {
+    
+              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+                         
+              });
+              elm.innerHTML=aHtml; 
+            });
+    }
+    
+    
  
       function search(ele) {
         if(event.key === 'Enter') {
@@ -531,15 +558,8 @@ if (content.style.maxHeight){
 
 
        function openMainView(val){
-        // $("#course-search").val("Php").trigger("select");
-      //  $("#course-search").val('Java');
-       // $("#course-search").data("ui-autocomplete").search("Hadoop");
-       // $("#course-search").data("ui-autocomplete").menu.element.children().first().click();
-       //$("#course-search").data("ui-autocomplete").menu.val("Java");
-       //$("#course-search").data("ui-autocomplete").menu.element.children().first().click();
-       $("#course-search").val(val);
-      // $("#course-search").data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:val}});
-      
+           $("#course-search").val(val);
+       
       $.ajax({
          url         : "/autocomplete", // the url where we want to POST
          data        : {"term":val}, // our data object
@@ -556,7 +576,11 @@ if (content.style.maxHeight){
      course_name = val;
      image_name = val+'_';
      course_level = null;
-     setView(course_name);
+     setView(course_name);        
+     setTechnology(data[0].levels);      
+     resetSearchTopic();      
+     setAssociatedTechnology();
+     setMostSoughtTechnologies();
      
        $.each(data, function(index) {
          $('#homeSubmenu').empty();
@@ -570,10 +594,6 @@ if (content.style.maxHeight){
              li_element.innerHTML+=aHtml;
               
             elm.appendChild(li_element); 
-            setTechnology(data[0].levels);
-            setAssociatedTechnology();
-            setView(va);
-            resetSearchTopic();
          }
          });
      });
@@ -604,6 +624,10 @@ if (content.style.maxHeight){
               elm.innerHTML=aHtml; 
             });
     }
+
+    
+  
+  
     
        function setTechnology(level_val){
         document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;

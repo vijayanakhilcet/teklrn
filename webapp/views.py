@@ -584,6 +584,23 @@ class BookCourseView(FormView):
         request.session['level']=course_level
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
+class MostSoughTechView(FormView):
+    def get(self,request,*args,**kwargs):
+        d = request.GET
+        course = d.get("course")
+        associated_techs = Course.objects.exclude(name=course) 
+        results = []
+        
+        for associated_tech in associated_techs:
+         if associated_tech.name != course:
+            associated_tech_json = {}
+            associated_tech_json['name'] = associated_tech.name
+            #studCourse_json['level'] = studCourse_obj.level
+            results.append(associated_tech_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
 
 class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
