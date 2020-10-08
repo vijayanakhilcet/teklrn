@@ -128,7 +128,8 @@ def register_t(request):
            # meeting_link = request.POST['meeting-link-register-t']
             meeting_link = 'https://us04web.zoom.us/j/3181485588?pwd=RU1ENGg4aHB6ZzhWWTBDOGIremEwQT09'
             phone = request.POST['phone']
-            dob = request.POST['start']
+          #  dob = request.POST['start']
+            dob = '2001-01-01'
             course_obj = Course.objects.get(name=course_name)
             user_obj = form.save()
             freegeoip_response = requests.get('http://ip-api.com/json/')
