@@ -233,7 +233,7 @@ class AutoCompleteSearchTopicsView(FormView):
             if not courses:
                  courses = CourseLevel.objects.filter(course=temp)         
         else:
-            courses = CourseLevel.objects.all()
+            courses = CourseLevel.objects.filter(course=temp)   
             results = []
         for course in courses:
             course_json = {}
