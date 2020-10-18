@@ -34,23 +34,37 @@
 		<div class="wrap-contact100">
 			<form id="myFormRegister" action="" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					TEKLRN Book Course
+					Teklrn Inc.
 				</span>
+				<span class="contact100-form-title">
+					Course Booking
+				</span>
+				<div style="text-align: center;"><img src="static/image/images/2.png" alt="TEKLRN" width="55" height="45"></div>
+					
+				<span class="login100-form-title p-b-26">
+					
+				</span>
+				<span class="login100-form-title p-b-26">
 
 				<div class="wrap-input100 validate-input" data-validate="Course is required">
 					<span class="label-input100">Course</span>
-					<input class="input100" type="text" name="course-name" required placeholder="Enter your course" value="{{course_name}}">
+					<input readonly class="input100" type="text" name="course-name" required placeholder="Enter your course" value="{{course_name}}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Level is required">
 					<span class="label-input100">Level</span> 
-					<input class="input100" type="text" name="level-name" required placeholder="Enter your course level"  value="{{course_level}}">
+					<input readonly class="input100" type="text" name="level-name" required placeholder="Enter your course level"  value="{{course_level}}">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Select time">
 					<span class="label-input100">Time</span>
+					<span style="font-size: xx-small;
+					color: ghostwhite;
+					font-style: italic;
+					background: #629DD1;" class="label-input100">Modify booking time here..</span>
+				
 					<input  class="input100" type="datetime-local" id="time" value="{{dat_val}}" min="{{dat_val}}" max="{{dt_max_val}}"  required>
 					<span class="focus-input100"></span>
 				</div>		

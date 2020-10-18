@@ -356,6 +356,13 @@ class LoginView(FormView):
         course_level = data.get("course_level")
         request.session['course']=course_name
         request.session['level']=course_level
+        if request.user.is_authenticated:
+            tz = Student.objects.get(email=request.user.email).time_zn
+            now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
+            dt = now.strftime('%Y-%m-%dT%H:%M')        
+            max_v = now + relativedelta(months=2)
+            dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+            return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
         return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level })
 
 class LoginTView(FormView):
@@ -369,9 +376,11 @@ class BookCourseFormView(FormView):
         course_name = data.get("course")
         course_level = data.get("level")
         tz = Student.objects.get(email=request.user.email).time_zn
-        now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(months=2)
-        dt = now.strftime('%Y-%m-%dT%H:%M')
-        return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : 2, 'tz': tz })
+        now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
+        dt = now.strftime('%Y-%m-%dT%H:%M')        
+        max_v = now + relativedelta(months=2)
+        dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+        return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
 
 class LoginTeacherView(FormView):    
     def post(self,request,*args,**kwargs):
@@ -413,9 +422,12 @@ class LoginStudentView(FormView):
                     course_name = request.session['course']
                     course_level = request.session['level']
                     tz = Student.objects.get(email=user.email).time_zn
-                    now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(months=2)
+                    now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
                     dt = now.strftime('%Y-%m-%dT%H:%M')
-                    return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : 2, 'tz': tz })
+                    max_v = now + relativedelta(months=2)
+                    dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+                  
+                    return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
                 else:
                     page="webapp/hi_login.html"               
                 name = student.user.first_name
