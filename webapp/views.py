@@ -42,12 +42,21 @@ def get_context_data(self, **kwargs): # new
 
 def charge(request): # new
     if request.method == 'POST':
-        charge = stripe.Charge.create(
-            amount=3500,
-            currency='cad',
-            description='A Django charge',
-            source=request.POST['stripeToken']
-        )
+        try:
+            charge = stripe.Charge.create(
+                amount=1300,
+                currency='cad',
+                description='A Django charge',
+                source=request.POST['stripeToken']
+            )
+        except Exception as e:
+            return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+    tz = Student.objects.get(email=request.session['email']).time_zn
+    d_aware = datetime.datetime.strptime(request.session['datetimeval'], '%Y-%m-%dT%H:%M').astimezone(pytz.timezone(tz))
+    student_obj = Student.objects.get(email=request.session['email'])
+    course_obj= Course.objects.get(name=request.session['course'])
+    assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=request.session['level'], status="P", date_joined=d_aware, teacher=None)
+    assignCourse.save()
     return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
    
 def about(request):
@@ -585,13 +594,7 @@ class BookCourseView(FormView):
         results= []
         course_name = request.POST['course']
         course_level = request.POST['level']
-        timeval = request.POST['datetimeval']
-        tz = Student.objects.get(email=request.user.email).time_zn
-        d_aware = datetime.datetime.strptime(timeval, '%Y-%m-%dT%H:%M').astimezone(pytz.timezone(tz))
-        student_obj = Student.objects.get(email=request.session['email'])
-        course_obj= Course.objects.get(name=course_name)
-        assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=course_level, status="P", date_joined=d_aware, teacher=None)
-        assignCourse.save()
+        request.session['datetimeval']=request.POST['datetimeval']
         request.session['name']=request.user.first_name
         request.session['course']=course_name
         request.session['level']=course_level
