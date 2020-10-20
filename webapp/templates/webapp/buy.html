@@ -18,9 +18,11 @@ font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue'
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7"
     data-description="A Django Charge"
-    data-amount="3500"
+    data-amount="1300"
     data-locale="auto">
 </script>
+<script src="{% static 'js/login.js' %}"></script>
+<button onclick="backtolandingmain(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Cancel</span></button>
 
 </form> 
 <body>
