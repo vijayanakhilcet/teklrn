@@ -56,7 +56,7 @@ if (uTeacher &&  uTeacher=="true") {
         var option = document.createElement('option'); // create the option element
         option.className="option-style";
         option.value = i; // set the value property
-        option.appendChild(document.createTextNode("Level " + i)); // set the textContent in a safe way.
+        option.appendChild(document.createTextNode(course_name+ " Level " + i)); // set the textContent in a safe way.
         df.appendChild(option); // append the option to the document fragment
     }
     elm.appendChild(df); 

@@ -269,7 +269,7 @@ var mail_id_login;
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
-                      var aHtml = '<a href="#">Level '+i+ ' '+
+                      var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
                     ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
                     li_element.innerHTML+=aHtml;
@@ -555,7 +555,7 @@ var mail_id_login;
         df = document.createDocumentFragment();
         for (var i = 1; i <= 21; i++) { 
            var li_element = document.createElement('li'); // create the option element
-                    var aHtml = '<a href="#">Level '+i+ ' '+
+                    var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
                   ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book '+'</button></a>';
                   li_element.innerHTML+=aHtml;
@@ -721,7 +721,7 @@ function levelClick(event) {
      for (var i = 1; i <= data[0].levels; i++) { 
          console.log (data[index].levels);
  var li_element = document.createElement('li'); // create the option element
-           var aHtml = '<a href="#">Level '+i+ ' '+
+           var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
           '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
          ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
          li_element.innerHTML+=aHtml;
