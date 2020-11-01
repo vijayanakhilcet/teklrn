@@ -56,8 +56,20 @@ a:focus {
     align-items: stretch;
 }
 
+.d-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.align-items-stretch {
+    -webkit-box-align: stretch !important;
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+}
+
 #sidebar {
-    min-width: 180px;
+    min-width: 250px;
     max-width: 250px;
     background: #629DD1;
     color: #fff;
