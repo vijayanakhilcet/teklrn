@@ -12,7 +12,7 @@ class ExtendedUserCreationForm(UserCreationForm):
     last_name = forms.CharField(max_length=30,  widget= forms.TextInput
                            (attrs={'placeholder':'Enter last name', 'class': 'input100'}))
     password1 = forms.CharField(widget= forms.PasswordInput
-                           (attrs={'placeholder':'Enter  passowrd', 'class': 'input100'}))
+                           (attrs={'placeholder':'Enter  password', 'class': 'input100'}))
     password2 = forms.CharField(widget= forms.PasswordInput
                            (attrs={'placeholder':'Re-Enter password', 'class': 'input100'}))                      
 
