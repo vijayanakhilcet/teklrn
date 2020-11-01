@@ -532,6 +532,7 @@ var li_element = document.createElement('li'); // create the option element
        setAssociatedTechnology();
        resetSearchTopic();
        setMostSoughtTechnologies();
+       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     });
 });

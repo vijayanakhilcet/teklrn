@@ -597,7 +597,7 @@ if (content.style.maxHeight){
          }
          });
      });
-       
+     window.scrollTo({ top: 0, behavior: 'smooth' });
      }
      
     

@@ -685,12 +685,6 @@ function levelClick(event) {
  }
 
  function openMainView(val){
-    // $("#course-search").val("Php").trigger("select");
-  //  $("#course-search").val('Java');
-   // $("#course-search").data("ui-autocomplete").search("Hadoop");
-   // $("#course-search").data("ui-autocomplete").menu.element.children().first().click();
-   //$("#course-search").data("ui-autocomplete").menu.val("Java");
-   //$("#course-search").data("ui-autocomplete").menu.element.children().first().click();
    $("#course-search").val(val);
   // $("#course-search").data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item:{value:val}});
   
@@ -728,7 +722,7 @@ function levelClick(event) {
           
         elm.appendChild(li_element); 
         setTechnology(data[0].levels);
-     
+        window.scrollTo({ top: 0, behavior: 'smooth' })
      }
      });
  });
