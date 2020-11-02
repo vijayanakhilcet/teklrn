@@ -60,7 +60,7 @@ def charge(request): # new
     #Sening email
     
     email_subject = 'Teklrn Course Booked Alert'
-    email_body = 'Hello '+request.session["name"]+', \n\nYou have booked \n\nCourse: '+request.session["course"]+'\n\nLevel: '+request.session["level"]+'\n\n You will be notified once the Booking is accepted by a trainer. \n\n Thanks And Regards, \n Teklrn Backend Team'
+    email_body = 'Hello '+request.session["name"]+', \n\n You have booked \n\nCourse: '+request.session["course"]+'\n\nLevel: '+request.session["level"]+'\n\n You will be notified once the Booking is accepted by a trainer. \n\n Thanks And Regards, \n Teklrn Backend Team'
     email_test = EmailMessage(
                 email_subject,
                 email_body,
@@ -335,11 +335,11 @@ class CheckUserExistsView(FormView):
 
 def logout_view(request): 
         logout(request)            
-        return render(request, "webapp/home.html")
+        return render(request, "webapp/hi.html")
 
 def logout_t_view(request): 
         logout(request)            
-        return render(request, "webapp/home.html")
+        return render(request, "webapp/hi.html")
 
 class CheckTeacherExistsView(FormView):
   
