@@ -519,8 +519,8 @@ function bookCrseClick(event) {
   }
 }
 function setTechnology(level_val){
-    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology : '+course_name+'</div>';
-    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels : '+level_val+'</div>';
+    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';
+    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels - '+level_val+'</div>';
 
 }
 
