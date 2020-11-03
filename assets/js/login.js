@@ -7,7 +7,8 @@
     document.getElementById('level_field').innerHTML = 'Total Levels : 21';
     setdefaultLevels();    
     setMostSoughtTechnologies();
-
+    searchTopics();
+    setAssociatedTechnology();
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
                 dataType: 'json',
@@ -33,7 +34,8 @@
     
     setTechnology(ui.item.levels);
     setAssociatedTechnology();   
-    resetSearchTopic(); 
+    resetSearchTopic();
+    searchTopics();
     setMostSoughtTechnologies();
 
         }
@@ -146,6 +148,33 @@ function levelClick(event) {
             event.preventDefault();
           
         }
+    }
+
+    function searchTopics() {
+            $.ajax({               
+                url          : "/searchtopics", // the url where we want to POST
+                data         : {"course_name":course_name, "keyword_data": "Teklrn"},
+                dataType     : 'json',
+                encode       : true
+            })
+                // using the done promise callback
+                 .done(function(data) {   
+                    var elm = document.getElementById('searchtopics');
+                    elm.innerHTML="";
+                    var aHtml ="";
+                    $.each(data, function(index) {
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                     
+                     
+                    });
+                    elm.innerHTML=aHtml;    
+        });
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+          
+        
     }
 
 
@@ -531,6 +560,7 @@ var li_element = document.createElement('li'); // create the option element
        setTechnology(data[0].levels);
        setAssociatedTechnology();
        resetSearchTopic();
+       searchTopics();
        setMostSoughtTechnologies();
        window.scrollTo({ top: 0, behavior: 'smooth' });
     }

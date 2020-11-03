@@ -10,6 +10,7 @@ $(function() {
         setAssociatedTechnology();
         setdefaultLevels();
         setMostSoughtTechnologies();
+        searchtopics();
   
   $.ajax({
     url         : "/get_pending_course_assignments", // the url where we want to POST
@@ -300,6 +301,7 @@ course_level = null;
 setTechnology(ui.item.levels);
 setAssociatedTechnology();   
 resetSearchTopic();
+searchtopics();
 setView(course_name);
 setMostSoughtTechnologies();
 for (var i = 1; i <= ui.item.levels; i++) { // loop, i like 42.
@@ -506,7 +508,34 @@ $("#bookCourse").submit(function(event) {
         }
     }     
     
+    function searchtopics() {
+          $.ajax({               
+              url          : "/searchtopics", // the url where we want to POST
+              data         : {"course_name":course_name, "keyword_data": "Teklrn"},
+              dataType     : 'json',
+              encode       : true
+          })
+              // using the done promise callback
+               .done(function(data) {   
+                  var elm = document.getElementById('searchtopics');
+                  elm.innerHTML="";
+                  var aHtml ="";
+                  $.each(data, function(index) {
+                      aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+ '</h4>';
+                 //     ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                   
+                   
+                  });
+                  elm.innerHTML=aHtml;    
+      });
+          // stop the form from submitting the normal way and refreshing the page
+          event.preventDefault();
         
+      
+  }     
+        
+    
 function afterDelayFour(){
             
 var t = document.getElementById("four");
@@ -578,7 +607,8 @@ if (content.style.maxHeight){
      course_level = null;
      setView(course_name);        
      setTechnology(data[0].levels);      
-     resetSearchTopic();      
+     resetSearchTopic();  
+     searchtopics();    
      setAssociatedTechnology();
      setMostSoughtTechnologies();
      

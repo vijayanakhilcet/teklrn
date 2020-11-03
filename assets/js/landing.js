@@ -9,7 +9,8 @@ var mail_id_login;
         document.getElementById('level_field').innerHTML = 'Total Levels : 21';
         setAssociatedTechnology();
         setdefaultLevels();
-        setMostSoughtTechnologies()
+        setMostSoughtTechnologies();
+        searchtopics();
                $.ajax({
                 url         : "/get_pending_student_trainings", // the url where we want to POST
                 data        : {"course":"ab"}, // our data object
@@ -264,8 +265,9 @@ var mail_id_login;
         setTechnology(ui.item.levels);
         setAssociatedTechnology();   
         resetSearchTopic();
+        searchtopics();
         setView(course_name);
-        setMostSoughtTechnologies()
+        setMostSoughtTechnologies();
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
@@ -522,6 +524,34 @@ var mail_id_login;
         }
     }
 
+    function searchtopics() {
+            $.ajax({               
+                url          : "/searchtopics", // the url where we want to POST
+                data         : {"course_name":course_name, "keyword_data": "Teklrn"},
+                dataType     : 'json',
+                encode       : true
+            })
+                // using the done promise callback
+                 .done(function(data) {   
+                    var elm = document.getElementById('searchtopics');
+                    elm.innerHTML="";
+                    var aHtml ="";
+                    $.each(data, function(index) {
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                     
+                     
+                    });
+                    elm.innerHTML=aHtml;    
+        });
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+          
+        
+    }
+
+    
     function setMostSoughtTechnologies(){
         $.ajax({
             url         : "/get_most_sought", // the url where we want to POST
@@ -708,6 +738,7 @@ function levelClick(event) {
  setMostSoughtTechnologies();
  setAssociatedTechnology(); 
  resetSearchTopic();
+ searchtopics();
 
    $.each(data, function(index) {
      $('#homeSubmenu').empty();
@@ -722,7 +753,7 @@ function levelClick(event) {
           
         elm.appendChild(li_element); 
         setTechnology(data[0].levels);
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'smooth' });
      }
      });
  });
