@@ -3,8 +3,8 @@
         image_name = 'Java_';
         course_name = 'Java';   
         
-    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
-    document.getElementById('level_field').innerHTML = 'Total Levels : 21';
+    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';
+    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels - 21'+'</div>';
     setdefaultLevels();    
     setMostSoughtTechnologies();
     searchTopics();
@@ -136,9 +136,9 @@ function levelClick(event) {
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>'+
                         '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
-                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></div></h4>';
                      
                      
                     });
@@ -163,9 +163,9 @@ function levelClick(event) {
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].value+
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>' +
                         '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
-                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></h4>';
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></div></h4>';
                      
                      
                     });
@@ -519,8 +519,8 @@ function bookCrseClick(event) {
   }
 }
 function setTechnology(level_val){
-    document.getElementById('tech_field').innerHTML = 'Technology : '+course_name;
-    document.getElementById('level_field').innerHTML = 'Total Levels : '+level_val;
+    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology : '+course_name+'</div>';
+    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels : '+level_val+'</div>';
 
 }
 
@@ -608,7 +608,7 @@ function setMostSoughtTechnologies(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].name+' <br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
@@ -634,7 +634,7 @@ function setAssociatedTechnology(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+data[index].name+' <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].name+'<br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
