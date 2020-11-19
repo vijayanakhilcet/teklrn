@@ -27,6 +27,7 @@ urlpatterns = [
     path('', views.home, name='Home-Page'),
     path('autocomplete/',views.AutoCompleteView.as_view()),
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
+    path('loginFormForVideoAccess/',views.LoginViewForVideoAccess.as_view()),
     path('loginForm/',views.LoginView.as_view()),
     path('loginFormT/',views.LoginTView.as_view()),    
     path('book_course_form/',views.BookCourseFormView.as_view()), 
@@ -56,6 +57,7 @@ urlpatterns = [
     path('reset_student_password',views.ResetStudentPwdView.as_view(), name='reset'),
     path('reset_trainer_password',views.ResetStudentPwdView.as_view()),
     path('book_course',views.BookCourseView.as_view()),
+    path('book_video',views.BookVideoView.as_view()),
     path('checkTrainer/',views.CheckTeacherExistsView.as_view()),
     path('register_teacher',views.RegisterTeacherView.as_view()),
     path('login_teacher',views.LoginTeacherView.as_view()),
@@ -73,6 +75,7 @@ urlpatterns = [
     path('get_completed_student_trainings/',views.CompletedStudentTrainingsView.as_view()),
     path('get_accepted_student_trainings/',views.AcceptedStudentTrainingsView.as_view()),
     path('charge/', views.charge, name='charge'), # new
+     path('chargevideo/', views.chargevideo, name='chargeVideo'), # new
 ]
 
 

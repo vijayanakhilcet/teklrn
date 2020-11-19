@@ -41,6 +41,12 @@ class StudentCourse(models.Model):
     status = models.CharField(max_length=1)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, blank=True, null=True)
 
+class StudentCourseVideoBookings(models.Model):    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    level = models.IntegerField(default=170)       
+    videoPresent = models.BooleanField(default=False)
+
 class TeacherCourse(models.Model):    
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     course =  models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -49,3 +55,7 @@ class CourseLevel(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     level_number = models.IntegerField(default=1)   
     description = models.CharField(max_length=100)
+    rating = models.IntegerField(default=4)
+    reviewCount = models.IntegerField(default=46739)
+    videoPresent = models.BooleanField(default=False)
+    videoFree = models.BooleanField(default=0)

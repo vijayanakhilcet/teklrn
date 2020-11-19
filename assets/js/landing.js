@@ -266,14 +266,15 @@ var mail_id_login;
         setAssociatedTechnology();   
         resetSearchTopic();
         searchtopics();
-        setView(course_name);
+        //setView(course_name);
         setMostSoughtTechnologies();
         course_level = null;
     for (var i = 1; i <= ui.item.levels; i++) { 
         var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book'+'</button></a>';
+                    
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
@@ -512,8 +513,32 @@ var mail_id_login;
                     $.each(data, function(index) {
                         aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>'+
                         '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
-                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></div></h4>';
-                     
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book Trainer'+'</button>';
+                        if(data[index].videoFree==true)
+                        {
+                            
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
+                        }
+                        else{
+                            aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                              
+                            } var l;
+                            aHtml+='<a style="padding-right: 1%"></a>';
+                            for (l = 0; l < 5; l++) {
+                                if(l<data[index].rating){
+                                aHtml+='<span style="font-size:30%;vertical-align: middle;" class="fa fa-star checked"></span>';
+                                }
+                                else{
+                                    aHtml+='<span style="color:grey; font-size:30%;vertical-align: middle;" class="fa fa-star checked"></span>';
+                                 
+                                }
+                                aHtml+='<a style="padding-right: .4%"></a>';
+                            }
+                            aHtml+='<a style="padding-right: 1%"></a>';
+                            aHtml+='<a style="vertical-align: middle;font-size: 42%;">Rating ('+data[index].rating+'/5) '+data[index].reviewCount+' Students Rated</a>';
+                            aHtml+='</div></h4>';
+                         
                      
                     });
                     elm.innerHTML=aHtml;    
@@ -539,8 +564,32 @@ var mail_id_login;
                     $.each(data, function(index) {
                         aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>'+
                         '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
-                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book '+'</button></div></h4>';
-                     
+                        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book Trainer'+'</button>';
+                        if(data[index].videoFree==true)
+                        {
+                            
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
+                        }
+                        else{
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                          
+                        }
+                        var l;
+                        aHtml+='<a style="padding-right: 1%"></a>';
+                        for (l = 0; l < 5; l++) {
+                            if(l<data[index].rating){
+                            aHtml+='<span style="font-size:30%;vertical-align: middle;" class="fa fa-star checked"></span>';
+                            }
+                            else{
+                                aHtml+='<span style="color:grey; font-size:30%;vertical-align: middle;" class="fa fa-star checked"></span>';
+                             
+                            }
+                            aHtml+='<a style="padding-right: .4%"></a>';
+                        }
+                        aHtml+='<a style="padding-right: 1%"></a>';
+                        aHtml+='<a style="vertical-align: middle;font-size: 42%;">Rating ('+data[index].rating+'/5) '+data[index].reviewCount+' Students Rated</a>';
+                        aHtml+='</div></h4>';
                      
                     });
                     elm.innerHTML=aHtml;    
@@ -734,7 +783,7 @@ function levelClick(event) {
  course_name = val;
  image_name = val+'_';
  course_level = null;
- setView(course_name);
+ //setView(course_name);
  setMostSoughtTechnologies();
  setAssociatedTechnology(); 
  resetSearchTopic();
@@ -784,6 +833,37 @@ function levelClick(event) {
           elm.innerHTML=aHtml; 
         });
 }
+
+function videoClk(event, crse, lvl) {
+    //alert(crse+lvl);
+    $.ajax({
+        url         : "/loginFormForVideoAccess", // the url where we want to POST
+        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "action":"video"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+
+            // here we will handle errors and validation messages
+        });
+
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+}
+
+ function videoClk1(event, crse, lvl){ 
+    var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="./static/image/'+crse+'_vid_'+lvl+'.mp4")."   preload="auto"   autoplay   playsinline   webkit-playsinline></video>'
+    $.createModal({
+    message: iframe,
+    closeButton:true,
+    scrollable:false
+    });
+    return false;        
+ }
 
  function setTechnology(level_val){
     document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';

@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel
+from webapp.models import Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -70,6 +70,35 @@ def charge(request): # new
     email_test.send(fail_silently=False)
     return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
    
+def chargevideo(request): # new
+    if request.method == 'POST':
+        try:
+            charge = stripe.Charge.create(
+                amount=300,
+                currency='cad',
+                description='A Django charge',
+                source=request.POST['stripeToken']
+            )
+        except Exception as e:
+            return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+    student_obj = Student.objects.get(email=request.session['email'])
+    course_obj= Course.objects.get(name=request.session['course'])
+    assignVideoAccess = StudentCourseVideoBookings.objects.create(student=student_obj, course=course_obj, level=request.session['level'], videoPresent=True)
+    assignVideoAccess.save()
+    #Sening email
+    
+    email_subject = 'Teklrn Course Video Booked Alert'
+    email_body = 'Hello '+request.session["name"]+', \n\n You have booked \n\nCourse: '+request.session["course"]+'\n\nLevel: '+request.session["level"]+' Video Tutorial'+'\n\n You will get access to the video if it exists now, if not in two working days. \n\n Thanks And Regards, \n Teklrn Backend Team'
+    email_test = EmailMessage(
+                email_subject,
+                email_body,
+                'teklrn.inc@gmail.com',
+                [student_obj.email],
+            )
+    email_test.send(fail_silently=False)
+    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+
+
 def about(request):
     return render(request, 'webapp/about.html')
 
@@ -259,6 +288,10 @@ class AutoCompleteSearchTopicsView(FormView):
             course_json = {}
             course_json['level'] = course.level_number
             course_json['value'] = course.description
+            course_json['rating'] = course.rating
+            course_json['reviewCount'] = course.reviewCount
+            course_json['videoFree'] = course.videoFree
+            
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -367,7 +400,25 @@ class CheckTeacherExistsView(FormView):
 
 
 
+class LoginViewForVideoAccess(FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        course_name = data.get("course_name")
+        course_level = data.get("course_level") 
+        request.session['course']=course_name
+        request.session['level']=course_level
+        request.session['action']='Video'
+        if request.user.is_authenticated:
+            tz = Student.objects.get(email=request.user.email).time_zn
+            now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
+            dt = now.strftime('%Y-%m-%dT%H:%M')        
+            max_v = now + relativedelta(months=2)
+            dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+            return render(request, "webapp/bookVideo.html", {'course_name':  course_name, 'course_level': course_level})
+        return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level, 'action':'video'})
    
+
+
 
 class LoginView(FormView):
     def get(self,request,*args,**kwargs):
@@ -375,7 +426,8 @@ class LoginView(FormView):
         course_name = data.get("course_name")
         course_level = data.get("course_level")
         request.session['course']=course_name
-        request.session['level']=course_level
+        request.session['level']=course_level        
+        request.session['action']='Trainer'
         if request.user.is_authenticated:
             tz = Student.objects.get(email=request.user.email).time_zn
             now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
@@ -446,7 +498,9 @@ class LoginStudentView(FormView):
                     dt = now.strftime('%Y-%m-%dT%H:%M')
                     max_v = now + relativedelta(months=2)
                     dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
-                  
+                    if(request.session['action']=='Video'):
+                        return render(request, "webapp/bookVideo.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
+                             
                     return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
                 else:
                     page="webapp/hi_login.html"               
@@ -598,6 +652,17 @@ class RegisterTeacherView(FormView):
         request.session['course']=course_name
         request.session['meetingLink']=meeting_link
         return render(request, "webapp/hi_login_t.html", {'name': request.session['name'], 'email': request.session['email'], 'password': request.session['password'], 'course': request.session['course']})
+
+
+class BookVideoView(FormView):
+    def post(self,request,*args,**kwargs):
+        results= []
+        course_name = request.POST['course']
+        course_level = request.POST['level']
+        request.session['name']=request.user.first_name
+        request.session['course']=course_name
+        request.session['level']=course_level
+        return render(request, "webapp/buyVideo.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
 
 class BookCourseView(FormView):

@@ -1,0 +1,34 @@
+{% load static %}
+<html>
+    <head>
+        <script src="{% static 'js/buy.js' %}"></script>
+        </head>
+<body style="text-align: center;
+background-color: #fafafb;
+letter-spacing: -.03125rem;
+font-weight: 400;
+font-size: 1.1rem;
+line-height: 2.75rem;
+font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+<h4 style="background-color: #629DD1; color: white;">Teklrn Inc.</h4>
+<div style="text-align: center;"><img src="static/image/images/2.png" alt="TEKLRN" width="55" height="45"></div>
+
+<h4 style="background-color: #629DD1; color: white;">Name : {{name}} | Technology : {{course}} | Level : {{level}}</h4>
+
+<h4 style="background-color: #629DD1; color: white;">Total Cost : 3.00 CAD</h4>
+
+<form action="javascript:checkoutVideo()" method="post" id="buy-form">
+    {% csrf_token %}
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7"
+    data-description="Teklrn Inc."
+    data-amount="300"
+    data-locale="auto">
+</script>
+<script src="{% static 'js/login.js' %}"></script>
+<button onclick="backtolandingmain(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Cancel</span></button>
+
+</form> 
+<body>
+</body>
+</html>
