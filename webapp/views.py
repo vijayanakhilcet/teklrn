@@ -291,6 +291,7 @@ class AutoCompleteSearchTopicsView(FormView):
             course_json['rating'] = course.rating
             course_json['reviewCount'] = course.reviewCount
             course_json['videoFree'] = course.videoFree
+            course_json['videolink'] = course.videoLink
             
             results.append(course_json)
         data = json.dumps(results)

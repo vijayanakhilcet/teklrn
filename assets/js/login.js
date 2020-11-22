@@ -81,8 +81,11 @@ function lvlclk(pg){
         event.preventDefault();
     }
     
-     function videoClk1(event, crse, lvl){ 
-        var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="./static/image/'+crse+'_vid_'+lvl+'.mp4")."   preload="auto"   autoplay   playsinline   webkit-playsinline></video>'
+     function videoClk1(event, crse, lvl, videolink){ 
+//        var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="./static/image/'+crse+'_vid_'+lvl+'.mp4"   preload="auto"   autoplay   playsinline   webkit-playsinline></video>'
+   //    var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="https://drive.google.com/file/d/1Oh813UhVbWbOzlDRGs87nH_CIgflnsbz/preview"   preload="none"   autoplay   playsinline   webkit-playsinline></video>'
+        
+       var iframe = '<iframe   src="'+videolink+'" width="100%" height="100%"></iframe>';
         $.createModal({
         message: iframe,
         closeButton:true,
@@ -173,7 +176,7 @@ function levelClick(event) {
                         if(data[index].videoFree==true)
                         {
                             
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video Training '+'</button>';
                         aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
                         }
                         else{
@@ -225,7 +228,7 @@ function levelClick(event) {
                         if(data[index].videoFree==true)
                         {
                             
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video Training '+'</button>';
                         aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
                         }
                         else{

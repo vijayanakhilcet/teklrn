@@ -59,3 +59,4 @@ class CourseLevel(models.Model):
     reviewCount = models.IntegerField(default=46739)
     videoPresent = models.BooleanField(default=False)
     videoFree = models.BooleanField(default=0)
+    videoLink =  models.CharField(max_length=400, default='Hi')

@@ -38,6 +38,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'dal',  
     'dal_select2',
     'webapp.apps.WebappConfig',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [  
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,6 +101,8 @@ WSGI_APPLICATION = 'webproject.wsgi.application'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '356459022033335'
 SOCIAL_AUTH_FACEBOOK_SECRET = '92c76f8e19e76a09e06327fc0a4fafcd'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
