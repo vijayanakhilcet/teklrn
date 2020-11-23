@@ -47,6 +47,8 @@
 
 (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+="</div>";html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div class="modal-footer">';if(b.closeButton===true){html+='<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
+(function(a){a.createModalVid=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div style="height:100%; width:100%"class="modal-dialog">';html+='<div style="height:100%; width:100%" class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div style="padding:0rem" class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button style="background-color: white; color: #629DD1" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+
 /*
 * Here is how you use it
 */
@@ -85,8 +87,8 @@ function lvlclk(pg){
 //        var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="./static/image/'+crse+'_vid_'+lvl+'.mp4"   preload="auto"   autoplay   playsinline   webkit-playsinline></video>'
    //    var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="https://drive.google.com/file/d/1Oh813UhVbWbOzlDRGs87nH_CIgflnsbz/preview"   preload="none"   autoplay   playsinline   webkit-playsinline></video>'
         
-       var iframe = '<iframe   src="'+videolink+'" width="100%" height="100%"></iframe>';
-        $.createModal({
+       var iframe = '<iframe   src="'+videolink+'" width="100%" height="100%" allow=autoplay frameborder="0" allowfullscreen="allowfullscreen"></iframe><div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>';
+        $.createModalVid({
         message: iframe,
         closeButton:true,
         scrollable:false
