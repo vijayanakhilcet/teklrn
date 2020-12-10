@@ -24,8 +24,8 @@
       
           var li_element = document.createElement('li'); // create the option element
                       var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+ '<br>'+
-                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book '+'</button></a>';
+                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'</button>'+
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'</button></a>';
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
@@ -173,16 +173,16 @@ function levelClick(event) {
                     var aHtml ="";
                     $.each(data, function(index) {
                         aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>'+
-                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus '+'</button>'+
                         ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book Trainer'+'</button>';
                         if(data[index].videoFree==true)
                         {
                             
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video '+'</button>';
                         aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
                         }
                         else{
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video '+'</button>';
                           
                         }
                         var l;
@@ -198,7 +198,7 @@ function levelClick(event) {
                             aHtml+='<a style="padding-right: .4%"></a>';
                         }
                         aHtml+='<a style="padding-right: 1%"></a>';
-                        aHtml+='<a style="vertical-align: middle;font-size: 42%;">Rating ('+data[index].rating+'/5) '+data[index].reviewCount+' Students Rated</a>';
+                        aHtml+='<a style="vertical-align: middle;font-size: 42%;">('+data[index].rating+'/5) '+data[index].reviewCount+' Ratings</a>';
                         aHtml+='</div></h4>';
                       
                      
@@ -225,16 +225,16 @@ function levelClick(event) {
                     var aHtml ="";
                     $.each(data, function(index) {
                         aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].value+ '<br>' +
-                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> View syllabus '+'</button>'+
+                        '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;  vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus '+'</button>'+
                         ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '> Book Trainer'+'</button>';
                         if(data[index].videoFree==true)
                         {
                             
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].videolink+'\')"'+ '> Video '+'</button>';
                         aHtml+='<a style="margin-left: 1%; padding-left:1%; padding-right:1%; font-size: x-small; background: slategray; vertical-align: middle;">Free Video</a>';
                         }
                         else{
-                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video Training '+'</button>';
+                        aHtml+=' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa; vertical-align: middle;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '> Video '+'</button>';
                           
                         }
                         var l;
@@ -250,7 +250,7 @@ function levelClick(event) {
                             aHtml+='<a style="padding-right: .4%"></a>';
                         }
                         aHtml+='<a style="padding-right: 1%"></a>';
-                        aHtml+='<a style="vertical-align: middle;font-size: 42%;">Rating ('+data[index].rating+'/5) '+data[index].reviewCount+' Students Rated</a>';
+                        aHtml+='<a style="vertical-align: middle;font-size: 42%;"> ('+data[index].rating+'/5) '+data[index].reviewCount+' Ratings</a>';
                         aHtml+='</div></h4>';
                      
                     });
@@ -637,7 +637,7 @@ course_level = null;
         console.log (data[index].levels);
 var li_element = document.createElement('li'); // create the option element
           var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
-         '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
+         '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'</button>'+
         ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'</button></a>';
         li_element.innerHTML+=aHtml;
          
@@ -666,8 +666,8 @@ function setdefaultLevels(){
     for (var i = 1; i <= 21; i++) { 
        var li_element = document.createElement('li'); // create the option element
                 var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
-               '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>View syllabus '+'</button>'+
-              ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book '+'</button></a>';
+               '<button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'</button>'+
+              ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book Trainer'+'</button></a>';
               li_element.innerHTML+=aHtml;
                
              elm.appendChild(li_element); 
