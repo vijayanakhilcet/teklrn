@@ -3,8 +3,8 @@
         image_name = 'Java_';
         course_name = 'Java';   
         
-    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';
-    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels - 21'+'</div>';
+    document.getElementById('tec_name').text = course_name;
+    document.getElementById('tot_levls').text =  '21';
     setdefaultLevels();    
     setMostSoughtTechnologies();
     searchTopics();
@@ -604,8 +604,8 @@ function bookCrseClick(event) {
   }
 }
 function setTechnology(level_val){
-    document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';
-    document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels - '+level_val+'</div>';
+    document.getElementById('tec_name').text = course_name;
+    document.getElementById('tot_levls').text = level_val;
 
 }
 
