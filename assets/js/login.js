@@ -23,7 +23,7 @@
     for (var i = 1; i <= ui.item.levels; i++) { 
       
           var li_element = document.createElement('li'); // create the option element
-                      var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+ '<br>'+
+                      var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
                     ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
                     li_element.innerHTML+=aHtml;
@@ -636,7 +636,7 @@ course_level = null;
     for (var i = 1; i <= data[0].levels; i++) { 
         console.log (data[index].levels);
 var li_element = document.createElement('li'); // create the option element
-          var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
+          var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+'<br>'+
          '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
         ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
         li_element.innerHTML+=aHtml;
@@ -665,7 +665,7 @@ function setdefaultLevels(){
     df = document.createDocumentFragment();
     for (var i = 1; i <= 21; i++) { 
        var li_element = document.createElement('li'); // create the option element
-                var aHtml = '<a href="#">'+course_name+' Level '+i+ ' '+'<br>'+
+                var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+'<br>'+
                '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
               ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
               li_element.innerHTML+=aHtml;
@@ -693,7 +693,7 @@ function setMostSoughtTechnologies(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].name+' <br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
@@ -719,7 +719,7 @@ function setAssociatedTechnology(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;">'+data[index].name+'<br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #fafafa; color:#629DD1;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View</button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
