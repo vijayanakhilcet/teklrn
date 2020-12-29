@@ -258,7 +258,8 @@ function levelClick(event) {
                         aHtml+='</div></h4>';
                      
                     });
-                    elm.innerHTML=aHtml;    
+                    elm.innerHTML=aHtml;   
+                    clk(); 
         });
             // stop the form from submitting the normal way and refreshing the page
             event.preventDefault();
