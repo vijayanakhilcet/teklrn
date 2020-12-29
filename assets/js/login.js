@@ -617,7 +617,7 @@ function setTechnology(level_val){
 
 
 function openMainView(val){
-  $("#course-search").val(val);
+ $("#course-search").val(val);
  $.ajax({
     url         : "/autocomplete", // the url where we want to POST
     data        : {"term":val}, // our data object
@@ -625,15 +625,12 @@ function openMainView(val){
     encode      : true
 })
     // using the done promise callback
-    .done(function(data) {
-        
-        
-       
-       
+    .done(function(data) {         
 df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
 course_name = val;
 image_name = val+'_';
 course_level = null;
+technology_to_set = null;
 
   $.each(data, function(index) {
     $('#homeSubmenu').empty();
@@ -647,13 +644,15 @@ var li_element = document.createElement('li'); // create the option element
         li_element.innerHTML+=aHtml;
          
        elm.appendChild(li_element); 
-       setTechnology(data[0].levels);
-       setAssociatedTechnology();
-       resetSearchTopic();
-       searchTopics();
-       setMostSoughtTechnologies();
-       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+       technology_to_set = data[0].levels;
+      
+    }    
+    setTechnology(technology_to_set);
+    setAssociatedTechnology();
+    resetSearchTopic();
+    searchTopics();
+    setMostSoughtTechnologies();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
   
