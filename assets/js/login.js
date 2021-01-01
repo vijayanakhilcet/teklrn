@@ -642,18 +642,18 @@ var li_element = document.createElement('li'); // create the option element
          '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
         ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
         li_element.innerHTML+=aHtml;
-         
+        
        elm.appendChild(li_element); 
        technology_to_set = data[0].levels;
       
     }    
-    setTechnology(technology_to_set);
+    setTechnology(technology_to_set);    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     setAssociatedTechnology();
     resetSearchTopic();
     searchTopics();
     setMostSoughtTechnologies();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 });
   
 }
