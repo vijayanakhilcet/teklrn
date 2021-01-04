@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import re
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
@@ -269,6 +270,32 @@ def careers(request):
 def home(request):
     return render(request, 'webapp/home.html')
 
+
+class TechnologiesMatchingTheSearchView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        topic = data.get("search_string")  
+        technologies = re.split(r'[;,\s]\s*', topic)
+        results = []
+        for technology in technologies:
+            courses =  Course.objects.filter(name__icontains=technology)
+            if courses:
+                for tech in courses:
+                    course_json = {}
+                    course_json['technology'] = tech.name
+                    results.append(course_json)
+
+        if not results:
+
+            technologies = Course.objects.all()
+            for technology in technologies:
+                course_json = {}
+                course_json['technology'] = technology.name
+                results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
     
 class AutoCompleteSearchTopicsView(FormView):
     def get(self,request,*args,**kwargs):
@@ -276,7 +303,7 @@ class AutoCompleteSearchTopicsView(FormView):
         data = request.GET
         topic = data.get("keyword_data")   
         c = data.get("course_name")
-        temp = Course.objects.get(name=c)
+        temp = Course.objects.get(name=c.capitalize())
         if topic:
             courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )  
             if not courses:
@@ -681,7 +708,7 @@ class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
         course = d.get("course")
-        associated_techs = Course.objects.exclude(name=course) 
+        associated_techs = Course.objects.exclude(name=course.capitalize()) 
         results = []
         
         for associated_tech in associated_techs:
@@ -698,7 +725,8 @@ class MostSoughTechView(FormView):
 class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
-        course = d.get("course")
+        course = d.get("course").capitalize()
+        
         cat = Course.objects.get(name=course).category 
         associated_techs = Course.objects.filter(category=cat)
         results = []

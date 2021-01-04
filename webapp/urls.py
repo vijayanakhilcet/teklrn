@@ -27,6 +27,7 @@ urlpatterns = [
     path('', views.home, name='Home-Page'),
     path('autocomplete/',views.AutoCompleteView.as_view()),
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
+    path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
     path('loginFormForVideoAccess/',views.LoginViewForVideoAccess.as_view()),
     path('loginForm/',views.LoginView.as_view()),
     path('loginFormT/',views.LoginTView.as_view()),    

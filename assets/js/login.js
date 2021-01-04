@@ -2,6 +2,7 @@
         $(function() {
         image_name = 'Java_';
         course_name = 'Java';   
+        var runit = 0;
         
     document.getElementById('tec_name').text = course_name;
     document.getElementById('tot_levls').text =  '21';
@@ -9,9 +10,14 @@
     setMostSoughtTechnologies();
     searchTopics();
     setAssociatedTechnology();
+
+ 
+    
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
                 dataType: 'json',
+               /* search: function(event, ui){ alert(event.target.value);
+                },*/
                 select: function( event , ui ) {
                     $('#homeSubmenu').empty();
                     var elm = document.getElementById('homeSubmenu');
@@ -37,13 +43,22 @@
     resetSearchTopic();
     searchTopics();
     setMostSoughtTechnologies();
-
+    runit = 1
         }
             });
 
-             
+            $("#course-search").on('keyup', function (event) {
+                if(runit === 0){
+                if (event.keyCode === 13) {
+                    technologiesOnSearchBar(event.target.value);
+                }
+            }  
+                        
+            runit = 0;   
+             });   
 
 });
+(function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4><br><a style="padding-left:4%;">Search results:</a>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
@@ -56,6 +71,8 @@ function clk(){
 /*
 * Here is how you use it
 */
+
+
 function lvlclk(pg){ 
         var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
         $.createModal({
@@ -63,6 +80,34 @@ function lvlclk(pg){
         closeButton:true,
         scrollable:false
         });
+        return false;        
+     }
+
+
+function technologiesOnSearchBar(pg){ 
+    html_message = '';
+    $.ajax({
+        url         : "/getTechnologiesMatchingTheSearch", // the url where we want to POST
+        data        : {"search_string":pg}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $.each(data, function(index) {
+                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+               
+            });
+            $.createModalForSearch({
+                message: html_message,
+                closeButton:true,
+                scrollable:false
+                });   
+        });
+    event.preventDefault();
+        
+      //  var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+       
         return false;        
      }
 
@@ -615,6 +660,10 @@ function setTechnology(level_val){
 }
 
 
+function openMainViewFromSearchResults(val){
+    openMainView(val);    
+    document.getElementById("closeModal").click();
+}
 
 function openMainView(val){
  $("#course-search").val(val);
