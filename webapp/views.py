@@ -276,7 +276,7 @@ class TechnologiesMatchingTheSearchView(FormView):
         results= []
         data = request.GET
         topic = data.get("search_string")  
-        technologies = re.split(r'[;,\s]\s*', topic)
+        technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
         for technology in technologies:
             courses =  Course.objects.filter(name__icontains=technology)

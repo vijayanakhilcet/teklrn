@@ -49,7 +49,8 @@
 
             $("#course-search").on('keyup', function (event) {
                 if(runit === 0){
-                if (event.keyCode === 13) {
+                if (event.keyCode === 13) {                    
+                    $("#course-search").blur();
                     technologiesOnSearchBar(event.target.value);
                 }
             }  
