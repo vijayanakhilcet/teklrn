@@ -1,7 +1,11 @@
 $( document ).ready(
 function to_login() {
-var tech = window.location.search.substring(1); 
-var n = tech.localeCompare("redirecttologinT");
+var tech = window.location.search.substring(1);
+const urlParams = new URLSearchParams(tech);
+var technologyFromSearchString = 'Tensorflow';
+if(urlParams.get('technology')){
+var technologyFromSearchString = urlParams.get('technology');
+}
 var page = "hi";
 if(tech){
 if(tech == 'redirecttologinT'){
@@ -24,7 +28,7 @@ else if(tech == 'redirecttologinA'){
                 // process the form
                 $.ajax({
                     url         : page, // the url where we want to POST
-                    data        : {"email":'login'}, // our data object
+                    data        : {"technology":technologyFromSearchString}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
                 })
@@ -48,7 +52,7 @@ else if(tech == 'redirecttologinA'){
 function doLaunch(event) {
         $.ajax({
             url         : "hi", // the url where we want to POST
-            data        : {"email":"hELLO"}, // our data object
+            data        : {"technology":"Tensorflow"}, // our data object
             dataType    : "html", // what type of data do\ we expect back from the server
             encode      : true
         }) .done(function(data) {

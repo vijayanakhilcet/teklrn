@@ -233,6 +233,10 @@ def contact(request):
 
 def hi(request):
     page = 'webapp/hi.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        defaultTechnology = data.get("technology")
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
@@ -241,7 +245,7 @@ def hi(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page)    
-    return render(request, page)
+    return render(request, page, {'technology':defaultTechnology})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
@@ -395,12 +399,14 @@ class CheckUserExistsView(FormView):
 
 
 def logout_view(request): 
-        logout(request)            
-        return render(request, "webapp/hi.html")
+        logout(request)    
+        defaultTechnology='Tensorflow'        
+        return render(request, "webapp/hi.html", {'technology':defaultTechnology})
 
 def logout_t_view(request): 
-        logout(request)            
-        return render(request, "webapp/hi.html")
+        logout(request)   
+        defaultTechnology='Tensorflow'            
+        return render(request, "webapp/hi.html", {'technology':defaultTechnology})
 
 class CheckTeacherExistsView(FormView):
   

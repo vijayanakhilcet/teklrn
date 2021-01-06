@@ -1,23 +1,26 @@
 
         $(function() {
-        image_name = 'Java_';
-        course_name = 'Java';   
-        var runit = 0;
+        var view_to_show = document.getElementById("technology_view").textContent;
+        //image_name = 'Java_';
+        image_name = view_to_show+'_';
+      //  course_name = 'Java';   
+      course_name = view_to_show;
+      var runit = 0;     
+             
+      openMainView(view_to_show);
         
-    document.getElementById('tec_name').text = course_name;
-    document.getElementById('tot_levls').text =  '21';
-    setdefaultLevels();    
-    setMostSoughtTechnologies();
-    searchTopics();
-    setAssociatedTechnology();
+  //  document.getElementById('tec_name').text = course_name;
+   // document.getElementById('tot_levls').text =  '21';
+   // setdefaultLevels();    
+    //setMostSoughtTechnologies();
+    //searchTopics();
+    //setAssociatedTechnology();
 
  
     
             $("#course-search").autocomplete({  
                 source: "/autocomplete",
                 dataType: 'json',
-               /* search: function(event, ui){ alert(event.target.value);
-                },*/
                 select: function( event , ui ) {
                     $('#homeSubmenu').empty();
                     var elm = document.getElementById('homeSubmenu');
@@ -58,6 +61,7 @@
             runit = 0;   
              });   
 
+             
 });
 (function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4><br><a style="padding-left:4%;">Search results:</a>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
