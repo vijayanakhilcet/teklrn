@@ -1,67 +1,66 @@
 
-        $(function() {
+$(function() {
         var view_to_show = document.getElementById("technology_view").textContent;
         image_name = view_to_show+'_';
-      course_name = view_to_show;
-      var runit = 0;     
-             
-      openMainView(view_to_show);
-
- 
-    
-            $("#course-search").autocomplete({  
+        course_name = view_to_show;
+        var runit = 0;     
+        openMainView(view_to_show);
+   
+        $("#course-search").autocomplete({  
                 source: "/autocomplete",
                 dataType: 'json',
                 select: function( event , ui ) {
                     additionalInfoOnTechnology();
+                    setSideBarLevels(ui);   
+                    setTechnology(ui.item.levels);
+                    setAssociatedTechnology();   
+                    resetSearchTopic();
+                    searchTopics();
+                    setMostSoughtTechnologies();
+                    runit = 1
+                   }
+        });
 
-                    $('#homeSubmenu').empty();
-                    var elm = document.getElementById('homeSubmenu');
-                   
-        df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-        course_name = ui.item.value;
-        image_name = ui.item.value+'_';
-        course_level = null;
-    for (var i = 1; i <= ui.item.levels; i++) { 
-      
-          var li_element = document.createElement('li'); // create the option element
-                      var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
-                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
-                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
-                    li_element.innerHTML+=aHtml;
-                     
-                   elm.appendChild(li_element); 
-                   
-    }
-    
-    setTechnology(ui.item.levels);
-    setAssociatedTechnology();   
-    resetSearchTopic();
-    searchTopics();
-    setMostSoughtTechnologies();
-    runit = 1
-        }
-            });
-
-            $("#course-search").on('keyup', function (event) {
+        $("#course-search").on('keyup', function (event) {
                 if(runit === 0){
-                if (event.keyCode === 13) {                    
-                    $("#course-search").blur();
-                    technologiesOnSearchBar(event.target.value);
-                }
-            }  
+                    if (event.keyCode === 13) {                    
+                        $("#course-search").blur();
+                        technologiesOnSearchBar(event.target.value);
+                    }
+                }  
                         
-            runit = 0;   
-             });   
+                 runit = 0;   
+        });   
 
              
 });
+
 (function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4><br><a style="padding-left:4%;">Search results:</a>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModalVid=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div style="height:100%;" class="modal-dialog">';html+='<div style="height:100%; width:100%" class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div style="padding-left:0.1rem; padding-right:0.1rem;" class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button style="background-color: white; color: #629DD1" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
+function setSideBarLevels(ui){
+    $('#homeSubmenu').empty();
+    var elm = document.getElementById('homeSubmenu');
+   
+    df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
+    course_name = ui.item.value;
+    image_name = ui.item.value+'_';
+    course_level = null;
+    
+    for (var i = 1; i <= ui.item.levels; i++) { 
+        var li_element = document.createElement('li'); // create the option element
+        var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
+        li_element.innerHTML+=aHtml;
+        elm.appendChild(li_element); 
+   
+    }
+
+}
 
 function clk(){
     document.getElementById('1').click();
