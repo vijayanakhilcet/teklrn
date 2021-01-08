@@ -159,9 +159,6 @@ function technologiesOnSearchBar(pg){
     }
     
      function videoClk1(event, crse, lvl, videolink){ 
-//        var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="./static/image/'+crse+'_vid_'+lvl+'.mp4"   preload="auto"   autoplay   playsinline   webkit-playsinline></video>'
-   //    var iframe = '<canvas id="my_canvas" style="width : 0%; max-height: 100%;"></canvas><video width="100%" height="100%" controls  src="https://drive.google.com/file/d/1Oh813UhVbWbOzlDRGs87nH_CIgflnsbz/preview"   preload="none"   autoplay   playsinline   webkit-playsinline></video>'
-        
        var iframe = '<iframe   src="'+videolink+'" width="100%" height="100%" allow=autoplay frameborder="0" allowfullscreen="allowfullscreen"></iframe><div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>';
         $.createModalVid({
         message: iframe,

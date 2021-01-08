@@ -64,8 +64,8 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Teklrn Inc.
-               <!-- <h4 style="font-size: 5px;"><i>An Akhil Vijayan Enterprise</i></h4></h3>
+              <!--  <h3>Teklrn Inc.
+                <h4 style="font-size: 5px;"><i>An Akhil Vijayan Enterprise</i></h4></h3>
         -->    </div>
 
          <ul class="list-unstyled components">
@@ -77,14 +77,14 @@
             </ul>-->
 
             <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bookings Pending Trainer Assignment</a>
+                <a style="text-transform:uppercase"  href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><b> Pending</b></a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     
                     
                 </ul>
             </li>
             <li>
-                <a href="#accepted" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Bookings Assigned to a Trainer </a>
+                <a style="text-transform:uppercase"  href="#accepted" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><b>Assigned</b> </a>
                 <ul class="collapse list-unstyled" id="accepted">
                    
                    
@@ -92,15 +92,22 @@
             </li>
 
             <li>
-                <a href="#completed" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Trainings Completed </a>
+                <a style="text-transform:uppercase" href="#completed" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><b>Completed</b> </a>
                 <ul class="collapse list-unstyled" id="completed">
                    
                    
                 </ul>
             </li>
 
+            <li class="active">
+                <a style="text-transform:uppercase" href="#moreinfoviewID" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><b>Technology Details</b></a>
+                <ul  class="collapse show list-unstyled" id="moreinfoviewID">
+                    
+                </ul>
+            </li>
+
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Levels</a>
+                    <a href="#homeSubmenu" style="text-transform:uppercase"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><b> Technology Levels</b></a>
                     <ul  class="collapse show list-unstyled" id="homeSubmenu">
                         
                     </ul>
@@ -117,16 +124,19 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button style="background-color: #629DD1;" type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button  style="background-color: #629DD1;" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="/"> Home </a>
                             </li>
@@ -166,83 +176,15 @@
                 </div>
             </nav>
           
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
             
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContentNew" aria-controls="navbarSupportedContentNew" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-            
-                    <div class="collapse navbar-collapse" id="navbarSupportedContentNew">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
-            
-                            <li class="nav-item">
-                                <button id="login_l1" type="submit" class="btn btn-info" onclick="version_history()" style="
-                                    background-color: transparent;
-                                    color: slategrey;
-                                    border-color: slategrey;
-                                "> <span>Version History</span>
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                 <button id="login_t1" type="submit" class="btn btn-info linkbutton" onclick="industry_acceptance()" style="
-                                 background-color: transparent;
-                                 color: slategrey;
-                                 border-color: slategrey;
-                             "> <span>Industry Acceptance</span>
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
-            
-                            
-                            <li class="nav-item">
-                                 <button id="login_t1" type="submit" class="btn btn-info linkbutton" onclick="dev_trends()" style="
-                                 background-color: transparent;
-                                 color: slategrey;
-                                 border-color: slategrey;
-                             "> <span>Development Trends</span>
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
-            
-                           
-                            
-                            <li class="nav-item">
-                                <button id="login_l1" type="submit" class="btn btn-info linkbutton" onclick="associated_tech()" style="
-                                background-color: transparent;
-                                color: slategrey;
-                                border-color: slategrey;
-                            "> <span>Linked Technologies</span>
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            
-            <input  name="course-search" id="course-search" class="form-control" placeholder="Enter Course">
- 
+            <input  name="course-search" id="course-search" class="form-control" placeholder="Enter Technology" style="text-transform: uppercase; font-weight: bolder;">
+
             <div class="line"></div>
-            <h4 id="tech_field" style="background-color: #629DD1; color: white;">Technology              - Java </h4>
-            <h4 id="level_field" style="background-color: #629DD1; color: white;">Total Levels           - 21 </h4>
-            <h4 style="background-color: #629DD1; color: white;"><div style="margin-left: 1%;">Cost per Level - $ 13</div></h4>
-            <div class="line"></div>
-            <input  name="search-topics" id="search-topics" class="form-control" placeholder="Search topics for this technology" onkeydown="search(this)" />
+            <h4 style="background-color: #629DD1; color: white;" href=""><div style="margin-left: 1%;">TECHNOLOGY <b style="color: #f5eded;">  <a style="text-transform:uppercase" id="tec_name">JAVA</a></b><br><button style="font-size: x-small; border: 1px solid transparent;background-color: #0d4d86;  vertical-align: middle;font-size: x-small;color: white;">Total Levels <a id="tot_levls">13</a> </button> <button style="font-size: x-small; border: 1px solid transparent;background-color: #2c71ad; vertical-align: middle;font-size: x-small;color: white;"> Costs Per Level <a id="tot_cost"></a>13</a><a> </a><i style="vertical-align:middle;" class="fas fa-dollar-sign"></i></button> 
+                <!-- <button style="font-size: x-small; border: 1px solid transparent;background-color: #4a82b3; vertical-align: middle;font-size: x-small;color: white;" onclick="videoClk1(event, 'Java', 1, 'https://drive.google.com/file/d/1Oh813UhVbWbOzlDRGs87nH_CIgflnsbz/preview')">FREE Video Preview <i style="vertical-align: middle;" class="fas fa-play-circle"></i></button>-->
+             </div></h4>
+             <div class="line"></div>
+            <input style="text-transform: uppercase; font-weight: bolder;"   name="search-topics" id="search-topics" class="form-control" placeholder="Search topics for this technology" onkeydown="search(this)" />
             <div class="line"></div>
             <ul  class="collapse show list-unstyled" id="searchtopics"> </ul>
      
