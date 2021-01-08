@@ -1,20 +1,11 @@
 
         $(function() {
         var view_to_show = document.getElementById("technology_view").textContent;
-        //image_name = 'Java_';
         image_name = view_to_show+'_';
-      //  course_name = 'Java';   
       course_name = view_to_show;
       var runit = 0;     
              
       openMainView(view_to_show);
-        
-  //  document.getElementById('tec_name').text = course_name;
-   // document.getElementById('tot_levls').text =  '21';
-   // setdefaultLevels();    
-    //setMostSoughtTechnologies();
-    //searchTopics();
-    //setAssociatedTechnology();
 
  
     
@@ -22,6 +13,8 @@
                 source: "/autocomplete",
                 dataType: 'json',
                 select: function( event , ui ) {
+                    additionalInfoOnTechnology();
+
                     $('#homeSubmenu').empty();
                     var elm = document.getElementById('homeSubmenu');
                    
@@ -87,6 +80,35 @@ function lvlclk(pg){
         });
         return false;        
      }
+
+ function additionalInfoOnTechnology(){
+     
+    $('#moreinfoviewID').empty();
+    var moreinfoviewelement = document.getElementById('moreinfoviewID');
+    var versionLiElement = document.createElement('li');
+    var aElementHtmlVersion = '<a style="text-transform:uppercase" href="#"><b>version </b> History <br>'+
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    versionLiElement.innerHTML+=aElementHtmlVersion;
+    moreinfoviewelement.appendChild(versionLiElement); 
+
+    var industryLiElement = document.createElement('li');
+    var aElementHtmlIndustry = '<a style="text-transform:uppercase" href="#"><b>Industry </b> Acceptance <br>'+
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    industryLiElement.innerHTML+=aElementHtmlIndustry;
+    moreinfoviewelement.appendChild(industryLiElement); 
+
+    var trendsLiElement = document.createElement('li');
+    var aElementHtmlTrends = '<a style="text-transform:uppercase" href="#"><b>Development </b> Trends <br>'+
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    trendsLiElement.innerHTML+=aElementHtmlTrends;
+    moreinfoviewelement.appendChild(trendsLiElement); 
+
+    var linkedLiElement = document.createElement('li');
+    var aElementHtmlLinked = '<a style="text-transform:uppercase" href="#"><b>Linked </b> Technologies <br>'+
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    linkedLiElement.innerHTML+=aElementHtmlLinked;
+    moreinfoviewelement.appendChild(linkedLiElement); 
+ }    
 
 
 function technologiesOnSearchBar(pg){ 
@@ -687,6 +709,8 @@ course_level = null;
 technology_to_set = null;
 
   $.each(data, function(index) {
+    additionalInfoOnTechnology();
+
     $('#homeSubmenu').empty();
     var elm = document.getElementById('homeSubmenu');
     for (var i = 1; i <= data[0].levels; i++) { 
@@ -718,6 +742,9 @@ function resetSearchTopic(){
 
 function setdefaultLevels(){
     $("#course-search").val("Java");
+
+    additionalInfoOnTechnology();
+
     $('#homeSubmenu').empty();
     var elm = document.getElementById('homeSubmenu');
     df = document.createDocumentFragment();
