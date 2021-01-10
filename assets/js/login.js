@@ -710,7 +710,6 @@ technology_to_set = null;
     $('#homeSubmenu').empty();
     var elm = document.getElementById('homeSubmenu');
     for (var i = 1; i <= data[0].levels; i++) { 
-        console.log (data[index].levels);
 var li_element = document.createElement('li'); // create the option element
           var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+'<br>'+
          '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
@@ -736,7 +735,7 @@ function resetSearchTopic(){
     $('#searchtopics').empty();
 }
 
-function setdefaultLevels(){
+/*function setdefaultLevels(){
     $("#course-search").val("Java");
 
     additionalInfoOnTechnology();
@@ -755,7 +754,7 @@ function setdefaultLevels(){
              
 }
 }
-
+*/
 
 function setMostSoughtTechnologies(){
     $.ajax({
