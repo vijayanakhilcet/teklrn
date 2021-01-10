@@ -86,25 +86,25 @@ function lvlclk(pg){
     var moreinfoviewelement = document.getElementById('moreinfoviewID');
     var versionLiElement = document.createElement('li');
     var aElementHtmlVersion = '<a style="text-transform:uppercase" href="#"><b>version </b> History <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></a>';
     versionLiElement.innerHTML+=aElementHtmlVersion;
     moreinfoviewelement.appendChild(versionLiElement); 
 
     var industryLiElement = document.createElement('li');
     var aElementHtmlIndustry = '<a style="text-transform:uppercase" href="#"><b>Industry </b> Acceptance <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-industry"></i></button></a>';
     industryLiElement.innerHTML+=aElementHtmlIndustry;
     moreinfoviewelement.appendChild(industryLiElement); 
 
     var trendsLiElement = document.createElement('li');
     var aElementHtmlTrends = '<a style="text-transform:uppercase" href="#"><b>Development </b> Trends <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-chart-line"></i></button></a>';
     trendsLiElement.innerHTML+=aElementHtmlTrends;
     moreinfoviewelement.appendChild(trendsLiElement); 
 
     var linkedLiElement = document.createElement('li');
     var aElementHtmlLinked = '<a style="text-transform:uppercase" href="#"><b>Linked </b> Technologies <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-link"></i></button></a>';
     linkedLiElement.innerHTML+=aElementHtmlLinked;
     moreinfoviewelement.appendChild(linkedLiElement); 
  }    

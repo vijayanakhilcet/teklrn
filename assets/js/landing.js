@@ -59,7 +59,7 @@ $(function() {
                
               //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
                  var aHtml = '<a href="#">'+data[index].date+
-                 '<button style="font-size: x-small; border: 1px solid transparent;background-color:  #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark complete<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join session</button> <button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+                 '<button style="font-size: x-small; border: 1px solid transparent;background-color:  #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark Complete <i  style="vertical-align:middle;" class="fas fa-check"></i></button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join  <i  style="vertical-align:middle;"  class="fas fa-video"></i></button> <button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
                
               //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
                //  var ele = document.createElement('div');
@@ -894,25 +894,25 @@ function additionalInfoOnTechnology(){
     var moreinfoviewelement = document.getElementById('moreinfoviewID');
     var versionLiElement = document.createElement('li');
     var aElementHtmlVersion = '<a style="text-transform:uppercase" href="#"><b>version </b> History <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></a>';
     versionLiElement.innerHTML+=aElementHtmlVersion;
     moreinfoviewelement.appendChild(versionLiElement); 
 
     var industryLiElement = document.createElement('li');
     var aElementHtmlIndustry = '<a style="text-transform:uppercase" href="#"><b>Industry </b> Acceptance <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-industry"></i></button></a>';
     industryLiElement.innerHTML+=aElementHtmlIndustry;
     moreinfoviewelement.appendChild(industryLiElement); 
 
     var trendsLiElement = document.createElement('li');
     var aElementHtmlTrends = '<a style="text-transform:uppercase" href="#"><b>Development </b> Trends <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-chart-line"></i></button></a>';
     trendsLiElement.innerHTML+=aElementHtmlTrends;
     moreinfoviewelement.appendChild(trendsLiElement); 
 
     var linkedLiElement = document.createElement('li');
     var aElementHtmlLinked = '<a style="text-transform:uppercase" href="#"><b>Linked </b> Technologies <br>'+
-    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-link"></i></button></a>';
     linkedLiElement.innerHTML+=aElementHtmlLinked;
     moreinfoviewelement.appendChild(linkedLiElement); 
  }    

@@ -66,7 +66,7 @@ $.ajax({
       
       var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+data[index].date+' '+
       '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+ ' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
-     ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join '+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
+     ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join '+'<i  style="vertical-align:middle;"  class="fas fa-video"></i></button></a>';
           
 
       '<button style="font-size: x-small; border: 1px solid transparent;background-color: #fafafa;font-size: x-small;color: #17a2b8;border-radius: .25rem;" onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join</button><button style="font-size: x-small; border: 1px solid transparent;background-color: slategrey;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">View syllabus '+data[index].course+' Level     '+ data[index].level+'</button></a>';
@@ -509,28 +509,29 @@ $("#bookCourse").submit(function(event) {
       var moreinfoviewelement = document.getElementById('moreinfoviewID');
       var versionLiElement = document.createElement('li');
       var aElementHtmlVersion = '<a style="text-transform:uppercase" href="#"><b>version </b> History <br>'+
-      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="version_history()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-arrow-circle-right" aria-hidden="true"></i></button></a>';
       versionLiElement.innerHTML+=aElementHtmlVersion;
       moreinfoviewelement.appendChild(versionLiElement); 
   
       var industryLiElement = document.createElement('li');
       var aElementHtmlIndustry = '<a style="text-transform:uppercase" href="#"><b>Industry </b> Acceptance <br>'+
-      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="industry_acceptance()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-industry"></i></button></a>';
       industryLiElement.innerHTML+=aElementHtmlIndustry;
       moreinfoviewelement.appendChild(industryLiElement); 
   
       var trendsLiElement = document.createElement('li');
       var aElementHtmlTrends = '<a style="text-transform:uppercase" href="#"><b>Development </b> Trends <br>'+
-      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="dev_trends()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-chart-line"></i></button></a>';
       trendsLiElement.innerHTML+=aElementHtmlTrends;
       moreinfoviewelement.appendChild(trendsLiElement); 
   
       var linkedLiElement = document.createElement('li');
       var aElementHtmlLinked = '<a style="text-transform:uppercase" href="#"><b>Linked </b> Technologies <br>'+
-      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-link"></i></button></a>';
       linkedLiElement.innerHTML+=aElementHtmlLinked;
       moreinfoviewelement.appendChild(linkedLiElement); 
    }    
+      
   
    function technologiesOnSearchBar(pg){ 
     html_message = '';
