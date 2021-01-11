@@ -237,14 +237,15 @@ def hi(request):
     defaultTechnology = 'Tensorflow'
     if data.get("technology"):
         defaultTechnology = data.get("technology")
+    request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
             page = 'webapp/hi_login.html'
-            return render(request, page)
+            return render(request, page, {'technology':defaultTechnology})
         except Exception:
             page = 'webapp/hi_login_t.html'
-            return render(request, page)    
+            return render(request, page, {'technology':defaultTechnology})    
     return render(request, page, {'technology':defaultTechnology})
 
 def privacy(request):
@@ -537,7 +538,9 @@ class LoginStudentView(FormView):
                              
                     return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
                 else:
-                    page="webapp/hi_login.html"               
+                    page="webapp/hi_login.html"     
+                    if(request.session['course'] is None):
+                        request.session['course'] = 'Tensorflow'                        
                 name = student.user.first_name
                 email_id = student.user.username
                 request.session['name']=name
@@ -545,7 +548,7 @@ class LoginStudentView(FormView):
             else:
                 request.session['name']=None
                 request.session['email']=email_id
-        return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
+        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'technology':request.session['course']})
     def get(self,request,*args,**kwargs):
         page = "webapp/login.html"
         if(request.user.is_authenticated):
@@ -654,7 +657,7 @@ class LandingBackView(FormView):
 
 class LandingBackLoginView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi_login.html", {'name': 'name'})       
+        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course']})       
 
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):

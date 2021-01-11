@@ -337,7 +337,6 @@ function levelClick(event) {
 
 
 function login_l(event, crse, lvl) {
-    //alert(crse+lvl);
     $.ajax({
         url         : "/loginForm", // the url where we want to POST
         data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl}, // our data object
@@ -735,26 +734,7 @@ function resetSearchTopic(){
     $('#searchtopics').empty();
 }
 
-/*function setdefaultLevels(){
-    $("#course-search").val("Java");
 
-    additionalInfoOnTechnology();
-
-    $('#homeSubmenu').empty();
-    var elm = document.getElementById('homeSubmenu');
-    df = document.createDocumentFragment();
-    for (var i = 1; i <= 21; i++) { 
-       var li_element = document.createElement('li'); // create the option element
-                var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+'<br>'+
-               '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
-              ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \'Java\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
-              li_element.innerHTML+=aHtml;
-               
-             elm.appendChild(li_element); 
-             
-}
-}
-*/
 
 function setMostSoughtTechnologies(){
     $.ajax({

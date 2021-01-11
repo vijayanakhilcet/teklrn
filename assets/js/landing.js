@@ -3,144 +3,36 @@ var course_name;
 var course_level;
 var mail_id_login;
 
-$(function() {
-        image_name = 'Java_';
-        course_name = 'Java';           
+$(function() {    
+        var view_to_show = document.getElementById("technology_view_student").textContent;
+        course_name = view_to_show;    
+        image_name = course_name+"_";       
         var runit = 0;     
         openMainView(course_name);
-               $.ajax({
-                url         : "/get_pending_student_trainings", // the url where we want to POST
-                data        : {"course":"ab"}, // our data object
-                dataType    : "json", // what type of data do\ we expect back from the server
-                encode      : true
-            })
-                // using the done promise callback
-                .done(function(data) {
-                    $('#pageSubmenu').empty();
-                    var elm = document.getElementById('pageSubmenu');
-               /*  while (elm.hasChildNodes()) {
-                     elm.removeChild(elm.firstChild);
-                  }*/
-        
-                 $.each(data, function(index) {
-                    var li_element = document.createElement('li'); // create the option element
-                   
-                  //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
-                     var aHtml = '<a href="#">'+data[index].date+
-                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
-                   
-                  //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
-                   //  var ele = document.createElement('div');
-                   li_element.innerHTML+=aHtml;
-                  //  ele.appendChild(node);
-                   // elm.appendChild(ele);
-                    
-                   elm.appendChild(li_element); 
-                  });
-        
-        });
+        getPendingStudentTrainings();
+        getAcceptedStudentTrainings();
+        getCompletedStudentTrainings();
 
-        $.ajax({
-            url         : "/get_accepted_student_trainings", // the url where we want to POST
-            data        : {"course":"ab"}, // our data object
-            dataType    : "json", // what type of data do\ we expect back from the server
-            encode      : true
-        })
-            // using the done promise callback
-            .done(function(data) {
-                $('#accepted').empty();
-                var elm = document.getElementById('accepted');
-           /*  while (elm.hasChildNodes()) {
-                 elm.removeChild(elm.firstChild);
-              }*/
-    
-             $.each(data, function(index) {
-                var li_element = document.createElement('li'); // create the option element
-               
-              //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
-                 var aHtml = '<a href="#">'+data[index].date+
-                 '<button style="font-size: x-small; border: 1px solid transparent;background-color:  #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark Complete <i  style="vertical-align:middle;" class="fas fa-check"></i></button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join  <i  style="vertical-align:middle;"  class="fas fa-video"></i></button> <button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
-               
-              //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
-               //  var ele = document.createElement('div');
-               li_element.innerHTML+=aHtml;
-              //  ele.appendChild(node);
-               // elm.appendChild(ele);
-                
-               elm.appendChild(li_element); 
-              });
-    
-    });
-
-
-
-    $.ajax({
-        url         : "/get_completed_student_trainings", // the url where we want to POST
-        data        : {"course":"ab"}, // our data object
-        dataType    : "json", // what type of data do\ we expect back from the server
-        encode      : true
-    })
-        // using the done promise callback
-        .done(function(data) {
-            $('#completed').empty();
-            var elm = document.getElementById('completed');
-       /*  while (elm.hasChildNodes()) {
-             elm.removeChild(elm.firstChild);
-          }*/
-
-         $.each(data, function(index) {
-            var li_element = document.createElement('li'); // create the option element
-           
-          //  var aHtml = '<div font-size: xx-small;><br><label><input type="radio" name="sel3" id="courseSelect" value="' + data[index].course+'_'+ data[index].level+'"'+' onchange="thisisSelected(event, this.value)" '+'>'+data[index].course+' '+'-'+data[index].level+ ' on : '+data[index].date+' </label> <button style="font-size: xx-small; float: right; color: #39739d; background-color: #e1ecf4;  border-color: #7aa7c7;"  type="Submit" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="thisisSelected(event, this.value)">Syllabus</button></div>'+'<br>';
-             var aHtml = '<a href="#">'+data[index].date+
-             '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
-           
-          //  var node = document.createTextNode(data[index].course+' '+'level '+data[index].level+ ' date '+data[index].date);
-           //  var ele = document.createElement('div');
-           li_element.innerHTML+=aHtml;
-          //  ele.appendChild(node);
-           // elm.appendChild(ele);
-            
-           elm.appendChild(li_element); 
-          });
-
-});
-
-
-
-            $("#myFormemail").click(function(event) {
-
-                // get the form data
-                // there are many ways to get this data using jQuery (you can use the class or id also)
+        $("#myFormemail").click(function(event) {
                 var mail_id = $('input[name=email]').val();
                 mail_id_login=mail_id;
-        
                 // process the form
                 $.ajax({
                     url         : "/checkuser", // the url where we want to POST
                     data        : {"email":mail_id}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
-                })
-                
-                    // using the done promise callback
-                    .done(function(data) {
+                }).done(function(data) {
                         document.open("text/html", "load")
                         document.write(data);
                         document.close();
-        });
-        
+                  });        
                 // stop the form from submitting the normal way and refreshing the page
                 event.preventDefault();
             });
 
             
             $("#book_course1").click(function(event) {
-
-                // get the form data
-                // there are many ways to get this data using jQuery (you can use the class or id also)
-                
-        
                 // process the form
                 $.ajax({
                     url         : "/book_course_form", // the url where we want to POST
@@ -198,11 +90,6 @@ $(function() {
 
 
             $("#login_l").click(function(event) {
-
-                // get the form data
-                // there are many ways to get this data using jQuery (you can use the class or id also)
-                
-        
                 // process the form
                 $.ajax({
                     url         : "/loginForm", // the url where we want to POST
@@ -224,11 +111,6 @@ $(function() {
             });
 
             $("#login_t").click(function(event) {
-
-                // get the form data
-                // there are many ways to get this data using jQuery (you can use the class or id also)
-                
-        
                 // process the form
                 $.ajax({
                     url         : "/loginFormT", // the url where we want to POST
@@ -241,8 +123,6 @@ $(function() {
                         document.open("text/html", "load")
                         document.write(data);
                         document.close();
-        
-                        // here we will handle errors and validation messages
                     });
         
                 // stop the form from submitting the normal way and refreshing the page
@@ -258,7 +138,7 @@ $(function() {
                 }  
                         
                  runit = 0;   
-        });   
+            });   
 
             $("#course-search").autocomplete({
                 source: "/autocomplete",
@@ -268,39 +148,35 @@ $(function() {
                     $('#homeSubmenu').empty();
                     var elm = document.getElementById('homeSubmenu');
                    
-        df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-        course_name = ui.item.value;
-        image_name = ui.item.value+'_';
-        setTechnology(ui.item.levels);
-        setAssociatedTechnology();   
-        resetSearchTopic();
-        searchtopics();
-        //setView(course_name);
-        setMostSoughtTechnologies();
-        runit = 1;
-        course_level = null;
-    for (var i = 1; i <= ui.item.levels; i++) { 
-        var li_element = document.createElement('li'); // create the option element
-                          
+                df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
+                course_name = ui.item.value;
+                image_name = ui.item.value+'_';
+                setTechnology(ui.item.levels);
+                setAssociatedTechnology();   
+                resetSearchTopic();
+                searchtopics();
+                setMostSoughtTechnologies();
+                runit = 1;
+                course_level = null;
+                for (var i = 1; i <= ui.item.levels; i++) { 
+                    var li_element = document.createElement('li'); // create the option element
                     var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+'<br>'+
-         '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
-        ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
-     
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button>'+
+                    ' <button style="font-size: x-small; border: 1px solid transparent;background-color: #7db2e0;font-size: x-small;color: white;border-radius: .25rem;" onclick="bookcrseNew(\''+course_name+'\', '+i+')"'+ '>Book Trainer'+'<i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button></a>';
                     li_element.innerHTML+=aHtml;
-                     
-                   elm.appendChild(li_element); 
-    }
-    pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
-        console.log("This file has "+doc._pdfInfo.numPages + " pages");
+                    elm.appendChild(li_element); 
+                }
+                pdfjsLib.getDocument("./static/image/"+image_name+"1.pdf").promise.then(doc =>{
+                console.log("This file has "+doc._pdfInfo.numPages + " pages");
       
-        doc.getPage(1).then(page =>{
-            var myCanvas = document.getElementById("my_canvas");
-            var context =  myCanvas.getContext("2d");
-      
-            var viewport = page.getViewport({scale:3});
-            myCanvas.width = viewport.width;
-            myCanvas.height = viewport.height;
-            page.render({
+                doc.getPage(1).then(page =>{
+                var myCanvas = document.getElementById("my_canvas");
+                var context =  myCanvas.getContext("2d");
+        
+                var viewport = page.getViewport({scale:3});
+                myCanvas.width = viewport.width;
+                myCanvas.height = viewport.height;
+                page.render({
                 canvasContext:context,
                 viewport:viewport
             });
@@ -308,7 +184,7 @@ $(function() {
       });
    
         }
-            });
+});
 
            // onLoadAComplete();
 
@@ -507,6 +383,69 @@ $(function() {
                 event.preventDefault();
     }
 
+
+
+function getCompletedStudentTrainings(){
+    $.ajax({
+        url         : "/get_completed_student_trainings", // the url where we want to POST
+        data        : {"course":"ab"}, // our data object
+        dataType    : "json", // what type of data do\ we expect back from the server
+        encode      : true
+    }).done(function(data) {
+            $('#completed').empty();
+            var elm = document.getElementById('completed');
+
+         $.each(data, function(index) {
+            var li_element = document.createElement('li'); // create the option element
+            var aHtml = '<a href="#">'+data[index].date+'<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+            li_element.innerHTML+=aHtml;
+            elm.appendChild(li_element); 
+          });
+
+});
+}    
+
+function getAcceptedStudentTrainings(){              
+    $.ajax({
+        url         : "/get_accepted_student_trainings", // the url where we want to POST
+        data        : {"course":"ab"}, // our data object
+        dataType    : "json", // what type of data do\ we expect back from the server
+        encode      : true
+    }).done(function(data) {
+            $('#accepted').empty();
+            var elm = document.getElementById('accepted');
+         $.each(data, function(index) {
+            var li_element = document.createElement('li'); // create the option element
+            var aHtml = '<a href="#">'+data[index].date+'<button style="font-size: x-small; border: 1px solid transparent;background-color:  #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" type="Submit" value="'+ data[index].pk + '" onclick="markCompletion(event, this.value)">Mark Complete <i  style="vertical-align:middle;" class="fas fa-check"></i></button><button style="font-size: x-small; margin-left: .2rem;   border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;"  onclick="window.open('+'\''+data[index].meetingLink+'\''+')">Join  <i  style="vertical-align:middle;"  class="fas fa-video"></i></button> <button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+            li_element.innerHTML+=aHtml;            
+            elm.appendChild(li_element); 
+          });
+});
+}   
+
+
+function getPendingStudentTrainings(){
+    $.ajax({
+        url         : "/get_pending_student_trainings", // the url where we want to POST
+        data        : {"course":"ab"}, // our data object
+        dataType    : "json", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $('#pageSubmenu').empty();
+            var elm = document.getElementById('pageSubmenu');
+
+         $.each(data, function(index) {
+            var li_element = document.createElement('li'); 
+            var aHtml = '<a href="#">'+data[index].date+'<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" value="'+ data[index].course+'_'+ data[index].level+'"'+ ' onclick="lvlclk1(\''+data[index].course+'_'+ data[index].level+'\')">Syllabus '+data[index].course+' Level     '+ data[index].level+' <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button></a>';
+            li_element.innerHTML+=aHtml;
+            elm.appendChild(li_element); 
+          });
+
+});
+
+}
 
     
 function technologiesOnSearchBar(pg){ 
