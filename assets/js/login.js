@@ -428,6 +428,9 @@ function backtolandingTest(event){
 }
 
 function backtolandingmain(event){
+    
+    if( typeof course_name == "undefined")
+        course_name = 'Tensorflow';
 
     $.ajax({
         url         : "/hi", // the url where we want to POST
@@ -447,6 +450,9 @@ event.preventDefault();
 }
 
 function backtolandingmainT(event){
+
+    if( typeof course_name == "undefined")
+        course_name = 'Tensorflow';
 
     $.ajax({
         url         : "/hi", // the url where we want to POST
