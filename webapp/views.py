@@ -481,6 +481,7 @@ class BookCourseFormView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
         course_name = data.get("course")
+        request.session['course']=course_name
         course_level = data.get("level")
         tz = Student.objects.get(email=request.user.email).time_zn
         now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
