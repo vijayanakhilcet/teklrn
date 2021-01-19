@@ -6,10 +6,28 @@
 		<title>The Worlds Largest Hub of Technology Learning -  Teklrn Inc.</title>
 		<link rel="icon" href="{% static 'image/images/favicon.ico' %}">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<style>
+			@font-face {
+  			font-family: 'draper';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/draper/Draper.otf' %}") format("opentype");
+			}
+
+			@font-face {
+  			font-family: 'cyberdyne';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/cyberdyne/cyberdynexpandital.ttf' %}") format("truetype");
+			}
+
+		</style>
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 		<meta name="viewport" content="width=device-width, initial-scale=0.76, maximum-scale=0.76, minimum-scale=0.76">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
 		<script src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/skel.min.js' %}"></script>
 		<script src="{% static 'js/skel-layers.min.js' %}"></script>
@@ -25,7 +43,7 @@
 
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
-				<h1><a href="#">TEKLRN</a></h1>
+				<h1><a href="#" style="font-family: cyberdyne;">TEKLRN</a></h1>
 				<nav id="nav">
 					<ul>
 							<li><a href="/">Home</a></li>
@@ -41,7 +59,7 @@
 			<section id="banner">
 				<div class="inner">
 					<!--<h2 href="#" style="height: 2%; width: 2%;" class="image fit"><img src="static/image/images/favicon.ico" alt="" /></h2>-->
-				<h2>TEKLRN</h2>
+				<h2 style="font-family: cyberdyne;">TEKLRN</h2>
 				
 					<!--<img src="static/image/images/icon_tek.png"></img>-->
 					<p style="color: white;">The Worlds Largest Hub of Technology Learning</p>
