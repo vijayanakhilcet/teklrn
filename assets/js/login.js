@@ -714,8 +714,9 @@ function setTechnology(level_val){
 
 
 function openMainViewFromSearchResults(val){
-    openMainView(val);    
-    document.getElementById("closeModal").click();
+    openMainView(val);   
+    setTimeout(() => {  document.getElementById("closeModal").click(); }, 20); 
+    
 }
 
 function openMainView(val){

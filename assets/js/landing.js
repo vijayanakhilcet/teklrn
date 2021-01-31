@@ -486,7 +486,7 @@ function technologiesOnSearchBar(pg){
      
 function openMainViewFromSearchResults(val){
     openMainView(val);    
-    document.getElementById("closeModal").click();
+    setTimeout(() => {  document.getElementById("closeModal").click(); }, 20); 
 }
 
     function search(ele) {
