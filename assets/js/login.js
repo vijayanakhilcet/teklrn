@@ -1,16 +1,17 @@
 
 $(function() {
+        
+        $(document).on('hidden.bs.modal', function (event) {
+            if ($('.modal:visible').length) {
+            $('body').addClass('modal-open');
+            }
+        });
+
         var view_to_show = document.getElementById("technology_view").textContent;
         image_name = view_to_show+'_';
         course_name = view_to_show;
         var runit = 0;     
         openMainView(view_to_show);
-
-        $(document).on('hidden.bs.modal', function (event) {
-            if ($('.modal:visible').length) {
-              $('body').addClass('modal-open');
-            }
-          });
    
         $("#course-search").autocomplete({  
                 source: "/autocomplete",
@@ -55,6 +56,7 @@ for (var i = 1; i <= b.total_levels; i++) {
 }   
     html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
+    
 function setSideBarLevels(ui){
     $('#homeSubmenu').empty();
     var elm = document.getElementById('homeSubmenu');
@@ -711,10 +713,9 @@ function setTechnology(level_val){
 }
 
 
-function openMainViewFromSearchResults(val){    
-    document.getElementById("closeModal").click();    
-    openMainView(val);
-   
+function openMainViewFromSearchResults(val){
+    openMainView(val);    
+    document.getElementById("closeModal").click();
 }
 
 function openMainView(val){
