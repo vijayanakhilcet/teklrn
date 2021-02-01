@@ -69,7 +69,7 @@ def charge(request): # new
                 [student_obj.email],
             )
     email_test.send(fail_silently=False)
-    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
    
 def chargevideo(request): # new
     if request.method == 'POST':
@@ -97,7 +97,7 @@ def chargevideo(request): # new
                 [student_obj.email],
             )
     email_test.send(fail_silently=False)
-    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
 
 
 def about(request):
