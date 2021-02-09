@@ -28,6 +28,8 @@ urlpatterns = [
     path('autocomplete/',views.AutoCompleteView.as_view()),
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
+    path('getTechnologiesForDesignations/',views.TechnologiesMatchingTheDesignationView.as_view()),
+    path('getSupportedDesignations/',views.SupportedDesignationsView.as_view()),
     path('loginFormForVideoAccess/',views.LoginViewForVideoAccess.as_view()),
     path('loginForm/',views.LoginView.as_view()),
     path('loginFormT/',views.LoginTView.as_view()),    

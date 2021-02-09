@@ -60,3 +60,9 @@ class CourseLevel(models.Model):
     videoPresent = models.BooleanField(default=False)
     videoFree = models.BooleanField(default=0)
     videoLink =  models.CharField(max_length=400, default='Hi')
+
+class CareerRoles(models.Model):
+    name = models.CharField(max_length=30) 
+    courses = models.ManyToManyField(Course)
+    def __str__(self):
+        return self.name

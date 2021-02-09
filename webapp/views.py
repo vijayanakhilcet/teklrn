@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -274,6 +274,36 @@ def careers(request):
 
 def home(request):
     return render(request, 'webapp/home.html')
+
+class SupportedDesignationsView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        technology = data.get("search_string") 
+        results = []
+        designations = Course.objects.get(name=technology).careerroles_set.all()
+        for designation in designations:
+            designation_json = {}
+            designation_json['designation'] = designation.name
+            results.append(designation_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+class TechnologiesMatchingTheDesignationView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        designation = data.get("search_string")
+        results = []
+        technologies = CareerRoles.objects.get(name=designation).courses.all()
+        for technology in technologies:
+            course_json = {}
+            course_json['technology'] = technology.name
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 
 class TechnologiesMatchingTheSearchView(FormView):

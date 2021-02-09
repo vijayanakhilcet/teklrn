@@ -42,7 +42,11 @@ $(function() {
              
 });
 
-(function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4><br><a style="padding-left:4%;">Search results:</a>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+(function(a){a.createModalForDesignationsCertification=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><div><div><h4 style="margin-left: 4%;margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4></div><div style="margin-left: 4%;"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">TECHNOLOGY CERTIFICATION COURSES </h4></div></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+
+(function(a){a.createModalForDesignations=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><div><div><h4 style="margin-left: 4%;margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4></div><div style="margin-left: 4%;"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">SUPPORTED SOFTWARE / IT / TECHNOLOGY DESIGNATIONS </h4></div></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+
+(function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><div><div><h4 style="margin-left: 4%;margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4></div><div style="margin-left: 4%;"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">SEARCH RESULTS: </h4></div></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
@@ -144,7 +148,7 @@ function technologiesOnSearchBar(pg){
         // using the done promise callback
         .done(function(data) {
             $.each(data, function(index) {
-                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
                
             });
             $.createModalForSearch({
@@ -160,6 +164,61 @@ function technologiesOnSearchBar(pg){
         return false;        
      }
 
+function openTechnologyList(val){ 
+        html_message = '';
+        $.ajax({
+            url         : "/getTechnologiesForDesignations", // the url where we want to POST
+            data        : {"search_string":val}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                $.each(data, function(index) {
+                    html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"> '+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                   
+                });
+                $.createModalForDesignationsCertification({
+                    message: html_message,
+                    closeButton:true,
+                    scrollable:false
+                    });   
+            });
+        event.preventDefault();
+            
+          //  var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+           
+            return false;        
+         }
+     
+
+function designationsClick(){ 
+        html_message = '';
+        $.ajax({
+            url         : "/getSupportedDesignations", // the url where we want to POST
+            data        : {"search_string":course_name}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                $.each(data, function(index) {
+                    html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"><i class="fa fa-briefcase" aria-hidden="true"></i> '+data[index].designation+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openCertificationsForThisDesignation(\''+data[index].designation+'\')">Technology Certifications <i class="fa fa-graduation-cap" aria-hidden="true"></i></button></div></h4>';
+                   
+                });
+                $.createModalForDesignations({
+                    message: html_message,
+                    closeButton:true,
+                    scrollable:false
+                    });   
+            });
+        event.preventDefault();
+            
+          //  var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+           
+            return false;        
+         }
+    
      function videoClk(event, crse, lvl) {
         //alert(crse+lvl);
         $.ajax({
@@ -194,6 +253,8 @@ function technologiesOnSearchBar(pg){
         });       
         return false;    
      }
+
+    
      function associated_tech(){ 
         var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+'Associated.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
         $.createModal({
@@ -718,6 +779,12 @@ function setTechnology(level_val){
 function openMainViewFromSearchResults(val){
     openMainView(val);   
     setTimeout(() => {  document.getElementById("closeModal").click(); }, 200); 
+    
+}
+
+function openCertificationsForThisDesignation(val){
+    openTechnologyList(val);   
+    document.getElementById("closeModal").click();
     
 }
 
