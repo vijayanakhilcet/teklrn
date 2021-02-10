@@ -758,7 +758,8 @@ if (content.style.maxHeight){
   
     
        function setTechnology(level_val){
-        document.getElementById('tec_name').text = course_name;
+        document.getElementById('tec_name').text = course_name;        
+        document.getElementById('tec_name1').text = course_name;
         document.getElementById('tot_levls').text = level_val;
        }
   
