@@ -581,7 +581,7 @@ $("#bookCourse").submit(function(event) {
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                      aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;">'+data[index].value+ '<br>'+
+                      aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '<br>'+
                       '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button> '+
                       '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Upload Video <i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i>'+'</button>' +
                       
@@ -611,7 +611,7 @@ $("#bookCourse").submit(function(event) {
                   elm.innerHTML="";
                   var aHtml ="";
                   $.each(data, function(index) {
-                    aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;">'+data[index].value+ '<br>'+
+                    aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '<br>'+
                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button> ' +
                     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Upload Video <i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i>'+'</button>'
                     
