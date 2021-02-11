@@ -503,7 +503,7 @@ function openMainViewFromSearchResults(val){
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div id='+data[index].level+'description style="padding:2%;margin-left: 1%;"><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '<br>'+
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href=""><a style="float:left; margin-right:1%;color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description style="padding:2%;margin-left: 1%;">'+data[index].value+ '<br>'+
                         '<button style="font-size: small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
                         ' <button style="font-size: small; border: 1px solid transparent;background-color: #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#4a82b3; padding-left:1px; padding-right:1px; margin-right: 2px;" >$13</a> Book Trainer'+' <i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button>';
                        
@@ -556,7 +556,7 @@ function openMainViewFromSearchResults(val){
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%;margin-left: 1%;"><div id='+data[index].level+'description><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '</div>' +
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%;margin-left: 1%;"><a style="float:left; margin-right:1%;color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description>'+data[index].value+ '</div>' +
                         '<button style="font-size: small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
                         ' <button style="font-size: small; border: 1px solid transparent;background-color: #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#4a82b3; padding-left:1px; padding-right:1px; margin-right: 2px;" >$13</a> Book Trainer'+'<i style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button>';
                         if(data[index].videoFree==true)
