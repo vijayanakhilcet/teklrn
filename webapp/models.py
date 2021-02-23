@@ -7,6 +7,7 @@ from phone_field import PhoneField
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=30)
+    description = models.CharField(max_length=30, default='Hi')  
     levels = models.IntegerField(default=170)    
     category = models.CharField(max_length=30, default='Java')  
     def __str__(self):
@@ -63,6 +64,12 @@ class CourseLevel(models.Model):
 
 class CareerRoles(models.Model):
     name = models.CharField(max_length=30) 
+    courses = models.ManyToManyField(Course)
+    def __str__(self):
+        return self.name
+
+class CourseCategory(models.Model):
+    name = models.CharField(max_length=50) 
     courses = models.ManyToManyField(Course)
     def __str__(self):
         return self.name
