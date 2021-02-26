@@ -242,11 +242,11 @@ def hi(request):
         try:
             s  = Student.objects.get(email=request.user.email)
             page = 'webapp/hi_login.html'
-            return render(request, page, {'technology':defaultTechnology})
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
             page = 'webapp/hi_login_t.html'
-            return render(request, page, {'technology':defaultTechnology})    
-    return render(request, page, {'technology':defaultTechnology})
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
@@ -319,6 +319,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                 for tech in courses:
                     course_json = {}
                     course_json['technology'] = tech.name
+                    course_json['description'] = tech.description
                     results.append(course_json)
 
         if not results:
@@ -327,6 +328,7 @@ class TechnologiesMatchingTheSearchView(FormView):
             for technology in technologies:
                 course_json = {}
                 course_json['technology'] = technology.name
+                course_json['description'] = technology.description
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -368,14 +370,16 @@ class AutoCompleteView(FormView):
         data = request.GET
         courseName = data.get("term")     
         if courseName:
-            courses = Course.objects.filter(name__icontains=courseName)           
+            courses = Course.objects.filter(description__icontains=courseName)           
         else:
             courses = Course.objects.all()
             results = []
         for course in courses:
             course_json = {}
             course_json['levels'] = course.levels
-            course_json['value'] = course.name
+            course_json['value'] = course.description
+            course_json['name'] = course.name
+            course_json['description'] = course.description
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -432,12 +436,12 @@ class CheckUserExistsView(FormView):
 def logout_view(request): 
         logout(request)    
         defaultTechnology='Tensorflow'        
-        return render(request, "webapp/hi.html", {'technology':defaultTechnology})
+        return render(request, "webapp/hi.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def logout_t_view(request): 
         logout(request)   
         defaultTechnology='Tensorflow'            
-        return render(request, "webapp/hi.html", {'technology':defaultTechnology})
+        return render(request, "webapp/hi.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 class CheckTeacherExistsView(FormView):
   
@@ -470,6 +474,8 @@ class LoginViewForVideoAccess(FormView):
         data = request.GET
         course_name = data.get("course_name")
         course_level = data.get("course_level") 
+        course_description = data.get("course_description")
+        request.session['description']=course_description
         request.session['course']=course_name
         request.session['level']=course_level
         request.session['action']='Video'
@@ -490,6 +496,8 @@ class LoginView(FormView):
         data = request.GET
         course_name = data.get("course_name")
         course_level = data.get("course_level")
+        course_description = data.get("course_description")
+        request.session['description']=course_description
         request.session['course']=course_name
         request.session['level']=course_level        
         request.session['action']='Trainer'
@@ -511,6 +519,8 @@ class BookCourseFormView(FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
         course_name = data.get("course")
+        course_description = data.get("course_description")
+        request.session['description']=course_description
         request.session['course']=course_name
         course_level = data.get("level")
         tz = Student.objects.get(email=request.user.email).time_zn
@@ -651,6 +661,7 @@ class RegisterStudentView(FormView):
           course_name = "Java"
         else:
           course_name = request.POST['course']
+          course_description = request.post['course_description']
         if 'level' not in request.POST:
           course_level = "1"
         else:
@@ -677,6 +688,7 @@ class RegisterStudentView(FormView):
         email_test.send(fail_silently=False)
         request.session['name']=student_name
         request.session['course']=course_name
+        request.session['description'] = course_description
         request.session['level']=course_level
         request.session['email']=email_id
         request.session['password']=pwd
@@ -688,7 +700,7 @@ class LandingBackView(FormView):
 
 class LandingBackLoginView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course']})       
+        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course'], 'technology_desc':request.session['description']})       
 
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):
@@ -705,6 +717,7 @@ class RegisterTeacherView(FormView):
         email_id = request.POST['email']
         pwd = request.POST['pwd']
         course_name =  request.POST['course']
+        course_description = request.POST['course_description']
         meeting_link = request.POST['meetingLink']
         tz_info = request.POST['tz_info']
         phone = request.POST['phone']
@@ -717,6 +730,7 @@ class RegisterTeacherView(FormView):
         request.session['name']=teacher_name
         request.session['email']=email_id
         request.session['password']=pwd
+        request.session['description']=course_description
         request.session['course']=course_name
         request.session['meetingLink']=meeting_link
         return render(request, "webapp/hi_login_t.html", {'name': request.session['name'], 'email': request.session['email'], 'password': request.session['password'], 'course': request.session['course']})
@@ -727,21 +741,25 @@ class BookVideoView(FormView):
         results= []
         course_name = request.POST['course']
         course_level = request.POST['level']
+        course_description = request.POST['course_description']
         request.session['name']=request.user.first_name
         request.session['course']=course_name
         request.session['level']=course_level
+        request.session['description']=course_description
         return render(request, "webapp/buyVideo.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
 
 class BookCourseView(FormView):
     def post(self,request,*args,**kwargs):
         results= []
+        course_description = request.POST['course_description']
         course_name = request.POST['course']
         course_level = request.POST['level']
         request.session['datetimeval']=request.POST['datetimeval']
         request.session['name']=request.user.first_name
         request.session['course']=course_name
         request.session['level']=course_level
+        request.session['description'] = course_description
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
 class MostSoughTechView(FormView):
@@ -755,7 +773,7 @@ class MostSoughTechView(FormView):
          if associated_tech.name != course:
             associated_tech_json = {}
             associated_tech_json['name'] = associated_tech.name
-            #studCourse_json['level'] = studCourse_obj.level
+            associated_tech_json['description'] = associated_tech.description
             results.append(associated_tech_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -775,6 +793,7 @@ class AssociatedTechView(FormView):
          if associated_tech.name != course:
             associated_tech_json = {}
             associated_tech_json['name'] = associated_tech.name
+            associated_tech_json['description'] = associated_tech.description
             #studCourse_json['level'] = studCourse_obj.level
             results.append(associated_tech_json)
         data = json.dumps(results)

@@ -10,6 +10,7 @@ $(function() {
         var view_to_show = document.getElementById("technology_view").textContent;
         image_name = view_to_show+'_';
         course_name = view_to_show;
+        course_description = view_to_show;
         var runit = 0;     
         openMainView(view_to_show);
    
@@ -66,8 +67,9 @@ function setSideBarLevels(ui){
     var elm = document.getElementById('homeSubmenu');
    
     df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-    course_name = ui.item.value;
-    image_name = ui.item.value+'_';
+    course_name = ui.item.name;
+    image_name = ui.item.name+'_';
+    course_description = ui.item.description;
     course_level = null;
     
     for (var i = 1; i <= ui.item.levels; i++) { 
@@ -148,7 +150,7 @@ function technologiesOnSearchBar(pg){
         // using the done promise callback
         .done(function(data) {
             $.each(data, function(index) {
-                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].description+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
                
             });
             $.createModalForSearch({
@@ -175,7 +177,7 @@ function openTechnologyList(val){
             // using the done promise callback
             .done(function(data) {
                 $.each(data, function(index) {
-                    html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"> '+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                    html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"> '+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].description+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
                    
                 });
                 $.createModalForDesignationsCertification({
@@ -223,7 +225,7 @@ function designationsClick(){
         //alert(crse+lvl);
         $.ajax({
             url         : "/loginFormForVideoAccess", // the url where we want to POST
-            data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "action":"video"}, // our data object
+            data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "action":"video", "course_description":course_description}, // our data object
             dataType    : "html", // what type of data do\ we expect back from the server
             encode      : true
         })
@@ -332,7 +334,7 @@ function levelClick(event) {
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href=""><a style="float:left; margin-right:1%;color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description style=" padding:2%; margin-left: 1%;">'+data[index].value+ '<br>'+
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="float:left; margin-right:1%; color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description>'+data[index].value+ '</div>' +
                         '<button style="font-size: small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
                         ' <button style="font-size: small; border: 1px solid transparent;background-color: #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#4a82b3; padding-left:1px; padding-right:1px; margin-right: 2px;" >$13</a> Book Trainer'+' <i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button>';
                         if(data[index].videoFree==true)
@@ -427,7 +429,7 @@ function levelClick(event) {
 function login_l(event, crse, lvl) {
     $.ajax({
         url         : "/loginForm", // the url where we want to POST
-        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl}, // our data object
+        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -522,7 +524,7 @@ function backtolandingmain(event){
 
     $.ajax({
         url         : "/hi", // the url where we want to POST
-        data        : {"technology":course_name}, // our data object
+        data        : {"technology":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -770,8 +772,8 @@ function bookCrseClick(event) {
   }
 }
 function setTechnology(level_val){
-    document.getElementById('tec_name').text = course_name;
-    document.getElementById('tec_name1').text = course_name;
+    document.getElementById('tec_name').text = course_description;
+    document.getElementById('tec_name1').text = course_description;
     document.getElementById('tot_levls').text = level_val;
 
 }
@@ -800,9 +802,10 @@ function openMainView(val){
     // using the done promise callback
     .done(function(data) {         
 df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-course_name = val;
-image_name = val+'_';
+course_name = data[0].name;
+image_name = course_name+'_';
 course_level = null;
+course_description = data[0].description
 technology_to_set = null;
 
   $.each(data, function(index) {
@@ -855,7 +858,7 @@ function setMostSoughtTechnologies(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
@@ -881,7 +884,7 @@ function setAssociatedTechnology(){
     
          $.each(data, function(index) {
 
-          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+          aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
@@ -919,7 +922,7 @@ function bookV(event) {
     $.ajax({
         url         : "/book_video", // the url where we want to POST
         type        : 'post',
-        data        : {"course":course, "level":level}, // our data object
+        data        : {"course":course, "level":level, "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -948,7 +951,7 @@ function bookc(event) {
     $.ajax({
         url         : "/book_course", // the url where we want to POST
         type        : 'post',
-        data        : {"course":course, "level":level, "datetimeval": datetimeval}, // our data object
+        data        : {"course":course, "level":level, "datetimeval": datetimeval, "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -978,7 +981,7 @@ function traineeRegister(event){
     $.ajax({
         url         : "/register_student", // the url where we want to POST
         type        : 'post',
-        data        : {"course": "Java", "level": "1", "email":mail_id, "name": name, "pwd":pwd, "tz_info":tz_n}, // our data object
+        data        : {"course": "Java", "level": "1", "email":mail_id, "name": name, "pwd":pwd, "tz_info":tz_n, "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -1009,7 +1012,7 @@ function trainerRegister(event){
     $.ajax({
         url         : "/register_teacher", // the url where we want to POST
         type        : 'post',
-        data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link, "tz_info": tz_n}, // our data object
+        data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link, "tz_info": tz_n, "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })

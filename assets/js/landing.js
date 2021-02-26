@@ -12,10 +12,12 @@ $(function() {
       });
 
         var view_to_show = document.getElementById("technology_view_student").textContent;
+        var desc_to_show = document.getElementById("description_view_student").textContent;
         course_name = view_to_show;    
-        image_name = course_name+"_";       
+        image_name = course_name+"_";  
+        course_description = desc_to_show;     
         var runit = 0;     
-        openMainView(course_name);
+        openMainView(course_description);
         getPendingStudentTrainings();
         getAcceptedStudentTrainings();
         getCompletedStudentTrainings();
@@ -156,8 +158,9 @@ $(function() {
                     var elm = document.getElementById('homeSubmenu');
                    
                 df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-                course_name = ui.item.value;
-                image_name = ui.item.value+'_';
+                course_name = ui.item.name;
+                image_name = course_name+'_';
+                course_description = ui.item.value;
                 setTechnology(ui.item.levels);
                 setAssociatedTechnology();   
                 resetSearchTopic();
@@ -304,7 +307,7 @@ $(function() {
                 $.ajax({
                     url         : "/register_student", // the url where we want to POST
                     type        : 'post',
-                    data        : {"course": course_name, "level": course_level, "email":mail_id, "name": name, "pwd":pwd, "tz_info":tz_n , "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+                    data        : {"course": course_name, "level": course_level, "email":mail_id, "name": name, "pwd":pwd, "tz_info":tz_n , "csrfmiddlewaretoken" : getCookie('csrftoken'), "course_description":course_description}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
                 })
@@ -357,7 +360,7 @@ $(function() {
             $.ajax({
                 url         : "/register_teacher", // the url where we want to POST
                 type        : 'post',
-                data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link, "tz_info": tz_n,  "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+                data        : {"course": course_name, "email":mail_id, "name": name, "pwd":pwd, "meetingLink": meeting_link, "tz_info": tz_n,  "csrfmiddlewaretoken" : getCookie('csrftoken'), "course_description":course_description}, // our data object
                 dataType    : "html", // what type of data do\ we expect back from the server
                 encode      : true
             })
@@ -466,7 +469,7 @@ function technologiesOnSearchBar(pg){
         // using the done promise callback
         .done(function(data) {
             $.each(data, function(index) {
-                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].description+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
                
             });
             $.createModalForSearch({
@@ -503,8 +506,8 @@ function openMainViewFromSearchResults(val){
                     elm.innerHTML="";
                     var aHtml ="";
                     $.each(data, function(index) {
-                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href=""><a style="float:left; margin-right:1%;color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description style="padding:2%;margin-left: 1%;">'+data[index].value+ '<br>'+
-                        '<button style="font-size: small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
+                        aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="float:left; margin-right:1%; color: #e1d7df;">LEVEL '+(index+1)+' </a><div id='+data[index].level+'description>'+data[index].value+ '</div>' +
+                         '<button style="font-size: small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
                         ' <button style="font-size: small; border: 1px solid transparent;background-color: #7db2e0; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#4a82b3; padding-left:1px; padding-right:1px; margin-right: 2px;" >$13</a> Book Trainer'+' <i  style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button>';
                        
                         if(data[index].videoFree==true)
@@ -619,7 +622,7 @@ function openMainViewFromSearchResults(val){
         
              $.each(data, function(index) {
     
-              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
                        
               });
               elm.innerHTML=aHtml; 
@@ -708,7 +711,7 @@ function openTechnologyList(val){
         // using the done promise callback
         .done(function(data) {
             $.each(data, function(index) {
-                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"> '+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].technology+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
+                html_message += '<h4 style="background-color: #629DD1; color: white;" href=""><div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase"> '+data[index].technology+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainViewFromSearchResults(\''+data[index].description+'\')">Open <i class="fas fa-folder"></i></button></div></h4>';
                
             });
             $.createModalForDesignationsCertification({
@@ -862,9 +865,10 @@ function levelClick(event) {
         
         
  df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
- course_name = val;
- image_name = val+'_';
- course_level = null;
+ course_name = data[0].name;
+ image_name = course_name+'_';
+ course_level = null; 
+ course_description = data[0].description
  additionalInfoOnTechnology();
  setMostSoughtTechnologies();
  setAssociatedTechnology(); 
@@ -909,7 +913,7 @@ li_element.innerHTML+=aHtml;
     
          $.each(data, function(index) {
 
-            aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+            aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
                      
           });
           elm.innerHTML=aHtml; 
@@ -951,7 +955,7 @@ function videoClk(event, crse, lvl) {
     //alert(crse+lvl);
     $.ajax({
         url         : "/loginFormForVideoAccess", // the url where we want to POST
-        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "action":"video"}, // our data object
+        data        : {"from": "home_book_login", "course_name":crse, "course_level": lvl, "action":"video", "course_description":course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -1058,7 +1062,7 @@ function videoClk1(event, crse, lvl, description, videolink, levels_total){
   function bookcrseNew(crse, leveChekced){
     $.ajax({
         url         : "/bookingForm", // the url where we want to POST
-        data        : {"course": crse, "level": leveChekced}, // our data object
+        data        : {"course": crse, "level": leveChekced, "course_description": course_description}, // our data object
         dataType    : "html", // what type of data do\ we expect back from the server
         encode      : true
     })
@@ -1161,8 +1165,8 @@ function videoClk1(event, crse, lvl, description, videolink, levels_total){
   }
 
   function setTechnology(level_val){
-    document.getElementById('tec_name').text = course_name;    
-    document.getElementById('tec_name1').text = course_name;
+    document.getElementById('tec_name').text = course_description;    
+    document.getElementById('tec_name1').text = course_description;
     document.getElementById('tot_levls').text = level_val;
 
 }
