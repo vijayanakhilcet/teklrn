@@ -581,7 +581,8 @@ class LoginStudentView(FormView):
                 else:
                     page="webapp/hi_login.html"     
                     if(request.session['course'] is None):
-                        request.session['course'] = 'Tensorflow'                        
+                        request.session['course'] = 'Tensorflow'
+                        request.session['description'] = 'Tensorflow'                        
                 name = student.user.first_name
                 email_id = student.user.username
                 request.session['name']=name
@@ -589,7 +590,7 @@ class LoginStudentView(FormView):
             else:
                 request.session['name']=None
                 request.session['email']=email_id
-        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'technology':request.session['course']})
+        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'technology':request.session['course'], 'technology_desc':request.session['description']})
     def get(self,request,*args,**kwargs):
         page = "webapp/login.html"
         if(request.user.is_authenticated):

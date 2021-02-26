@@ -1,12 +1,14 @@
 var image_name;
 var course_name;
 var course_level;
+var course_description;
 
 $(function() {
   image_name = 'Java_';
-        course_name = 'Java';   
+        course_name = 'Java';
+        course_description =    course_name;
         var runit = 0;     
-        openMainView(course_name);
+        openMainView(course_description);
    /*     document.getElementById('tech_field').innerHTML = '<div style="margin-left: 1%;">Technology - '+course_name+'</div>';
         document.getElementById('level_field').innerHTML = '<div style="margin-left: 1%;">Total Levels - 21</div>';        
         setAssociatedTechnology();
@@ -321,8 +323,9 @@ $("#course-search").autocomplete({
       var elm = document.getElementById('homeSubmenu');
      
 df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-course_name = ui.item.value;
-image_name = ui.item.value+'_';
+course_name = ui.item.name;
+image_name = ui.item.name+'_';
+course_description = ui.item.description;
 course_level = null;
 setTechnology(ui.item.levels);
 setAssociatedTechnology();   
@@ -498,7 +501,7 @@ $("#bookCourse").submit(function(event) {
                          var aHtml ="";
         
              $.each(data, function(index) {
-              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br><button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
                              
               });
               elm.innerHTML=aHtml; 
@@ -698,9 +701,11 @@ if (content.style.maxHeight){
             
             
      df = document.createDocumentFragment(); // create a document fragment to hold the options while we create them
-     course_name = val;
-     image_name = val+'_';
+     course_name = data[0].name;;
+     image_name = course_name+'_';
      course_level = null;
+     course_description = data[0].description;
+
      additionalInfoOnTechnology();
      setView(course_name);        
      setTechnology(data[0].levels);      
@@ -747,7 +752,7 @@ if (content.style.maxHeight){
         
              $.each(data, function(index) {
 
-              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].name+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].name+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
+              aHtml += '<h4  style="background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><b style="color: #f5eded;">  <a style="text-transform:uppercase">'+data[index].description+'</a></b><br> <button style="vertical-align: middle;font-size: x-small; border: 1px solid transparent;  background-color: #155d9c; color:#ecf0f3;   font-size: x-small;  border-radius: .25rem;" onclick="openMainView( \''+data[index].description+'\')">View <i class="fas fa-folder"></i></button></div></h4>';
              });
               elm.innerHTML=aHtml; 
             });
@@ -758,8 +763,8 @@ if (content.style.maxHeight){
   
     
        function setTechnology(level_val){
-        document.getElementById('tec_name').text = course_name;        
-        document.getElementById('tec_name1').text = course_name;
+        document.getElementById('tec_name').text = course_description;        
+        document.getElementById('tec_name1').text = course_description;
         document.getElementById('tot_levls').text = level_val;
        }
   
