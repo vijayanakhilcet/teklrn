@@ -299,6 +299,7 @@ class TechnologiesMatchingTheDesignationView(FormView):
         technologies = CareerRoles.objects.get(name=designation).courses.all()
         for technology in technologies:
             course_json = {}
+            course_json['description'] = technology.description
             course_json['technology'] = technology.name
             results.append(course_json)
         data = json.dumps(results)
