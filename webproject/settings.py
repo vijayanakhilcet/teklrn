@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 APP_HOST_NAME='http://localhost:8000/'
-#APP_HOST_NAME='http://teklrn.com/'
+#APP_HOST_NAME='https://teklrn.com/'
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['www.teklrn.com', 'teklrn.com', 'localhost']
 
 STRIPE_SECRET_KEY = 'sk_test_yt4k3CWdEQgIJIXoPM4tEZak00XxxVpPdw'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7' 
-
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
