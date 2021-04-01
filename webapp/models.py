@@ -61,6 +61,8 @@ class CourseLevel(models.Model):
     videoPresent = models.BooleanField(default=False)
     videoFree = models.BooleanField(default=0)
     videoLink =  models.CharField(max_length=400, default='Hi')
+    class Meta:
+        ordering = ["level_number"]
 
 class CareerRoles(models.Model):
     name = models.CharField(max_length=30) 
