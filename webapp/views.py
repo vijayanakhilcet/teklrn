@@ -786,19 +786,24 @@ class AssociatedTechView(FormView):
     def get(self,request,*args,**kwargs):
         d = request.GET
         course = d.get("course").capitalize()
-        
-        cat = Course.objects.get(name=course).category 
-        associated_techs = Course.objects.filter(category=cat)
+        designations = Course.objects.get(name=course).careerroles_set.all()
         results = []
-        
-        for associated_tech in associated_techs:
-         if associated_tech.name != course:
-            associated_tech_json = {}
-            associated_tech_json['name'] = associated_tech.name
-            associated_tech_json['description'] = associated_tech.description
-            #studCourse_json['level'] = studCourse_obj.level
-            results.append(associated_tech_json)
-        data = json.dumps(results)
+        for designation in designations:
+            technologies = CareerRoles.objects.get(name=designation).courses.all()
+            for technology in technologies:
+                associated_tech_json = {}
+                associated_tech_json['description'] = technology.description
+                associated_tech_json['name'] = technology.name
+                results.append(associated_tech_json)
+        seen = set()
+        new_l = []
+        for d in results:
+            t = tuple(d.items())
+            if t not in seen:
+                seen.add(t)
+                new_l.append(d)
+
+        data = json.dumps(new_l)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
