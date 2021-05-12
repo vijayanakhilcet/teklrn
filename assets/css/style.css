@@ -995,7 +995,7 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(64, 72, 80, 0.25);
+			/*background: rgba(64, 72, 80, 0.25);*/
 		}
 
 		section#banner:before {
@@ -1005,7 +1005,7 @@
 			right: 0;
 			top: 0;
 			bottom: 0;
-			background: rgba(0,0,0,.5);
+			/*background: rgba(0,0,0,.5);*/
 		}
 
 		#banner .inner {
@@ -1023,7 +1023,8 @@
 
 		#banner .button.alt {
 			box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.75);
-			color: #ffffff !important;
+			/*color: #ffffff !important;*/
+			color: #629dd1 !important;
 		}
 
 			#banner .button.alt:hover {
