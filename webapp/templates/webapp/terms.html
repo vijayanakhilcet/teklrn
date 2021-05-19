@@ -34,7 +34,6 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>TEKLRN</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -90,40 +89,43 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                  
+                    <button style="background-color: #629DD1; border-color: #629DD1;" type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button style="background-color: #629DD1; border-color: #629DD1;" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">  </a>
+                            </li>
 							<li class="nav-item">
                                 <a class="nav-link" href="/"> Home </a>
                             </li>
-							
 							<li class="nav-item">
                                 <a class="nav-link" href="#">  </a>
                             </li>
-                           
-							<li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
-                            </li>
+						
 
                             <li class="nav-item">
-                                <button id="login_l" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Learner Login</span>
+                                <button style="color: #629DD1;background-color: transparent;  border-color: #629DD1;"  id="login_t1" type="submit" class="btn btn-info" onclick="login_t(event)"> <span>Trainer Login</span>
+                               </button>
+                           </li>
+                           <li class="nav-item">
+                            <a class="nav-link" href="#">  </a>
+                        </li>
+
+                            <li class="nav-item">
+                                <button style="color: #629DD1;background-color: transparent;  border-color: #629DD1;" id="login_l1" type="submit" class="btn btn-info" onclick="login_l(event, course_name)"> <span>Learner Login</span>
                                 </button>
-                            </li>
-							<li class="nav-item">
-                                <a class="nav-link" href="#">  </a>
                             </li>
 							
-                            <li class="nav-item">
-                                 <button id="login_t" type="button" id="sidebarCollapse" class="btn btn-info"> <span>Trainer Login</span>
-                                </button>
-                            </li>
+							
+                          
                            
                         </ul>
                     </div>

@@ -2,14 +2,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<style>
+        @font-face {
+  			font-family: 'Antietam';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+			}
+			</style>
 	<title>The Worlds Largest Hub of Technology Learning -  Teklrn Inc.</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=0.76, maximum-scale=0.76, minimum-scale=0.76">
-   
-	<script src="{% static 'js/login.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   	<script src="{% static 'js/login.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
+    <script src="{% static 'js/dist/attention.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>  
+	
 <!--===============================================================================================
 	<link rel="icon" type="image/png" href="{% static 'drop-down/images/icons/favicon.ico' %}"/>
-<!--===============================================================================================-->
+===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'drop-down/vendor/bootstrap/css/bootstrap.min.css' %}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'drop-down/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
@@ -121,8 +136,8 @@
 					<div style="text-align: center;" class="wrap-input100 validate-input">
 						<span class="label-input100" style="font-size: 10px;
 						margin: 0 0 16px;">By Registering, you agree to our<a style="font-size: 10px;
-						margin: 0 0 16px; color: dodgerblue;" href=""> <u>Terms</u></a> and <a style="font-size: 10px;
-						margin: 0 0 16px; color: dodgerblue;" href="">  <u>Policies</u></a>.
+						margin: 0 0 16px; color: dodgerblue;" href="#" onclick="doLaunchTerm(event)"> <u>Terms</u></a> and <a style="font-size: 10px;
+						margin: 0 0 16px; color: dodgerblue;" href="#" onclick="doLaunchTerm(event)">  <u>Policies</u></a>.
 						</span>						
 					</div>
 				</div> 
@@ -134,8 +149,6 @@
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
-	<script src="{% static 'drop-down/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'drop-down/vendor/animsition/js/animsition.min.js' %}"></script>
 <!--===============================================================================================-->
@@ -166,6 +179,51 @@
 
   gtag('config', 'UA-23581568-13');
 </script>
+
+
+<script>
+    pdfjsLib.getDocument('./static/image/Html_6.pdf').promise.then(doc =>{
+        console.log("This file has "+doc._pdfInfo.numPages + " pages");
+
+        doc.getPage(1).then(page =>{
+            var myCanvas = document.getElementById("my_canvas");
+            var context =  myCanvas.getContext("2d");
+
+            var viewport = page.getViewport({scale:1.5});
+            myCanvas.width = viewport.width;
+            myCanvas.height = viewport.height;
+            page.render({
+                canvasContext:context,
+                viewport:viewport
+            });
+        });
+    });
+
+</script>
+           </div>
+    </div>
+
+   <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+        document.querySelector('.new-alert').addEventListener('click', function() {
+                    new Attention.Alert({
+                        title: 'Missing Information',
+                        content: 'Enter a course in the search box and select a level review the syllabus of the level before you proceed with booking',
+
+                            
+                    });
+            });
+    </script>
 
 </body>
 </html>
