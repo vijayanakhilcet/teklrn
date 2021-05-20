@@ -760,7 +760,7 @@ function lvlclk(pg){
        // var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
        var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
         $.createModal({
-        current_level:  pg,
+        current_level: pg,
         message: iframe,
         closeButton:true,
         scrollable:false
@@ -981,7 +981,7 @@ function parseVideoLink(linkVid){
 }
 
 function videoClk1(event, crse, lvl, description, videolink, levels_total){ 
-        var iframe = '<video poster="static/image/images/poster.jpg" autoplay playsinline id="frameclk" controls height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video><div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>';
+        var iframe = '<video poster="static/image/images/poster.jpg" autoplay playsinline id="frameclk" controls height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video>';
         $.createModalVid({
         message: iframe,
         closeButton:true,
