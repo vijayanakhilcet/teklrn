@@ -107,6 +107,9 @@ def RedirectToLandingStudentView(request):
     return  HttpResponseRedirect(HOSTNAME+'?GFTfgTRFghHGfdjkJHGVCDSdnHHHH')
 
 
+def registerBack(request):
+    return  HttpResponseRedirect(HOSTNAME+'?GFTfgTRFghHGfdjkJHGVCDSdnHHHH')
+
 def register(request):
     if request.method == 'POST':
         user_time_zone  = request.session.get('user_time_zone', None)

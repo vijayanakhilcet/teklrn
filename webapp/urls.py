@@ -39,6 +39,7 @@ urlpatterns = [
     path('logout/',views.logout_view, name='logout'),
     path('logout_t/',views.logout_t_view, name='logout_t'),
     path('register_student',views.RegisterStudentView.as_view()),
+    path('registerBack/', views.registerBack, name='registerBack'), 
     path('register/', views.register, name='register'), 
     path('registerT/', views.register_t, name='registerT'), 
     path('userProfile/', views.user_profile, name='user_profile'), 
