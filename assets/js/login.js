@@ -575,6 +575,28 @@ function backtolandingmain(event){
 event.preventDefault();
 }
 
+function backtol(){
+    
+    if( typeof course_name == "undefined"){
+        course_name = 'Tensorflow';
+        course_description = course_name;
+}
+
+    $.ajax({
+        url         : "/redirect_to_landing_page", // the url where we want to POST
+        data        : {"":""}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+}
+
 function backtolandingmainT(event){
 
     if( typeof course_name == "undefined")
