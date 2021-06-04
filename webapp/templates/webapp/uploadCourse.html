@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>The Worlds Largest Hub of Technology Learning -  Teklrn Inc.</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.76, maximum-scale=0.76, minimum-scale=0.76">
+   
+	<script src="{% static 'js/login.js' %}"></script>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'forms/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/css/main.css' %}">
+<!--===============================================================================================-->
+<style>
+	@font-face {
+			font-family: 'Antietam';
+			font-style: normal;
+			font-weight: normal;
+		  src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+		  }
+
+		  input[type=file]::file-selector-button {
+  border:  #629DD1;
+  padding: .5em;
+  border-radius: .3em;
+  background-color: white;
+  color: #629DD1;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: whitesmoke;
+  
+}
+
+  </style>
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form"   action="https://script.google.com/macros/s/AKfycbwSJI7JR3pIlFkWyve2Ls2vuJH1huVRWJAOoiah5mI4GD7ZIQzD1aU5tWPrSnEbvJn0Sg/exec" id="form" method="post">
+									
+					<h4 style="font-family: 'Antietam';text-align: center;color: #3590d5;">Teklrn</h4> <br>
+			
+					<div style="text-align: center;"><img src="static/image/images/2.png" alt="TEKLRN" width="55" height="45"></div>
+					<span class="login100-form-title p-b-26">
+						
+					</span>
+					<span class="login100-form-title p-b-26">
+						
+					</span>
+					<div id="data"></div>
+					<div style="color: white; background-color: #629DD1; padding: .3em; border-radius:.3em;" class="wrap-input100 validate-input" >
+						<input name="file" id="uploadfile" type="file">
+						<span class="focus-input100" ></span>
+					</div>
+
+					
+					
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button id="submit"  class="login100-form-btn" type="submit" >
+								Submit
+							</button>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" onclick="backtolandingmain(event)"   type="button" >
+								Back
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'forms/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'forms/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/js/main.js' %}"></script>
+	<script>
+		$('#uploadfile').on("change", function() {
+			var file = this.files[0];
+			var fr = new FileReader();
+			fr.fileName = file.name
+			fr.onload = function(e) {
+				e.target.result
+				html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
+				html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
+				html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
+				$("#data").empty().append(html);
+			}
+			fr.readAsDataURL(file);
+			$("#submit").submit();
+		});
+		</script>
+
+</body>
+</html>

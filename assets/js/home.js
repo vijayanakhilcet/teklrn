@@ -8,10 +8,16 @@ var technologyFromSearchString = urlParams.get('technology');
 }
 var page = "hi";
 if(tech){
+
+    
 if(tech == 'redirecttologinT'){
     page = "/login_teacher_authorize"
 
 }
+else if(tech == 'UploadComplete'){
+    page = "/upload_complete"
+}
+
 else if(tech == 'redirecttologin'){
     page = "/login_student"
 }

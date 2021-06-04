@@ -53,7 +53,6 @@
 <script src="{% static 'js/dist/attention.js' %}"></script>
 <script src="{% static 'js/modal.js' %}"></script>  
 
-
     
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -74,8 +73,26 @@
               <!--  <h4 style="font-size:5px;"><i>An Akhil Vijayan Enterprise</i></h4></h3>
            --> </div>
 
-        <ul class="list-unstyled components">
-     
+           <ul class="list-unstyled components"> <li class="nav-item">
+            <a class="nav-link" href="/">  <i class="fas fa-home"></i><b> Home</b> </a>
+        </li>
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-user"></i><b> HELLO {{user.first_name}} </b></a>
+      </li>
+
+        
+        <li class="nav-item">
+            <a id="user_profile_t"  id="sidebarCollapse" href="#"><i class="fas fa-user"></i> <span><b> PROFILE</b></span>
+            </a>
+        </li>
+       
+        
+        <li class="nav-item">
+             <a id="logout"><i class="fas fa-sign-out-alt"></i> <span><b> LOGOUT</b></span>
+             </a>
+        </li>
 
             
                  <li>
@@ -135,11 +152,14 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button style="background-color: #f8f9fa; border-color: #629DD1; color: #729fd1;" type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span></span>
                     </button>
-                    <button style="background-color: #629DD1; border-color: #629DD1;" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button style="font-size: medium;border: 1px solid transparent;background-color: #629dd1;vertical-align: middle;font-size: medium;color: #fafafa;border-radius: .25rem;" onclick="uploadCourse(1)"> Upload Course   <i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i> </button>
+                    
+                    <a style="font-size: 1.15rem;font-family: Antietam;color: #629dd1;"><img src="static/image/images/2.png" alt="TEKLRN" width="35" height="25"> teklrn </a>
+              <!--  <button style="background-color: #629DD1; border-color: #629DD1;" class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
@@ -177,7 +197,7 @@
                             </li>
                            
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
             </nav>
 

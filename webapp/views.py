@@ -158,6 +158,17 @@ def user_profile(request):
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
     return render(request, 'webapp/userProfile.html')
 
+    
+def upload_course(request):
+    if request.method == 'POST':    
+            t = Teacher.objects.get(email=request.user.email)
+            phone = request.POST['phone']
+            t.phone = phone
+            t.save()
+            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+    return render(request, 'webapp/uploadCourse.html')
+
+
 
 def user_profile_t(request):
     if request.method == 'POST':    
@@ -217,6 +228,9 @@ def register_t(request):
 
 def login_page(request):
     return render(request, 'webapp/login.html')
+
+def upload_complete(request):
+    return render(request, 'webapp/upload_complete.html')       
     
 def login_teacher_authorize(request):
     return render(request, 'webapp/login_t_auth.html')    

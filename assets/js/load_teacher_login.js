@@ -135,6 +135,8 @@ for (i = 0; i < coll.length; i++) {
 }*/
 
 
+
+
 $("#booking-close").click(function() {
   document.getElementById("bookCourse").style.display = "none";
 });
@@ -344,8 +346,7 @@ li_element.appendChild(a_element);
 elm.appendChild(li_element); */
 var li_element = document.createElement('li'); // create the option element
 var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> ' +
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Upload Video '+'<i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i></button>'
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> '
 li_element.innerHTML+=aHtml;
 
 elm.appendChild(li_element); 
@@ -406,6 +407,32 @@ $("#myFormemail").submit(function(event) {
 });
 
 
+
+/*$("#form").submit(function(event) {
+
+  // get the form data
+  // there are many ways to get this data using jQuery (you can use the class or id also)
+  var content = $('input[id=uploadfile]').val();
+
+  // process the form
+  $.ajax({
+      url         : 'https://script.google.com/macros/s/AKfycbxBeF06c7ZWIxp9AFyZvC8zwyfB1tzBqDIKXHMLeo3-JXLZd3uUcoNATjuja_T3qmovRw/exec', // the url where we want to POST
+      type        : 'post',
+      data        : {"uploadfile":content, "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+      dataType    : "html", // what type of data do\ we expect back from the server
+      encode      : true
+  })
+      // using the done promise callback
+     .done(function(data) {alert("Done");
+          // here we will handle errors and validation messages
+      });
+     
+  // stop the form from submitting the normal way and refreshing the page
+  event.preventDefault();
+
+});
+
+*/
 $("#bookCourse").submit(function(event) {
 
                 // get the form data
@@ -435,6 +462,8 @@ $("#bookCourse").submit(function(event) {
                 event.preventDefault();
 
             });
+
+            
 
             $("#myFormRegister").submit(function(event) {
 
@@ -476,8 +505,7 @@ $("#bookCourse").submit(function(event) {
           for (var i = 1; i <= 21; i++) { 
              var li_element = document.createElement('li'); // create the option element
              var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> '+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Upload Video '+'<i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i></button>'
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> '
                     li_element.innerHTML+=aHtml;
                      
                    elm.appendChild(li_element); 
@@ -586,7 +614,6 @@ $("#bookCourse").submit(function(event) {
                     $.each(data, function(index) {
                       aHtml += '<h4  style="border-radius:.3em; background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '<br>'+
                       '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button> '+
-                      '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Upload Video <i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i>'+'</button>' +
                       
                       '</div>'+ '</h4>';
                
@@ -615,8 +642,7 @@ $("#bookCourse").submit(function(event) {
                   var aHtml ="";
                   $.each(data, function(index) {
                     aHtml += '<h4  style="border-radius:.3em;background-color: #629DD1; color: white;" href="">'+'<div style="padding:2%; margin-left: 1%;"><a style="color: #e1d7df;">LEVEL '+(index+1)+' </a>'+data[index].value+ '<br>'+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button> ' +
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Upload Video <i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i>'+'</button>'
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '> Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button> ' 
                     
                     +'</div>'+'</h4>';
              
@@ -647,6 +673,8 @@ if (content.style.maxHeight){
 (function(a){a.createModalForSearch=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><div><div><h4 style="margin-left: 4%;margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4></div><div style="margin-left: 4%;"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">SEARCH RESULTS: </h4></div></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button id="closeModal" type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModal=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="margin-left: 4%;margin-bottom: 4%;  text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4><div style="margin-left: 4%; margin-right: 4%"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">TECHNOLOGY PROFICIENCY CERTIFICATION<br><br><a style="font-weight:bolder">'+ course_name.toUpperCase() +' PROFESSIONAL TECHNOLOGY DEVELOPER LEVEL '+b.current_level+'</a></h4></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
+
+(function(a){a.createModalUpload=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div class="modal-dialog">';html+='<div class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="margin-left: 4%;margin-bottom: 4%;  text-align: left;color: inherit;font-size:inherit;font-family: \'Antietam\';font-size: x-large;"><img src="static/image/images/2.png" style="padding-right:1%;width: 10%;height:90%;" alt="TEKLRN" width="35" height="25"> TEKLRN </h4><div style="margin-left: 4%;"><h4 style="margin-bottom: 4%;text-align: left;color: inherit;font-size:inherit;font-family: inherit;">COURSE UPLOAD: </h4></div>';html+='<div class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button type="button" style="background-color: white; color: #629DD1" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
 (function(a){a.createModalVid=function(b){defaults={title:"",message:"Your Message Goes Here!",closeButton:false,scrollable:true};var b=a.extend({},defaults,b);var c=(b.scrollable===true)?'style="max-height: 100%;overflow-y: auto;"':"";html='<div class="modal fade" id="myModal">';html+='<div style="height:100%;" class="modal-dialog">';html+='<div style="height:100%; width:100%" class="modal-content">';html+='<div style="border-bottom:none" class="modal-header">';html+='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';if(b.title.length>0){html+='<h4 class="modal-title">'+b.title+"</h4>"}html+='</div><h4 style="text-align: center;color: inherit; font-size:inherit;font-family: inherit;"><img src="static/image/images/2.png" style="padding-right:1%; width:5%; height:90%" alt="TEKLRN" width="35" height="25">    Teklrn Inc.</h4>';html+='<div style="padding-left:0.1rem; padding-right:0.1rem;" class="modal-body" '+c+">";html+=b.message;html+="</div>";html+='<div style="border-top:none" class="modal-footer">';if(b.closeButton===true){html+='<button style="background-color: white; color: #629DD1" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>'}html+="</div>";html+="</div>";html+="</div>";html+="</div>";a("body").prepend(html);a("#myModal").modal().on("hidden.bs.modal",function(){a(this).remove()})}})(jQuery);
 
@@ -722,8 +750,7 @@ if (content.style.maxHeight){
              console.log (data[index].levels);
      var li_element = document.createElement('li'); // create the option element
      var aHtml = '<a style="text-transform:uppercase" href="#"><b>'+course_name+'</b> Level '+i+ ' '+ '<br>'+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> '+
-                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Upload Video '+'<i style="vertical-align:middle;" class="fas fa-upload" aria-hidden="true"></i></button> '
+                    '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+i+')"'+ '>Syllabus '+'<i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i></button> '
                     li_element.innerHTML+=aHtml;
               
             elm.appendChild(li_element); 
@@ -851,8 +878,23 @@ function afterDelayThree(){
                       closeButton:true,
                       scrollable:false
                       });
-                      return false;        
+                      return false;        5
                    }
+
+                   function uploadCourse(crse){ 
+                    $.ajax({
+                        url         : "/uploadCourse", // the url where we want to POST
+                        data        : {"email":'login'}, // our data object
+                        dataType    : "html", // what type of data do\ we expect back from the server
+                        encode      : true
+                    })
+                        .done(function(data) {
+                            document.open("text/html", "load")
+                            document.write(data);
+                            document.close();
+                  }); event.preventDefault();
+                 }
+
         function afterDelayTwo(){
             
                         var t = document.getElementById("two");
@@ -907,7 +949,20 @@ function pendingSelected(val){
             elm1.style.display = "block";
             elm1.src = page;
         }
-        
+function upd() {
+          alert("Hi");
+          var file = this.files[0];
+          var fr = new FileReader();
+          fr.fileName = file.name
+          fr.onload = function(e) {
+              e.target.result
+              html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
+              html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
+              html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
+              $("#data").empty().append(html);
+          }
+          fr.readAsDataURL(file);
+      }        
 function thisisSelected(val){
 
     var page = "/static/image/"+val+".pdf";
