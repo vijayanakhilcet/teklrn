@@ -349,7 +349,7 @@ function logout() {
         encode      : true
     })
         .done(function(data) {
-            document.open("text/html", "load")
+            document.open("text/html", "load");
             document.write(data);
             document.close();
 });
