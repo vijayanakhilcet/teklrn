@@ -9,7 +9,8 @@ class Course(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=30, default='Hi')  
     levels = models.IntegerField(default=170)    
-    category = models.CharField(max_length=30, default='Java')  
+    category = models.CharField(max_length=30, default='Java')
+    contentType = models.CharField(max_length=30, default='Tech') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
     def __str__(self):
         return self.name
 

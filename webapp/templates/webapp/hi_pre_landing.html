@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        @font-face {
+  			font-family: 'Antietam';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+			}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Worlds Largest Hub of Technology Learning -  Teklrn Inc.</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all"/>
+    --><link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="{% static 'css/stackpath.css' %}" type="text/css" />
+     <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'js/search.js' %}"></script> 
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:200,300,400,500,600,700,800,900&display=swap" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+</head>
+
+<body style="font-family: Antietam; background-color: #fafafa !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);" class="bg-black muli">
+
+    <div style="overflow-x: hidden;" id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+               
+                <a style="font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="static/image/images/2.png" alt="TEKLRN" width="25" height="25"> teklrn </a>
+            
+            </div>
+        </nav>
+
+
+<!--<iframe id="course-pdf" src="static/image/Html_6.pdf"  style="width : 100%; height : 100%;"></iframe> -->
+<!--<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas> -->
+
+
+
+<div>
+    <div>
+    
+        <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder; font-family: 'Font Awesome 5 Free';">
+     
+    
+    <div class="line"></div>
+    </div>
+
+   
+    <section class="p-0 md-p-5">
+
+      
+        <div id="searchData"  class="flex flex-wrap">
+      <!--     <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/yoann-siloine-dyaxQ-aoGWY-unsplash.jpg" alt="">
+                    <p style=" font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                        Mind Anatomy : Albert Einstein Smart Brains, Intelligence
+                    </p>
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">EDUCATIONAL</div>
+                  
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                </a>
+            </div>
+            <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/fabrice-villard-Jrl_UQcZqOc-unsplash.jpg" alt="">
+                    <p style="font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                        Java Professional Technology Developer Course.
+                    </p>
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">CERTIFICATION</div>
+                  
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                </a>
+            </div>
+            <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/florian-klauer-mk7D-4UCfmg-unsplash.jpg" alt="">
+                    <p style="font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                     Tensorflow Professional Technology Developer Course.
+                    </p>
+                    
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">CERTIFICATION</div>
+                     
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                    
+                </a>
+            </div>
+            <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/yoann-siloine-dyaxQ-aoGWY-unsplash.jpg" alt="">
+                    <p style=" font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                        Mind Anatomy : Albert Einstein Smart Brains, Intelligence
+                    </p>
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">EDUCATIONAL</div>
+                  
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                </a>
+            </div>
+            <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/yoann-siloine-dyaxQ-aoGWY-unsplash.jpg" alt="">
+                    <p style=" font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                        Mind Anatomy : Albert Einstein Smart Brains, Intelligence
+                    </p>
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">EDUCATIONAL</div>
+                  
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                </a>
+            </div>
+            <div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10">
+                <a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300">
+                    <img class="w-100pc" src="static/image/search/yoann-siloine-dyaxQ-aoGWY-unsplash.jpg" alt="">
+                    <p style=" font-size: medium !important; color: #629DD1 !important;" class="fw-600 white fs-m3 mt-3">
+                        Mind Anatomy : Albert Einstein Smart Brains, Intelligence
+                    </p>
+                    <div style="color: white; background-color: #629DD1; font-size: small; padding: 1.2%; border-radius: .5 em;">EDUCATIONAL</div>
+                  
+                    <div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div>
+                </a>
+            </div>-->
+        </div>
+    </section>
+	
+	    <!-- testimonials -->
+    <section class="p-10 md-p-l5">
+        <div id="slider-2">
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important" class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has over 10 million subscribers world wide</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">John Pochal</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Trainer and Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has the highest quality techn learning content.</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">Ross Scott</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Trainer and Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. provides the most relevant technology training. </p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">Sam Bording</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Certified at Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has highest quality technology learning content</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">John Rubio</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Certified at Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="{% static 'js/search.js' %}"></script> 
+</body>
+
+</html>

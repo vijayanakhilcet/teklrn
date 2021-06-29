@@ -248,12 +248,37 @@ def login_page_a(request):
 def contact(request):
     return render(request, 'webapp/contact.html')
 
+def hiPre(request):
+    page = 'webapp/hi_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
 def hi(request):
     page = 'webapp/hi.html'
     data = request.GET
     defaultTechnology = 'Tensorflow'
     if data.get("technology"):
-        defaultTechnology = data.get("technology")
+        try:
+            c = Course.objects.get(description=data.get("technology"))
+        except:
+            c = Course.objects.get(name=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
     request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
@@ -263,7 +288,7 @@ def hi(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
@@ -326,6 +351,7 @@ class TechnologiesMatchingTheDesignationView(FormView):
 
 class TechnologiesMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
+        cate = 'GENERAL'
         results= []
         data = request.GET
         topic = data.get("search_string")  
@@ -338,6 +364,13 @@ class TechnologiesMatchingTheSearchView(FormView):
                     course_json = {}
                     course_json['technology'] = tech.name
                     course_json['description'] = tech.description
+                    if tech.contentType == 'Tech':
+                        cate = 'CERTIFICATION'
+                    elif tech.contentType == 'Edu':
+                        cate = 'EDUCATIONAL'
+
+                    course_json['contentType'] = cate
+                    course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
                     results.append(course_json)
 
         if not results:
@@ -347,6 +380,14 @@ class TechnologiesMatchingTheSearchView(FormView):
                 course_json = {}
                 course_json['technology'] = technology.name
                 course_json['description'] = technology.description
+                if technology.contentType == 'Tech':
+                        cate = 'CERTIFICATION'
+                elif technology.contentType == 'Edu':
+                        cate = 'EDUCATIONAL'
+
+                course_json['contentType'] = cate
+                course_json['videoLink'] = CourseLevel.objects.get(course=technology, level_number=1).videoLink
+                   
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -380,6 +421,33 @@ class AutoCompleteSearchTopicsView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class AutoCompleteSearchTopicsViewNew(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        topic = data.get("keyword_data")   
+        c = data.get("course_name")
+        temp = Course.objects.get(name=c.capitalize())
+        if topic:
+            courses = CourseLevel.objects.filter(description__icontains=topic, course=temp )  
+            if not courses:
+                 courses = CourseLevel.objects.filter(course=temp)         
+        else:
+            courses = CourseLevel.objects.filter(course=temp)   
+            results = []
+        for course in courses:
+            course_json = {}
+            course_json['level'] = course.level_number
+            course_json['value'] = course.description
+            course_json['rating'] = course.rating
+            course_json['reviewCount'] = course.reviewCount
+            course_json['videoFree'] = course.videoFree
+            course_json['videolink'] = course.videoLink
+            
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 
 class AutoCompleteView(FormView):
@@ -398,6 +466,7 @@ class AutoCompleteView(FormView):
             course_json['value'] = course.description
             course_json['name'] = course.name
             course_json['description'] = course.description
+            course_json['contentType'] = course.contentType
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -454,12 +523,12 @@ class CheckUserExistsView(FormView):
 def logout_view(request): 
         logout(request)    
         defaultTechnology='Tensorflow'        
-        return render(request, "webapp/hi.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        return render(request, "webapp/hi_pre_landing.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def logout_t_view(request): 
         logout(request)   
         defaultTechnology='Tensorflow'            
-        return render(request, "webapp/hi.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        return render(request, "webapp/hi_pre_landing.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 class CheckTeacherExistsView(FormView):
   
@@ -562,10 +631,11 @@ class LoginTeacherView(FormView):
                 name = teacher.user.first_name
                 request.session['name']=name
                 request.session['email']=email_id
+                request.session['technology'] = 'Tensorflow'
             else:
                 request.session['name']=None
                 request.session['email']=email_id
-        return render(request, page, {'email': request.session['email']})
+        return render(request, page, {'email': request.session['email'], 'technology':  request.session['technology'], 'contentType': 'Tech'})
     def get(self,request,*args,**kwargs):
         page = "webapp/loginT.html"
         if(request.user.is_authenticated):
@@ -597,10 +667,11 @@ class LoginStudentView(FormView):
                              
                     return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
                 else:
-                    page="webapp/hi_login.html"     
+                    page="webapp/hi_pre_landing.html"     
                     if(request.session['course'] is None):
                         request.session['course'] = 'Tensorflow'
-                        request.session['description'] = 'Tensorflow'                        
+                        request.session['description'] = 'Tensorflow' 
+                request.session['contentType'] = Course.objects.get(name= request.session['course']).contentType                     
                 name = student.user.first_name
                 email_id = student.user.username
                 request.session['name']=name
@@ -608,11 +679,11 @@ class LoginStudentView(FormView):
             else:
                 request.session['name']=None
                 request.session['email']=email_id
-        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'technology':request.session['course'], 'technology_desc':request.session['description']})
+        return render(request, page, {'email': request.session['email'], 'name': request.session['name'], 'technology':request.session['course'], 'technology_desc':request.session['description'], 'contentType':request.session['contentType']})
     def get(self,request,*args,**kwargs):
         page = "webapp/login.html"
         if(request.user.is_authenticated):
-           page="webapp/hi_login.html"  
+           page="webapp/hi_pre_landing.html"  
         return render(request, page)
 
 

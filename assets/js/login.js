@@ -1,6 +1,5 @@
 
 $(function() {
-        
         $(document).on('hidden.bs.modal', function (event) {
             if ($('.modal:visible').length) {
             $('body').addClass('modal-open');
@@ -18,9 +17,10 @@ $(function() {
                 source: "/autocomplete",
                 dataType: 'json',
                 select: function( event , ui ) {
-                    additionalInfoOnTechnology();
+                    //setContentRelatedData(ui.item.contentType);
+                    additionalInfoOnTechnology(ui.item.contentType);
                     setSideBarLevels(ui);   
-                    setTechnology(ui.item.levels);
+                    setTechnology(ui.item.levels, ui.item.contentType);
                     setAssociatedTechnology();   
                     resetSearchTopic();
                     searchTopics();
@@ -136,8 +136,30 @@ function lvlclk(pg){
         return false;        
      }
 
- function additionalInfoOnTechnology(){
+ /*function setContentRelatedData(contentType){
+
+    if(contentType==='Tech'){
+        document.getElementById("tech_id").style.display = "block";
+        document.getElementById("edu_id").style.display = "none";
+        document.getElementById("general_id").style.display = "none"
+    }
+    else if(contentType==='Edu'){
+        document.getElementById("tech_id").style.display = "none";
+        document.getElementById("edu_id").style.display = "block";
+        document.getElementById("general_id").style.display = "none"
+    }
+    else{
+        document.getElementById("tech_id").style.display = "none";
+        document.getElementById("edu_id").style.display = "none";
+        document.getElementById("general_id").style.display = "block"
+    }
      
+ }*/
+
+ function additionalInfoOnTechnology(contentType){
+     
+    if(contentType==='Tech'){
+    document.getElementById('techdetailsview').style.display="block";
     $('#moreinfoviewID').empty();
     var moreinfoviewelement = document.getElementById('moreinfoviewID');
     var versionLiElement = document.createElement('li');
@@ -163,6 +185,10 @@ function lvlclk(pg){
     '<button style="font-size: x-small; border: 1px solid transparent;background-color: #98bcdc;font-size: x-small;color: white;border-radius: .25rem;" onclick="associated_tech()"'+ '>View '+'<i style="vertical-align:middle;" class="fas fa-link"></i></button></a>';
     linkedLiElement.innerHTML+=aElementHtmlLinked;
     moreinfoviewelement.appendChild(linkedLiElement); 
+    }
+    else{
+        document.getElementById('techdetailsview').style.display="none";
+    }
  }    
 
 
@@ -762,7 +788,7 @@ function trainerResetPassword(event){
                 // stop the form from submitting the normal way and refreshing the page
                 event.preventDefault();
 }
-
+    ``
 function traineeLogin(event){   
 
                 // get the form data
@@ -828,10 +854,34 @@ function bookCrseClick(event) {
     bookcrse();
   }
 }
-function setTechnology(level_val){
-    document.getElementById('tec_name').text = course_description;
-    document.getElementById('tec_name1').text = course_description;
-    document.getElementById('tot_levls').text = level_val;
+function setTechnology(level_val, contentType){
+    
+
+    if(contentType==='Tech'){
+        document.getElementById('tec_name').text = course_description;
+        document.getElementById('tec_name1').text = course_description;
+        document.getElementById('tech_levls').text = level_val;
+        document.getElementById("tech_id").style.display = "block";
+        document.getElementById("edu_id").style.display = "none";
+        document.getElementById("general_id").style.display = "none"
+    }
+    else if(contentType==='Edu'){
+        document.getElementById('edu_name').text = course_description;
+        document.getElementById('edu_name1').text = course_description;
+        document.getElementById('edu_levls').text = level_val;
+        document.getElementById("tech_id").style.display = "none";
+        document.getElementById("edu_id").style.display = "block";
+        document.getElementById("general_id").style.display = "none"
+    }
+    else{
+        document.getElementById('general_name').text = course_description;
+        document.getElementById('general_name1').text = course_description;
+        document.getElementById('general_levls').text = level_val;
+        document.getElementById("tech_id").style.display = "none";
+        document.getElementById("edu_id").style.display = "none";
+        document.getElementById("general_id").style.display = "block"
+    }
+    
 
 }
 
@@ -863,10 +913,12 @@ course_name = data[0].name;
 image_name = course_name+'_';
 course_level = null;
 course_description = data[0].description
+contentType = data[0].contentType
+//setContentRelatedData(contentType);
 technology_to_set = null;
 
   $.each(data, function(index) {
-    additionalInfoOnTechnology();
+    additionalInfoOnTechnology(data[0].contentType);
 
     $('#homeSubmenu').empty();
     var elm = document.getElementById('homeSubmenu');
@@ -881,7 +933,7 @@ var li_element = document.createElement('li'); // create the option element
        technology_to_set = data[0].levels;
       
     }    
-    setTechnology(technology_to_set);    
+    setTechnology(technology_to_set, data[0].contentType);    
     window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     setAssociatedTechnology();

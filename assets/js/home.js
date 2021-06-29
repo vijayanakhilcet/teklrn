@@ -57,7 +57,7 @@ else if(tech == 'redirecttologinA'){
 
 function doLaunch(event) {
         $.ajax({
-            url         : "hi", // the url where we want to POST
+            url         : "hi_pre_land", // the url where we want to POST
             data        : {"technology":"Tensorflow"}, // our data object
             dataType    : "html", // what type of data do\ we expect back from the server
             encode      : true
