@@ -148,18 +148,7 @@ function searchTopics() {
             $.each(data, function(index) {
                 a1Html = " ";
                 a2Html = " ";
-                a1Html += '<button style="font-size: small; border: 1px solid transparent;background-color: #378fdd;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
-                ' <button style="font-size: small; border: 1px solid transparent;background-color: #0c78d5; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="login_l(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#0c78d5; padding-left:1px; padding-right:1px; margin-right: 2px;" >$13</a> Book Trainer'+'<i style="vertical-align:middle;" class="fas fa-chalkboard-teacher"></i></button>';
-            if(data[index].videoFree==true)
-                {
-                    
-                    a1Html+=' <button id='+data[index].level+' style="font-size: small; border: 1px solid transparent;background-color: #0665b8; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].value+'\', \''+data[index].videolink+'\', \''+data.length+'\')"'+ '>FREE Video <i style="vertical-align: middle;" class="fas fa-play-circle"></i>'+'</button>';
-                }
-            else{
-                    a1Html+=' <button id='+data[index].level+'  style="font-size: small; border: 1px solid transparent;background-color: #0665b8; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="videoClk(event, \''+course_name+'\', '+data[index].level+')"'+ '><a style="background-color:white; color:#4a82b3; padding-left:1px; padding-right:1px; margin-right: 2px;" >$3</a> Video <i style="vertical-align: middle;" class="fas fa-play-circle"></i>'+'</button>';
-                  
-                }   
-
+                a1Html += '<button style="font-size: small; border: 1px solid transparent;background-color: #378fdd;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>';
                 var l;
                 a2Html+='<a style="padding-right: 1%"></a><br>';
                 for (l = 0; l < 5; l++) {
@@ -358,6 +347,44 @@ function logout() {
     event.preventDefault();
   }  
 
+  function bookThis(event, val){
+    new Attention.Confirm({title: 'Confirm Booking',
+    content: 'Kindly review the syllabus before booking',
+    buttonCancel: false, // custom button text
+    buttonConfirm: false,
+    
+    onCancel(component) {
+    },
+    onConfirm(component) {
+      onAcceptEv(val);
+     }
+    
+  });
+  }
+
+  function onAcceptEv(val)
+{
+  var pk = val;
+  // process the form
+  $.ajax({
+      url         : "/teacherbooking", // the url where we want to POST
+      data        : {"pk":pk}, // our data object
+      dataType    : "html", // what type of data do\ we expect back from the server
+      encode      : true
+
+  })
+      // using the done promise callback
+      .done(function(data) {
+
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
+      });
+      setTimeout(afterDelayOne, 10);
+      
+//event.preventDefault(); 
+}
+  
 
 
   function lvlclk1(crse){ 

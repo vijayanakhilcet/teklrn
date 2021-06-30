@@ -284,7 +284,7 @@ def hi(request):
         try:
             s  = Student.objects.get(email=request.user.email)
             page = 'webapp/hi_login.html'
-            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+            return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
@@ -564,6 +564,7 @@ class LoginViewForVideoAccess(FormView):
         course_description = data.get("course_description")
         request.session['description']=course_description
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['level']=course_level
         request.session['action']='Video'
         if request.user.is_authenticated:
@@ -593,7 +594,8 @@ class LoginView(FormView):
             now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
             dt = now.strftime('%Y-%m-%dT%H:%M')        
             max_v = now + relativedelta(months=2)
-            dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+            dt_max = max_v.strftime('%Y-%m-%dT%H:%M')            
+            request.session['contentType'] = Course.objects.get(name=course_name).contentType
             return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
         return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level })
 
@@ -609,6 +611,7 @@ class BookCourseFormView(FormView):
         course_description = data.get("course_description")
         request.session['description']=course_description
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         course_level = data.get("level")
         tz = Student.objects.get(email=request.user.email).time_zn
         now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
@@ -778,6 +781,7 @@ class RegisterStudentView(FormView):
         email_test.send(fail_silently=False)
         request.session['name']=student_name
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['description'] = course_description
         request.session['level']=course_level
         request.session['email']=email_id
@@ -790,7 +794,7 @@ class LandingBackView(FormView):
 
 class LandingBackLoginView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course'], 'technology_desc':request.session['description']})       
+        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course'], 'technology_desc':request.session['description'], 'contentType': request.session['contentType']})       
 
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):
@@ -822,6 +826,7 @@ class RegisterTeacherView(FormView):
         request.session['password']=pwd
         request.session['description']=course_description
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['meetingLink']=meeting_link
         return render(request, "webapp/hi_login_t.html", {'name': request.session['name'], 'email': request.session['email'], 'password': request.session['password'], 'course': request.session['course']})
 
@@ -834,6 +839,7 @@ class BookVideoView(FormView):
         course_description = request.POST['course_description']
         request.session['name']=request.user.first_name
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['level']=course_level
         request.session['description']=course_description
         return render(request, "webapp/buyVideo.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
@@ -848,6 +854,7 @@ class BookCourseView(FormView):
         request.session['datetimeval']=request.POST['datetimeval']
         request.session['name']=request.user.first_name
         request.session['course']=course_name
+        request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['level']=course_level
         request.session['description'] = course_description
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
