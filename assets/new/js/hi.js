@@ -113,6 +113,83 @@ function doLaunchTerm(event) {
 }
 
 
+function bookc(event) {
+
+    // get the form data
+    // there are many ways to get this data using jQuery (you can use the class or id also)
+    var course = $('input[name=course-name]').val();
+    var level = $('input[name=level-name]').val();
+    var datetimeval = $('input[id=time]').val();
+    var sel = document.getElementById('timezone-offset');    
+    // process the form
+    $.ajax({
+        url         : "/book_course", // the url where we want to POST
+        type        : 'post',
+        data        : {"course":course, "level":level, "datetimeval": datetimeval, "course_description":course_description}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+       .done(function(data) {
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
+            // here we will handle errors and validation messages
+        });
+       
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+
+}
+
+
+function backtolandinglogin(event){
+
+    $.ajax({
+        url         : "/back_to_landing_login_page", // the url where we want to POST
+        data        : {"email":"email"}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+    
+        // using the done promise callback
+        .done(function(data) {
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+});
+
+event.preventDefault();
+}
+
+
+function bookV(event) {
+
+    // get the form data
+    // there are many ways to get this data using jQuery (you can use the class or id also)
+    var course = $('input[name=course-name]').val();
+    var level = $('input[name=level-name]').val();
+
+    $.ajax({
+        url         : "/book_video", // the url where we want to POST
+        type        : 'post',
+        data        : {"course":course, "level":level, "course_description":course_description}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+       .done(function(data) {
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
+            // here we will handle errors and validation messages
+        });
+       
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+
+}
+
 
 function backtolandingmainT(event){
 
