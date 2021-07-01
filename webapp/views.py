@@ -794,7 +794,7 @@ class LandingBackView(FormView):
 
 class LandingBackLoginView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course'], 'technology_desc':request.session['description'], 'contentType': request.session['contentType']})       
+        return render(request, "webapp/hi_login.html", {'name': 'name', 'technology' : request.session['course'], 'technology_desc':request.session['description']})       
 
 class ResetPasswordView(FormView):
     def get(self,request,*args,**kwargs):

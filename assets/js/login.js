@@ -6,7 +6,8 @@ $(function() {
             }
         });
 
-        var view_to_show = document.getElementById("technology_view").textContent;
+       // var view_to_show = document.getElementById("technology_view").textContent;
+        var view_to_show = 'Tensorflow';
         image_name = view_to_show+'_';
         course_name = view_to_show;
         course_description = view_to_show;
