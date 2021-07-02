@@ -5,8 +5,15 @@ $(function() {
         $('body').addClass('modal-open');
         }
     });
-    var view_to_show = document.getElementById("technology_view").textContent;
-    contentType = document.getElementById("technology_contentType").textContent;
+    var view_to_show = null;
+    
+    if(document.getElementById("technology_view")){
+    view_to_show = document.getElementById("technology_view").textContent;
+    }
+    contentType = null;
+    if( document.getElementById("technology_contentType")){
+    contentType = document.getElementById("technology_contentType").textContent
+    }
     image_name = view_to_show+'_';
     course_name = view_to_show;
     course_description = view_to_show;    

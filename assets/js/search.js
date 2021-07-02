@@ -8,7 +8,7 @@ $(document).ready(function () {
         source: "/autocomplete",
         dataType: 'json',
         select: function( event , ui ) {
-        gotoTechnology(event.target.value);        
+        gotoTechnology(ui.item.value);        
         runit = 1;
            }
 });
@@ -82,7 +82,6 @@ function refineSearchView(pg){
           
     elm.innerHTML=html_message;
         });
-    event.preventDefault();
         return false;       
 }
 
