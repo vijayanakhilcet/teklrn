@@ -108,7 +108,8 @@ def RedirectToLandingStudentView(request):
 
 
 def registerBack(request):
-    return  HttpResponseRedirect(HOSTNAME+'?GFTfgTRFghHGfdjkJHGVCDSdnHHHH')
+    ret = '?technology='+request.session['course']
+    return  HttpResponseRedirect(HOSTNAME+ret)
 
 def register(request):
     if request.method == 'POST':
@@ -227,7 +228,7 @@ def register_t(request):
     return render(request, 'webapp/registerT.html', context)
 
 def login_page(request):
-    return render(request, 'webapp/login.html')
+    return render(request, 'webapp/login.html', {'course': request.session['course']})
 
 def upload_complete(request):
     return render(request, 'webapp/upload_complete.html')       
@@ -279,6 +280,7 @@ def hi(request):
             c = Course.objects.get(name=data.get("technology"))
         defaultTechnology = c.name
         contentType = c.contentType
+        request.session['contentType'] = c.contentType
     request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
@@ -288,7 +290,7 @@ def hi(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-    return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
