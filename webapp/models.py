@@ -7,7 +7,7 @@ from phone_field import PhoneField
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=30, default='Hi')  
+    description = models.CharField(max_length=100, default='Hi')  
     levels = models.IntegerField(default=170)    
     category = models.CharField(max_length=30, default='Java')
     contentType = models.CharField(max_length=30, default='Tech') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
