@@ -360,7 +360,7 @@ class TechnologiesMatchingTheSearchView(FormView):
         technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
         for technology in technologies:
-            courses =  Course.objects.filter(name__icontains=technology)
+            courses =  Course.objects.filter(name__icontains=technology).order_by("-id")
             if courses:
                 for tech in courses:
                     course_json = {}
@@ -377,7 +377,7 @@ class TechnologiesMatchingTheSearchView(FormView):
 
         if not results:
 
-            technologies = Course.objects.all()
+            technologies = Course.objects.all().order_by("-id")
             for technology in technologies:
                 course_json = {}
                 course_json['technology'] = technology.name
