@@ -4,6 +4,17 @@
 
 <head>
     <style>
+        .loader {
+position: fixed;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+z-index: 9999;
+background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+}
+    </style>
+    <style>
         @font-face {
   			font-family: 'Antietam';
   			font-style: normal;
@@ -22,7 +33,8 @@
     <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
     <script src="{% static 'new/js/solid.js' %}"></script> 
     <script src="{% static 'new/js/solid.min.js' %}"></script> 
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
     <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -33,7 +45,7 @@
     </head>
 
 <body style="font-family: Antietam; background-color: #fafafa !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);" class="bg-black muli">
-
+    <div class="loader"></div> 
     <div style="background-color:white !important;overflow-x: hidden;" id="content">
 
         <nav style="background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -199,6 +211,11 @@
         </div>
     </section> -->
        <script src="{% static 'js/search.js' %}"></script> 
+       <script>
+        $(window).load(function(){  
+                 $('.loader').fadeOut();  
+             });
+             </script>  
 </body>
 
 </html>
