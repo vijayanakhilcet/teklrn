@@ -372,7 +372,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                         cate = 'EDUCATIONAL'
 
                     course_json['contentType'] = cate
-                    course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
                     results.append(course_json)
 
         if not results:
@@ -388,7 +388,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                         cate = 'EDUCATIONAL'
 
                 course_json['contentType'] = cate
-                course_json['videoLink'] = CourseLevel.objects.get(course=technology, level_number=1).videoLink
+                #course_json['videoLink'] = CourseLevel.objects.get(course=technology, level_number=1).videoLink
                    
                 results.append(course_json)
         data = json.dumps(results)
