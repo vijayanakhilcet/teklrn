@@ -104,6 +104,8 @@ function gotoTechnology(pg){
 }
 
 
+
+
 function parseVideoLink(linkVid){        
     var tmpStr  = linkVid.match("/d/(.*)/preview");
     var newStr = 'https://drive.google.com/uc?export=download&id='+tmpStr[1];
