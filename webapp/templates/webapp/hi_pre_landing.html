@@ -46,13 +46,16 @@ background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 25
 
 <body style="font-family: Antietam; background-color: #fafafa !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);" class="bg-black muli">
     <div class="loader"></div> 
-    <div style="background-color:white !important;overflow-x: hidden;" id="content">
+    <div  style="padding: 0px !important; background-color:white !important;overflow-x: hidden;" id="content">
 
-        <nav style="background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav style="position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
                
-                <a  onclick="doLaunch(event)" style="font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="static/image/images/banner3.jpg" alt="TEKLRN" width="300" height="25"> </a>
+                <a  onclick="doLaunch(event)" style="width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="static/image/images/banner3.jpg" alt="TEKLRN" width="300" height="25"> </a>
+                <p style="width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder; font-family: 'Font Awesome 5 Free';">
+     
+                </p>
             
             </div>
         </nav>
@@ -63,14 +66,8 @@ background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 25
 
 
 
-<div>
-    <div>
+<div style="margin-top: 150px; padding: 20px !important;">
     
-        <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder; font-family: 'Font Awesome 5 Free';">
-     
-    
-    <div class="line"></div>
-    </div>
 
    
     <section class="p-0 md-p-5">
