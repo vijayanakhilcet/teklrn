@@ -456,9 +456,11 @@ class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        courseName = data.get("term")     
+        courseName = data.get("term").strip() 
+        courses = []
         if courseName:
-            courses = Course.objects.filter(description__icontains=courseName)           
+            for cr in courseName.split():
+                courses += Course.objects.filter(description__icontains=cr)
         else:
             courses = Course.objects.all()
             results = []
