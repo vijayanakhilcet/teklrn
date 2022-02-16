@@ -194,6 +194,13 @@ $(function() {
       });
    
         }
+})
+.data( "autocomplete" )._renderItem = function( ul, item ) {
+    return $( "<li></li>" )
+        .data( "item.autocomplete", item )
+        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+        .appendTo( ul );
+};
 });
 
            // onLoadAComplete();
@@ -325,23 +332,23 @@ $(function() {
             });
 
 
-            $("#logout").click(function() {
-                $.ajax({
-                    url         : "/logout", // the url where we want to POST
-                    data        : {"email":'hi'}, // our data object
-                    dataType    : "html", // what type of data do\ we expect back from the server
-                    encode      : true
-                })
-                    .done(function(data) {
-                        document.open("text/html", "load")
-                        document.write(data);
-                        document.close();
-        });
-        
-                // stop the form from submitting the normal way and refreshing the page
-                event.preventDefault();
-              });   
-        
+                $("#logout").click(function() {
+                    $.ajax({
+                        url         : "/logout", // the url where we want to POST
+                        data        : {"email":'hi'}, // our data object
+                        dataType    : "html", // what type of data do\ we expect back from the server
+                        encode      : true
+                    })
+                        .done(function(data) {
+                            document.open("text/html", "load")
+                            document.write(data);
+                            document.close();
+            });
+            
+                    // stop the form from submitting the normal way and refreshing the page
+                    event.preventDefault();
+                });   
+            
 
 
         $("#teacherFormRegister").submit(function(event) {

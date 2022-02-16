@@ -10,8 +10,15 @@ $(document).ready(function () {
         select: function( event , ui ) {
         gotoTechnology(ui.item.value);        
         runit = 1;
+        return false;
            }
-});
+}) 
+.data("ui-autocomplete")._renderItem = function(ul, item) {
+    return $( "<li>" )
+    .data( "ui-autocomplete-item", item )
+    .append( "<img style='margin-right: 20px; width:25px; height:25px;' src='static/image/images/" + item.name +"_icon.png'/>"+ item.description )
+    .appendTo( ul );
+  };
 
 $("#course-search").on('keyup', function (event) {
         if(runit === 0){
