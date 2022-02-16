@@ -14,9 +14,9 @@ $(document).ready(function () {
            }
 }) 
 .data("ui-autocomplete")._renderItem = function(ul, item) {
-    return $( "<li>" )
+    return $( "<li style='margin-top:25px'>" )
     .data( "ui-autocomplete-item", item )
-    .append( "<img style='margin-right: 20px; width:25px; height:25px;' src='static/image/images/" + item.name +"_icon.png'/>"+ item.description )
+    .append( "<img style='margin-right: 40px; width:25px; height:25px;' src='static/image/images/" + item.name +"_icon.png'/>"+ item.description)
     .appendTo( ul );
   };
 
