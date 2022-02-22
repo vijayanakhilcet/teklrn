@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import numpy as np
 import re
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
@@ -270,9 +271,13 @@ def hiPre(request):
 
 
 def hi(request):
-    page = 'webapp/hi.html'
+    page = 'webapp/hi.html' 
     data = request.GET
     defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    
+    if request.GET.get("level"):
+        defaultLevel = request.GET.get("level")
     if data.get("technology"):
         try:
             c = Course.objects.get(description=data.get("technology"))
@@ -286,11 +291,11 @@ def hi(request):
         try:
             s  = Student.objects.get(email=request.user.email)
             page = 'webapp/hi_login.html'
-            return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
             page = 'webapp/hi_login_t.html'
-            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-    return render(request, page, {'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')
@@ -445,7 +450,6 @@ class AutoCompleteSearchTopicsViewNew(FormView):
             course_json['reviewCount'] = course.reviewCount
             course_json['videoFree'] = course.videoFree
             course_json['videolink'] = course.videoLink
-            
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -461,6 +465,7 @@ class AutoCompleteView(FormView):
         if courseName:
             for cr in courseName.split():
                 courses += Course.objects.filter(description__icontains=cr)
+                courses.reverse()
         else:
             courses = Course.objects.all()
             results = []

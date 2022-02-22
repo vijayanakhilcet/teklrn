@@ -6,6 +6,10 @@ $(function() {
         }
     });
     var view_to_show = null;
+    lvl_to_show = null;
+
+    lvl_to_show = document.getElementById("lvl_view").textContent;
+    
     
     if(document.getElementById("technology_view")){
     view_to_show = document.getElementById("technology_view").textContent;
@@ -451,9 +455,13 @@ function lvlclk(pg){
  }
 
  function clk(){ 
-    if(document.getElementById('1').innerText.includes("FREE")){
+    
+    document.getElementById(lvl_to_show).click();
+
+    /*if(document.getElementById('1').innerText.includes("FREE")){
     document.getElementById('1').click();
-    }
+    }*/
+    
 }
 
 

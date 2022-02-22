@@ -3,9 +3,13 @@ function to_login() {
 var tech = window.location.search.substring(1);
 const urlParams = new URLSearchParams(tech);
 var technologyFromSearchString = 'Tensorflow';
+var dlevel = 1
 if(urlParams.get('technology')){
 var technologyFromSearchString = urlParams.get('technology');
 }
+if(urlParams.get('level')){
+    var dlevel = urlParams.get('level');
+    }
 var page = "hi";
 if(tech){
 
@@ -34,7 +38,7 @@ else if(tech == 'redirecttologinA'){
                 // process the form
                 $.ajax({
                     url         : page, // the url where we want to POST
-                    data        : {"technology":technologyFromSearchString}, // our data object
+                    data        : {"technology":technologyFromSearchString, "level":dlevel}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
                     encode      : true
                 })
