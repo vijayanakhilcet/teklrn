@@ -1,5 +1,5 @@
 $(function() {  
-
+        
     $(document).on('hidden.bs.modal', function (event) {
         if ($('.modal:visible').length) {
         $('body').addClass('modal-open');
@@ -20,9 +20,10 @@ $(function() {
     }
     image_name = view_to_show+'_';
     course_name = view_to_show;
-    course_description = view_to_show;    
+    course_description = view_to_show; 
     var runit = 0;     
     searchTopics();
+    refineSearchView("zzz");
 });
 
 
@@ -420,6 +421,50 @@ for (var i = 1; i <= b.total_levels; i++) {
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     }
+
+
+    function refineSearchView(pg){
+        var elm = document.getElementById("mgc");
+        var html_message ="";
+        $.ajax({
+            url         : "/getTechnologiesMatchingTheSearch", // the url where we want to POST
+            data        : {"search_string":pg}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                elm.innerHTML="";  
+                $.each(data, function(index) {
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img src="static/image/images/poster_video.jpg" /></div>'
+                    });
+              
+        elm.innerHTML=html_message;
+            });
+            event.preventDefault();      
+    }
+
+
+    function gotoTechnology(pg){
+
+        window.open(window.location.origin+"?technology="+pg, "_self");
+        /*
+        $.ajax({
+            url         : "hi", // the url where we want to POST
+            data        : {"technology":pg}, // our data object
+            dataType    : "html", // what type of data do\ we expect back from the server
+            encode      : true,
+        }) .done(function(data) {
+                                document.open("text/html", "load")
+                                document.write(data);
+                                document.close();
+                                    // here we will handle errors and validation messages
+                                    });
+                                    event.preventDefault();*/
+}
+
+    
+    
 
     function hi() {
         //alert(crse+lvl);
