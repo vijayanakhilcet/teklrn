@@ -436,7 +436,7 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img style="float: left;width: 120px; height: 120px;object-fit: cover;" src="static/image/images/'+data[index].technology+'_icon.png" /></div>'
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="static/image/images/'+data[index].technology+'_icon.png" /></div>'
                     });
               
         elm.innerHTML=html_message;
