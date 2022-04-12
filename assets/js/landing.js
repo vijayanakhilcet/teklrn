@@ -194,13 +194,6 @@ $(function() {
       });
    
         }
-})
-.data( "autocomplete" )._renderItem = function( ul, item ) {
-    return $( "<li></li>" )
-        .data( "item.autocomplete", item )
-        .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-        .appendTo( ul );
-};
 });
 
            // onLoadAComplete();
@@ -988,7 +981,7 @@ function parseVideoLink(linkVid){
 }
 
 function videoClk1(event, crse, lvl, description, videolink, levels_total){ 
-        var iframe = '<video poster="static/image/images/poster.jpg" autoplay playsinline id="frameclk" controls height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video>';
+        var iframe = '<video poster="static/image/images/poster.jpg" autoplay muted playsinline id="frameclk" controls height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video>';
         $.createModalVid({
         message: iframe,
         closeButton:true,
