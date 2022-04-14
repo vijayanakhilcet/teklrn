@@ -239,7 +239,7 @@ function parseVideoLink(linkVid){
 
 function videoClk1(event, crse, lvl, description, videolink, levels_total){ 
     //var iframe = '<iframe id="frameclk"  src="'+videolink+'" width="100%"  height="100%" allow=autoplay frameborder="0" allowfullscreen="allowfullscreen"></iframe><div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;">&nbsp;</div>';
-    var iframe = '<video poster="static/image/images/poster.jpg" autoplay playsinline id="frameclk" controls controlsList="nodownload"  height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video>';
+    var iframe = '<video poster="static/image/images/poster.jpg" autoplay  id="frameclk" controls controlsList="nodownload"  height="100%" width="100%"><source src="'+parseVideoLink(videolink)+'" type="video/mp4"></video>';
     $.createModalVid({
       message: iframe,
       closeButton:true,
