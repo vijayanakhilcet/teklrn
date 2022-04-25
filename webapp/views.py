@@ -276,8 +276,8 @@ def hi(request):
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
     
-    if request.GET.get("level"):
-        defaultLevel = request.GET.get("level")
+    if data.get("level"):
+        defaultLevel = data.get("level")
     if data.get("technology"):
         try:
             c = Course.objects.get(description=data.get("technology"))
@@ -296,6 +296,11 @@ def hi(request):
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+def test(request):
+    page = 'webapp/test.html' 
+    data = request.GET
+    return render(request, page, {'lvl':'2', 'technology_desc':'Hi'})
 
 def privacy(request):
     return render(request, 'webapp/privacy.html')

@@ -15,6 +15,7 @@ urlpatterns = [
     path('activateT/<uidb64>/<token>', views.ActivateTrainerView.as_view(), name="activateT"),
     path('contact/', views.contact, name='contact-Page'),
     path('about/', views.about, name='about-Page'),
+    path('test/', views.test, name='hi-Test-Page'),
     path('hi/', views.hi, name='hi-Page'),
     path('hi_pre_land/', views.hiPre, name='hi-pre-Page'),
     path('careers/', views.careers, name='careers-Page'),
