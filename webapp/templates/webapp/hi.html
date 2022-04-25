@@ -63,7 +63,7 @@ background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 25
   
     
     <aside class="sidebar">
-      <div class="toggle">
+      <div class="toggle" style="padding-top: 5px !important;">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
               <span></span>
             </a>
@@ -102,7 +102,7 @@ background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 25
     </aside>
     
     <main style="background-color: white !important;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 30px;background-color: white !important;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
                 <div class="container-fluid">
                  <input onclick="doLaunch(event)" type="text" name="course-search" id="course-search" class="form-control" placeholder="" style="width: 15%; text-transform: uppercase; font-weight: bolder; font-family: 'Font Awesome 5 Free';">
                  <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1;"><img src="static/image/images/banner3.jpg" alt="TEKLRN" width="200" height="65">  </a>
@@ -161,63 +161,6 @@ background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 25
            $('.loader').fadeOut();  
        });
        </script> 
-
-<script>
-  var element, player;
-
-  function createPlayer() {
-    element = document.querySelector('.theoplayer-container');
-    player = new THEOplayer.Player(element, {
-      libraryLocation: 'https://cdn.myth.theoplayer.com/55d71743-4924-4d1b-8440-78f9cd103879/'
-    });
-    player.preload = "auto";
-  }
-
-  function setSrc(src, poster) {
-    if (!player) {
-      createPlayer();
-    }
-    player.source = {
-      "sources": {
-        "src": src
-      },
-      "poster": poster
-    }
-  }
-  window.addEventListener('theoplayerready', function() {
-    if (!player) {
-      createPlayer();
-    }
-  })
-  document.addEventListener("DOMContentLoaded", function() {
-    var players = [].slice.call(document.querySelectorAll(".theoplayer-container"));
-    if ("IntersectionObserver" in window) {
-      var playerObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(function(container) {
-          if (container.isIntersecting) {
-            var src = container.target.dataset.src
-            var poster = container.target.dataset.poster;
-            if (!window.THEOplayer) {
-              window.addEventListener('theoplayerready',
-                function() {
-                  setSrc(src, poster);
-                })
-            } else {
-              setSrc(src, poster);
-            }
-            playerObserver.unobserve(container.target);
-          }
-        });
-      });
-      players.forEach(function(playerElement) {
-        playerObserver.observe(playerElement);
-      });
-    }
-  });
-</script>
-<script async src="https://cdn.myth.theoplayer.com/55d71743-4924-4d1b-8440-78f9cd103879/THEOplayer.js"></script>
-<link rel="stylesheet" type="text/css" href='https://cdn.myth.theoplayer.com/55d71743-4924-4d1b-8440-78f9cd103879/ui.css'>
-
        
   </body>
 </html>
