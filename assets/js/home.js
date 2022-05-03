@@ -72,9 +72,13 @@ function getAllTechnologies(){
         .done(function(data) {
             elm.innerHTML="";  
             $.each(data, function(index) {
-                 // html_message +='<div class="row"><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img style="object-fit:cover; width:450px; text-align:center;" src="static/image/images/'+data[index].technology+'_icon.png" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img style="object-fit:cover; width:450px; text-align:center;" src="static/image/images/'+data[index].technology+'_icon.png" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
-                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img  src="static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img src="static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
-
+                 if(index % 2 == 0) {
+                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img  src="static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div>';
+                 }
+                 else{
+                    html_message +='<div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img src="static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
+  
+                 }
                 });
           
     elm.innerHTML=html_message;
