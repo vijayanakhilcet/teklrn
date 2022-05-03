@@ -286,16 +286,17 @@ def hi(request):
         defaultTechnology = c.name
         contentType = c.contentType
         request.session['contentType'] = c.contentType
+        technology_description = c.description
     request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
             page = 'webapp/hi_login.html'
-            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
         except Exception:
             page = 'webapp/hi_login_t.html'
-            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description})
 
 def test(request):
     page = 'webapp/test.html' 
@@ -702,7 +703,7 @@ class LoginStudentView(FormView):
         if(request.user.is_authenticated):
            page="webapp/hi_pre_landing.html"  
         return render(request, page)
-
+    
 
 class ResetStudentPwdView(FormView):
     def post(self,request,*args,**kwargs):
