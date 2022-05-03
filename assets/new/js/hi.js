@@ -429,6 +429,26 @@ for (var i = 1; i <= b.total_levels; i++) {
         event.preventDefault();
     }
 
+    function getAllTechnologies(){
+        var elm = document.getElementById("course_lst");
+        var html_message ="";
+        $.ajax({
+            url         : "/getTechnologiesMatchingTheSearch", // the url where we want to POST
+            data        : {"search_string":"zzz"}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                elm.innerHTML="";  
+                $.each(data, function(index) {
+                      html_message +='<div class="row"><div class="6u"><section class="special"><a href="?technology='+data[index].description+'" class="image fit"><img src="static/image/images/'+data[index].name+'_icon.png" alt=""></a><h3>'+data[index].name+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div><div class="6u"><section class="special"><a href="?technology='+data[index+1].description+'" class="image fit"><img src="static/image/images/'+data[index+1].name+'_icon.png" alt=""></a><h3>'+data[index+1].name+'</h3><p>'+data[index+1].description+'</p><ul class="actions"><li><a href="?technology='+data[index+1].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
+                    });
+              
+        elm.innerHTML=html_message;
+            });
+            event.preventDefault();      
+    }
 
     function refineSearchView(pg){
         var elm = document.getElementById("mgc");
