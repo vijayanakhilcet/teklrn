@@ -267,7 +267,8 @@ def hiPre(request):
         except Exception:
             page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-    return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 
 def hi(request):
@@ -297,6 +298,35 @@ def hi(request):
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description})
+
+def gotToTechnology(request):
+    page = 'webapp/hi.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    
+    if data.get("level"):
+        defaultLevel = data.get("level")
+    if data.get("technology"):
+        try:
+            c = Course.objects.get(description=data.get("technology"))
+        except:
+            c = Course.objects.get(name=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+        request.session['contentType'] = c.contentType
+        technology_description = c.description
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description})
+
 
 def test(request):
     page = 'webapp/test.html' 
