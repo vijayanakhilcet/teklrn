@@ -110,7 +110,7 @@ function traineeLogin(event){
 }
 
 function doLaunch(event) {
-    window.open(window.location.origin+"/", "_self");   
+    window.open(window.location.origin+"/technologies", "_self");   
 }
 
 
