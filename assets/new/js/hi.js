@@ -110,7 +110,7 @@ function traineeLogin(event){
 }
 
 function doLaunch(event) {
-    window.open(window.location.origin+"/technologies", "_self");   
+    window.open(window.location.origin+"/", "_self");   
 }
 
 
@@ -460,7 +460,7 @@ for (var i = 1; i <= b.total_levels; i++) {
 
     function gotoTechnology(pg){
 
-        window.open(window.location.origin+"/technologies/gotToTechnology?technology="+pg, "_self");
+        window.open(window.location.origin+"/technologies/technology?technology="+pg, "_self");
         /*
         $.ajax({
             url         : "hi", // the url where we want to POST

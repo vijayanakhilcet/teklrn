@@ -96,7 +96,7 @@ function refineSearchView(pg){
 
 
 function gotoTechnology(pg){
-    window.open(window.location.origin+"/technologies/gotToTechnology?technology="+pg, "_self");
+    window.open(window.location.origin+"/technologies/technology?technology="+pg, "_self");
     /*    $.ajax({
             url         : "hi", // the url where we want to POST
             data        : {"technology":pg}, // our data object

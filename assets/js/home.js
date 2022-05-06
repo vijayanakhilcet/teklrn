@@ -73,10 +73,10 @@ function getAllTechnologies(){
             elm.innerHTML="";  
             $.each(data, function(index) {
                  if(index % 2 == 0) {
-                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="technologies/gotToTechnology?technology='+data[index].description+'" class="image fit"><img  src="/static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="/technologies/gotToTechnology?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div>';
+                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="technologies/technology?technology='+data[index].description+'" class="image fit"><img  src="/static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="/technologies/technology?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div>';
                  }
                  else{
-                    html_message +='<div class="6u"><section class="special"><a href="technologies/gotToTechnology?technology='+data[index].description+'" class="image fit"><img src="/static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="/technologies/gotToTechnology?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
+                    html_message +='<div class="6u"><section class="special"><a href="technologies/technology?technology='+data[index].description+'" class="image fit"><img src="/static/image/images/poster_video.jpg" alt=""></a><h3>'+data[index].technology+'</h3><p>'+data[index].description+'</p><ul class="actions"><li><a href="/technologies/technology?technology='+data[index].description+'" class="button alt">Learn More</a></li></ul></section></div></div>';
   
                  }
                 });
