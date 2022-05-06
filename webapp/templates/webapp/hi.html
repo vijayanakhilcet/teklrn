@@ -22,7 +22,8 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
     <script src="{% static 'js/modal.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>   <script src="{% static 'new/js/solid.js' %}"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>  
+     <script src="{% static 'new/js/solid.js' %}"></script> 
     <script src="{% static 'new/js/solid.min.js' %}"></script> 
 
     <link rel="stylesheet"  href="{% static 'new/css/owl.carousel.min.css' %}">
@@ -73,7 +74,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
       <div class="side-inner">
 
         <div onclick="login_l(event, course_name)" class="profile">
-          <img src="{% static 'new/images/person_profile.jpg' %}" alt="Image" class="img-fluid">
+          <img src="{% static 'image/images/poster_video.jpg' %}" style="width: 250px;height: 180px;" alt="Image" class="img-fluid">
           <h3 class="name">Learner Login</h3>
           <span class="country">New York, USA</span>
         </div>
