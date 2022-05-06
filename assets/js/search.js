@@ -96,7 +96,8 @@ function refineSearchView(pg){
 
 
 function gotoTechnology(pg){
-        $.ajax({
+    window.open(window.location.origin+"/technologies/gotToTechnology?technology="+pg, "_self");
+    /*    $.ajax({
             url         : "hi", // the url where we want to POST
             data        : {"technology":pg}, // our data object
             dataType    : "html", // what type of data do\ we expect back from the server
@@ -107,7 +108,7 @@ function gotoTechnology(pg){
                                 document.close();
                                     // here we will handle errors and validation messages
                                 });
-        event.preventDefault();
+        event.preventDefault();*/
 }
 
 

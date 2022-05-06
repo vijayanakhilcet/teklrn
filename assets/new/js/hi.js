@@ -109,6 +109,11 @@ function traineeLogin(event){
                 event.preventDefault();
 }
 
+function doLaunch(event) {
+    window.open(window.location.origin+"/technologies", "_self");   
+}
+
+
 function doLaunchTerm(event) {
     $.ajax({
         url         : "terms", // the url where we want to POST
@@ -343,6 +348,7 @@ function searchTopics() {
 
                 if(data[index].videoFree==true)
                 {
+
                     a1Html+='<img id='+data[index].level+' src="/static/image/images/play_b.png" style="width: 12%;height: 10%;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].value+'\', \''+data[index].videolink+'\', \''+data.length+'\')">'+'</img>';
  
                     //a1Html+=' <button id='+data[index].level+' style="font-size: small; border: 1px solid transparent;background-color: #0665b8; vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="videoClk1(event, \''+course_name+'\', '+data[index].level+', \''+data[index].value+'\', \''+data[index].videolink+'\', \''+data.length+'\')"'+ '>FREE Video <i style="vertical-align: middle;" class="fas fa-play-circle"></i>'+'</button>';
@@ -454,7 +460,7 @@ for (var i = 1; i <= b.total_levels; i++) {
 
     function gotoTechnology(pg){
 
-        window.open(window.location.origin+"?technology="+pg, "_self");
+        window.open(window.location.origin+"/technologies/gotToTechnology?technology="+pg, "_self");
         /*
         $.ajax({
             url         : "hi", // the url where we want to POST
