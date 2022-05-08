@@ -449,7 +449,7 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img src="/static/image/images/play_b2.png" style="transform: translate(155%, -0%); -ms-transform: translate(-50%, -50%); font-size: 16px; padding: 5px 15px;border: none; cursor: pointer;text-align: center;width: 90px;z-index:100"/><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png" /></div>'
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img src="/static/image/images/play_b2.png" style="position:absolute; transform: translate(55%, 40%); -ms-transform: translate(-50%, -50%); font-size: 16px; padding: 5px 15px;border: none; cursor: pointer;text-align: center;width: 90px;z-index:100"/><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png" /></div>'
                     });
               
         elm.innerHTML=html_message;
