@@ -2,4 +2,4 @@ Hive (stylized as HIVE) is a custom ROM developed by Xolo and is built on the An
 Hive was designed by Xolo's software design team at Bangalore. Users can interact with the development team and share ideas for new features. The Hive Development Team aims to release over-the-air updates with new features or bug fixes every fortnight.
 The first Xolo device (8X-1000) with Hive was launched in August 2014.
 
-This mobile software article is a stub. You can help Wikipedia by expanding it.
+This mobile software article is a stub. You can help Teklrn Inc. by expanding it.

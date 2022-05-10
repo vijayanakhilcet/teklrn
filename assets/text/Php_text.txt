@@ -91,7 +91,7 @@ The LAMP architecture has become popular in the web industry as a way of deployi
 For specific and more advanced usage scenarios, PHP offers a well defined and documented way for writing custom extensions in C or C++. Besides extending the language itself in form of additional libraries, extensions are providing a way for improving execution speed where it is critical and there is room for improvements by using a true compiled language. PHP also offers well defined ways for embedding itself into other software projects. That way PHP can be easily used as an internal scripting language for another project, also providing tight interfacing with the project's specific internal data structures.
 PHP received mixed reviews due to lacking support for multithreading at the core language level, though using threads is made possible by the "pthreads" PECL extension.
 A command line interface, php-cli, and two ActiveX Windows Script Host scripting engines for PHP have been produced.
-PHP is used for Web content management systems including MediaWiki, WordPress, Joomla, Drupal, Moodle, eZ Publish, eZ Platform, and SilverStripe.
+PHP is used for Web content management systems including WordPress, Joomla, Drupal, Moodle, eZ Publish, eZ Platform, and SilverStripe.
 Websites using PHP include Facebook, Digg, Dailymotion, and Tumblr.
 As of January 2013, PHP was used in more than 240 million websites (39% of those sampled) and was installed on 2.1 million web servers.
 As of March 2021, PHP was used as the server-side programming language on 79.1% of websites, down from 83.5% previously, where the language could be determined, and PHP 7 is the most used version of the language with 50.3% of all websites on the web are using that version.
