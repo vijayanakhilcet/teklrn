@@ -1,0 +1,111 @@
+
+Artificial gravity is the creation of an inertial force that mimics the effects of a gravitational force, usually by rotation. 
+Artificial gravity, or rotational gravity, is thus the appearance of a centrifugal force in a rotating frame of reference (the transmission of centripetal acceleration via normal force in the non-rotating frame of reference), as opposed to the force experienced in linear acceleration, which by the equivalence principle is indistinguishable from gravity.
+In a more general sense, "artificial gravity" may also refer to the effect of linear acceleration, e.g. by means of a rocket engine.
+Rotational simulated gravity has been used in simulations to help astronauts train for extreme conditions. 
+Rotational simulated gravity has been proposed as a solution in human spaceflight to the adverse health effects caused by prolonged weightlessness. 
+However, there are no current practical outer space applications of artificial gravity for humans due to concerns about the size and cost of a spacecraft necessary to produce a useful centripetal force comparable to the gravitational field strength on Earth (g).
+Scientists are concerned about the effect of such a system on the inner ear of the occupants. The concern is that using centripetal force to create artificial gravity will cause disturbances in the inner ear leading to nausea and disorientation. The adverse effects may prove intolerable for the occupants.
+Artificial gravity can be created using a centripetal force. A centripetal force directed towards the center of the turn is required for any object to move in a circular path.
+In the context of a rotating space station it is the normal force provided by the spacecraft's hull that acts as centripetal force. Thus, the "gravity" force felt by an object is the centrifugal force perceived in the rotating frame of reference as pointing "downwards" towards the hull. In accordance with Newton's Third Law the value of little g (the perceived "downward" acceleration) is equal in magnitude and opposite in direction to the centripetal acceleration.
+From the point of view of people rotating with the habitat, artificial gravity by rotation behaves in some ways similarly to normal gravity but with the following differences:
+This form of artificial gravity has additional engineering issues:
+
+
+
+
+a
+=
+R
+
+
+(
+
+
+
+2
+π
+
+T
+
+
+)
+
+
+2
+
+
+
+(
+T
+>
+0
+)
+,
+
+
+{\displaystyle a=R\left({\frac {2\pi }{T}}\right)^{2}\quad (T>0),}
+
+
+
+
+
+
+T
+=
+2
+π
+
+
+
+R
+a
+
+
+
+
+(
+a
+>
+0
+)
+,
+
+
+{\displaystyle T=2\pi {\sqrt {\frac {R}{a}}}\quad (a>0),}
+
+
+where:
+R = Radius from center of rotation
+a = Artificial gravity
+T = Rotating spacecraft period
+The engineering challenges of creating a rotating spacecraft are comparatively modest to any other proposed approach. Theoretical spacecraft designs using artificial gravity have a great number of variants with intrinsic problems and advantages. The formula for the centripetal force implies that the radius of rotation grows with the square of the rotating spacecraft period, so a doubling of the period requires a fourfold increase in the radius of rotation. For example, to produce standard gravity, ɡ0 = 9.8 m/s2 with a rotating spacecraft period of 15 s, the radius of rotation would have to be 56 m (184 ft), while a period of 30 s would require it to be 224 m (735 ft). To reduce mass, support along the diameter could consist of nothing but a cable connecting two sections of the spaceship. Among the possible solutions include a habitat module and a counterweight consisting of every other part of the spacecraft, alternatively two habitable modules of similar weight could be attached.
+Whatever design is chosen, it would be necessary for the spacecraft to possess some means to quickly transfer ballast from one section to another, otherwise, even small shifts in mass could cause a substantial shift in the spacecraft's axis, which would result in a dangerous "wobble." One possible solution would be to engineer the spacecraft's plumbing system to serve this purpose, using drinking water and/or wastewater as the ballast.
+It is not yet known whether exposure to high gravity for short periods is as beneficial to health as continuous exposure to normal gravity. It is also not known how effective low levels of gravity would be at countering the adverse effects on the health of weightlessness. Artificial gravity at 0.1g and a rotating spacecraft period of 30 s would require a radius of only 22 m (72 ft). Likewise, at a radius of 10 m, a period of just over 6 s would be required to produce standard gravity (at the hips; gravity would be 11% higher at the feet), while 4.5 s would produce 2g. If brief exposure to high gravity can negate the harmful effects of weightlessness, then a small centrifuge could be used as an exercise area.
+The Gemini 11 mission attempted to produce artificial gravity by rotating the capsule around the Agena Target Vehicle to which it was attached by a 36-meter tether. They were able to generate a small amount of artificial gravity, about 0.00015 g, by firing their side thrusters to slowly rotate the combined craft like a slow-motion pair of bolas.
+The resultant force was too small to be felt by either astronaut, but objects were observed moving towards the "floor" of the capsule.
+The Gemini 8 mission achieved artificial gravity for a few minutes. This, however, was due to an electrical fault causing continuous firing of one thruster. The acceleration forces upon the crew were high (around 4 g), and the mission had to be urgently terminated.
+Artificial gravity has been suggested as a solution to the various health risks associated with spaceflight. In 1964, the Soviet space program believed that a human could not survive more than 14 days in space for fear that the heart and blood vessels would be unable to adapt to the weightless conditions. This fear was eventually discovered to be unfounded as spaceflights have now lasted up to 437 consecutive days, with missions aboard the International Space Station commonly lasting 6 months. However, the question of human safety in space did launch an investigation into the physical effects of prolonged exposure to weightlessness. In June 1991, a Spacelab Life Sciences 1 flight performed 18 experiments on two men and two women over a period of nine days. In an environment without gravity, it was concluded that the response of white blood cells and muscle mass decreased. Additionally, within the first 24 hours spent in a weightless environment, blood volume decreased by 10%. Long weightless periods can cause brain-swelling and eyesight problems. Upon return to earth, the effects of prolonged weightlessness continue to affect the human body as fluids pool back to the lower body, the heart rate rises, a drop in blood pressure occurs and there is a reduced ability to exercise.
+Artificial gravity, for its ability to mimic the behavior of gravity on the human body, has been suggested as one of the most encompassing manners of combating the physical effects inherent with weightless environments. Other measures that have been suggested as symptomatic treatments include exercise, diet and penguin suits. However, criticism of those methods lies in the fact that they do not fully eliminate the health problems and require a variety of solutions to address all issues. Artificial gravity, in contrast, would remove the weightlessness inherent with space travel. By implementing artificial gravity, space travelers would never have to experience weightlessness or the associated side effects. Especially in a modern-day six-month journey to Mars, exposure to artificial gravity is suggested in either a continuous or intermittent form to prevent extreme debilitation to the astronauts during travel.
+A number of proposals have incorporated artificial gravity into their design:
+Some of the reasons that artificial gravity remains unused today in spaceflight trace back to the problems inherent in implementation. One of the realistic methods of creating artificial gravity is the centrifugal effect caused by the centripetal force of the floor of a rotating structure pushing up on the person. In that model, however, issues arise in the size of the spacecraft. As expressed by John Page and Matthew Francis, the smaller a spacecraft (the shorter the radius of rotation), the more rapid the rotation that is required. As such, to simulate gravity, it would be better to utilize a larger spacecraft that rotates slowly. The requirements on size with regard to rotation are due to the differing forces on parts of the body at different distances from the center of rotation. If parts of the body closer to the rotational center experience a force significantly different from parts farther from the center, then this could have adverse effects. Additionally, questions remain as to what the best way is to initially set the rotating motion in place without disturbing the stability of the whole spacecraft's orbit. At the moment, there is not a ship massive enough to meet the rotation requirements, and the costs associated with building, maintaining, and launching such a craft are extensive.
+In general, with the limited health effects present in shorter spaceflights, as well as the high cost of research, application of artificial gravity is often stunted and sporadic.
+Several science fiction novels, films and series have featured artificial gravity production. In the movie 2001: A Space Odyssey, a rotating centrifuge in the Discovery spacecraft provides artificial gravity. 
+In the novel  The Martian, the Hermes spacecraft achieves artificial gravity by design; it employs a ringed structure, at whose periphery forces around 40% of Earth's gravity are experienced, similar to Mars' gravity. The movie  Interstellar features a spacecraft called the Endurance that can rotate on its center axis to create artificial gravity, controlled by retro thrusters on the ship. The 2021 film Stowaway features the upper stage of launch vehicle is connected by 450 meter long tethers to the ship's main hull, acting as a counterweight for inertia-based artificial gravity.
+High-G training is done by aviators and astronauts who are subject to high levels of acceleration ('G') in large-radius centrifuges. It is designed to prevent a g-induced loss of consciousness (abbreviated G-LOC), a situation when g-forces move the blood away from the brain to the extent that consciousness is lost. Incidents of acceleration-induced loss of consciousness have caused fatal accidents in aircraft capable of sustaining high-g for considerable periods.
+In amusement parks, pendulum rides and centrifuges provide rotational force. Roller coasters also do, whenever they go over dips, humps, or loops. When going over a hill, time in which zero or negative gravity is felt is called air time, or "airtime", which can be divided into "floater air time" (for zero gravity) and "ejector air time" (for negative gravity).
+Linear acceleration is another method of generating artificial gravity, by using the thrust from a spacecraft's engines to create the illusion of being under a gravitational pull. A spacecraft under constant acceleration in a straight line would have the appearance of a gravitational pull in the direction opposite of the acceleration, as the thrust from the engines would cause the spacecraft to "push" itself up into the objects and persons inside of the vessel, thus creating the feeling of weight. This is because of Newton's third law: the weight that one would feel standing in a linearly accelerating spacecraft would not be a true gravitational pull, but simply the reaction of oneself pushing against the craft's hull as it pushes back. Similarly, objects that would otherwise be free-floating within the spacecraft if it were not accelerating would "fall" towards the engines when it started accelerating, as a consequence of Newton's first law: the floating object would remain at rest, while the spacecraft would accelerate towards it, and appear to an observer within that the object was "falling".
+To emulate artificial gravity on Earth, spacecraft using linear acceleration gravity may be built similar to a skyscraper, with its engines as the bottom "floor". If the spacecraft were to accelerate at the rate of 1g—Earth's gravitational pull—the individuals inside would be pressed into the hull at the same force, and thus be able to walk and behave as if they were on Earth.
+This form of artificial gravity is desirable because it could functionally create the illusion of a gravity field that is uniform and unidirectional throughout a spacecraft, without the need for large, spinning rings, whose fields may not be uniform, not unidirectional with respect to the spacecraft, and require constant rotation. This would also have the advantage of relatively high speed: a spaceship accelerating at 1g, 9.8 m/s2, for the first half of the journey, and then decelerating for the other half, could reach Mars within a few days. Similarly, a hypothetical space travel using constant acceleration of 1g for one year would reach relativistic speeds and allow for a round trip to the nearest star, Proxima Centauri. As such, low-impulse but long-term linear acceleration has been proposed for various interplanetary missions. For example, even heavy (100 ton) cargo payloads to Mars could be transported to Mars in 27 months and retain approximately 55 percent of the LEO vehicle mass upon arrival into a Mars orbit, providing a low-gravity gradient to the spacecraft during the entire journey.
+This form of gravity is not without challenges, however. At present, the only practical engines that could propel a vessel fast enough to reach speeds comparable to Earth's gravitational pull require chemical reaction rockets, which expel reaction mass to achieve thrust, and thus the acceleration could only last for as long as a vessel had fuel. The vessel would also need to be constantly accelerating and at a constant speed to maintain the gravitational effect, and thus would not have gravity while stationary, and could experience significant swings in g-forces if the vessel were to accelerate above or below 1g. Further, for point-to-point journeys, such as Earth-Mars transits, vessels would need to constantly accelerate for half the journey, turn off their engines, perform a 180° flip, reactivate their engines, and then begin decelerating towards the target destination, requiring everything inside the vessel to experience weightlessness and possibly be secured down for the duration of the flip.
+A propulsion system with a very high specific impulse (that is, good efficiency in the use of reaction mass that must be carried along and used for propulsion on the journey) could accelerate more slowly producing useful levels of artificial gravity for long periods of time. A variety of electric propulsion systems provide examples. Two examples of this long-duration, low-thrust, high-impulse propulsion that have either been practically used on spacecraft or are planned in for near-term in-space use are Hall effect thrusters and Variable Specific Impulse Magnetoplasma Rockets (VASIMR). Both provide very high specific impulse but relatively low thrust, compared to the more typical chemical reaction rockets. They are thus ideally suited for long-duration firings which would provide limited amounts of, but long-term, milli-g levels of artificial gravity in spacecraft.
+In a number of science fiction plots, acceleration is used to produce artificial gravity for interstellar spacecraft, propelled by as yet theoretical or hypothetical means.
+This effect of linear acceleration is well understood, and is routinely used for 0g cryogenic fluid management for post-launch (subsequent) in-space firings of upper stage rockets.
+Roller coasters, especially launched roller coasters or those that rely on electromagnetic propulsion, can provide linear acceleration "gravity", and so can relatively high acceleration vehicles, such as sports cars. Linear acceleration can be used to provide air-time on roller coasters and other thrill rides.
+In January 2022 China was reported by the South China Morning Post to have built a small (60 centimetres (24 in) diameter) research facility to simulate low lunar gravity with the help of magnets. The facility was reportedly partly inspired by the work of Andre Geim (who later shared the 2010 Nobel Prize in Physics for his research on graphene) and Michael Berry, who both shared the Ig Nobel Prize in Physics in 2000 for the magnetic levitation of a frog.
+Weightless Wonder is the nickname for the NASA aircraft that flies parabolic trajectories and briefly provides a nearly weightless environment in which to train astronauts, conduct research, and film motion pictures. The parabolic trajectory creates a vertical linear acceleration which matches that of gravity, giving zero-g for a short time, usually 20–30 seconds, followed by approximately 1.8g for a similar period. The nickname Vomit Comet is also used to refer to motion sickness that is often experienced by the aircraft passengers during these parabolic trajectories. Such reduced gravity aircraft are nowadays operated by several organizations worldwide.
+The Neutral Buoyancy Laboratory (NBL) is an astronaut training facility at the Sonny Carter Training Facility at the NASA Johnson Space Center in Houston, Texas. The NBL is a large indoor pool of water, the largest in the world, in which astronauts may perform simulated EVA tasks in preparation for space missions. The NBL contains full-sized mock-ups of the Space Shuttle cargo bay, flight payloads, and the International Space Station (ISS).
+The principle of neutral buoyancy is used to simulate the weightless environment of space. The suited astronauts are lowered into the pool using an overhead crane and their weight is adjusted by support divers so that they experience no buoyant force and no rotational moment about their center of mass. The suits worn in the NBL are down-rated from fully flight-rated EMU suits like those in use on the space shuttle and International Space Station.
+The NBL tank is 202 feet (62 m) in length, 102 feet (31 m) wide, and 40 feet 6 inches (12.34 m) deep, and contains 6.2 million gallons (23.5 million litres) of water. Divers breathe nitrox while working in the tank.
+Neutral buoyancy in a pool is not weightlessness, since the balance organs in the inner ear still sense the up-down direction of gravity. Also, there is a significant amount of drag presented by water. Generally, drag effects are minimized by doing tasks slowly in the water. Another difference between neutral buoyancy simulation in a pool and actual EVA during spaceflight is that the temperature of the pool and the lighting conditions are maintained constant.
+In science fiction, artificial gravity (or cancellation of gravity) or "paragravity" is sometimes present in spacecraft that are neither rotating nor accelerating. At present, there is no confirmed technique that can simulate gravity other than actual mass or acceleration. There have been many claims over the years of such a device. Eugene Podkletnov, a Russian engineer, has claimed since the early 1990s to have made such a device consisting of a spinning superconductor producing a powerful "gravitomagnetic field", but there has been no verification or even negative results from third parties. In 2006, a research group funded by ESA claimed to have created a similar device that demonstrated positive results for the production of gravitomagnetism, although it produced only 0.0001g. This result has not been replicated.

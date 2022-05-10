@@ -1,0 +1,6 @@
+A low-power wide-area network (LPWAN or LPWA network) is a type of wireless telecommunication wide area network designed to allow long-range communications at a low bit rate among things (connected objects), such as sensors operated on a battery.
+The low power, low bit rate, and intended use distinguish this type of network from a wireless WAN that is designed to connect users or businesses, and carry more data, using more power. The LPWAN data rate ranges from 0.3 kbit/s to 50 kbit/s per
+channel.
+A LPWAN may be used to create a private wireless sensor network, but may also be a service or infrastructure offered by a third party, allowing the owners of sensors to deploy them in the field without investing in gateway technology.
+Some competing standards and vendors for LPWAN space include:
+Ultra Narrowband (UNB), modulation technology used for LPWAN by various companies including:
