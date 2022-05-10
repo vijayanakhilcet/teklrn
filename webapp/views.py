@@ -297,7 +297,9 @@ def hi(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description})
+    data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    data = data_file.read()
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
 
 def gotToTechnology(request):
     page = 'webapp/hi.html' 
@@ -325,7 +327,9 @@ def gotToTechnology(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description})
+    data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    data = data_file.read()
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':data})
 
 
 def test(request):
