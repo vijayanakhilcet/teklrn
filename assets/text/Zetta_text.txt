@@ -1,4 +1,0 @@
-Zetta (unit symbol prefix Z) is a decimal unit prefix in the metric system denoting a factor of 1021 or 1000000000000000000000. The prefix was added as an SI prefix to the International System of Units (SI) in 1991.
-Zetta is derived from the Latin numeral septem 'seven', and represents 10007.
-A prefix of the same value, hepta, derived from the Ancient Greek ἑπτά (hepta) 'seven', was informally introduced a few years before the promulgation of zetta, but never received official sanction and is considered obsolete.
-Examples:
