@@ -1,4 +1,7 @@
 from django.shortcuts import render
+import wikipedia
+import urllib.request
+from bs4 import BeautifulSoup
 import numpy as np
 import re
 import requests
@@ -297,8 +300,20 @@ def hi(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
-    data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
-    data = data_file.read()
+    #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    #data = data_file.read()
+    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    # opening the url for reading
+    html = urllib.request.urlopen(url)
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
+    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    # getting all the paragraphs
+    txt = ''
+    for para in htmlParse.find_all("p"):
+        txt += str(para)
+    soup = BeautifulSoup(txt, features="lxml")
+    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
 
 def gotToTechnology(request):
@@ -327,8 +342,21 @@ def gotToTechnology(request):
         except Exception:
             page = 'webapp/hi_login_t.html'
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
-    data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
-    data = data_file.read()
+    #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    #data = data_file.read()
+    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    # opening the url for reading
+    html = urllib.request.urlopen(url)
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
+    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    # getting all the paragraphs
+    txt = ''
+    for para in htmlParse.find_all("p"):
+        txt += str(para)
+    soup = BeautifulSoup(txt, features="lxml")
+    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
+  
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':data})
 
 
