@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from pygooglenews import GoogleNews
 import wikipedia
 import urllib.request
 from bs4 import BeautifulSoup
@@ -274,49 +273,6 @@ def hiPre(request):
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
-def news(request):
-    page = 'webapp/news.html' 
-    data = request.GET
-    defaultTechnology = 'Tensorflow'
-    defaultLevel = 1
-    
-    if data.get("level"):
-        defaultLevel = data.get("level")
-    if data.get("technology"):
-        try:
-            c = Course.objects.get(description=data.get("technology"))
-        except:
-            c = Course.objects.get(name=data.get("technology"))
-        defaultTechnology = c.name
-        contentType = c.contentType
-        request.session['contentType'] = c.contentType
-        technology_description = c.description
-    request.session['course'] = defaultTechnology
-    if(request.user.is_authenticated):
-        try:
-            s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_login.html'
-            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
-        except Exception:
-            page = 'webapp/hi_login_t.html'
-            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
-    #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
-    #data = data_file.read()
-    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
-    # opening the url for reading
-    html = urllib.request.urlopen(url)
-    # parsing the html file
-    htmlParse = BeautifulSoup(html, 'html.parser')
-    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
-    # getting all the paragraphs
-    txt = ''
-    for para in htmlParse.find_all("p"):
-        txt += str(para)
-    soup = BeautifulSoup(txt, features="lxml")
-    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
-
-
 
 def hi(request):
     page = 'webapp/hi.html' 
@@ -539,49 +495,6 @@ class AutoCompleteSearchTopicsView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
-
-   
-class AutoCompleteSearchTopicsViewNewNews(FormView):
-    def get(self,request,*args,**kwargs):
-        results= []
-        data = request.GET
-        topic = data.get("keyword_data")   
-        c = data.get("course_name")
-        temp = Course.objects.get(name=c.capitalize()).description
-        gn = GoogleNews()
-        s = gn.search(temp)
-        c = 0
-        for entry in s["entries"]:
-            if c > 10 :
-                break
-            c = c + 1
-            course_json = {}
-            course_json['title'] = entry["title"].split('-')[0]
-            htmlParse = ''
-            try:
-                html = urllib.request.urlopen(entry["link"])
-                # parsing the html file
-                #htmlParse = BeautifulSoup(html, 'html.parser')
-                htmlParse = BeautifulSoup(html, 'html.parser').find('p')
-                #htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
-                # getting all the paragraphs
-                course_json['description'] = htmlParse.text
-                results.append(course_json)
-            except:
-                course_json['description'] = entry["title"].split('-')[0]
-                results.append(course_json)
-                continue
-
-            #txt = ''
-            #for para in htmlParse.find_all("p"):
-                #txt += str(para)
-            #soup = BeautifulSoup(txt, features="lxml")
-            #course_json['description'] = htmlParse.text
-           
-        data = json.dumps(results)
-        mimetype = 'application/json'
-        return HttpResponse(data, mimetype)
-
 
 class AutoCompleteSearchTopicsViewNew(FormView):
     def get(self,request,*args,**kwargs):
