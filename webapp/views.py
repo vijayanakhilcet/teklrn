@@ -2,6 +2,7 @@ from django.shortcuts import render
 from GoogleNews import GoogleNews
 import wikipedia
 import urllib.request
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import numpy as np
 import re
@@ -273,6 +274,24 @@ def hiPre(request):
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+def newsread(request):
+    page = 'webapp/newsmainpage.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    req = Request(data.get("url"), headers={'User-Agent': 'Mozilla/5.0'})
+    html = urlopen(req)    
+    #html = urllib.request.urlopen(data.get("url"), headers=hdr)
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
+    txt = ''
+    for para in htmlParse.find_all("p"):
+        txt += str(para)
+    soup = BeautifulSoup(txt, features="lxml")
+    dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
+    return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
+
 
 def news(request):
     page = 'webapp/news.html' 
@@ -555,6 +574,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
             course_json = {}
             course_json['title'] = entry["title"]
             course_json['description'] = entry["desc"]
+            course_json['link'] = entry["link"]
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
