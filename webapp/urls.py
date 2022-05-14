@@ -88,7 +88,7 @@ urlpatterns = [
     path('get_completed_student_trainings/',views.CompletedStudentTrainingsView.as_view()),
     path('get_accepted_student_trainings/',views.AcceptedStudentTrainingsView.as_view()),
     path('charge/', views.charge, name='charge'), # new
-     path('chargevideo/', views.chargevideo, name='chargeVideo'), # new
+    path('chargevideo/', views.chargevideo, name='chargeVideo'), # new
 ]
 
 
