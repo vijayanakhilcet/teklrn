@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from pygooglenews import GoogleNews
+from GoogleNews import GoogleNews
 import wikipedia
 import urllib.request
 from bs4 import BeautifulSoup
@@ -548,36 +548,14 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         topic = data.get("keyword_data")   
         c = data.get("course_name")
         temp = Course.objects.get(name=c.capitalize()).description
-        gn = GoogleNews()
-        s = gn.search(temp)
-        c = 0
-        for entry in s["entries"]:
-            if c > 10 :
-                break
-            c = c + 1
+        googlenews = GoogleNews(lang='en', period='1d')
+        googlenews.search(temp)
+        alldata = googlenews.results(sort=True)
+        for entry in alldata:
             course_json = {}
-            course_json['title'] = entry["title"].split('-')[0]
-            htmlParse = ''
-            try:
-                html = urllib.request.urlopen(entry["link"])
-                # parsing the html file
-                #htmlParse = BeautifulSoup(html, 'html.parser')
-                htmlParse = BeautifulSoup(html, 'html.parser').find('p')
-                #htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
-                # getting all the paragraphs
-                course_json['description'] = htmlParse.text
-                results.append(course_json)
-            except:
-                course_json['description'] = entry["title"].split('-')[0]
-                results.append(course_json)
-                continue
-
-            #txt = ''
-            #for para in htmlParse.find_all("p"):
-                #txt += str(para)
-            #soup = BeautifulSoup(txt, features="lxml")
-            #course_json['description'] = htmlParse.text
-           
+            course_json['title'] = entry["title"]
+            course_json['description'] = entry["desc"]
+            results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
