@@ -297,7 +297,7 @@ function checkTraineeExists(event){
 }
 
 function backToNews(event){
-    window.open(window.location.origin+"/news?technology="+document.getElementById("technology_Val").textContent, "_self");
+    window.open(window.location.origin+"/news/technology?technology="+document.getElementById("technology_Val").textContent, "_self");
 
 
 }
@@ -420,7 +420,7 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img src="/static/image/images/play_b2.png" style="position:absolute; transform: translate(55%, 40%); -ms-transform: translate(-50%, -50%); font-size: 16px; padding: 5px 15px;border: none; cursor: pointer;text-align: center;width: 90px;z-index:100"/><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png" /></div>'
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png" /></div>'
                     });
               
         elm.innerHTML=html_message;
@@ -482,7 +482,7 @@ function lvlclk(url, heading, technology){
     scrollable:false
     });
     return false;   */
-    window.open(window.location.origin+"/news/read?link="+url+'?heading='+heading+'?technology='+technology, "_self");     
+    window.open(window.location.origin+"/news/technology/read?link="+url+'?heading='+heading+'?technology='+technology, "_self");     
  }
 
  function clk(){ 
