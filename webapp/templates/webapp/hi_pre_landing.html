@@ -50,14 +50,18 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <div  style="padding: 0px !important; background-color:white !important;overflow-x: hidden;" id="content">
 
         <nav style="z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+            <div style="flex-direction: column;display: flex;" class="container-fluid">
 
-               
-                <a  onclick="doLaunch(event)" style="width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="300" height="25"> </a>
-                <p style="width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
+                <div style="width: 100%;">
+                <a  onclick="doLaunch(event)" style="float: left;width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="210" height="25"> </a>
+                <p style="padding-top: 1% ;float: left;width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
      
                 </p>
-            
+                </div>
+                <div style="width: 100%;">
+                <a href="/technologies" style="padding-right: 4px;border-bottom-style: solid; border-bottom-color: #507fce;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a>
+                <a href="/news" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">News</a>
+                </div>
             </div>
         </nav>
 
