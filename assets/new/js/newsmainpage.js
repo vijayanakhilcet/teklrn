@@ -349,7 +349,7 @@ function searchTopicsNews() {
                // a1Html+='<img src="/static/image/images/syl_b.png" style="width: 10%;height: 10%; margin-right:10px" onclick="lvlclk('+data[index].title+')"'+'</img>';
                 a2Html+='</div></h4>';
                 
-            aHtml += '<div class="col-md-12"><div class="d-flex post-entry"><div class="custom-thumbnail"></div><div class="post-content"><div style="font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important">'+data[index].title+'</div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
+            aHtml += '<div class="col-md-12"><div class="d-flex post-entry"><div class="custom-thumbnail"></div><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important">'+data[index].title+'</div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
             });
             elm.innerHTML=aHtml;
                          

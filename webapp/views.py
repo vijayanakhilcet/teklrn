@@ -308,7 +308,7 @@ def newsread(request):
     htmlParse = BeautifulSoup(html, 'html.parser')
     txt = ''
     for para in htmlParse.find_all("p"):
-        txt += str(para)
+        txt += ' '+str(para)
     soup = BeautifulSoup(txt, features="lxml")
     dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
     return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
