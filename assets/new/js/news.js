@@ -422,6 +422,9 @@ for (var i = 1; i <= b.total_levels; i++) {
             event.preventDefault();      
     }
 
+    function backToNews() {
+        window.open(window.location.origin+"/news", "_self");   
+    }
 
     function gotoTechnology(pg){
 

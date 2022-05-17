@@ -113,6 +113,9 @@ function doLaunch(event) {
     window.open(window.location.origin+"/technologies", "_self");   
 }
 
+function backToNews() {
+    window.open(window.location.origin+"/technologies", "_self");   
+}
 
 function doLaunchTerm(event) {
     $.ajax({
