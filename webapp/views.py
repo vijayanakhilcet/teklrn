@@ -313,6 +313,47 @@ def newsread(request):
     dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
     return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
 
+def info(request):
+    page = 'webapp/info.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    
+    if data.get("level"):
+        defaultLevel = data.get("level")
+    if data.get("technology"):
+        try:
+            c = Course.objects.get(description=data.get("technology"))
+        except:
+            c = Course.objects.get(name=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+        request.session['contentType'] = c.contentType
+        technology_description = c.description
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    #data = data_file.read()
+    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    # opening the url for reading
+    html = urllib.request.urlopen(url)
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
+    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    # getting all the paragraphs
+    txt = ''
+    for para in htmlParse.find_all("p"):
+        txt += str(para)
+    soup = BeautifulSoup(txt, features="lxml")
+    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("wikipedia", "Teklrn Inc.")
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':data})
 
 def news(request):
     page = 'webapp/news.html' 
