@@ -1,11 +1,11 @@
 $(document).ready(function () {
     
     var runit = 0;     
-    refineSearchView("zzz");
+    refineSearchView("News");
    // document.getElementById("course-search").focus();
 
     $("#course-search").autocomplete({  
-        source: "/autocomplete",
+        source: "/autocompletenews",
         dataType: 'json',
         select: function( event , ui ) {
         gotoTechnology(ui.item.value);        
@@ -14,6 +14,14 @@ $(document).ready(function () {
            }
 }) 
 .data("ui-autocomplete")._renderItem = function(ul, item) {
+
+    if( item.exist == "No"){
+        return $( "<li style='margin-top:25px'>" )
+        .data( "ui-autocomplete-item", item )
+        .append( "<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/poster.jpg'/>"+ item.description)
+        .appendTo( ul );
+    }
+
     return $( "<li style='margin-top:25px'>" )
     .data( "ui-autocomplete-item", item )
     .append( "<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>"+ item.description)
@@ -76,7 +84,7 @@ function refineSearchView(pg){
     var html_message ="";
     $.ajax({
         url         : "/getTechnologiesMatchingTheSearch", // the url where we want to POST
-        data        : {"search_string":pg}, // our data object
+        data        : {"search_string":pg, "app":"news"}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -84,9 +92,7 @@ function refineSearchView(pg){
         .done(function(data) {
             elm.innerHTML="";  
             $.each(data, function(index) {
-              //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img src="/static/image/images/news_b.png"  style="position:absolute; transform: translate(-5.5%, 184%); font-size: 16px; padding: 5px 15px;border: none; cursor: pointer;text-align: center;width: 260px;"/><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width: 150px; height: 150px; object-fit: cover;"  src="/static/image/images/'+data[index].technology+'_icon.png"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+                html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img src="/static/image/images/news_b.png"  style="position:absolute; transform: translate(-5.5%, 184%); font-size: 16px; padding: 5px 15px;border: none; cursor: pointer;text-align: center;width: 260px;"/><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width: 150px; height: 150px; object-fit: cover;" '+data[index].img_link+'><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
 
             });
           

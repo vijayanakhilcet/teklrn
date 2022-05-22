@@ -343,7 +343,7 @@ function searchTopicsNews() {
                // a1Html+='<img src="/static/image/images/syl_b.png" style="width: 10%;height: 10%; margin-right:10px" onclick="lvlclk('+data[index].title+')"'+'</img>';
                 a2Html+='</div></h4>';
                 
-            aHtml += '<div class="col-md-6"><div class="d-flex post-entry"><div class="custom-thumbnail"><img style="padding-left:30%;" src="/static/image/images/'+course_name+'_icon.png" width="55px" height="30px" alt="Image" class="img-fluid"></div><div onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+course_description+'\')"  class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important">'+data[index].title+'<img onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+course_description+'\')" src="/static/image/images/read_b.png" style="width: 30%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
+            aHtml += '<div class="col-md-6"><div class="d-flex post-entry"><div class="custom-thumbnail"><img style="padding-left:30%;" src="/static/image/images/2.png" width="55px" height="30px" alt="Image" class="img-fluid"></div><div onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+course_description+'\')"  class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important">'+data[index].title+'<img onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+course_description+'\')" src="/static/image/images/read_b.png" style="width: 30%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
             });
             elm.innerHTML=aHtml;
                          
@@ -414,7 +414,7 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png" /></div>'
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;"  /></div>'
                     });
               
         elm.innerHTML=html_message;

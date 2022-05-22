@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import  cchardet
 from GoogleNews import GoogleNews
 import wikipedia
 import urllib.request
@@ -364,10 +365,28 @@ def news(request):
     if data.get("level"):
         defaultLevel = data.get("level")
     if data.get("technology"):
+        technology = data.get("technology")
         try:
             c = Course.objects.get(description=data.get("technology"))
         except:
-            c = Course.objects.get(name=data.get("technology"))
+            try:
+                c = Course.objects.get(name=data.get("technology"))
+            except:
+                url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology)[0]).replace(" ", "_")
+                # opening the url for reading
+                html = urllib.request.urlopen(url)
+                # parsing the html file
+                htmlParse = BeautifulSoup(html, 'html.parser')
+                htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+                # getting all the paragraphs
+                txt = ''
+                for para in htmlParse.find_all("p"):
+                    txt += str(para)
+                soup = BeautifulSoup(txt, features="lxml")
+                data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
+                return render(request, page, {'lvl':1,'contentType':'CERTIFICATION', 'technology':technology, 'technology_desc':technology, 'data':data})
+
+
         defaultTechnology = c.name
         contentType = c.contentType
         request.session['contentType'] = c.contentType
@@ -395,7 +414,7 @@ def news(request):
         txt += str(para)
     soup = BeautifulSoup(txt, features="lxml")
     data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':data})
 
 
 
@@ -551,6 +570,7 @@ class TechnologiesMatchingTheDesignationView(FormView):
 
 class TechnologiesMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
+
         cate = 'GENERAL'
         results= []
         data = request.GET
@@ -564,6 +584,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                     course_json = {}
                     course_json['technology'] = tech.name
                     course_json['description'] = tech.description
+                    course_json['img_link'] = 'src="/static/image/images/'+tech.name+'_icon.png"'
                     if tech.contentType == 'Tech':
                         cate = 'CERTIFICATION'
                     elif tech.contentType == 'Edu':
@@ -572,6 +593,21 @@ class TechnologiesMatchingTheSearchView(FormView):
                     course_json['contentType'] = cate
                     #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
                     results.append(course_json)
+            if data.get("app"):
+                headers = {
+                      "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+                }
+                # client param could be replaced with firefox or other browser
+                response = requests.get('http://google.com/complete/search?client=chrome&q='+technology, headers=headers)
+                for result in json.loads(response.text)[1]:
+                    course_json = {}
+                    course_json['technology'] = result
+                    course_json['description'] = result
+                    course_json['img_link'] = 'src="'+get_image(result.replace(' ', '_'))+'"'
+                    course_json['contentType'] = 'CERTIFICATION'
+                    results.append(course_json)         
+                    
+            
 
         if not results:
 
@@ -580,6 +616,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                 course_json = {}
                 course_json['technology'] = technology.name
                 course_json['description'] = technology.description
+                course_json['img_link'] = 'src="/static/image/images/'+technology.name+'_icon.png"'
                 if technology.contentType == 'Tech':
                         cate = 'CERTIFICATION'
                 elif technology.contentType == 'Edu':
@@ -628,7 +665,10 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         data = request.GET
         topic = data.get("keyword_data")   
         c = data.get("course_name")
-        temp = Course.objects.get(name=c.capitalize()).description
+        try:
+            temp = Course.objects.get(name=c.capitalize()).description
+        except:
+            temp = c
         googlenews = GoogleNews(lang='en', period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
@@ -665,6 +705,46 @@ class AutoCompleteSearchTopicsViewNew(FormView):
             course_json['reviewCount'] = course.reviewCount
             course_json['videoFree'] = course.videoFree
             course_json['videolink'] = course.videoLink
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+
+class AutoCompleteNewsView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        courseName = data.get("term").strip() 
+        courses = []
+        if courseName:
+            for cr in courseName.split():
+                courses += Course.objects.filter(description__icontains=cr)
+                courses.reverse()
+        
+        for course in courses:
+            course_json = {}
+            course_json['levels'] = course.levels
+            course_json['value'] = course.description
+            course_json['name'] = course.name
+            course_json['exist'] = 'Yes'
+            course_json['description'] = course.description
+            course_json['contentType'] = course.contentType
+            results.append(course_json)
+        headers = {
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+        # client param could be replaced with firefox or other browser
+        response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
+        for result in json.loads(response.text)[1]:
+            course_json = {}
+            course_json['levels'] = 1
+            course_json['value'] = result
+            course_json['name'] = result
+            course_json['exist'] = 'No'
+            course_json['description'] = result
+            course_json['contentType'] = 'CERTIFICATION'
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -1330,3 +1410,18 @@ class CompletedStudentTrainingsView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
+
+def get_image(text):
+        headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+        url = "https://www.google.com/search?q="+text+"&tbm=isch"
+        # opening the url for reading
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        html = urlopen(req)
+        # parsing the html file
+        bs = BeautifulSoup(html, 'lxml')
+        images = bs.find("img", class_="yWs4tf")
+        return images['src']
+
