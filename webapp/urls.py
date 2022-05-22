@@ -34,7 +34,6 @@ urlpatterns = [
     path('privacy/', views.privacy, name='privacy-Page'),
     path('', views.home, name='Home-Page'),
     path('autocomplete/',views.AutoCompleteView.as_view()),
-    path('autocompletenews/',views.AutoCompleteNewsView.as_view()),
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
     path('searchtopicsnew/',views.AutoCompleteSearchTopicsViewNew.as_view()),
     path('searchtopicsnewnews/',views.AutoCompleteSearchTopicsViewNewNews.as_view()),
