@@ -565,7 +565,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                     course_json['technology'] = tech.name
                     course_json['description'] = tech.description
                     if tech.contentType == 'Tech':
-                        cate = 'CERTIFICATION'
+                        cate = 'TECHNOLOGY'
                     elif tech.contentType == 'Edu':
                         cate = 'EDUCATIONAL'
 
@@ -581,7 +581,7 @@ class TechnologiesMatchingTheSearchView(FormView):
                 course_json['technology'] = technology.name
                 course_json['description'] = technology.description
                 if technology.contentType == 'Tech':
-                        cate = 'CERTIFICATION'
+                        cate = 'TECHNOLOGY'
                 elif technology.contentType == 'Edu':
                         cate = 'EDUCATIONAL'
 
@@ -634,8 +634,8 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         alldata = googlenews.results(sort=True)
         for entry in alldata:
             course_json = {}
-            course_json['title'] = entry["title"]
-            course_json['description'] = entry["desc"]
+            course_json['title'] = entry["title"].replace('\'', '')
+            course_json['description'] = entry["desc"].replace('\'', '')
             course_json['link'] = entry["link"]
             results.append(course_json)
         data = json.dumps(results)
