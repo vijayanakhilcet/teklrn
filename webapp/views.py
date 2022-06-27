@@ -570,6 +570,8 @@ class TechnologiesMatchingTheSearchView(FormView):
                         cate = 'EDUCATIONAL'
                     elif tech.contentType == 'Pol':
                         cate = 'POLITICS'
+                    elif tech.contentType == 'Eco':
+                        cate = 'ECONOMY'
 
                     course_json['contentType'] = cate
                     #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
@@ -588,6 +590,8 @@ class TechnologiesMatchingTheSearchView(FormView):
                         cate = 'EDUCATIONAL'
                 elif technology.contentType == 'Pol':
                         cate = 'POLITICS'
+                elif technology.contentType == 'Eco':
+                        cate = 'ECONOMY'
 
                 course_json['contentType'] = cate
                 #course_json['videoLink'] = CourseLevel.objects.get(course=technology, level_number=1).videoLink
