@@ -76,3 +76,12 @@ class CourseCategory(models.Model):
     courses = models.ManyToManyField(Course)
     def __str__(self):
         return self.name
+
+class News(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=100, default='Hi')  
+    levels = models.IntegerField(default=170)    
+    category = models.CharField(max_length=30, default='Java')
+    contentType = models.CharField(max_length=30, default='Tech') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
+    def __str__(self):
+        return self.name
