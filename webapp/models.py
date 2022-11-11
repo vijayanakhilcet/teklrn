@@ -79,9 +79,15 @@ class CourseCategory(models.Model):
 
 class News(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=100, default='Hi')  
-    levels = models.IntegerField(default=170)    
-    category = models.CharField(max_length=30, default='Java')
+    category = models.CharField(max_length=30, default='General')
     contentType = models.CharField(max_length=30, default='Tech') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
     def __str__(self):
         return self.name
+
+class NewsLevel(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    level_number = models.IntegerField(default=1)    
+    description = models.TextField(max_length=None, default='Hi')
+
+    class Meta:
+        ordering = ["level_number"]
