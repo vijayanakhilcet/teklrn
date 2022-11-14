@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .loader {
+position: fixed;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+z-index: 9999;
+background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+}
+    </style>
+    <style>
+        @font-face {
+  			font-family: 'Antietam';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+			}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Of Technologies | Technology Video | Teklrn Inc.</title><link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
+    <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="{% static 'css/stackpath.css' %}" type="text/css" />
+     <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+    <script src="{% static 'new/js/solid.js' %}"></script> 
+    <script src="{% static 'new/js/solid.min.js' %}"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
+    <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'new/js/kit.js' %}"></script> 
+    <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
+    </head>
+
+<body style="font-family: Antietam; background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);" class="bg-black muli">
+    <div class="loader"></div> 
+    <div  style="padding: 0px !important; background-color:white !important;overflow-x: hidden;" id="content">
+
+        <nav style="z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
+            <div style="flex-direction: column;display: flex;" class="container-fluid">
+
+                <div style="width: 100%;">
+                <a  onclick="doLaunch(event)" style="float: left;width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="210" height="25"> </a>
+                <p style="padding-top: 1% ;float: left;width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
+     
+                </p>
+                </div>
+                <div style="width: 100%;">
+                <a href="/technologies" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a>
+                <a href="/news" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">News</a>
+                <a href="/worldnews" style="border-bottom-style: solid;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Trending</a>
+    
+            </div>
+            </div>
+        </nav>
+
+
+<!--<iframe id="course-pdf" src="static/image/Html_6.pdf"  style="width : 100%; height : 100%;"></iframe> -->
+<!--<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas> -->
+
+
+
+<div style="margin-top: 150px; padding: 20px !important;">
+    
+
+   
+    <section class="p-0 md-p-5">
+
+      
+        <div id="searchData"  class="flex flex-wrap">
+      
+        </div>
+    </section>
+	
+	    <!-- testimonials -->
+ <!--   <section class="p-10 md-p-l5">
+        <div id="slider-2">
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important" class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has over 10 million subscribers world wide</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">John Pochal</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Trainer and Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has the highest quality techn learning content.</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">Ross Scott</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Trainer and Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. provides the most relevant technology training. </p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">Sam Bording</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Certified at Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="p-8 br-8 bg-indigo-lightest-10 relative">
+                    <span class="fs-l5 lh-1 white opacity-10 absolute top-0 z--1">&#10077;</span>
+                    <p style="color: #629DD1 !important"  class="fw-600 fs-m1 indigo-lightest opacity-80 italic ls-wider">Teklrn Inc. has highest quality technology learning content</p>
+                    <div class="flex items-center my-5">
+                        <div class="block br-round border bc-black bw-4 w-l3 h-l3"><img class="br-round"
+                            src="/static/new/images/person_profile.jpg" alt=""></div>
+                        <div class="ml-4 fs-s1">
+                            <div style="color: #629DD1 !important"  class="indigo-lightest">John Rubio</div>
+                            <div style="color: #629DD1 !important"  class="indigo-lightest opacity-20">Certified at Teklrn Inc.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section> -->
+       <script src="{% static 'js/trendingnewssearch.js' %}"></script>
+       <script>
+        $(window).load(function(){  
+                 $('.loader').fadeOut();  
+             });
+             </script>  
+</body>
+
+</html>
