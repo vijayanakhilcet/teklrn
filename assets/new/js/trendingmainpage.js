@@ -297,7 +297,7 @@ function checkTraineeExists(event){
 }
 
 function backToNews(event){
-    window.open(window.location.origin+"/news/technology?technology="+document.getElementById("technology_Val").textContent, "_self");
+    window.open(window.location.origin+"/trendingnews/technology?technology="+document.getElementById("technology_Val").textContent, "_self");
 
 
 }

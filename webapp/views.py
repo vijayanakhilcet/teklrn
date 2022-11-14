@@ -752,12 +752,13 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
         # googlenews.search(temp)
         # alldata = googlenews.results(sort=True)
         cname = unquote(c)
-        cl = NewsLevel.objects.filter(news=News.objects.get(name=cname))
+        n = News.objects.get(name=cname)
+        cl = NewsLevel.objects.filter(news=n)
         for entry in cl:
             course_json = {}
             course_json['title'] = cname
             course_json['description'] = entry.description
-            course_json['link'] = ''
+            course_json['link'] = n.imageLink
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
