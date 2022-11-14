@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from urllib.parse import unquote
 from GoogleNews import GoogleNews
 import wikipedia
 import urllib.request
@@ -11,7 +12,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -254,6 +255,27 @@ def login_page_a(request):
 
 def contact(request):
     return render(request, 'webapp/contact.html')
+    
+def worldNews(request):
+    page = 'webapp/worldnews_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
 
 def newsPre(request):
     page = 'webapp/news_pre_landing.html'
@@ -295,6 +317,15 @@ def hiPre(request):
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
+def trendingread(request):
+    page = 'webapp/trendingmainpage.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    return render(request, page, {'description':data.get("description"), 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
+
 
 def newsread(request):
     page = 'webapp/newsmainpage.html' 
@@ -354,6 +385,50 @@ def info(request):
     soup = BeautifulSoup(txt, features="lxml")
     data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("wikipedia", "Teklrn Inc.")
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':data})
+
+
+def trendingnews(request):
+    page = 'webapp/trendingnews.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    
+    if data.get("level"):
+        defaultLevel = data.get("level")
+    if data.get("technology"):
+        try:
+            c = News.objects.get(name=data.get("technology"))
+        except:
+            c = News.objects.get(name=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+        request.session['contentType'] = c.contentType
+        technology_description = c.name
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
+    #data = data_file.read()
+    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    # opening the url for reading
+    html = urllib.request.urlopen(url)
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
+    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    # getting all the paragraphs
+    txt = ''
+    for para in htmlParse.find_all("p"):
+        txt += str(para)
+    soup = BeautifulSoup(txt, features="lxml")
+    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
+
 
 def news(request):
     page = 'webapp/news.html' 
@@ -600,6 +675,42 @@ class TechnologiesMatchingTheSearchView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
+
+class NewsMatchingTheSearchView(FormView):
+    def get(self,request,*args,**kwargs):
+        cate = 'GENERAL'
+        results= []
+        data = request.GET
+        topic = data.get("search_string")  
+        technologies = re.split(r'[;,\s]\s*', topic.strip())
+        results = []
+        for technology in technologies:
+            courses =  News.objects.filter(name__icontains=technology).order_by("-id")
+            if courses:
+                for tech in courses:
+                    course_json = {}
+                    course_json['name'] = tech.name
+                    course_json['category'] = tech.category
+                    course_json['contentType'] = tech.contentType
+                    course_json['imageLink'] = tech.imageLink
+
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                    results.append(course_json)
+
+        if not results:
+
+            technologies = News.objects.all().order_by("-id")
+            for technology in technologies:
+                course_json = {}
+                course_json['name'] = technology.name
+                course_json['category'] = technology.category
+                course_json['contentType'] = technology.contentType
+                course_json['imageLink'] = technology.imageLink
+                #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
     
 class AutoCompleteSearchTopicsView(FormView):
     def get(self,request,*args,**kwargs):
@@ -629,6 +740,28 @@ class AutoCompleteSearchTopicsView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class AutoCompleteSearchTopicsViewNewTrending(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        topic = data.get("keyword_data")   
+        c = data.get("course_name")
+        #temp = Course.objects.get(name=c.capitalize()).description
+        # temp = c
+        # googlenews = GoogleNews(lang='en  ', period='1d')
+        # googlenews.search(temp)
+        # alldata = googlenews.results(sort=True)
+        cname = unquote(c)
+        cl = NewsLevel.objects.filter(news=News.objects.get(name=cname))
+        for entry in cl:
+            course_json = {}
+            course_json['title'] = cname
+            course_json['description'] = entry.description
+            course_json['link'] = ''
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
    
 class AutoCompleteSearchTopicsViewNewNews(FormView):
     def get(self,request,*args,**kwargs):
