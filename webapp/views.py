@@ -402,7 +402,11 @@ def trendingnews(request):
         try:
             c = News.objects.get(name=data.get("technology"))
         except:
-            c = News.objects.get(name=data.get("technology"))
+            try:
+                c = News.objects.filter(name__icontains=data.get("technology")[0:12])[0]
+            except:
+                c = News.objects.filter(name__icontains=data.get("technology")[0:4])[0]
+
         defaultTechnology = c.name
         contentType = c.contentType
         request.session['contentType'] = c.contentType

@@ -80,7 +80,7 @@ class CourseCategory(models.Model):
 class News(models.Model):
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=30, default='General')
-    contentType = models.CharField(max_length=30, default='Tech') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
+    contentType = models.CharField(max_length=30, default='WORLD NEWS') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
     imageLink =  models.CharField(max_length=400, default='Hi')
     def __str__(self):
         return self.name
