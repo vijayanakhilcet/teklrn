@@ -324,7 +324,7 @@ def trendingread(request):
     data = request.GET
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
-    return render(request, page, {'description':data.get("description"), 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
+    return render(request, page, {'description':data.get("description"), 'heading':data.get("heading"), 'technologyVal':data.get("heading")})
 
 
 def newsread(request):
@@ -415,19 +415,19 @@ def trendingnews(request):
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
     #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
     #data = data_file.read()
-    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
-    # opening the url for reading
-    html = urllib.request.urlopen(url)
-    # parsing the html file
-    htmlParse = BeautifulSoup(html, 'html.parser')
-    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
-    # getting all the paragraphs
-    txt = ''
-    for para in htmlParse.find_all("p"):
-        txt += str(para)
-    soup = BeautifulSoup(txt, features="lxml")
-    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
+    # url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    # # opening the url for reading
+    # html = urllib.request.urlopen(url)
+    # # parsing the html file
+    # htmlParse = BeautifulSoup(html, 'html.parser')
+    # htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    # # getting all the paragraphs
+    # txt = ''
+    # for para in htmlParse.find_all("p"):
+    #     txt += str(para)
+    # soup = BeautifulSoup(txt, features="lxml")
+    # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':''})
 
 
 def news(request):
