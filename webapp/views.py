@@ -324,7 +324,10 @@ def trendingread(request):
     data = request.GET
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
-    return render(request, page, {'description':data.get("description"), 'heading':data.get("heading"), 'technologyVal':data.get("heading")})
+    cname = unquote(data.get("heading"))
+    n = News.objects.get(name=cname)
+    cl = NewsLevel.objects.filter(description__icontains=data.get("description"), news=n)[0]
+    return render(request, page, {'description':cl.description, 'heading':data.get("heading"), 'technologyVal':data.get("heading")})
 
 
 def newsread(request):
