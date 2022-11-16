@@ -53,13 +53,19 @@ else if(tech == 'redirecttologinA'){
         
                 
             }
+            
             getAllTechnologies();
+            getAllNews();
+            
 }
 
 );
 
+trending_lst
+
 
 function getAllTechnologies(){
+    var elm1 = ""
     var elm = document.getElementById("course_lst");
     var html_message ="";
     $.ajax({
@@ -85,6 +91,36 @@ function getAllTechnologies(){
         });
         event.preventDefault();      
 }
+
+
+function getAllNews(){
+    var elm1 = ""
+    var elm = document.getElementById("trending_lst");
+    var html_message ="";
+    $.ajax({
+        url         : "/getNewsMatchingTheSearch", // the url where we want to POST
+        data        : {"search_string":"zzz"}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            elm.innerHTML="";  
+            $.each(data, function(index) {
+                 if(index % 2 == 0) {
+                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div>';
+                 }
+                 else{
+                    html_message +='<div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div></div>';
+  
+                 }
+                });
+          
+    elm.innerHTML=html_message;
+        });
+        event.preventDefault();      
+}
+
 
 
 
