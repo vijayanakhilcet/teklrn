@@ -327,7 +327,7 @@ def trendingread(request):
     cname = unquote(data.get("heading"))
     n = News.objects.get(name=cname)
     cl = NewsLevel.objects.filter(description__icontains=data.get("description"), news=n)[0]
-    return render(request, page, {'description':cl.description, 'heading':data.get("heading"), 'technologyVal':data.get("heading")})
+    return render(request, page, {'description':cl.description, 'heading':data.get("heading"), 'technologyVal':data.get("heading"), 'url':n.imageLink})
 
 
 def newsread(request):
