@@ -399,10 +399,37 @@ for (var i = 1; i <= b.total_levels; i++) {
         // stop the form from submitting the normal way and refreshing the page
         event.preventDefault();
     }
+    function setCookie(username, value, expiry) {
+        const date = new Date();
+        date.setTime(date.getTime() + (expiry * 24 * 60 * 60 * 1000));
+        var expires = "expires="+date.toUTCString();
+        document.cookie = username + "=" + value + ";" + expires + ";path=/";
+      }
+      function getCookie(username) {
+        let name = username + "=";
+        let spli = document.cookie.split('`');
+        for(var j = 0; j < spli.length; j++) {
+          let char = spli[j];
+          while (char.charAt(0) == ' ') {
+            char = char.substring(1);
+          }
+          if (char.indexOf(name) == 0) {
+            return char.substring(name.length, char.length);
+          }
+        }
+        return "";
+      }
 
     
     function refineSearchView(pg){
         var elm = document.getElementById("mgc");
+        // if( getCookie("mgc") != ""){
+        //     alert(getCookie("mgc"));
+        //     elm.innerHTML=getCookie("mgc");
+        // }
+        if(localStorage.getItem("mgc")!=null){
+            elm.innerHTML=localStorage.getItem("mgc");}
+        else{
         var html_message ="";
         $.ajax({
             url         : "/getNewsMatchingTheSearch", // the url where we want to POST
@@ -418,8 +445,11 @@ for (var i = 1; i <= b.total_levels; i++) {
                     });
               
         elm.innerHTML=html_message;
+        localStorage.setItem("mgc", html_message);
+        //setCookie("mgc", html_message, 10);
             });
-            event.preventDefault();      
+            event.preventDefault();     
+        } 
     }
 
     function backToNews() {
