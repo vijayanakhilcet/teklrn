@@ -427,8 +427,9 @@ for (var i = 1; i <= b.total_levels; i++) {
         //     alert(getCookie("mgc"));
         //     elm.innerHTML=getCookie("mgc");
         // }
-        if(localStorage.getItem("mgc")!=null){
-            elm.innerHTML=localStorage.getItem("mgc");}
+        var datafromlocal = localStorage.getItem("mgc");
+        if(datafromlocal){
+            elm.innerHTML=datafromlocal;}
         else{
         var html_message ="";
         $.ajax({
