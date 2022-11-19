@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-        <style>
+        <!-- <style>
         .loader {
 position: fixed;
 left: 0px;
@@ -12,7 +12,7 @@ height: 100%;
 z-index: 9999;
 background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
 }
-    </style>
+    </style> -->
     
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -151,11 +151,10 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 
           </div>
         </div>
-      <div id="mgc" class="MagicScroll" data-options="mode: cover-flow; height: 135px;" style="background-color: #3f6fcb;position: fixed; bottom: 0;">
+      <div id="mgc" class="MagicScroll" data-options="mode: cover-flow; height: 135px;" style="background-color: white;position: fixed; bottom: 0;">
         <div class="mcs-item" data-item="0" style="width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;"><div onclick="gotoTechnology('Carbon Capture Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
         <div class="mcs-item" data-item="1" style="width: 24.3716%; position: absolute; transform: translate3d(-295.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31668;"><div onclick="gotoTechnology('Ship Design Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
-        
-    </div> 
+      </div> 
     </main>
     <script src="{% static 'new/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'new/js/popper.min.js' %}"></script>
@@ -164,29 +163,12 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <script src="{% static 'new/js/trending.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/magicscroll.js' %}"></script>
    
-<script>
-  pdfjsLib.getDocument('./static/image/Html_6.pdf').promise.then(doc =>{
-      console.log("This file has "+doc._pdfInfo.numPages + " pages");
 
-      doc.getPage(1).then(page =>{
-          var myCanvas = document.getElementById("my_canvas");
-          var context =  myCanvas.getContext("2d");
-
-          var viewport = page.getViewport({scale:1.5});
-          myCanvas.width = viewport.width;
-          myCanvas.height = viewport.height;
-          page.render({
-              canvasContext:context,
-              viewport:viewport
-          });
-      });
-  });
-</script>
-<script>
+<!-- <script>
   $(window).ready(function(){  
            $('.loader').fadeOut();  
        });
-       </script> 
+       </script>  -->
        
   </body>
 </html>
