@@ -54,7 +54,7 @@ else if(tech == 'redirecttologinA'){
                 
             }
             
-            getAllTechnologies();
+           
             
 }
 
