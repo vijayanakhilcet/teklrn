@@ -40,7 +40,7 @@
 			<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
 			<link rel="stylesheet" href="{% static 'css/style-xlarge.css' %}" type="text/css" />
 		</noscript>	
-		<!-- <style>
+		<style>
 			.loader {
  position: fixed;
  left: 0px;
@@ -50,7 +50,7 @@
  z-index: 9999;
  background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
 }
-		</style> -->
+		</style>
 	</head>
 	<body id="top">
 		<div class="loader"></div> 
@@ -569,9 +569,9 @@
 				</div>
 			</footer>
 			<script>
-			// $(window).load(function(){  
-			// 	     $('.loader').fadeOut();  
-			// 	 });
+			$(window).load(function(){  
+				     $('.loader').fadeOut();  
+				 });
 			
 			document.addEventListener("DOMContentLoaded",getAllNews());
 

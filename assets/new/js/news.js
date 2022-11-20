@@ -23,7 +23,7 @@ $(function() {
     course_description = view_to_show; 
     var runit = 0;     
     searchTopicsNews();
-    refineSearchView("zzz");
+    
 });
 
 
