@@ -427,10 +427,10 @@ for (var i = 1; i <= b.total_levels; i++) {
         //     alert(getCookie("mgc"));
         //     elm.innerHTML=getCookie("mgc");
         // }
-        var datafromlocal = localStorage.getItem("mgc");
-        if(datafromlocal){
-            elm.innerHTML=datafromlocal;}
-        else{
+        // var datafromlocal = localStorage.getItem("mgc");
+        // if(datafromlocal){
+        //     elm.innerHTML=datafromlocal;}
+        // else{
         var html_message ="";
         $.ajax({
             url         : "/getNewsMatchingTheSearch", // the url where we want to POST
@@ -450,7 +450,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         //setCookie("mgc", html_message, 10);
             });
             event.preventDefault();     
-        } 
+        // } 
     }
 
     function backToNews() {
