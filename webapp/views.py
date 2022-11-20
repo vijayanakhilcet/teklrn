@@ -614,6 +614,33 @@ class SupportedDesignationsView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+        
+class TrendingNewsForNews(FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        news = data.get("search_string")
+        if news:
+            try:
+                c = News.objects.get(name=news)
+            except:
+                try:
+                    c = News.objects.filter(name__icontains=news[0:12])[0]
+                except:
+                    c = News.objects.filter(name__icontains=news[0:4])[0]
+        results = []
+        newsLevels = NewsLevel.objects.filter(news=c)
+        for entry in newsLevels:
+            course_json = {}
+            course_json['title'] = news
+            course_json['description'] = entry.description
+            course_json['link'] = c.imageLink
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+
+
 class TechnologiesMatchingTheDesignationView(FormView):
     def get(self,request,*args,**kwargs):
         results= []

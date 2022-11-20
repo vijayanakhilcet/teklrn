@@ -44,6 +44,7 @@ urlpatterns = [
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
     path('getNewsMatchingTheSearch/',views.NewsMatchingTheSearchView.as_view()),
     path('getTechnologiesForDesignations/',views.TechnologiesMatchingTheDesignationView.as_view()),
+    path('getTrendingNewsForNews/',views.TrendingNewsForNews.as_view()),
     path('getSupportedDesignations/',views.SupportedDesignationsView.as_view()),
     path('loginFormForVideoAccess/',views.LoginViewForVideoAccess.as_view()),
     path('loginForm/',views.LoginView.as_view()),

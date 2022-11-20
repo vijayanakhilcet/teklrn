@@ -459,20 +459,40 @@ for (var i = 1; i <= b.total_levels; i++) {
 
     function gotoTechnology(pg){
 
-        window.open(window.location.origin+"/trendingnews/technology?technology="+pg, "_self");
-        /*
+        // window.open(window.location.origin+"/trendingnews/technology?technology="+pg, "_self");
+        var elm = document.getElementById('rowdata');
+        var aHtml ="";
+                var a1Html = "";
+                var a2Html ="";
+                var a1Html = "";
         $.ajax({
-            url         : "hi", // the url where we want to POST
-            data        : {"technology":pg}, // our data object
-            dataType    : "html", // what type of data do\ we expect back from the server
-            encode      : true,
-        }) .done(function(data) {
-                                document.open("text/html", "load")
-                                document.write(data);
-                                document.close();
-                                    // here we will handle errors and validation messages
-                                    });
-                                    event.preventDefault();*/
+            url         : "/getTrendingNewsForNews", // the url where we want to POST
+            data        : {"search_string":pg}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                
+                elm.innerHTML="";
+                
+                $.each(data, function(index) {
+                    a1Html = " ";
+                    a2Html = " ";
+                    //a1Html += '<button style="font-size: small; border: 1px solid transparent;background-color: #0665b8;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
+                   // a1Html+='<img src="/static/image/images/syl_b.png" style="width: 10%;height: 10%; margin-right:10px" onclick="lvlclk('+data[index].title+')"'+'</img>';
+                    a2Html+='</div></h4>';
+                    
+                aHtml += '<div class="col-md-6"><div class="d-flex post-entry"><div class="custom-thumbnail"><img style="padding-left:30%;" src="'+data[index].link+'" width="55px" height="30px" alt="Image" class="img-fluid"></div><div onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+data[index].description+'\')"  class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding: 1.5%; margin-right: 2%; ">NEWS '+(index+1)+' </b>'+data[index].title+'<img onclick="lvlclk(\''+data[index].link+'\', \''+data[index].title+'\', \''+course_description+'\')" src="/static/image/images/read_b.png" style="width: 30%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
+           // alert(aHtml)    
+            });    
+                elm.innerHTML=aHtml; });
+
+      //  event.preventDefault();
+            
+          //  var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
+           
+           // return false;     
 }
 
     
