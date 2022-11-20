@@ -116,7 +116,7 @@ function getAllNews(){
                 });
           
     elm.innerHTML=html_message;
-        });
+        });getAllTechnologies();
         event.preventDefault();      
 }
 
