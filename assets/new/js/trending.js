@@ -23,7 +23,7 @@ $(function() {
     course_description = view_to_show; 
     var runit = 0;     
     searchTopicsNews();
-    refineSearchView("zzz");
+    
 });
 
 
@@ -422,35 +422,35 @@ for (var i = 1; i <= b.total_levels; i++) {
 
     
     function refineSearchView(pg){
-        // var elm = document.getElementById("mgc");
-        // // if( getCookie("mgc") != ""){
-        // //     alert(getCookie("mgc"));
-        // //     elm.innerHTML=getCookie("mgc");
-        // // }
-        // var datafromlocal = localStorage.getItem("mgc");
-        // if(datafromlocal){
-        //     elm.innerHTML=datafromlocal;}
-        // else{
-        // var html_message ="";
-        // $.ajax({
-        //     url         : "/getNewsMatchingTheSearch", // the url where we want to POST
-        //     data        : {"search_string":pg}, // our data object
-        //     dataType    : 'json', // what type of data do we expect back from the server
-        //     encode      : true
-        // })
-        //     // using the done promise callback
-        //     .done(function(data) {
-        //         elm.innerHTML="";  
-        //         $.each(data, function(index) {
-        //               html_message +='<div onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="'+data[index].imageLink+'" /></div>'
-        //             });
+        var elm = document.getElementById("mgc");
+        // if( getCookie("mgc") != ""){
+        //     alert(getCookie("mgc"));
+        //     elm.innerHTML=getCookie("mgc");
+        // }
+        var datafromlocal = localStorage.getItem("mgc");
+        if(datafromlocal){
+            elm.innerHTML=datafromlocal;}
+        else{
+        var html_message ="";
+        $.ajax({
+            url         : "/getNewsMatchingTheSearch", // the url where we want to POST
+            data        : {"search_string":pg}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                elm.innerHTML="";  
+                $.each(data, function(index) {
+                      html_message +='<div onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="'+data[index].imageLink+'" /></div>'
+                    });
               
-        // elm.innerHTML=html_message;
-        // localStorage.setItem("mgc", html_message);
-        // //setCookie("mgc", html_message, 10);
-        //     });
-        //     event.preventDefault();     
-        // } 
+        elm.innerHTML=html_message;
+        localStorage.setItem("mgc", html_message);
+        //setCookie("mgc", html_message, 10);
+            });
+            event.preventDefault();     
+        } 
     }
 
     function backToNews() {

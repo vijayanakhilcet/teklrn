@@ -55,7 +55,6 @@ else if(tech == 'redirecttologinA'){
             }
             
             getAllTechnologies();
-            getAllNews();
             
 }
 
