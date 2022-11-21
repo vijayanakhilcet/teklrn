@@ -166,13 +166,16 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
    
 
 
-       
+    <script>
+      // $(window).ready(function(){  
+      //          $('.loader').fadeOut();  
+      //      });
+      $(document).ready(function(){  
+        refineSearchView("zzz")
+      });
+          //  document.addEventListener("DOMContentLoaded", refineSearchView("zzz"));
+           </script>  
        
   </body>
-  <script>
-    // $(window).ready(function(){  
-    //          $('.loader').fadeOut();  
-    //      });
-         document.addEventListener("DOMContentLoaded", refineSearchView("zzz"));
-         </script> 
+  
 </html>
