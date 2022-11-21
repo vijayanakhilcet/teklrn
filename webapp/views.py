@@ -327,7 +327,7 @@ def trendingread(request):
     cname = unquote(data.get("heading"))
     n = News.objects.get(name=cname)
     cl = NewsLevel.objects.filter(description__icontains=data.get("description"), news=n)[0]
-    return render(request, page, {'description':cl.description, 'heading':data.get("heading"), 'technologyVal':data.get("heading"), 'url':n.imageLink})
+    return render(request, page, {'description':cl.description.split('!@#')[0], 'heading':cl.description.split('!@#')[1], 'technologyVal':data.get("heading"), 'url':n.imageLink})
 
 
 def newsread(request):
@@ -632,7 +632,8 @@ class TrendingNewsForNews(FormView):
         for entry in newsLevels:
             course_json = {}
             course_json['title'] = news
-            course_json['description'] = entry.description
+            course_json['heading'] = entry.description.split('!@#')[1]
+            course_json['description'] = entry.description.split('!@#')[0]
             course_json['link'] = c.imageLink
             results.append(course_json)
         data = json.dumps(results)
@@ -791,7 +792,8 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
         for entry in cl:
             course_json = {}
             course_json['title'] = cname
-            course_json['description'] = entry.description
+            course_json['heading'] = entry.description.split('!@#')[1]
+            course_json['description'] = entry.description.split('!@#')[0]
             course_json['link'] = n.imageLink
             results.append(course_json)
         data = json.dumps(results)
