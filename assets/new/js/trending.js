@@ -449,6 +449,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         localStorage.setItem("mgc", html_message);
         //setCookie("mgc", html_message, 10);
             });
+            elm.style.visibility=visible
             event.preventDefault();     
         // } 
     }
