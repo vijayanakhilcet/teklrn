@@ -556,8 +556,11 @@
 			$(window).load(function(){  
 				     $('.loader').fadeOut();  
 				 });
+				 $(window).ready(function(){  
+					getAllNews();  
+				 });
 			
-			document.addEventListener("DOMContentLoaded	",getAllNews());
+			// document.addEventListener("DOMContentLoaded	",getAllNews());
 
 				 </script>  
 
