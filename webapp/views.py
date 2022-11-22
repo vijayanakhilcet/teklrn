@@ -634,7 +634,7 @@ class TrendingNewsForNews(FormView):
             course_json['title'] = news
             course_json['heading'] = entry.description.split('!@#')[1]
             course_json['description'] = entry.description.split('!@#')[0]
-            course_json['link'] = c.imageLink
+            course_json['link'] = entry.imageLink
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -794,7 +794,7 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
             course_json['title'] = cname
             course_json['heading'] = entry.description.split('!@#')[1]
             course_json['description'] = entry.description.split('!@#')[0]
-            course_json['link'] = n.imageLink
+            course_json['link'] = entry.imageLink
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
