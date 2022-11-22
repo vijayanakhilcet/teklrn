@@ -89,6 +89,7 @@ class NewsLevel(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     level_number = models.IntegerField(default=1)    
     description = models.TextField(max_length=None, default='Hi')
+    imageLink =  models.CharField(max_length=400, default='')
 
     class Meta:
         ordering = ["level_number"]
