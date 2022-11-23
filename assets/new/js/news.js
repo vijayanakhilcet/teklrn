@@ -419,6 +419,7 @@ for (var i = 1; i <= b.total_levels; i++) {
               
         elm.innerHTML=html_message;
             });
+            elm.style.visibility='visible';
             event.preventDefault();      
     }
 
