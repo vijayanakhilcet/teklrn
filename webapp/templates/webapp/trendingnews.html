@@ -161,26 +161,27 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'new/js/main.js' %}"></script>    
     <script src="{% static 'new/js/trending.js' %}"></script>
-    <script type="text/javascript" async src="{% static 'js/magicscroll.js' %}"></script>
+    <script type="text/javascript"  src="{% static 'js/magicscroll.js' %}"></script>
    
-    <link type="text/css" rel="stylesheet" async href="{% static 'css/magicscroll.css' %}" media="screen"/>
+    <link type="text/css" rel="stylesheet"  href="{% static 'css/magicscroll.css' %}" media="screen"/>
 
-
+    <script>
+      $(window).on('scroll',function() {
+        refineSearchView("zzz");
+        $(window).off('scroll');
+  });
+      // $(window).ready(function(){  
+      //          $('.loader').fadeOut();  
+      //      });
+      // $(window).ready(function(){  
+      //   refineSearchView("zzz");
+      // 		 });
+          //  document.addEventListener("DOMContentLoaded", refineSearchView("zzz"));
+          // document.addEventListener('DOMContentLoaded', (event) => refineSearchView("zzz"));
+           </script>  
    
        
   </body>
-  <script>
-    $(window).one('scroll',function() {
-      refineSearchView("zzz")
-});
-    // $(window).ready(function(){  
-    //          $('.loader').fadeOut();  
-    //      });
-    // $(window).ready(function(){  
-    //   refineSearchView("zzz");
-		// 		 });
-        //  document.addEventListener("DOMContentLoaded", refineSearchView("zzz"));
-        // document.addEventListener('DOMContentLoaded', (event) => refineSearchView("zzz"));
-         </script>  
+ 
   
 </html>
