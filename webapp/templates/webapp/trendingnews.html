@@ -1,179 +1,147 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
-        <style>
-        /* .loader {
-position: fixed;
-left: 0px;
-top: 0px;
-width: 100%;
-height: 100%;
-z-index: 9999;
-background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
-} */
-    </style>
-    
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="Cache-control" content="public">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><script src="{% static 'new/js/kit.js' %}"></script> 
-    <!-- <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
-    <script src="{% static 'js/modal.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>  
-     <script src="{% static 'new/js/solid.js' %}"></script> 
-    <script src="{% static 'new/js/solid.min.js' %}"></script>  -->
-
-    <link rel="stylesheet"  href="{% static 'new/css/owl.carousel.min.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'css/stackpath.css' %}" type="text/css" /> -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="{% static 'new/css/style.css' %}">
-    
-    <!-- <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />     -->
-    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
-    
-    
-
-    <title>{{technology_desc}}</title>
-    <meta name="description" content="Latest Technologies - {{technology_desc}}"/> 
-    <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
-    <style>
-      
-      #mgc a{
-  visibility: hidden;
-}
-        
-        @font-face {
-  			font-family: 'Antietam';
-  			font-style: normal;
-  			font-weight: normal;
-			src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
-			}
-
-    </style>
-
-  </head>
-  <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
-    
-    TTT
-    <div class="loader"></div>  
-    <p id="technology_view" hidden>{{technology}}</p>
-    <p id="lvl_view" hidden>{{lvl}}</p>
-    <p id="technology_contentType" hidden>{{contentType}}</p>
-  
-    
-    <aside class="sidebar">
-      <!-- <div class="toggle" style="padding-top: 5px !important;">
-        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-              <span></span>
-            </a>
-      </div> -->
-      <div class="side-inner">
-
-        <div style="padding-left: 2%;padding-right: 2%;" onclick="login_l(event, course_name)" class="profile">
-          <img src="/static/image/images/{{technology}}_icon.png" style="width: 200px;height: 150px; border-radius: 10%;" alt="{{technology_desc}}" class="img-fluid">
-          <!--<img src="/static/image/images/play_b2.png" style="left: 50%; transform: translate(-00%, -210%);
-          -ms-transform: translate(-50%, -50%);
-          /* background-color: #6589c5; */
-          /* color: white; */
-          font-size: 16px;
-          padding: 5px 15px;
-          border: none;
-          cursor: pointer;
-          /* border-radius: 15px; */
-          text-align: center;">-->
-          <h3 style="padding-left:1%;" class="name">{{technology_desc}}</h3><br>
-         <!-- <span class="country">New York, USA</span> -->
-         <a style="font-size: smaller;">{{data}}</a>
-        </div>
-
-        <div class="counter d-flex justify-content-center">
-          <!-- <div class="row justify-content-center"> -->
-            <div class="col">
-              <strong class="number">18032</strong>
-              <span class="number-label">Users</span>
+   <head>
+      <style>
+         /* .loader {
+         position: fixed;
+         left: 0px;
+         top: 0px;
+         width: 100%;
+         height: 100%;
+         z-index: 9999;
+         background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+         } */
+      </style>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta http-equiv="Cache-control" content="public">
+      <meta name="robots" content="index, follow">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script src="{% static 'new/js/kit.js' %}"></script> 
+      <!-- <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+         <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+         <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+         <script src="{% static 'js/modal.js' %}"></script>
+         <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>  
+          <script src="{% static 'new/js/solid.js' %}"></script> 
+         <script src="{% static 'new/js/solid.min.js' %}"></script>  -->
+      <link rel="stylesheet"  href="{% static 'new/css/owl.carousel.min.css' %}">
+      <!-- <link rel="stylesheet" href="{% static 'css/stackpath.css' %}" type="text/css" /> -->
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">
+      <!-- Style -->
+      <link rel="stylesheet" href="{% static 'new/css/style.css' %}">
+      <!-- <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />     -->
+      <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+      <title>{{technology_desc}}</title>
+      <meta name="description" content="Latest Technologies - {{technology_desc}}"/>
+      <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
+      <style>
+         #mgc a{
+         visibility: hidden;
+         }
+         @font-face {
+         font-family: 'Antietam';
+         font-style: normal;
+         font-weight: normal;
+         src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+         }
+      </style>
+   </head>
+   <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
+      <div class="loader"></div>
+      <p id="technology_view" hidden>{{technology}}</p>
+      <p id="lvl_view" hidden>{{lvl}}</p>
+      <p id="technology_contentType" hidden>{{contentType}}</p>
+      <aside class="sidebar">
+         <!-- <div class="toggle" style="padding-top: 5px !important;">
+            <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+                  <span></span>
+                </a>
+            </div> -->
+         <div class="side-inner">
+            <div style="padding-left: 2%;padding-right: 2%;" onclick="login_l(event, course_name)" class="profile">
+               <img src="/static/image/images/{{technology}}_icon.png" style="width: 200px;height: 150px; border-radius: 10%;" alt="{{technology_desc}}" class="img-fluid">
+               <!--<img src="/static/image/images/play_b2.png" style="left: 50%; transform: translate(-00%, -210%);
+                  -ms-transform: translate(-50%, -50%);
+                  /* background-color: #6589c5; */
+                  /* color: white; */
+                  font-size: 16px;
+                  padding: 5px 15px;
+                  border: none;
+                  cursor: pointer;
+                  /* border-radius: 15px; */
+                  text-align: center;">-->
+               <h3 style="padding-left:1%;" class="name">{{technology_desc}}</h3>
+               <br>
+               <!-- <span class="country">New York, USA</span> -->
+               <a style="font-size: smaller;">{{data}}</a>
             </div>
-            <div class="col">
-              <strong class="number">1781</strong>
-              <span class="number-label">Followers</span>
+            <div class="counter d-flex justify-content-center">
+               <!-- <div class="row justify-content-center"> -->
+               <div class="col">
+                  <strong class="number">18032</strong>
+                  <span class="number-label">Users</span>
+               </div>
+               <div class="col">
+                  <strong class="number">1781</strong>
+                  <span class="number-label">Followers</span>
+               </div>
+               <div class="col">
+                  <strong class="number">106</strong>
+                  <span class="number-label">Topics</span>
+               </div>
+               <!-- </div> -->
             </div>
-            <div class="col">
-              <strong class="number">106</strong>
-              <span class="number-label">Topics</span>
+            <div class="nav-menu">
+               <ul id="navig_side">
+               </ul>
             </div>
-          <!-- </div> -->
-        </div>
-        
-        <div class="nav-menu">
-          <ul id="navig_side">
-                </ul>
-        </div>
-      </div>
-      
-    </aside>
-    
-    <main style="background-color: white !important; height: 100% !important; ">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
-        <div class="container-fluid">
-          <div>
-            <!-- <a href="/technologies/technology?technology={{technology}}" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a> -->
-            <!-- <a href="/news/technology?technology={{technology}}" style="padding-right: 4px; border-bottom-style: solid; border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;    padding-right: 4px;">TRENDING</a> -->
-            <!-- <a href="/info/technology?technology={{technology}}" style="padding-right: 4px; text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Info</a> -->
-  
-          </div>
-             <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1; margin: 0px -20px -0px 0px;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="155" height="55">  </a>
-            
+         </div>
+      </aside>
+      <main style="background-color: white !important; height: 100% !important; ">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
+            <div class="container-fluid">
+               <div>
+                  <!-- <a href="/technologies/technology?technology={{technology}}" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a> -->
+                  <!-- <a href="/news/technology?technology={{technology}}" style="padding-right: 4px; border-bottom-style: solid; border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;    padding-right: 4px;">TRENDING</a> -->
+                  <!-- <a href="/info/technology?technology={{technology}}" style="padding-right: 4px; text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Info</a> -->
+               </div>
+               <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1; margin: 0px -20px -0px 0px;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="155" height="55">  </a>
             </div>
-    </nav>
-    <img style="padding-top: 100px;margin-left: 10px;z-index: 111; width: 30px;  position: fixed;" onclick="backToNews()" src="/static/image/images/back_b.png">
-
-     
-      <div style="margin-top:10px;" style="padding: 1rem 0;" class="site-section">
-        
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-9">
-              <div id="rowdata" class="row">
-               
-             
-                 
-                </div>
-              </div>
+         </nav>
+         <img style="padding-top: 100px;margin-left: 10px;z-index: 111; width: 30px;  position: fixed;" onclick="backToNews()" src="/static/image/images/back_b.png">
+         <div style="margin-top:10px;" style="padding: 1rem 0;" class="site-section">
+            <div class="container">
+               <div class="row justify-content-center">
+                  <div class="col-md-9">
+                     <div id="rowdata" class="row">
+                     </div>
+                  </div>
+               </div>
             </div>
-
-
-          </div>
-        </div>
+         </div>
       </main>
       <div id="mgc" class="MagicScroll" data-options="mode: cover-flow; height: 135px;" style="background-color: white;position: fixed; bottom: 0; visibility: hidden;">
-        <div class="mcs-item" data-item="0" style="width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;"><div onclick="gotoTechnology('Carbon Capture Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
-        <!-- +<div class="mcs-item" data-item="1" style="width: 24.3716%; position: absolute; transform: translate3d(-295.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31668;"><div onclick="gotoTechnology('Ship Design Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div> -->
-      </div> 
-
-    <script src="{% static 'new/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'new/js/popper.min.js' %}"></script>
-    <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'new/js/main.js' %}"></script>    
-    <script src="{% static 'new/js/trending.js' %}"></script>
-    <script type="text/javascript"  src="{% static 'js/magicscroll.js' %}"></script>
-   
-    <link type="text/css" rel="stylesheet"  href="{% static 'css/magicscroll.css' %}" media="screen"/>
-
-  <script>
-      $(window).on('scroll',function() {
-        refineSearchView("zzz");
-        $(window).off('scroll');
-   
-  }); 
-  </script>     
-       
-  </body>
- 
-  
+         <div class="mcs-item" data-item="0" style="width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;">
+            <div onclick="gotoTechnology('Carbon Capture Technology')" style="opacity: 1; visibility: visible;"></div>
+            <canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas>
+         </div>
+      </div>
+      <script src="{% static 'new/js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'new/js/popper.min.js' %}"></script>
+      <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'new/js/main.js' %}"></script>    
+      <script src="{% static 'new/js/trending.js' %}"></script>
+      <script type="text/javascript"  src="{% static 'js/magicscroll.js' %}"></script>
+      <link type="text/css" rel="stylesheet"  href="{% static 'css/magicscroll.css' %}" media="screen"/>
+      <script>
+         $(window).on('scroll',function() {
+           refineSearchView("zzz");
+           $(window).off('scroll');
+         
+         }); 
+      </script>     
+   </body>
 </html>

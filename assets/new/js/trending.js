@@ -448,9 +448,13 @@ for (var i = 1; i <= b.total_levels; i++) {
         elm.innerHTML=html_message;
         // localStorage.setItem("mgc", html_message);
         //setCookie("mgc", html_message, 10);
-            });
+        elm.addEventListener("animationend", function() {
             elm.style.visibility='visible';
-            event.preventDefault();     
+    });
+        
+            });
+           
+            // event.preventDefault();     
         // } 
     }
 
