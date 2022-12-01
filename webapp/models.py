@@ -93,3 +93,20 @@ class NewsLevel(models.Model):
 
     class Meta:
         ordering = ["level_number"]
+
+class NewsTechnology(models.Model):
+    name = models.CharField(max_length=30)
+    category = models.CharField(max_length=30, default='General')
+    contentType = models.CharField(max_length=30, default='TECHNOLOGY NEWS') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
+    imageLink =  models.CharField(max_length=400, default='Hi')
+    def __str__(self):
+        return self.name
+
+class NewsTechnologyLevel(models.Model):
+    news = models.ForeignKey(NewsTechnology, on_delete=models.CASCADE)
+    level_number = models.IntegerField(default=1)    
+    description = models.TextField(max_length=None, default='Hi')
+    imageLink =  models.CharField(max_length=400, default='')
+
+    class Meta:
+        ordering = ["level_number"]
