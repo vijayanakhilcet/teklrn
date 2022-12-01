@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from urllib.parse import unquote
 from GoogleNews import GoogleNews
+import random
 import wikipedia
 import urllib.request
 from urllib.request import Request, urlopen
@@ -743,6 +744,7 @@ class NewsMatchingTheSearchView(FormView):
                 course_json['imageLink'] = technology.imageLink
                 #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
                 results.append(course_json)
+        random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
