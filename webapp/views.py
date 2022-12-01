@@ -13,7 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -259,6 +259,27 @@ def contact(request):
     
 def worldNews(request):
     page = 'webapp/worldnews_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
+def technologyNews(request):
+    page = 'webapp/technologynews_pre_landing.html'
     data = request.GET
     defaultTechnology = 'Tensorflow'
     if data.get("technology"):
