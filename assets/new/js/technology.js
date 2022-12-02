@@ -535,7 +535,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         scrollable:false
         });
         return false;   */
-        window.open(window.location.origin+"/trendingnews/technology/read?url="+url+'&heading='+heading+'&description='+technology.slice(0,40), "_self");     
+        window.open(window.location.origin+"/technologynews/technology/read?url="+url+'&heading='+heading+'&description='+technology.slice(0,40), "_self");     
      }
 
  function clk(){ 

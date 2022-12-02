@@ -341,6 +341,17 @@ def hiPre(request):
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 
+def technologyread(request):
+    page = 'webapp/technologymainpage.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    cname = unquote(data.get("heading"))
+    n = NewsTechnology.objects.get(name=cname)
+    cl = NewsTechnologyLevel.objects.filter(description__icontains=data.get("description"), news=n)[0]
+    return render(request, page, {'description':cl.description.split('!@#')[0], 'heading':cl.description.split('!@#')[1], 'technologyVal':data.get("heading"), 'url':cl.imageLink})
+
+
 def trendingread(request):
     page = 'webapp/trendingmainpage.html' 
     data = request.GET

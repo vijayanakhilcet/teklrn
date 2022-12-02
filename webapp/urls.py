@@ -23,6 +23,7 @@ urlpatterns = [
     path('info/technology/', views.info, name='info-Page'),
     path('news/technology/read/', views.newsread, name='news-read'),    
     path('trendingnews/technology/read/', views.trendingread, name='news-read'),    
+    path('technologynews/technology/read/', views.technologyread, name='news-read'),  
     path('technologies/technology/', views.gotToTechnology, name='gotToTechnology-Page'),
     path('technologies/', views.hiPre, name='hi-pre-Page'),
     path('news/', views.newsPre, name='hi-pre-Page'),
