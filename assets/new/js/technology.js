@@ -458,8 +458,8 @@ for (var i = 1; i <= b.total_levels; i++) {
         // } 
     }
 
-    function backToNews() {
-        window.open(window.location.origin+"/worldnews", "_self");   
+    function backToTechnologyNews() {
+        window.open(window.location.origin+"/technologynews", "_self");   
     }
 
     function gotoTechnology(pg){
