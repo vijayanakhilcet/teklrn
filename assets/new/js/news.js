@@ -608,7 +608,7 @@ $(function () {
     var elm = document.getElementById("mgc");
     var html_message = "";
     $.ajax({
-          url: "/getTechnologiesMatchingTheSearch", // the url where we want to POST
+          url: "/getTechnologiesMatchingTheSearchFiltered", // the url where we want to POST
           data: {
              "search_string": pg
           }, // our data object

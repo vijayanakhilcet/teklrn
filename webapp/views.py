@@ -816,6 +816,58 @@ class TechnologiesMatchingTheSearchView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class TechnologiesMatchingTheSearchViewFiltered(FormView):
+    def get(self,request,*args,**kwargs):
+        cate = 'GENERAL'
+        results= []
+        data = request.GET
+        topic = data.get("search_string")  
+        technologies = re.split(r'[;,\s]\s*', topic.strip())
+        results = []
+        for technology in technologies:
+            courses =  Course.objects.filter(name__icontains=technology).order_by("-id")
+            if courses:
+                for tech in courses:
+                    course_json = {}
+                    course_json['technology'] = tech.name
+                    course_json['description'] = tech.description
+                    if tech.contentType == 'Tech':
+                        cate = 'TECHNOLOGY'
+                    elif tech.contentType == 'Edu':
+                        cate = 'EDUCATIONAL'
+                    elif tech.contentType == 'Pol':
+                        cate = 'POLITICS'
+                    elif tech.contentType == 'Eco':
+                        cate = 'ECONOMY'
+
+                    course_json['contentType'] = cate
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                    results.append(course_json)
+
+        if not results:
+
+            technologies = Course.objects.all().order_by("-id")
+            for technology in technologies:
+                course_json = {}
+                course_json['technology'] = technology.name
+                course_json['description'] = technology.description
+                if technology.contentType == 'Tech':
+                        cate = 'TECHNOLOGY'
+                elif technology.contentType == 'Edu':
+                        cate = 'EDUCATIONAL'
+                elif technology.contentType == 'Pol':
+                        cate = 'POLITICS'
+                elif technology.contentType == 'Eco':
+                        cate = 'ECONOMY'
+
+                course_json['contentType'] = cate
+                #course_json['videoLink'] = CourseLevel.objects.get(course=technology, level_number=1).videoLink
+                   
+                results.append(course_json)
+        data = json.dumps(results[-35:])
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
         
 class TechnologyNewsMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
@@ -854,6 +906,43 @@ class TechnologyNewsMatchingTheSearchView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)        
 
+class TechnologyNewsMatchingTheSearchViewFiltered(FormView):
+    def get(self,request,*args,**kwargs):
+        cate = 'GENERAL'
+        results= []
+        data = request.GET
+        topic = data.get("search_string")  
+        technologies = re.split(r'[;,\s]\s*', topic.strip())
+        results = []
+        for technology in technologies:
+            courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")
+            if courses:
+                for tech in courses:
+                    course_json = {}
+                    course_json['name'] = tech.name
+                    course_json['category'] = tech.category
+                    course_json['contentType'] = tech.contentType
+                    course_json['imageLink'] = tech.imageLink
+
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                    results.append(course_json)
+
+        if not results:
+
+            technologies = NewsTechnology.objects.all().order_by("-id")
+            for technology in technologies:
+                course_json = {}
+                course_json['name'] = technology.name
+                course_json['category'] = technology.category
+                course_json['contentType'] = technology.contentType
+                course_json['imageLink'] = technology.imageLink
+                #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results[-35:])
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)             
+
 class NewsMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
         cate = 'GENERAL'
@@ -888,6 +977,43 @@ class NewsMatchingTheSearchView(FormView):
                 results.append(course_json)
         random.shuffle(results)
         data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+class NewsMatchingTheSearchViewFiltered(FormView):
+    def get(self,request,*args,**kwargs):
+        cate = 'GENERAL'
+        results= []
+        data = request.GET
+        topic = data.get("search_string")  
+        technologies = re.split(r'[;,\s]\s*', topic.strip())
+        results = []
+        for technology in technologies:
+            courses =  News.objects.filter(name__icontains=technology).order_by("-id")
+            if courses:
+                for tech in courses:
+                    course_json = {}
+                    course_json['name'] = tech.name
+                    course_json['category'] = tech.category
+                    course_json['contentType'] = tech.contentType
+                    course_json['imageLink'] = tech.imageLink
+
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                    results.append(course_json)
+
+        if not results:
+
+            technologies = News.objects.all().order_by("-id")
+            for technology in technologies:
+                course_json = {}
+                course_json['name'] = technology.name
+                course_json['category'] = technology.category
+                course_json['contentType'] = technology.contentType
+                course_json['imageLink'] = technology.imageLink
+                #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results[-35:])
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
     

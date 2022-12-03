@@ -433,7 +433,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         // else{
         var html_message ="";
         $.ajax({
-            url         : "/getNewsMatchingTheSearch", // the url where we want to POST
+            url         : "/getNewsMatchingTheSearchFiltered", // the url where we want to POST
             data        : {"search_string":pg}, // our data object
             dataType    : 'json', // what type of data do we expect back from the server
             encode      : true

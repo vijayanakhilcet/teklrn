@@ -46,8 +46,12 @@ urlpatterns = [
     path('searchtopicsnewtrending/',views.AutoCompleteSearchTopicsViewNewTrending.as_view()),
     path('searchtopicsnewtechnology/',views.AutoCompleteSearchTopicsViewNewTechnology.as_view()),
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
+    path('getTechnologiesMatchingTheSearchFiltered/',views.TechnologiesMatchingTheSearchViewFiltered.as_view()),
     path('getNewsMatchingTheSearch/',views.NewsMatchingTheSearchView.as_view()),
+    path('getNewsMatchingTheSearchFiltered/',views.NewsMatchingTheSearchViewFiltered.as_view()),
+
     path('getTechnologyNewsMatchingTheSearch/',views.TechnologyNewsMatchingTheSearchView.as_view()),
+    path('getTechnologyNewsMatchingTheSearchFiltered/',views.TechnologyNewsMatchingTheSearchViewFiltered.as_view()),
     path('getTechnologiesForDesignations/',views.TechnologiesMatchingTheDesignationView.as_view()),
     path('getTrendingNewsForNews/',views.TrendingNewsForNews.as_view()),
     path('getTechnologyNewsForNews/',views.TechnologyNewsForNews.as_view()),
