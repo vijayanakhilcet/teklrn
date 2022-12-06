@@ -322,7 +322,7 @@ event.preventDefault();
 
 function searchTopicsNews() {
     $.ajax({               
-        url          : "/searchtopicsnewtrending", // the url where we want to POST
+        url          : "/searchtopicsnewentertainment", // the url where we want to POST
         data         : {"course_name":course_name, "keyword_data": "Teklrn"},
         dataType     : 'json',
         encode       : true
@@ -459,7 +459,7 @@ for (var i = 1; i <= b.total_levels; i++) {
     }
 
     function backToNews() {
-        window.open(window.location.origin+"/worldnews", "_self");   
+        window.open(window.location.origin+"/entertainmentnews", "_self");   
     }
 
     function gotoTechnology(pg){
@@ -471,7 +471,7 @@ for (var i = 1; i <= b.total_levels; i++) {
                 var a2Html ="";
                 var a1Html = "";
         $.ajax({
-            url         : "/getTrendingNewsForNews", // the url where we want to POST
+            url         : "/getEntertainmentNewsForNews", // the url where we want to POST
             data        : {"search_string":pg}, // our data object
             dataType    : 'json', // what type of data do we expect back from the server
             encode      : true
@@ -535,7 +535,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         scrollable:false
         });
         return false;   */
-        window.open(window.location.origin+"/trendingnews/technology/read?url="+url+'&heading='+heading+'&description='+technology.slice(0,40), "_self");     
+        window.open(window.location.origin+"/entertainmentnews/technology/read?url="+url+'&heading='+heading+'&description='+technology.slice(0,40), "_self");     
      }
 
  function clk(){ 

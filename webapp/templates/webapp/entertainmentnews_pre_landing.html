@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <style>
+    <!-- <style>
         .loader {
 position: fixed;
 left: 0px;
@@ -12,7 +12,7 @@ width: 100%;
 height: 100%;
 z-index: 9999;
 background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
-}
+} -->
     </style>
     <style>
         @font-face {
@@ -54,16 +54,16 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 
                 <div style="width: 100%;">
                 <a  onclick="doLaunch(event)" style="float: left;width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="210" height="25"> </a>
-                <p style="padding-top: 1% ;float: left;width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
+                <!-- <p style="padding-top: 1% ;float: left;width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="text-transform: uppercase; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
      
-                </p>    
+                </p> -->
                 </div>
                 <div style="width: 100%;">
-                <a href="/technologies" style="padding-right: 4px;border-bottom-style: solid; border-bottom-color: #507fce;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-family: 'Poppins', sans-serif;color: white;padding: .5%;background-color: #507acf; font-size: .7rem;">VIDEO</a>
-                <a href="/news" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">NEWS</a>
-                <a href="/worldnews" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">TRENDING</a>
+                <a href="/technologies" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">VIDEO</a>
+                <a href="/news" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">NEWS</a>
+                <a href="/worldnews" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">TRENDING</a>
                 <a href="/technologynews" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">TECHNOLOGY</a>
-                <a href="/entertainmentnews" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">ENTERTAINMENT</a>
+                <a href="/entertainmentnews" style="border-bottom-style: solid;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-family: 'Poppins', sans-serif;color: white;padding: .5%;background-color: #507acf; font-size: .7rem;">ENTERTAINMENT</a>
 
             </div>
             </div>
@@ -73,19 +73,19 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 <!--<iframe id="course-pdf" src="static/image/Html_6.pdf"  style="width : 100%; height : 100%;"></iframe> -->
 <!--<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas> -->
 
-<script>
+<!-- <script>
     $(window).load(function(){  
              $('.loader').fadeOut();  
          });
-         </script>  
+         </script>   -->
 
-<div style="margin-top: 150px; padding: 20px !important;">
+<div style="margin-top: 110px; padding: 20px !important;">
     
 
    
     <section class="p-0 md-p-5">
 
-      
+        
         <div id="searchData"  class="flex flex-wrap">
       
         </div>
@@ -153,7 +153,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 
         </div>
     </section> -->
-       <script src="{% static 'js/search.js' %}"></script> 
+       <script src="{% static 'js/entertainmentnewssearch.js' %}"></script>
        
 </body>
 
