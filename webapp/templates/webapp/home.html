@@ -47,7 +47,7 @@
 						<li><a href="#cont">Contact</a></li>
 						<li><a href="#one">About</a></li>
 						<li><a href="#three">Refrences</a></li>
-						<li><a href="#" id="launch" onclick="doLaunch(event)" class="button special">Get Started</a></li>
+						<li><a href="#" id="launch" onclick="doLaunch(event, 'worldnews')" class="button special">Get Started</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -59,12 +59,12 @@
 				<h2 style="font-family: Antietam; color:#629dd1;"><img src="/static/image/images/Capture11.png" height="45" width="280"></h2>
 				
 					<!--<img src="static/image/images/icon_tek.png"></img>-->
-					<p style="color: #629dd1; visibility: hidden;">The Worlds Largest Hub of Technology Learning</p>
+					<p style="color: #629dd1; visibility: hidden;">Technology World News Entertainment</p>
 					<!--<p style="color: lightyellow; font-size: medium;">We intend to partner with major UNIVERSITIES in US and CANADA and with the Software Industry at large.</p>
 					<p style="color: lightyellow; font-size: medium;">With Over 300 Highly Certified and Experienced Freelance Trainers we are the Fastest Growing e-Learning Platform in the World</p>
 					-->
 					
-					<ul class="actions">
+					<!-- <ul class="actions">
 						<li><a href="#content" id="launch1" onclick="doLaunch(event)" class="button big special">Get Started</a></li>
 						{% if user.is_authenticated %}
 						<li><a href="#two"  class="button big alt">Quick Links</a></li>
@@ -72,6 +72,17 @@
 						{% if not user.is_authenticated %}
 						<li><a href="#content" id="launch1" onclick="login_t(event)" class="button big alt">Freelance Trainer</a></li>
 						<li><a href="#one" onclick="login_l(event)" class="button big alt">Learner Login</a></li>
+						{% endif %}
+					</ul> -->
+
+					<ul class="actions">
+						<li><a href="#content" id="launch1" onclick="doLaunch(event, 'technologynews')" class="button big special">Technology</a></li>
+						{% if user.is_authenticated %}
+						<li><a href="#two"  class="button big alt">Quick Links</a></li>
+						{% endif %}
+						{% if not user.is_authenticated %}
+						<li><a href="#content" id="launch1" onclick="doLaunch(event, 'worldnews')" class="button big alt">World News</a></li>
+						<li><a href="#one" onclick="doLaunch(event, 'entertainmentnews')" class="button big alt">Entertainment</a></li>
 						{% endif %}
 					</ul>
 				</div>

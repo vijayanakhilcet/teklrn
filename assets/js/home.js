@@ -123,9 +123,9 @@ function getAllNews(){
 
 
 
-function doLaunch(event) {
+function doLaunch(event, section_data) {
         $.ajax({
-            url         : "worldnews", // the url where we want to POST
+            url         : section_data, // the url where we want to POST
             data        : {"technology":"Tensorflow"}, // our data object
             dataType    : "html", // what type of data do\ we expect back from the server
             encode      : true
