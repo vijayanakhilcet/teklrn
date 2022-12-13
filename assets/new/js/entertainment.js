@@ -442,7 +442,7 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="'+data[index].imageLink+'" /></div>'
+                      html_message +='<div style="position:relative;" onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height:200px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;background-color:white;position:absolute; color:black;bottom: 2px;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
                     });
               
         elm.innerHTML=html_message;
