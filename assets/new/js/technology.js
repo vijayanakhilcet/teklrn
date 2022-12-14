@@ -442,8 +442,8 @@ for (var i = 1; i <= b.total_levels; i++) {
             .done(function(data) {
                 elm.innerHTML="";  
                 $.each(data, function(index) {
-                      html_message +='<div onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height: 135px;object-fit: cover;" src="'+data[index].imageLink+'" /></div>'
-                    });
+                    html_message +='<div style="position:relative;" onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height:135px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
+                });
               
         elm.innerHTML=html_message;
         // localStorage.setItem("mgc", html_message);
