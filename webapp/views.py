@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from bing_image_urls import bing_image_urls
 from urllib.parse import unquote
 from GoogleNews import GoogleNews
 import random
@@ -605,12 +606,24 @@ def news(request):
     if data.get("technology"):
         try:
             c = Course.objects.get(description=data.get("technology"))
+            defaultTechnology = c.name
+            contentType = c.contentType
+            request.session['contentType'] = c.contentType
+            technology_description = c.description
         except:
-            c = Course.objects.get(name=data.get("technology"))
-        defaultTechnology = c.name
-        contentType = c.contentType
-        request.session['contentType'] = c.contentType
-        technology_description = c.description
+            try:
+                c = Course.objects.get(name=data.get("technology"))
+                defaultTechnology = c.name
+                contentType = c.contentType
+                request.session['contentType'] = c.contentType
+                technology_description = c.description
+            except:
+                defaultTechnology = data.get("technology")
+                contentType = data.get("technology")
+                request.session['contentType'] = data.get("technology")
+                technology_description = data.get("technology")
+
+       
     request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
@@ -622,19 +635,19 @@ def news(request):
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
     #data_file = open('assets/text/'+defaultTechnology+'_text.txt', 'r')       
     #data = data_file.read()
-    url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
+    #url = "https://en.wikipedia.org/wiki/"+(wikipedia.search(technology_description)[0]).replace(" ", "_")
     # opening the url for reading
-    html = urllib.request.urlopen(url)
+    #html = urllib.request.urlopen(url)
     # parsing the html file
-    htmlParse = BeautifulSoup(html, 'html.parser')
-    htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
+    #htmlParse = BeautifulSoup(html, 'html.parser')
+    #htmlParse = htmlParse.find("div", {"class": "mw-parser-output"})
     # getting all the paragraphs
-    txt = ''
-    for para in htmlParse.find_all("p"):
-        txt += str(para)
-    soup = BeautifulSoup(txt, features="lxml")
-    data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, data:data})
+    #txt = ''
+    # for para in htmlParse.find_all("p"):
+    #     txt += str(para)
+    # soup = BeautifulSoup(txt, features="lxml")
+    # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':''})
 
 
 
@@ -866,6 +879,21 @@ class TechnologiesMatchingTheDesignationView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+
+class TechnologiesMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        our_url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=10f27a32c3224f959563a9964bbd70db"
+        data = requests.get(our_url).json()
+        for item in data['articles']:
+            course_json = {}
+            course_json['technology'] = str(item['urlToImage']) 
+            course_json['description'] = item['title'].split(' - ')[0].replace("'", "")
+            course_json['contentType'] = 'POLITICS'
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 class TechnologiesMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
@@ -1303,15 +1331,18 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         data = request.GET
         topic = data.get("keyword_data")   
         c = data.get("course_name")
-        temp = Course.objects.get(name=c.capitalize()).description
+        #temp = Course.objects.get(name=c.capitalize()).description
+        temp=c
         googlenews = GoogleNews(lang='en', period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
         for entry in alldata:
             course_json = {}
-            course_json['title'] = entry["title"].replace('\'', '')
+            titles = entry["title"].replace('\'', '')
+            course_json['title'] = titles
             course_json['description'] = entry["desc"].replace('\'', '')
             course_json['link'] = entry["link"]
+            course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'

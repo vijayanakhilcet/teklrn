@@ -50,6 +50,7 @@ urlpatterns = [
     path('searchtopicsnewentertainment/',views.AutoCompleteSearchTopicsViewNewEntertainment.as_view()),
     path('searchtopicsnewtechnology/',views.AutoCompleteSearchTopicsViewNewTechnology.as_view()),
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
+    path('getTechnologiesMatchingTheSearchNew/',views.TechnologiesMatchingTheSearchNewView.as_view()),
     path('getTechnologiesMatchingTheSearchFiltered/',views.TechnologiesMatchingTheSearchViewFiltered.as_view()),
     path('getNewsMatchingTheSearch/',views.NewsMatchingTheSearchView.as_view()),
     path('getNewsMatchingTheSearchFiltered/',views.NewsMatchingTheSearchViewFiltered.as_view()),
