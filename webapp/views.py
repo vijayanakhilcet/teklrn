@@ -1332,7 +1332,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         topic = data.get("keyword_data")   
         c = data.get("course_name")
         #temp = Course.objects.get(name=c.capitalize()).description
-        temp=c
+        temp=unquote(c)
         googlenews = GoogleNews(lang='en', period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
@@ -1342,7 +1342,10 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
             course_json['title'] = titles
             course_json['description'] = entry["desc"].replace('\'', '')
             course_json['link'] = entry["link"]
-            course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+            try:
+                course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+            except:
+                course_json['imgLink'] =  bing_image_urls(titles.replace('-', ' ').replace(',', ' '), limit=1)[0]
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
