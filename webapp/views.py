@@ -457,7 +457,7 @@ def newsread(request):
         txt += ' '+str(para)
     soup = BeautifulSoup(txt, features="lxml")
     dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
-    return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology")})
+    return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology"), 'url':data.get("imgLink")})
 
 def info(request):
     page = 'webapp/info.html' 

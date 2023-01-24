@@ -126,32 +126,36 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
                    </div>
             </nav>
      
-      <div style="margin-top:10px;" style="padding: 1rem 0;" class="site-section">
+            <div style="margin-top:10px;" style="padding: 1rem 0;" class="site-section">
         
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-12">
-              <div id="rowdata" class="row">
-                <div class="col-md-12">
-                  <div class="d-flex post-entry">
-                   <div class="custom-thumbnail" style="margin-right: 0px;">
-                    <img style="z-index: 111; width: 40px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png" style="z-index:100;width: 30px;float: right;">  </div>
-                   <div class="post-content">
-                     <div style="text-transform: capitalize;font-weight: 300 !important; font-family: 'Poppins', sans-serif; font-size: 16px !important;  color:black !important">{{heading}}
-                     </div>
-                     <hr>
-                     <p style="color: #4d4c4c;font-size:13px;display: block; max-height: 3.6em;  line-height: 1.8em;">
-                      {{description}}
-                     </p>
-                     <div class="post-meta"> 
-                     </div>
-                     <div class="post-meta">
-                       <span> </span>
-                     </div>
-                   </div>
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-md-12">
+                    <div id="rowdata" class="row">
+                      <div class="col-md-12">
+                        <div class="d-flex post-entry">
+                         <div class="custom-thumbnail" style="margin-right: 0px; flex: 0 0 40px;">
+                          <img style="z-index: 111; width: 40px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png" style="z-index:100;width: 30px;float: right;">  </div>
+                         <div class="post-content">
+                          <img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width:100%;  height:50%;object-fit: cover;" src="{{url}}">
+                           <div style="text-transform: capitalize; padding-top: 2% ;font-weight: 450 !important; font-family: 'Poppins', sans-serif; font-size: 14px !important;  color:black !important">{{heading}}
+                           </div>
+                           <hr>
+                           <p style="color: #4d4c4c;font-size:13px;display: block; max-height: 3.6em;  line-height: 1.8em;">
+                            {{description}}
+                           </p>
+                           <div class="post-meta"> 
+                           </div>
+                           <div class="post-meta">
+                             <span> </span>
+                         </div>
+                        </div>
+                       </div>             
+                       
+                      </div>
+                    </div>
                   </div>
-                 </div>             
-                 
+      
                 </div>
               </div>
             </div>

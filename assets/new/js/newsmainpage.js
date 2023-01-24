@@ -411,7 +411,7 @@ for (var i = 1; i <= b.total_levels; i++) {
         var elm = document.getElementById("mgc");
         var html_message ="";
         $.ajax({
-            url         : "/getTechnologiesMatchingTheSearchFiltered", // the url where we want to POST
+            url         : "/getTechnologiesMatchingTheSearch", // the url where we want to POST
             data        : {"search_string":pg}, // our data object
             dataType    : 'json', // what type of data do we expect back from the server
             encode      : true

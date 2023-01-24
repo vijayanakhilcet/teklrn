@@ -371,7 +371,7 @@ $(function () {
              a2Html += '</div></h4>';
  
              //aHtml += '<div class="col-md-6"><div class="d-flex post-entry"><div class="custom-thumbnail"><img style="padding-left:30%;" src="/static/image/images/' + course_name + '_icon.png" width="55px" height="30px" alt="Image" class="img-fluid"></div><div onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\')"  class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding: 1.5%; margin-right: 2%; ">NEWS ' + (index + 1) + ' </b>' + data[index].title + '<img onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\')" src="/static/image/images/read_b.png" style="width: 30%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">' + data[index].description + '</p><div class="post-meta">' + a1Html + '</div><div class="post-meta"><span>' + a2Html + '</span></div></div></div></div>';
-             aHtml += '<div class="col-md-6" onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\')"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="'+data[index].imgLink+'" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS '+(index+1)+' </b>'+data[index].title+'<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
+             aHtml += '<div class="col-md-6" onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\', \''+data[index].imgLink + '\')"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="'+data[index].imgLink+'" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS '+(index+1)+' </b>'+data[index].title+'<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">'+data[index].description+'</p><div class="post-meta">'+a1Html+'</div><div class="post-meta"><span>'+ a2Html+'</span></div></div></div></div>';     
 
             });
           elm.innerHTML = aHtml;
@@ -681,7 +681,7 @@ $(function () {
  }
  
  
- function lvlclk(url, heading, technology) {
+ function lvlclk(url, heading, technology, imgLink) {
     /*
     var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
     $.createModal({
@@ -691,7 +691,7 @@ $(function () {
     scrollable:false
     });
     return false;   */
-    window.open(window.location.origin + "/news/technology/read?url=" + url + '&heading=' + heading + '&technology=' + technology, "_self");
+    window.open(window.location.origin + "/news/technology/read?url=" + url + '&heading=' + heading + '&technology=' + technology + '&imgLink='+imgLink, "_self");
  }
  
  function clk() {
