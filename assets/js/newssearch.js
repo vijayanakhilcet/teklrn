@@ -1,7 +1,7 @@
 $(document).ready(function () {
     
     var runit = 0;     
-    refineSearchView("zzz");
+    refineSearchView("us");
    // document.getElementById("course-search").focus();
 
     $("#course-search").autocomplete({  
@@ -29,6 +29,11 @@ $("#course-search").on('keyup', function (event) {
         }  
                 
          runit = 0;   
+});
+
+$("#countryCode").on('change', function (event) {
+    refineSearchView(event.target.value);
+
 });
 
     // toggle mobile menu
@@ -98,7 +103,7 @@ function refineSearchView(pg){
 
 
 function gotoTechnology(pg){
-    window.open(window.location.origin+"/news/technology?technology="+pg, "_self");
+    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val(), "_self");
     /*    $.ajax({
             url         : "hi", // the url where we want to POST
             data        : {"technology":pg}, // our data object

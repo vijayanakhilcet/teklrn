@@ -21,6 +21,7 @@ $(function () {
     image_name = view_to_show + '_';
     course_name = view_to_show;
     course_description = view_to_show;
+    Code = document.getElementById("Code").textContent
     var runit = 0;
     searchTopicsNews();
  
@@ -349,7 +350,9 @@ $(function () {
           url: "/searchtopicsnewnews", // the url where we want to POST
           data: {
              "course_name": course_name,
-             "keyword_data": "Teklrn"
+             "keyword_data": "Teklrn",
+             "lang":Code   
+
           },
           dataType: 'json',
           encode: true

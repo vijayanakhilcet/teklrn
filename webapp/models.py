@@ -127,3 +127,10 @@ class NewsEntertainmentLevel(models.Model):
 
     class Meta:
         ordering = ["level_number"]
+
+class CountryCode(models.Model):
+    country = models.CharField(max_length=400, default='')
+    code = models.CharField(max_length=400, default='') 
+
+    class Meta:
+        ordering = ["code"]

@@ -647,7 +647,7 @@ def news(request):
     #     txt += str(para)
     # soup = BeautifulSoup(txt, features="lxml")
     # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':''})
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':''})
 
 
 
@@ -883,12 +883,14 @@ class TechnologiesMatchingTheDesignationView(FormView):
 class TechnologiesMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
-        our_url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=10f27a32c3224f959563a9964bbd70db"
+        data = request.GET
+        codeC = data.get("search_string")  
+        our_url = "https://newsapi.org/v2/top-headlines?country="+codeC+"&apiKey=10f27a32c3224f959563a9964bbd70db"
         data = requests.get(our_url).json()
         for item in data['articles']:
             course_json = {}
             course_json['technology'] = str(item['urlToImage']) 
-            course_json['description'] = item['title'].split(' - ')[0].replace("'", "")
+            course_json['description'] = item['title'].split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "")
             course_json['contentType'] = 'POLITICS'
             results.append(course_json)
         data = json.dumps(results)
@@ -1331,9 +1333,10 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         data = request.GET
         topic = data.get("keyword_data")   
         c = data.get("course_name")
+        langg = data.get("lang")
         #temp = Course.objects.get(name=c.capitalize()).description
         temp=unquote(c)
-        googlenews = GoogleNews(lang='en', period='1d')
+        googlenews = GoogleNews(lang=langg, period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
         for entry in alldata:
