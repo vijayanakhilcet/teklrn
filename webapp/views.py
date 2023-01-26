@@ -1341,19 +1341,40 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
         translator = Translator()
-        for entry in alldata:
-            course_json = {}
-            titles = entry["title"].replace('\'', '')
-            course_json['title'] = titles
-            course_json['description'] = entry["desc"].replace('\'', '')
-            course_json['link'] = entry["link"]
-            titles = translator.translate(titles, dest="en").text
-            try:
-                course_json['imgLink'] =  bing_image_urls(entry["title"], limit=1)[0]
-            except:
-                course_json['imgLink'] =  bing_image_urls(entry["title"].replace('-', ' ').replace(',', ' '), limit=1)[0]
+        NonEnglish = False
+        if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
+            NonEnglish = True   
+        if NonEnglish: 
+            for entry in alldata:
+                course_json = {}
+                
+                course_json['description'] = entry["desc"].replace('\'', '')
+                course_json['link'] = entry["link"]
+                titles = entry["title"]
+                course_json['title'] = titles
+                titles = translator.translate(titles, dest="en").text
+                                    
+                try:
+                    course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+                except:
+                    course_json['imgLink'] =  ''
 
-            results.append(course_json)
+                results.append(course_json)
+        else:
+            for entry in alldata:
+                course_json = {}
+                
+                course_json['description'] = entry["desc"].replace('\'', '')
+                course_json['link'] = entry["link"]
+                titles = entry["title"].replace('\'', '')
+                course_json['title'] = titles
+                    
+                try:
+                    course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+                except:
+                    course_json['imgLink'] =  ''
+
+                results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
