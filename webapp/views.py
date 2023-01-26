@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from googletrans import Translator
 from bing_image_urls import bing_image_urls
 from urllib.parse import unquote
 from GoogleNews import GoogleNews
@@ -1339,16 +1340,19 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         googlenews = GoogleNews(lang=langg, period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
+        translator = Translator()
         for entry in alldata:
             course_json = {}
             titles = entry["title"].replace('\'', '')
             course_json['title'] = titles
             course_json['description'] = entry["desc"].replace('\'', '')
             course_json['link'] = entry["link"]
+            titles = translator.translate(titles, dest="en").text
             try:
-                course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+                course_json['imgLink'] =  bing_image_urls(entry["title"], limit=1)[0]
             except:
-                course_json['imgLink'] =  bing_image_urls(titles.replace('-', ' ').replace(',', ' '), limit=1)[0]
+                course_json['imgLink'] =  bing_image_urls(entry["title"].replace('-', ' ').replace(',', ' '), limit=1)[0]
+
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
