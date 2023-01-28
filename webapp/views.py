@@ -1407,6 +1407,26 @@ class AutoCompleteSearchTopicsViewNew(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class AutoCompleteViewNew(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        courseName = data.get("term")
+        courses = []
+        headers = {
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+        response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
+        for course in json.loads(response.text)[1]:
+            course_json = {}
+            course_json['value'] = course
+            course_json['name'] = course
+            course_json['description'] = course
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 class AutoCompleteView(FormView):
     def get(self,request,*args,**kwargs):

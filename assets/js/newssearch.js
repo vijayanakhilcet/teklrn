@@ -16,15 +16,17 @@ $(document).ready(function () {
 .data("ui-autocomplete")._renderItem = function(ul, item) {
     return $( "<li style='margin-top:25px'>" )
     .data( "ui-autocomplete-item", item )
-    .append( "<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>"+ item.description)
+    .append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>-->"+ item.description)
     .appendTo( ul );
   };
 
 $("#course-search").on('keyup', function (event) {
         if(runit === 0){
             if (event.keyCode === 13) {                                     
-                $("#course-search").blur();            
-                refineSearchView(event.target.value);    
+                $("#course-search").blur(); 
+                //refineSearchView(event.target.value);    
+                gotoTechnology(event.target.value);
+
             }
         }  
                 
@@ -102,7 +104,7 @@ function refineSearchView(pg){
 
 
 
-function gotoTechnology(pg){
+function gotoTechnology(pg){    
     window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val(), "_self");
     /*    $.ajax({
             url         : "hi", // the url where we want to POST
