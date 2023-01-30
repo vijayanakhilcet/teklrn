@@ -1335,25 +1335,22 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
         topic = data.get("keyword_data")   
         c = data.get("course_name")
         langg = data.get("lang")
-        #temp = Course.objects.get(name=c.capitalize()).description
         temp=unquote(c)
         googlenews = GoogleNews(lang=langg, period='1d')
         googlenews.search(temp)
         alldata = googlenews.results(sort=True)
-        translator = Translator()
         NonEnglish = False
         if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
-            NonEnglish = True   
-        if NonEnglish: 
+            NonEnglish = True 
+        if NonEnglish:            
+            translator = Translator() 
             for entry in alldata:
-                course_json = {}
-                
+                course_json = {}                
                 course_json['description'] = entry["desc"].replace('\'', '')
                 course_json['link'] = entry["link"]
                 titles = entry["title"]
                 course_json['title'] = titles
-                titles = translator.translate(titles, dest="en").text
-                                    
+                titles = translator.translate(titles, dest="en").text                                    
                 try:
                     course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
                 except:
