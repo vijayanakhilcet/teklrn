@@ -1330,6 +1330,27 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
+
+class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
+    def get(self,request,*args,**kwargs):
+        print('hi')
+        results= []
+        data = request.GET
+        topic = data.get('titles')  
+        alltitles = topic.split('---')
+        for entry in alltitles:
+            course_json = {} 
+            e = unquote(entry.replace('img-', ''))
+            course_json['title'] = 'img-'+e
+            try:
+                course_json['src'] =  bing_image_urls(e.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+            except:
+                course_json['src'] =  '/static/image/test/certificate.jpg'
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
    
 class AutoCompleteSearchTopicsViewNewNews(FormView):
     def get(self,request,*args,**kwargs):
@@ -1355,7 +1376,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 course_json['title'] = titles
                 titles = translator.translate(titles, dest="en").text                                    
                 try:
-                    course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                    course_json['imgLink'] =  '/static/image/test/certificate.jpg' #bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:
                     course_json['imgLink'] =  '/static/image/test/certificate.jpg'
 
@@ -1370,7 +1391,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 course_json['title'] = titles
                     
                 try:
-                    course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=0)[0]
+                    course_json['imgLink'] =  '/static/image/test/certificate.jpg' #bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=0)[0]
                 except:
                     course_json['imgLink'] =  '/static/image/test/certificate.jpg'
 
