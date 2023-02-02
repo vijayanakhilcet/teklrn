@@ -1352,7 +1352,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 course_json['title'] = titles
                 titles = translator.translate(titles, dest="en").text                                    
                 try:
-                    course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+                    course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", ""), limit=1)[0]
                 except:
                     course_json['imgLink'] =  ''
 
@@ -1367,7 +1367,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 course_json['title'] = titles
                     
                 try:
-                    course_json['imgLink'] =  bing_image_urls(titles, limit=1)[0]
+                    course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", ""), limit=1)[0]
                 except:
                     course_json['imgLink'] =  ''
 
