@@ -449,15 +449,18 @@ def newsread(request):
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
     req = Request(data.get("url"), headers={'User-Agent': 'Mozilla/5.0'})
-    html = urlopen(req)    
-    #html = urllib.request.urlopen(data.get("url"), headers=hdr)
-    # parsing the html file
-    htmlParse = BeautifulSoup(html, 'html.parser')
-    txt = ''
-    for para in htmlParse.find_all("p"):
-        txt += ' '+str(para)
-    soup = BeautifulSoup(txt, features="lxml")
-    dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
+    try:
+        html = urlopen(req)    
+        #html = urllib.request.urlopen(data.get("url"), headers=hdr)
+        # parsing the html file
+        htmlParse = BeautifulSoup(html, 'html.parser')
+        txt = ''
+        for para in htmlParse.find_all("p"):
+            txt += ' '+str(para)
+        soup = BeautifulSoup(txt, features="lxml")
+        dataValue = re.sub("[\[].*?[\]]", "", soup.get_text())
+    except:
+        dataValue = '' 
     return render(request, page, {'description':dataValue, 'heading':data.get("heading"), 'technologyVal':data.get("technology"), 'url':data.get("imgLink")})
 
 def info(request):
