@@ -1354,7 +1354,8 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 try:
                     course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", "").replace('’', ''), limit=1)[0]
                 except:
-                    course_json['imgLink'] =  '/static/image/test/certificate.jpg'
+                    course_json['imgLink'] = bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", "").replace('’', ''), limit=5)[1]
+                    #course_json['imgLink'] =  '/static/image/test/certificate.jpg'
 
                 results.append(course_json)
         else:
@@ -1369,7 +1370,8 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 try:
                     course_json['imgLink'] =  bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", "").replace('’', ''), limit=0)[0]
                 except:
-                    course_json['imgLink'] =  '/static/image/test/certificate.jpg'
+                    course_json['imgLink'] = bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace("'", "").replace('’', ''), limit=5)[1]
+                    #course_json['imgLink'] =  '/static/image/test/certificate.jpg'
 
                 results.append(course_json)
         data = json.dumps(results)
