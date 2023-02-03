@@ -893,7 +893,10 @@ class TechnologiesMatchingTheSearchNewView(FormView):
         data = requests.get(our_url).json()
         for item in data['articles']:
             course_json = {}
-            course_json['technology'] = str(item['urlToImage']) 
+            img = str(item['urlToImage']) 
+            if 'googleusercontent' in img or "None" in img or not img:
+                img = '/static/image/test/certificate.jpg'
+            course_json['technology'] = img 
             course_json['description'] = item['title'].split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "")
             course_json['contentType'] = 'POLITICS'
             results.append(course_json)
