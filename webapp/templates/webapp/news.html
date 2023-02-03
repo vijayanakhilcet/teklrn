@@ -184,13 +184,15 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
       $(window).on('scroll',function() {
         //refineSearchView("zzz");
         var dates = document.querySelectorAll('[id^="img-"]');
+        Code = document.getElementById("Code").textContent;
         data = ''
         dates.forEach((userItem) => {
         data=data+userItem.id+'---';
         $.ajax({
           url: "/searchtopicsnewnewsForImg", // the url where we want to POST
           data: {
-             "titles": data
+             "titles": data,
+             "lang":Code
           },
           dataType: 'json',
           encode: true

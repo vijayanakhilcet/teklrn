@@ -895,7 +895,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
             course_json = {}
             img = str(item['urlToImage']) 
             if 'googleusercontent' in img or "None" in img or not img:
-                img = '/static/image/test/certificate.jpg'
+                img = '/static/image/images/2.png'
             course_json['technology'] = img 
             course_json['description'] = item['title'].split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "")
             course_json['contentType'] = 'POLITICS'
@@ -1340,16 +1340,32 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         results= []
         data = request.GET
         topic = data.get('titles')  
+        langg = data.get('lang') 
+        NonEnglish = False
+        if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
+            NonEnglish = True 
         alltitles = topic.split('---')
-        for entry in alltitles:
-            course_json = {} 
-            e = unquote(entry.replace('img-', ''))
-            course_json['title'] = 'img-'+e
-            try:
-                course_json['src'] =  bing_image_urls(e.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
-            except:
-                course_json['src'] =  '/static/image/test/certificate.jpg'
-            results.append(course_json)
+        if NonEnglish: 
+            translator = Translator() 
+            for entry in alltitles:
+                course_json = {} 
+                e = unquote(entry.replace('img-', ''))
+                course_json['title'] = 'img-'+e
+                try:
+                    course_json['src'] =  bing_image_urls(translator.translate(e, dest="en").text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                except:
+                    course_json['src'] =  '/static/image/test/certificate.jpg'
+                results.append(course_json)
+        else:            
+            for entry in alltitles:
+                course_json = {} 
+                e = unquote(entry.replace('img-', ''))
+                course_json['title'] = 'img-'+e
+                try:
+                    course_json['src'] =  bing_image_urls(e.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                except:
+                    course_json['src'] =  '/static/image/test/certificate.jpg'
+                results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
