@@ -70,11 +70,11 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
   
     
     <aside class="sidebar">
-      <div class="toggle" style="padding-top: 5px !important;">
+      <!-- <div class="toggle" style="padding-top: 5px !important;">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
               <span></span>
             </a>
-      </div>
+      </div> -->
       <div class="side-inner">
 
         <div style="padding-left: 2%;padding-right: 2%;" onclick="login_l(event, course_name)" class="profile">
@@ -120,12 +120,18 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     </aside>
     
     <main style="background-color: white !important; height: 100% !important; ">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
-                <div class="container-fluid">
-                  <input onclick="doLaunch(event)" type="text" name="course-search" id="course-search" class="form-control" placeholder="" style="width: 15%; text-transform: uppercase; font-weight: bolder; font-family: 'Font Awesome 5 Free';">
-                 <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="200" height="65">  </a>
-                   </div>
-            </nav>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
+        <div class="container-fluid">
+          <div>
+            <!-- <a href="/technologies/technology?technology={{technology}}" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a>
+            <a href="/news/technology?technology={{technology}}" style="padding-right: 4px; border-bottom-style: solid; border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">News</a>
+            <a href="/info/technology?technology={{technology}}" style="padding-right: 4px; text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Info</a> -->
+  
+          </div>
+             <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1; margin: 0px -20px -0px 0px;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="155" height="55">  </a>
+            
+            </div>
+    </nav>
      
       <div style="margin-top:10px;" style="padding: 1rem 0;" class="site-section">
         
@@ -138,7 +144,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
                    <div class="custom-thumbnail" style="margin-right: 0px; flex: 0 0 0px;">
                     <img style="z-index: 111; width: 40px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png" style="z-index:100;width: 30px;float: right;">  </div>
                    <div class="post-content">
-                    <img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width:100%;  height:50%;object-fit: cover;" src="{{url}}">
+                    <img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width:100%;  height:70%;object-fit: cover;" src="{{url}}">
                      <div style="text-transform: capitalize; padding-top: 2% ;font-weight: 450 !important; font-family: 'Poppins', sans-serif; font-size: 14px !important;  color:black !important">{{heading}}
                      </div>
                      <hr>
