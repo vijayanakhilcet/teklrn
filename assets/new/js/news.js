@@ -692,7 +692,7 @@ $(function () {
     scrollable:false
     });
     return false;   */
-    window.open(window.location.origin + "/news/technology/read?url=" + url + '&heading=' + heading + '&technology=' + technology + '&imgLink='+imgLink, "_self");
+    window.open(window.location.origin + "/news/technology/read?url=" + url + '&heading=' + heading + '&technology=' + technology + '&imgLink='+document.getElementById('img-'+heading).src, "_self");
  }
  
  function clk() {
