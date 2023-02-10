@@ -173,8 +173,8 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
           var viewport = page.getViewport({scale:1.5});
           myCanvas.width = viewport.width;
           myCanvas.height = viewport.height;
-          page.render({
-              canvasContext:context,
+          page.render({ 
+              canvasContext:context, 
               viewport:viewport
           });
       });

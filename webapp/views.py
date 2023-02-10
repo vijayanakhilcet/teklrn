@@ -918,7 +918,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
-        return HttpResponse(data, mimetype)
+        return HttpResponse(data, mimetype) 
 
 class TechnologiesMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
