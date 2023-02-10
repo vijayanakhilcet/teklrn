@@ -101,7 +101,34 @@ function refineSearchView(pg){
             });
           
     elm.innerHTML=html_message;
-        });
+        })
+        .complete(function(data) {
+            var datas = document.querySelectorAll('[id^="img-"]');
+            Code = $("#countryCode option:selected").val().split("---")[0];
+            data = ''
+            datas.forEach((userItem) => {
+                data=userItem.id+'---';
+                $.ajax({
+                    url: "/searchtopicsnewnewsForImg", // the url where we want to POST
+                    data: {
+                    "titles": data,
+                    "lang":Code
+                    },
+                    dataType: 'json',
+                    encode: true
+                })
+                // using the done promise callback
+                .done(function (data) {
+                    $.each(data, function (index) {
+                    var elm = document.getElementById(data[index].title);
+                    elm.src = data[index].src;
+                    elm.style.visibility = "visible";
+                    });
+        
+                });
+            });
+        })
+         
         return false;       
 }
 
