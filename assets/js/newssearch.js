@@ -37,6 +37,7 @@ $("#course-search").on('keyup', function (event) {
 });
 
 $("#countryCode").on('change', function (event) {
+    window.stop();
     refineSearchView(event.target.value);
 
 });
