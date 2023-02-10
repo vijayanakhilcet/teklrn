@@ -895,7 +895,6 @@ class TechnologiesMatchingTheSearchNewView(FormView):
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('a'):
             if len(a.text.split(' '))>4:
-                print(a.text.strip()+'\n', end=" ")
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = '' 
@@ -1338,7 +1337,6 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
 
 class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
     def get(self,request,*args,**kwargs):
-        print('hi')
         results= []
         data = request.GET
         topic = data.get('titles')  

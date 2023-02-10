@@ -9,6 +9,7 @@ $(document).ready(function () {
         source: "/autocomplete",
         dataType: 'json',
         select: function( event , ui ) {
+        window.stop();
         gotoTechnology(ui.item.value);        
         runit = 1;
         return false;
@@ -22,6 +23,7 @@ $(document).ready(function () {
   };
 
 $("#course-search").on('keyup', function (event) {
+    window.stop();
         if(runit === 0){
             if (event.keyCode === 13) {                                     
                 $("#course-search").blur(); 
@@ -134,7 +136,8 @@ function refineSearchView(pg){
 
 
 
-function gotoTechnology(pg){    
+function gotoTechnology(pg){   
+    window.stop();
     window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val(), "_self");
     /*    $.ajax({
             url         : "hi", // the url where we want to POST
