@@ -2,7 +2,7 @@ $(document).ready(function () {
     
     var runit = 0;  
        
-    refineSearchView(document.getElementById("countryCode").value);
+    refineSearchView(document.getElementById("countryCode").value); 
    // document.getElementById("course-search").focus();
 
     $("#course-search").autocomplete({  
