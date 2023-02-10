@@ -888,18 +888,34 @@ class TechnologiesMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        codeC = data.get("search_string")  
-        our_url = "https://newsapi.org/v2/top-headlines?country="+codeC+"&apiKey=10f27a32c3224f959563a9964bbd70db"
-        data = requests.get(our_url).json()
-        for item in data['articles']:
-            course_json = {}
-            img = str(item['urlToImage']) 
-            if 'googleusercontent' in img or "None" in img or not img:
+        datasplit = data.get("search_string").split('---')
+        codeC = datasplit[0]
+        # our_url = "https://newsapi.org/v2/top-headlines?country="+codeC+"&apiKey=10f27a32c3224f959563a9964bbd70db"
+        # data = requests.get(our_url).json()
+        # for item in data['articles']:
+        #     course_json = {}
+        #     img = str(item['urlToImage']) 
+        #     if 'googleusercontent' in img or "None" in img or not img:
+        #         img = '/static/image/images/2.png'
+        #     course_json['technology'] = img 
+        #     course_json['description'] = item['title'].split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "")
+        #     course_json['contentType'] = 'POLITICS'
+        #     results.append(course_json)
+        # data = json.dumps(results)
+        # mimetype = 'application/json'
+        # return HttpResponse(data, mimetype)
+        our_url = datasplit[1]
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.split(' '))>4:
+                print(a.text.strip()+'\n', end=" ")
+                course_json = {}
                 img = '/static/image/images/2.png'
-            course_json['technology'] = img 
-            course_json['description'] = item['title'].split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "")
-            course_json['contentType'] = 'POLITICS'
-            results.append(course_json)
+                course_json['technology'] = '' 
+                course_json['description'] = a.text.split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['contentType'] = 'POLITICS'
+                results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
