@@ -127,7 +127,7 @@ function refineSearchView(pg){
         
                 });
             });
-        })
+        });
          
         return false;       
 }
