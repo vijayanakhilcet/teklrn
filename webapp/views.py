@@ -935,7 +935,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
-                course_json['description'] = a.text.split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 course_json['contentType'] = 'POLITICS'
                 results.append(course_json)
         data = json.dumps(results)
