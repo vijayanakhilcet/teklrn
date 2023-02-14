@@ -604,6 +604,8 @@ def news(request):
     data = request.GET
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
+    img=''
+    pElement=''
     
     if data.get("level"):
         defaultLevel = data.get("level")
@@ -651,7 +653,14 @@ def news(request):
     #     txt += str(para)
     # soup = BeautifulSoup(txt, features="lxml")
     # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':''})
+    if data.get('image'):
+        img = data.get('image')
+    if data.get('url'):
+        r = requests.get(data.get('url'))
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('p'):
+            pElement = pElement+ a.text.strip()
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement})
 
 
 
@@ -897,7 +906,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
             if len(a.text.split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = '' 
+                course_json['technology'] = a['href']
                 course_json['description'] = a.text.split(' - ')[0].replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 course_json['contentType'] = 'POLITICS'
                 results.append(course_json)

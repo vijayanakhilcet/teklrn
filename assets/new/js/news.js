@@ -1,5 +1,6 @@
 $(function () {
 
+   //alert(document.getElementById('pElement').textContent)
     $(document).on('hidden.bs.modal', function (event) {
        if ($('.modal:visible').length) {
           $('body').addClass('modal-open');
@@ -361,6 +362,7 @@ $(function () {
        .done(function (data) {
           sideMenu();
           var elm = document.getElementById('rowdata');
+          var elm1 = document.getElementById('rowdata1');
           elm.innerHTML = "";
           var aHtml = "";
           var a1Html = "";
@@ -378,6 +380,7 @@ $(function () {
 
             }); 
           elm.innerHTML = aHtml;
+          elm1.innerHTML = '<div class="col-md-12" <p style="pointer-events: none; object-fit: cover;"><img src="'+document.getElementById("img").textContent+'"  style="pointer-events: none; object-fit: cover;"  width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><div style="text-transform: capitalize; padding-top: 2% ;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 14px !important;  color:black !important">'+document.getElementById("technology_view").textContent+'</div><hr><p style="color: #4d4c4c;font-size:13px;display: block;  line-height: 1.8em;">'+document.getElementById("pElement").textContent+'</p></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta">'+ " " +'</div><div class="post-meta"><span></div></h4></span></div></div></div></div>';
  
        });
     // stop the form from submitting the normal way and refreshing the page
