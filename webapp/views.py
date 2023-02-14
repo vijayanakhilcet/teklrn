@@ -655,11 +655,35 @@ def news(request):
     # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
     if data.get('image'):
         img = data.get('image')
+    
     if data.get('url'):
-        r = requests.get(data.get('url'))
-        soup = BeautifulSoup(r.content)
-        for a in soup.find_all('p'):
-            pElement = pElement+ a.text.strip()
+        try:
+            # r = requests.get(data.get('url'))
+            # soup = BeautifulSoup(r.content)
+            # for a in soup.find_all('p'):
+            #     pElement = pElement+ a.text.strip()+'\n'
+            search = data.get('technology')
+            url = 'https://www.google.com/search'
+
+            headers = {
+                'Accept' : '*/*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+            }
+            parameters = {'q': search}
+
+            content = requests.get(url, headers = headers, params = parameters).text
+            soup = BeautifulSoup(content, 'html.parser')
+
+            search = soup.find(id = 'search')
+            first_link = search.find_all('a')[3]
+            r = requests.get(first_link['href'])
+            soup = BeautifulSoup(r.content)
+
+            for a in soup.find_all('p'):
+                pElement = pElement+ a.text.strip()+'\n'
+        except:
+            pElement = ''
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement})
 
 
