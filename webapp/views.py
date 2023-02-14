@@ -676,13 +676,17 @@ def news(request):
             soup = BeautifulSoup(content, 'html.parser')
 
             search = soup.find(id = 'search')
-            first_link = search.find_all('a')[3]
-            r = requests.get(first_link['href'])
-            soup = BeautifulSoup(r.content)
-
-            for a in soup.find_all('p'):
-                pElement = pElement+ a.text.strip()+'\n'
-        except:
+            #first_link = search.find_all('a')[3]
+            for link in search.find_all('a'):
+                r = requests.get(link['href'])
+                soup = BeautifulSoup(r.content)
+                pElement = ''
+                for all_p in soup.find_all('p'):
+                    pElement = pElement+ all_p.text.strip()+'\n'
+                if len(pElement.split())>=200:
+                    break
+        except Exception as e:
+            print(e)
             pElement = ''
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement})
 
@@ -1399,6 +1403,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
                 results.append(course_json)
+       # random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
