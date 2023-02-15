@@ -938,6 +938,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
                 course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 course_json['contentType'] = 'POLITICS'
                 results.append(course_json)
+        random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
