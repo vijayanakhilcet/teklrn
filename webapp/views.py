@@ -680,15 +680,15 @@ def news(request):
             for link in search.find_all('a'):
                 r = requests.get(link['href'])
                 soup = BeautifulSoup(r.content)
-                pElement = ''
-                for all_p in soup.find_all('p'):
-                    pElement = pElement+ all_p.text.strip()+'\n'
+                pElement = '<div style="font-size:small;">'
+                for all_p in soup.find_all('p')[1:-1]:
+                    pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
                 if len(pElement.split())>=200:
                     break
         except Exception as e:
             print(e)
             pElement = ''
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement})
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
 
 
