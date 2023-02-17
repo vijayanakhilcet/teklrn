@@ -134,3 +134,20 @@ class CountryCode(models.Model):
 
     class Meta:
         ordering = ["code"]
+
+class Language(models.Model):
+    name = models.CharField(max_length=30)
+    def __str__(self):
+        return self.name
+
+class Country(models.Model):
+    name = models.CharField(max_length=90)
+    def __str__(self):
+        return self.name
+
+class NewsLinks(models.Model):
+    link = models.CharField(max_length=400)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.link
