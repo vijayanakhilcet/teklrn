@@ -15,7 +15,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import Country, Language, NewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -920,14 +920,47 @@ class TechnologiesMatchingTheDesignationView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class LanguagesView(FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        c = data.get("country")
+        results= []
+        langs = NewsLinks.objects.filter(country=Country.objects.get(name=c))
+        for country in langs:
+            course_json = {}
+            course_json['name'] = country.language.name
+            results.append(course_json)  
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
+
+class CountriesView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        countries = Country.objects.all()
+        for country in countries:
+            course_json = {}
+            course_json['name'] = country.name
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
+
 
 class TechnologiesMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET
-        datasplit = data.get("search_string").split('---')
-        codeC = datasplit[0]
-        our_url = datasplit[1]
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        print(c)
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsLinks.objects.filter(country=Country.objects.get(name=c))[0]
+        our_url = nl.link
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('a'):
@@ -936,7 +969,34 @@ class TechnologiesMatchingTheSearchNewView(FormView):
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
                 course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
-                course_json['contentType'] = 'POLITICS'
+                course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
+class TechnologiesMatchingTheSearchNewWithLanguageView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        print(c)
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name=l))[0]
+        our_url = nl.link
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
                 results.append(course_json)
         random.shuffle(results)
         data = json.dumps(results)
