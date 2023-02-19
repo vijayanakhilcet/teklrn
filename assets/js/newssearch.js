@@ -38,6 +38,7 @@ $("#course-search").on('keyup', function (event) {
 
 $("#countryCode").on('change', function (event) {
     window.stop();
+    window.scrollTo({ top: 0, behavior: "auto" });
     getLanguage(event.target.value);
     refineSearchView(event.target.value, document.getElementById("lang").value);
 
@@ -45,6 +46,7 @@ $("#countryCode").on('change', function (event) {
 
 $("#lang").on('change', function (event) {
     window.stop();
+    window.scrollTo({ top: 0, behavior: "auto" });
     refineSearchWithLangView(document.getElementById("countryCode").value, event.target.value);
 
 });
@@ -147,6 +149,7 @@ function refineSearchWithLangView(pg, lang){
 }
 
 function refineSearchView(pg, lang){
+    window.scrollTo({ top: 0, behavior: "auto" });
     var elm = document.getElementById("searchData");
     var html_message ="";
     $.ajax({
