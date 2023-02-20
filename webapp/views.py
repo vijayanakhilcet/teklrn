@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from googletrans import Translator
 from bing_image_urls import bing_image_urls
+from string import digits
 from urllib.parse import unquote
 from GoogleNews import GoogleNews
 import random
@@ -1450,7 +1451,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 e = unquote(entry.replace('img-', ''))
                 course_json['title'] = 'img-'+e
                 try:
-                    course_json['src'] =  bing_image_urls(translator.translate(e, dest="en").text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                    course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest="en").text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
                 results.append(course_json)
@@ -1460,7 +1461,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 e = unquote(entry.replace('img-', ''))
                 course_json['title'] = 'img-'+e
                 try:
-                    course_json['src'] =  bing_image_urls(e.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                    course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
                 results.append(course_json)
