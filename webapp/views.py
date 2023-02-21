@@ -940,9 +940,21 @@ class CountriesView(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         countries = Country.objects.all()
+        data = request.GET
+        from geopy.geocoders import Nominatim
+        geolocator = Nominatim(user_agent="geoapiExercises")
+        if data.get("def_C")!="":
+            location = geolocator.reverse(data.get("def_C"))
+            srcC = str(location).split(',')[-1].strip()
+        else:
+            srcC =  'Canada'
         for country in countries:
             course_json = {}
             course_json['name'] = country.name
+            if srcC in country.name:
+                course_json['default_c'] = 1
+            else:
+                course_json['default_c'] = 0
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -965,7 +977,7 @@ class TechnologiesMatchingTheSearchNewView(FormView):
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('a'):
-            if len(a.text.split(' '))>4:
+            if len(a.text.strip().split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
@@ -992,7 +1004,7 @@ class TechnologiesMatchingTheSearchNewWithLanguageView(FormView):
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('a'):
-            if len(a.text.split(' '))>4:
+            if len(a.text.strip().split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']

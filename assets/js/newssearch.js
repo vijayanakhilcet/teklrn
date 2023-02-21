@@ -1,10 +1,8 @@
 $(document).ready(function () {
-    
     var runit = 0;  
     populateCountry();   
-    refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+    
    // document.getElementById("course-search").focus();
-
     $("#course-search").autocomplete({  
         source: "/autocomplete",
         dataType: 'json',
@@ -50,8 +48,6 @@ $("#lang").on('change', function (event) {
     refineSearchWithLangView(document.getElementById("countryCode").value, event.target.value);
 
 });
-
-getTechnologiesMatchingTheSearchWithLangNew
 
     // toggle mobile menu
     $('[data-toggle="toggle-nav"]').on('click', function () {
@@ -230,11 +226,13 @@ function getLanguage(pg){
 }
 
 function populateCountry(pg){
-    var elm = document.getElementById("countryCode");
+        if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(showPosition, function(error) {
+            var elm = document.getElementById("countryCode");
     var html_message ="";
     $.ajax({
         url         : "/getCountries", // the url where we want to POST
-        data        : {"search_string":pg}, // our data object
+        data        : {"search_string":pg, "def_C":""}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -244,7 +242,7 @@ function populateCountry(pg){
             $.each(data, function(index) {
               //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
                 //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                if (index == 1)
+                if (data[index].default_c=='1')
                     html_message +='<option selected value="'+data[index].name+'">'+data[index].name+'</option>';         
                 else
                     html_message +='<option value="'+data[index].name+'">'+data[index].name+'</option>';          
@@ -252,9 +250,78 @@ function populateCountry(pg){
             });
           
     elm.innerHTML=html_message;
+        })
+        .complete(function(data) {
+            refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+            })
+        return true;    
         });
-        return true;       
-}
+        } else {
+            var elm = document.getElementById("countryCode");
+            var html_message ="";
+            $.ajax({
+                url         : "/getCountries", // the url where we want to POST
+                data        : {"search_string":pg, "def_C":""}, // our data object
+                dataType    : 'json', // what type of data do we expect back from the server
+                encode      : true
+            })
+                // using the done promise callback
+                .done(function(data) {
+                    elm.innerHTML="";  
+                    $.each(data, function(index) {
+                      //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+                        //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+                        if (data[index].default_c=='1')
+                            html_message +='<option selected value="'+data[index].name+'">'+data[index].name+'</option>';         
+                        else
+                            html_message +='<option value="'+data[index].name+'">'+data[index].name+'</option>';          
+        
+                    });
+                  
+            elm.innerHTML=html_message;
+                })
+                .complete(function(data) {
+                    refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+                    })
+                return true;   
+            
+
+      }
+        
+      
+      
+      function showPosition(position) { 
+        var elm = document.getElementById("countryCode");
+    var html_message ="";
+    $.ajax({
+        url         : "/getCountries", // the url where we want to POST
+        data        : {"search_string":pg, "def_C":position.coords.latitude + "," + position.coords.longitude}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            elm.innerHTML="";  
+            $.each(data, function(index) {
+              //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+                //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+                if (data[index].default_c=='1')
+                    html_message +='<option selected value="'+data[index].name+'">'+data[index].name+'</option>';         
+                else
+                    html_message +='<option value="'+data[index].name+'">'+data[index].name+'</option>';          
+
+            });
+          
+    elm.innerHTML=html_message;
+        })
+        .complete(function(data) {
+        refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+        })
+        return true;   
+
+      }
+   
+    }   
 
 
 function gotoTechnology1(pg, url, img){   
