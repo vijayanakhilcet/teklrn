@@ -1005,12 +1005,15 @@ class TechnologiesMatchingTheSearchNewWithLanguageView(FormView):
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('a'):
             if len(a.text.strip().split(' '))>4:
-                course_json = {}
-                img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = a['href']
-                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
-                course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
-                results.append(course_json)
+                try:
+                    course_json = {}
+                    img = '/static/image/test/certificate.jpg'
+                    course_json['technology'] = a['href']
+                    course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                    course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
+                    results.append(course_json)
+                except:
+                    continue
         random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
