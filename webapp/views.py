@@ -972,7 +972,14 @@ class TechnologiesMatchingTheSearchNewView(FormView):
         print(c)
         # codeC = datasplit[0]
         # our_url = datasplit[1]
-        nl = NewsLinks.objects.filter(country=Country.objects.get(name=c))[0]
+        try:
+            nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name='en'))[0]
+        except:
+            try:
+                nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name='en-US'))[0]
+            except:
+                nl = NewsLinks.objects.filter(country=Country.objects.get(name=c))[0]
+
         our_url = nl.link
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
