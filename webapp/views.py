@@ -679,13 +679,16 @@ def news(request):
             search = soup.find(id = 'search')
             #first_link = search.find_all('a')[3]
             for link in search.find_all('a'):
-                r = requests.get(link['href'])
-                soup = BeautifulSoup(r.content)
-                pElement = '<div style="font-size:small;">'
-                for all_p in soup.find_all('p')[1:-1]:
-                    pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
-                if len(pElement.split())>=200:
-                    break
+                try:
+                    r = requests.get(link['href'])
+                    soup = BeautifulSoup(r.content)
+                    pElement = '<div style="font-size:small;">'
+                    for all_p in soup.find_all('p')[1:-1]:
+                        pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
+                    if len(pElement.split())>=200:
+                        break
+                except:
+                    continue
         except Exception as e:
             print(e)
             pElement = ''
