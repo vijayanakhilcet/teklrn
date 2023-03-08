@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -967,12 +967,13 @@ class CountriesView(FormView):
 
 class TechnologiesMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
+        EndOfData =  False
         results= []
         data = request.GET
         # datasplit = data.get("search_string").split('---')
         c = data.get("search_string")
         l = data.get("lang")
-        print(c)
+        idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
         try:
@@ -981,8 +982,25 @@ class TechnologiesMatchingTheSearchNewView(FormView):
             try:
                 nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name='en-US'))[0]
             except:
-                nl = NewsLinks.objects.filter(country=Country.objects.get(name=c))[0]
-
+                try:
+                    nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name='en-GB'))[0]
+                except:
+                    nl = NewsLinks.objects.filter(country=Country.objects.get(name=c))[0]
+        contentType = nl.country.name.upper() + ' [' + nl.language.name + ']'
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
         our_url = nl.link
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
@@ -992,7 +1010,8 @@ class TechnologiesMatchingTheSearchNewView(FormView):
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
                 course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
-                course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
+                course_json['contentType'] = contentType
+                course_json['count'] = count
                 results.append(course_json)
         random.shuffle(results)
         data = json.dumps(results)
@@ -1001,15 +1020,31 @@ class TechnologiesMatchingTheSearchNewView(FormView):
 
 class TechnologiesMatchingTheSearchNewWithLanguageView(FormView):
     def get(self,request,*args,**kwargs):
+        EndOfData =  False
         results= []
         data = request.GET
         # datasplit = data.get("search_string").split('---')
         c = data.get("search_string")
         l = data.get("lang")
-        print(c)
+        idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
         nl = NewsLinks.objects.filter(country=Country.objects.get(name=c), language=Language.objects.get(name=l))[0]
+        contentType = nl.country.name.upper() + ' [' + nl.language.name + ']'
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
         our_url = nl.link
         r = requests.get(our_url)
         soup = BeautifulSoup(r.content)
@@ -1020,7 +1055,8 @@ class TechnologiesMatchingTheSearchNewWithLanguageView(FormView):
                     img = '/static/image/test/certificate.jpg'
                     course_json['technology'] = a['href']
                     course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
-                    course_json['contentType'] = nl.country.name.upper() + ' [' + nl.language.name + ']'
+                    course_json['contentType'] = contentType
+                    course_json['count'] = count
                     results.append(course_json)
                 except:
                     continue
@@ -1465,6 +1501,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         data = request.GET
         topic = data.get('titles')  
         langg = data.get('lang') 
+        stringVal = data.get('strVal') 
         NonEnglish = False
         if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
             NonEnglish = True 
@@ -1473,8 +1510,8 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
             translator = Translator() 
             for entry in alltitles:
                 course_json = {} 
-                e = unquote(entry.replace('img-', ''))
-                course_json['title'] = 'img-'+e
+                e = unquote(entry.replace(stringVal+'-img-', ''))
+                course_json['title'] = stringVal+'-img-'+e
                 try:
                     course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:
@@ -1492,8 +1529,8 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         else:            
             for entry in alltitles:
                 course_json = {} 
-                e = unquote(entry.replace('img-', ''))
-                course_json['title'] = 'img-'+e
+                e = unquote(entry.replace(stringVal+'-img-', ''))
+                course_json['title'] = stringVal+'-img-'+e
                 try:
                     course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:

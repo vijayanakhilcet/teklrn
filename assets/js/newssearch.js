@@ -38,14 +38,14 @@ $("#countryCode").on('change', function (event) {
     window.stop();
     window.scrollTo({ top: 0, behavior: "auto" });
     getLanguage(event.target.value);
-    refineSearchView(event.target.value, document.getElementById("lang").value);
+    refineSearchView(event.target.value, document.getElementById("lang").value, -1);
 
 });
 
 $("#lang").on('change', function (event) {
     window.stop();
     window.scrollTo({ top: 0, behavior: "auto" });
-    refineSearchWithLangView(document.getElementById("countryCode").value, event.target.value);
+    refineSearchWithLangView(document.getElementById("countryCode").value, event.target.value, -1);
 
 });
 
@@ -91,12 +91,27 @@ $("#lang").on('change', function (event) {
 
 
 
-function refineSearchWithLangView(pg, lang){
-    var elm = document.getElementById("searchData");
+function refineSearchWithLangView(pg, lang, idx){
+    if(idx==-1){
+        var datas = document.querySelectorAll('div[id^="searchD"]');
+        datas.forEach((userItem) => {
+            if (userItem.id != "searchD"){
+            var elem = document.getElementById(userItem.id); 
+            elem.remove();
+        }
+        });
+    }
+   
+    stringVal = "searchD"
+    if (idx >=0){
+        stringVal =stringVal + idx
+    }
+    else{window.scrollTo({ top: 0, behavior: "auto" });}
+    var elm = document.getElementById(stringVal);
     var html_message ="";
     $.ajax({
         url         : "/getTechnologiesMatchingTheSearchWithLangNew", // the url where we want to POST
-        data        : {"search_string":pg, "lang":lang}, // our data object
+        data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -106,16 +121,21 @@ function refineSearchWithLangView(pg, lang){
             i=-1
             $.each(data, function(index) {
                 i=i+1
+                count = data[index].count;
               //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
                 //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\'img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important; font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
+                html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important; font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
 
             });
           
     elm.innerHTML=html_message;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("id", "searchD"+(idx+1));
+    newDiv.setAttribute("class", "flex flex-wrap");
+    elm.after(newDiv);
         })
         .complete(function(data) {
-            var datas = document.querySelectorAll('[id^="img-"]');
+            var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
             Code = $("#countryCode option:selected").val().split("---")[0];
             data = ''
             datas.forEach((userItem) => {
@@ -124,7 +144,8 @@ function refineSearchWithLangView(pg, lang){
                     url: "/searchtopicsnewnewsForImg", // the url where we want to POST
                     data: {
                     "titles": data,
-                    "lang":Code
+                    "lang":Code,
+                    "strVal": stringVal
                     },
                     dataType: 'json',
                     encode: true
@@ -139,18 +160,39 @@ function refineSearchWithLangView(pg, lang){
         
                 });
             });
+            if (count != 9999){
+                refineSearchView(pg, lang, idx+1);
+            }
         });
          
         return false;       
 }
 
-function refineSearchView(pg, lang){
-    window.scrollTo({ top: 0, behavior: "auto" });
-    var elm = document.getElementById("searchData");
+function refineSearchView(pg, lang, idx){
+    if(idx==-1){
+    var datas = document.querySelectorAll('div[id^="searchD"]');
+    datas.forEach((userItem) => {
+        if (userItem.id != "searchD"){
+        var elem = document.getElementById(userItem.id); 
+        elem.remove();
+    }
+    });
+}
+
+
+    
+    
+    stringVal = "searchD"
+    if (idx >=0){
+        stringVal =stringVal + idx
+    }
+    else{window.scrollTo({ top: 0, behavior: "auto" });}
+    var elm = document.getElementById(stringVal);
     var html_message ="";
+    count = 0
     $.ajax({
         url         : "/getTechnologiesMatchingTheSearchNew", // the url where we want to POST
-        data        : {"search_string":pg, "lang":lang}, // our data object
+        data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -160,16 +202,22 @@ function refineSearchView(pg, lang){
             i=-1
             $.each(data, function(index) {
                 i=i+1
+                count = data[index].count;
+                
               //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
                 //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\'img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
+                html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
 
             });
           
-    elm.innerHTML=html_message;
+    elm.innerHTML=html_message
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("id", "searchD"+(idx+1));
+    newDiv.setAttribute("class", "flex flex-wrap");
+    elm.after(newDiv);
         })
         .complete(function(data) {
-            var datas = document.querySelectorAll('[id^="img-"]');
+            var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
             Code = $("#countryCode option:selected").val().split("---")[0];
             data = ''
             datas.forEach((userItem) => {
@@ -178,7 +226,8 @@ function refineSearchView(pg, lang){
                     url: "/searchtopicsnewnewsForImg", // the url where we want to POST
                     data: {
                     "titles": data,
-                    "lang":Code
+                    "lang":Code,
+                    "strVal": stringVal
                     },
                     dataType: 'json',
                     encode: true
@@ -193,6 +242,9 @@ function refineSearchView(pg, lang){
         
                 });
             });
+            if (count != 9999){
+                refineSearchView(pg, lang, idx+1);
+            }
         });
          
         return false;       
@@ -252,7 +304,7 @@ function populateCountry(pg){
     elm.innerHTML=html_message;
         })
         .complete(function(data) {
-            refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+            refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value, -1); 
             })
         return true;    
         });
@@ -281,7 +333,7 @@ function populateCountry(pg){
             elm.innerHTML=html_message;
                 })
                 .complete(function(data) {
-                    refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+                    refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value, -1); 
                     })
                 return true;   
             
@@ -315,7 +367,7 @@ function populateCountry(pg){
     elm.innerHTML=html_message;
         })
         .complete(function(data) {
-        refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value); 
+        refineSearchView(document.getElementById("countryCode").value, document.getElementById("lang").value, -1); 
         })
         return true;   
 

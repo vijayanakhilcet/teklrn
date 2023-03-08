@@ -151,3 +151,10 @@ class NewsLinks(models.Model):
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     def __str__(self):
         return self.link
+        
+class AllNewsLinks(models.Model):
+    link = models.CharField(max_length=400)
+    newLinks = models.ForeignKey(NewsLinks, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.link
+        
