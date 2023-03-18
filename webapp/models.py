@@ -157,4 +157,14 @@ class AllNewsLinks(models.Model):
     newLinks = models.ForeignKey(NewsLinks, on_delete=models.CASCADE)
     def __str__(self):
         return self.link
+
+class Person(models.Model): 
+    name = models.CharField(max_length=400)
+    designation = models.CharField(max_length=400)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    instagram = models.CharField(max_length=400, default='')
+    facebook = models.CharField(max_length=400, default='')
+    twitter = models.CharField(max_length=400, default='')
+    def __str__(self):
+        return self.name
         
