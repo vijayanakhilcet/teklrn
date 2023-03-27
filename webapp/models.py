@@ -168,3 +168,8 @@ class Person(models.Model):
     def __str__(self):
         return self.name
         
+class PersonVideoLinks(models.Model): 
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    link = models.CharField(max_length=1000, default='')
+    def __str__(self):
+        return self.link
