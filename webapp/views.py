@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings
+from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -351,6 +351,27 @@ def entertainmentnews(request):
 
 def technologyNews(request):
     page = 'webapp/technologynews_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
+def videoPre(request):
+    page = 'webapp/video_pre_landing.html'
     data = request.GET
     defaultTechnology = 'Tensorflow'
     if data.get("technology"):
@@ -959,6 +980,30 @@ class CountriesView(FormView):
             else:
                 course_json['default_c'] = 0
             results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
+class VideosMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        all_person = Person.objects.filter(country=Country.objects.get(name=c))
+        for person in all_person:
+            alllinks = PersonVideoLinks.objects.filter(person=person)
+            for a in alllinks:
+                course_json = {}
+                course_json['technology'] = a.link
+                course_json['description'] = c + ' '+ person.name
+                course_json['contentType'] = person.name
+                results.append(course_json)
+        random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
