@@ -168,6 +168,98 @@ function refineSearchWithLangView(pg, lang, idx){
         return false;       
 }
 
+// function refineSearchView(pg, lang, idx){
+//     var elm = document.getElementById("searchD");
+//     var html_message ="";
+//     count = 0
+//     $.ajax({
+//         url         : "/videoCount", // the url where we want to POST
+//         data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
+//         dataType    : 'json', // what type of data do we expect back from the server
+//         encode      : true
+//     })
+//         // using the done promise callback
+//         .done(function(data) { 
+//             elm.innerHTML="";
+//             $.each(data, function(index) {
+//                count= data[index].count;
+//             });
+//         })
+//         .complete(function(data) {
+//             for(i=0; i<count;i++){
+//                 $.ajax({
+//                     url         : "/getVideosMatchingTheSearchNew", // the url where we want to POST
+//                     data        : {"search_string":pg, "lang":lang, "idx":i}, // our data object
+//                     dataType    : 'json', // what type of data do we expect back from the server
+//                     encode      : true
+//                 })
+//                     // using the done promise callback
+//                     .done(function(data) { 
+//                         elm.innerHTML="";
+//                         $.each(data, function(index) {
+//                               html_message1 = '<video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video>';
+//                               html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div>'+html_message1+'<a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+            
+//                         });
+//                         elm.innerHTML+=html_message
+//                     })
+//                     .complete(function(data) {
+//                         if (idx<count){
+//                         refineSearchView(pg, lang, idx+1);
+//                         }
+                            
+//                     });
+                
+//             }
+                
+//               //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+//             //   html_message1 = '<video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video>';
+  
+//             //   html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div>'+html_message1+'<a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
+//             //     // html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
+
+            
+          
+//     // elm.innerHTML=html_message
+//     // newDiv = document.createElement("div");
+//     // newDiv.setAttribute("id", "searchD"+(idx+1));
+//     // newDiv.setAttribute("class", "flex flex-wrap");
+//     // elm.after(newDiv);
+        
+//             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
+//             Code = $("#countryCode option:selected").val().split("---")[0];
+//             data = ''
+//             datas.forEach((userItem) => {
+//                 data=userItem.id+'---';
+//                 $.ajax({
+//                     url: "/searchtopicsnewnewsForImg", // the url where we want to POST
+//                     data: {
+//                     "titles": data,
+//                     "lang":Code,
+//                     "strVal": stringVal
+//                     },
+//                     dataType: 'json',
+//                     encode: true
+//                 })
+//                 // using the done promise callback
+//                 .done(function (data) {
+//                     $.each(data, function (index) {
+//                     var elm = document.getElementById(data[index].title);
+//                     elm.src = data[index].src;
+//                     elm.style.visibility = "visible";
+//                     });
+        
+//                 });
+//             });
+//             if (count != 9999){
+//                 refineSearchView(pg, lang, idx+1);
+//             }
+//         });
+         
+//         return false;       
+// }
+
+
 function refineSearchView(pg, lang, idx){
     if(idx==-1){
     var datas = document.querySelectorAll('div[id^="searchD"]');
@@ -191,63 +283,36 @@ function refineSearchView(pg, lang, idx){
         url         : "/getVideosMatchingTheSearchNew", // the url where we want to POST
         data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
-        encode      : true
+        encode      : true  
     })
         // using the done promise callback
-        .done(function(data) { 
+        .done(function(data) {
             elm.innerHTML="";  
             i=-1
             $.each(data, function(index) {
                 i=i+1
                 count = data[index].count;
-                
-              //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-              html_message1 = '<video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video>';
-  
-              html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div>'+html_message1+'<a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
-                // html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
-
+                html_message1 = '<video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video>';
+                html_message ='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div>'+html_message1+'<a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';                     
             });
           
     elm.innerHTML=html_message
     newDiv = document.createElement("div");
     newDiv.setAttribute("id", "searchD"+(idx+1));
-    newDiv.setAttribute("class", "flex flex-wrap");
+    newDiv.setAttribute("class", "flex flex-wrap");  
+    // newDiv.setAttribute("style", "display:  inline-block !important;");
+
     elm.after(newDiv);
         })
-        // .complete(function(data) {
-        //     var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
-        //     Code = $("#countryCode option:selected").val().split("---")[0];
-        //     data = ''
-        //     datas.forEach((userItem) => {
-        //         data=userItem.id+'---';
-        //         $.ajax({
-        //             url: "/searchtopicsnewnewsForImg", // the url where we want to POST
-        //             data: {
-        //             "titles": data,
-        //             "lang":Code,
-        //             "strVal": stringVal
-        //             },
-        //             dataType: 'json',
-        //             encode: true
-        //         })
-        //         // using the done promise callback
-        //         .done(function (data) {
-        //             $.each(data, function (index) {
-        //             var elm = document.getElementById(data[index].title);
-        //             elm.src = data[index].src;
-        //             elm.style.visibility = "visible";
-        //             });
-        
-        //         });
-        //     });
-        //     if (count != 9999){
-        //         refineSearchView(pg, lang, idx+1);
-        //     }
-        // });
+        .complete(function(data) {
+            if (count != 9999){
+                refineSearchView(pg, lang, idx+1);
+            }
+        });
          
         return false;       
 }
+
 
 function getLanguage(pg){
     var elm = document.getElementById("lang");
