@@ -292,8 +292,7 @@ function refineSearchView(pg, lang, idx){
             $.each(data, function(index) {
                 i=i+1
                 count = data[index].count;
-                html_message1 = '<video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video>';
-                html_message ='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div>'+html_message1+'<a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';                     
+                html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><video preload="metadata" style="width: 700px; height: 400px; object-fit: cover;" controls><source src="'+data[index].technology+'#t=0.000001'+'" type="video/mp4">Your browser does not support the video tag.</video><a style="padding-left: 13px;font-size: small;">'+data[index].description+'</a></p><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';                     
             });
           
     elm.innerHTML=html_message
@@ -306,7 +305,7 @@ function refineSearchView(pg, lang, idx){
         })
         .complete(function(data) {
             if (count != 9999){
-                refineSearchView(pg, lang, idx+1);
+                refineSearchView(pg, lang, (idx+1));
             }
         });
          
