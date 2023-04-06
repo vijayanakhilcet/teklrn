@@ -1009,11 +1009,11 @@ class VideosMatchingTheSearchNewView(FormView):
             try:
                 a = alllinks[(int(idx)+1)*3+int(x)]
                 course_json['technology'] = a.link
-                course_json['description'] = c + ' '+ a.person.name
+                course_json['description'] = c 
                 course_json['contentType'] = a.person.name
                 course_json['count'] = count
             except Exception as e:
-                print("Exception"+str(e))
+                print("Exception "+str(e))
                 count = 9999  
                 course_json['count'] = count
                 break
