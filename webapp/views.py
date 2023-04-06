@@ -968,8 +968,12 @@ class CountriesView(FormView):
         from geopy.geocoders import Nominatim
         geolocator = Nominatim(user_agent="geoapiExercises")
         if data.get("def_C")!="":
-            location = geolocator.reverse(data.get("def_C"))
-            srcC = str(location).split(',')[-1].strip()
+            try:
+                location = geolocator.reverse(data.get("def_C"))
+                srcC = str(location).split(',')[-1].strip()
+            except:
+                srcC = 'Canada'
+
         else:
             srcC =  'Canada'
         for country in countries:
