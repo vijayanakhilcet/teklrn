@@ -1000,17 +1000,18 @@ class VideosMatchingTheSearchNewView(FormView):
         # codeC = datasplit[0]
         # our_url = datasplit[1]
         count=0
-        all_person = Person.objects.filter(country=Country.objects.get(name=c))
+        # all_person = Person.objects.filter(country=Country.objects.get(name=c))
         alllinks = []
-        for person in all_person:
-            alllinks += PersonVideoLinks.objects.filter(person=person).order_by('id')
+        # for person in all_person:
+        #     alllinks += PersonVideoLinks.objects.filter(person=person).order_by('id')
+        alllinks += PersonVideoLinks.objects.all().order_by('id')
         for x in range(3):              
             course_json = {}
             try:
                 a = alllinks[(int(idx)+1)*3+int(x)]
                 course_json['technology'] = a.link
-                course_json['description'] = c 
-                course_json['contentType'] = a.person.name
+                course_json['description'] = a.person.country.name 
+                course_json['contentType'] = a.person.name + ' ['+a.person.designation+']'
                 course_json['count'] = count
             except Exception as e:
                 print("Exception "+str(e))
