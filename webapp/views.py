@@ -1001,7 +1001,7 @@ class VideosMatchingTheSearchNewView(FormView):
                 if len(k.strip().split(' ')) > 4:
                     if fname.split('+')[0]  in k:
                             names = names+k+';'
-        return names
+        return names[:-1]
     def get(self,request,*args,**kwargs):
         EndOfData =  False
         results= []
@@ -1027,8 +1027,11 @@ class VideosMatchingTheSearchNewView(FormView):
                 course_json['video'] = a.link
                 course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
                 course_json['contentType'] = a.txt 
-                course_json['count'] = count                
-                course_json['news'] = self.allNews(a.person.name)
+                course_json['count'] = count
+                news = self.allNews(a.person.name)
+                if news == "":
+                    news = self.allNews(a.person.country.name)         
+                course_json['news'] = news
             except Exception as e:
                 print("Exception "+str(e))
                 count = 9999  
