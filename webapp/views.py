@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
+from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -989,6 +989,19 @@ class CountriesView(FormView):
         return HttpResponse(data, mimetype) 
 
 class VideosMatchingTheSearchNewView(FormView):
+    def allNews(self, nameValue):
+        nsu = NewsSearchUrls.objects.all()        
+        fname = nameValue.capitalize().replace(' ','+')
+        names = ''
+        for u in nsu:            
+            req = requests.get(u.url+fname)
+            dataVal = BeautifulSoup(req.content)
+            for a in dataVal.find_all(u.rule):
+                k = a.text
+                if len(k.strip().split(' ')) > 4:
+                    if fname.split('+')[0]  in k:
+                            names = names+k+';'
+        return names
     def get(self,request,*args,**kwargs):
         EndOfData =  False
         results= []
@@ -1008,12 +1021,14 @@ class VideosMatchingTheSearchNewView(FormView):
         for x in range(3):              
             course_json = {}
             try:
+                names = ''
                 a = alllinks[(int(idx)+1)*3+int(x)]
                 course_json['img'] = a.imgLink
                 course_json['video'] = a.link
                 course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
                 course_json['contentType'] = a.txt 
-                course_json['count'] = count
+                course_json['count'] = count                
+                course_json['news'] = self.allNews(a.person.name)
             except Exception as e:
                 print("Exception "+str(e))
                 count = 9999  
@@ -1023,6 +1038,8 @@ class VideosMatchingTheSearchNewView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
+
+    
 
 
 

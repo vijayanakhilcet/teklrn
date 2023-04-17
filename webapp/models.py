@@ -176,3 +176,9 @@ class PersonVideoLinks(models.Model):
 
     def __str__(self):
         return self.link
+
+class NewsSearchUrls(models.Model): 
+    url = models.CharField(max_length=1000, default='')
+    rule = models.CharField(max_length=5, default='')
+    def __str__(self):
+        return self.url
