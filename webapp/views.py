@@ -1088,7 +1088,7 @@ class VideosMatchingTheSearchNewView(FormView):
                 if len(k.strip().split(' ')) > 4:
                     if fname.split('+')[0]  in k:
                             names = names+k+';'
-        return names[:-1]
+        return names[:-1].replace("'", "’")
     def get(self,request,*args,**kwargs):
         EndOfData =  False
         results= []
