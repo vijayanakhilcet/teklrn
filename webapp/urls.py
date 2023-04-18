@@ -18,6 +18,7 @@ urlpatterns = [
     path('test/', views.test, name='hi-Test-Page'),
     path('hi/', views.hi, name='hi-Page'),
     path('news/technology/', views.news, name='news-Page'),
+    path('media/news/', views.medianews, name='newsmedia-Page'),
     path('technologynews/technology/', views.technologynews, name='t-news-Page'),
     path('entertainmentnews/technology/', views.entertainmentnews, name='e-news-Page'),
     path('trendingnews/technology/', views.trendingnews, name='news-Page'),

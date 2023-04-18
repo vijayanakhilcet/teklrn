@@ -715,6 +715,93 @@ def news(request):
             pElement = ''
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
+def medianews(request):
+    page = 'webapp/medianews.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    img=''
+    pElement=''
+    if data.get("technology"):
+        try:
+            c = Course.objects.get(description=data.get("technology"))
+            defaultTechnology = c.name
+            contentType = c.contentType
+            request.session['contentType'] = c.contentType
+            technology_description = c.description
+        except:
+            try:
+                c = Course.objects.get(name=data.get("technology"))
+                defaultTechnology = c.name
+                contentType = c.contentType
+                request.session['contentType'] = c.contentType
+                technology_description = c.description
+            except:
+                defaultTechnology = data.get("technology")
+                contentType = data.get("technology")
+                request.session['contentType'] = data.get("technology")
+                technology_description = data.get("technology")
+
+       
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    if data.get('image'):
+        img = data.get('image')
+    
+    if data.get('technology'):
+        try:
+            search = data.get('technology')
+            url = 'https://www.google.com/search'
+
+            headers = {
+                'Accept' : '*/*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+            }
+            parameters = {'q': search}
+
+            content = requests.get(url, headers = headers, params = parameters).text
+            soup = BeautifulSoup(content, 'html.parser')
+
+            search = soup.find(id = 'search')
+            for link in search.find_all('a'):
+                try:
+                    r = requests.get(link['href'])
+                    soup = BeautifulSoup(r.content)
+                    pElement = '<div style="font-size:small;">'
+                    for all_p in soup.find_all('p')[1:-1]:
+                        pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
+                    if len(pElement.split())>=200:
+                        break
+                except:
+                    continue
+            e = unquote(defaultTechnology.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''))
+            try:
+                    img =  bing_image_urls(e, limit=1)[0]
+            except:
+                try:
+                    img =  bing_image_urls(e, limit=4)[2]
+                except:
+                    try:
+                        img =  bing_image_urls(e, limit=10)[1]
+                    except:
+                        try:
+                            img =  bing_image_urls(e, limit=1)[0]
+                        except:
+                            img =  '/static/image/test/certificate.jpg'  
+            
+        except Exception as e:
+            print(e)
+            pElement = ''
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
+
 
 
 def hi(request):
@@ -1557,11 +1644,6 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
         data = request.GET
         topic = data.get("keyword_data")   
         c = data.get("course_name")
-        #temp = Course.objects.get(name=c.capitalize()).description
-        # temp = c
-        # googlenews = GoogleNews(lang='en  ', period='1d')
-        # googlenews.search(temp)
-        # alldata = googlenews.results(sort=True)
         cname = unquote(c)
         n = News.objects.get(name=cname)
         cl = NewsLevel.objects.filter(news=n)
