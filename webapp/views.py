@@ -411,6 +411,25 @@ def newsPre(request):
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
+def financialPre(request):
+    page = 'webapp/financial_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
 
 def hiPre(request):
     page = 'webapp/hi_pre_landing.html'
@@ -1127,10 +1146,51 @@ class VideosMatchingTheSearchNewView(FormView):
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
+        return HttpResponse(data, mimetype)    
+
+class FinancialMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
+        contentType = 'FINANCIAL'.upper() + ' [' + nl.language.name + ']'
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
+        our_url = nl.link
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.strip().split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['contentType'] = contentType
+                course_json['count'] = count
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
-
-    
-
 
 
 class TechnologiesMatchingTheSearchNewView(FormView):
