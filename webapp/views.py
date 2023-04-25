@@ -697,44 +697,45 @@ def news(request):
     if data.get('image'):
         img = data.get('image')
     
-    if data.get('url'):
-        try:
-            # r = requests.get(data.get('url'))
-            # soup = BeautifulSoup(r.content)
-            # for a in soup.find_all('p'):
-            #     pElement = pElement+ a.text.strip()+'\n'
-            search = data.get('technology')
-            url = 'https://www.google.com/search'
+    # if data.get('url'):
+    #     try:
+    #         # r = requests.get(data.get('url'))
+    #         # soup = BeautifulSoup(r.content)
+    #         # for a in soup.find_all('p'):
+    #         #     pElement = pElement+ a.text.strip()+'\n'
+    #         search = data.get('technology')
+    #         url = 'https://www.google.com/search'
 
-            headers = {
-                'Accept' : '*/*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
-            }
-            parameters = {'q': search}
+    #         headers = {
+    #             'Accept' : '*/*',
+    #             'Accept-Language': 'en-US,en;q=0.5',
+    #             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+    #         }
+    #         parameters = {'q': search}
 
-            content = requests.get(url, headers = headers, params = parameters).text
-            soup = BeautifulSoup(content, 'html.parser')
+    #         content = requests.get(url, headers = headers, params = parameters).text
+    #         soup = BeautifulSoup(content, 'html.parser')
 
-            search = soup.find(id = 'search')
-            #first_link = search.find_all('a')[3]
-            for link in search.find_all('a'):
-                if "ft-com" in link['href'] or "ft.com" in link['href']:
-                    print(link['href'])
-                    continue
-                try:
-                    r = requests.get(link['href'])
-                    soup = BeautifulSoup(r.content)
-                    pElement = '<div style="font-size:small;">'
-                    for all_p in soup.find_all('p')[1:-1]:
-                        pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
-                    if len(pElement.split())>=200:
-                        break
-                except:
-                    continue
-        except Exception as e:
-            print(e)
-            pElement = ''
+    #         search = soup.find(id = 'search')
+    #         #first_link = search.find_all('a')[3]
+    #         for link in search.find_all('a'):
+    #             if "ft-com" in link['href'] or "ft.com" in link['href']:
+    #                 print(link['href'])
+    #                 continue
+    #             try:
+    #                 r = requests.get(link['href'])
+    #                 soup = BeautifulSoup(r.content)
+    #                 pElement = '<div style="font-size:small;">'
+    #                 for all_p in soup.find_all('p')[1:-1]:
+    #                     if len(all_p.text.strip().split())>=10:
+    #                         pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
+    #                 if len(pElement.split())>=200:
+    #                     break
+    #             except:
+    #                 continue
+    #     except Exception as e:
+    #         print(e)
+    #         pElement = ''
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
 def medianews(request):
@@ -1762,6 +1763,60 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
                 results.append(course_json)
+       # random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+class NewsContent(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        
+        if data.get('heading'):
+            heading = data.get('heading')
+            print(data.get('heading'))
+        try:
+            search = heading
+            url = 'https://www.google.com/search'
+
+            headers = {
+                'Accept' : '*/*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+            }
+            parameters = {'q': search}
+
+            content = requests.get(url, headers = headers, params = parameters).text
+            soup = BeautifulSoup(content, 'html.parser')
+
+            search = soup.find(id = 'search')
+            #first_link = search.find_all('a')[3]
+            for link in search.find_all('a'):
+                if "ft-com" in link['href'] or "ft.com" in link['href']:
+                    print(link['href'])
+                    continue
+                try:
+                    r = requests.get(link['href'])
+                    soup = BeautifulSoup(r.content)
+                    pElement = '<div style="font-size:small;">'
+                    for all_p in soup.find_all('p')[1:-1]:
+                        if len(all_p.text.strip().split())>=10:
+                            pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</a>'
+                    if len(pElement.split())>=200:
+                        break
+                    course_json = {}
+                    course_json['para'] = pElement
+                    results.append(course_json)
+                except:
+                    continue
+        except Exception as e:
+            print(e)
+            pElement = ''
+            course_json = {}
+            course_json['para'] = pElement
+            results.append(course_json)
+                
        # random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
