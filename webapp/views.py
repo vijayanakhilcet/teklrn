@@ -719,6 +719,9 @@ def news(request):
             search = soup.find(id = 'search')
             #first_link = search.find_all('a')[3]
             for link in search.find_all('a'):
+                if "ft-com" in link['href'] or "ft.com" in link['href']:
+                    print(link['href'])
+                    continue
                 try:
                     r = requests.get(link['href'])
                     soup = BeautifulSoup(r.content)
