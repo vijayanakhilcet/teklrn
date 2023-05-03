@@ -40,8 +40,7 @@ urlpatterns = [
     path('press/', views.press, name='press-Page'),
     path('business/', views.business, name='business-Page'),
     path('help/', views.help, name='help-Page'),
-    path('terms/', views.terms, name='terms-Page'),
-    
+    path('terms/', views.terms, name='terms-Page'),    
     path('refund/', views.refund, name='refund-Page'),
     path('privacy/', views.privacy, name='privacy-Page'),
     path('', views.home, name='Home-Page'),
@@ -62,6 +61,7 @@ urlpatterns = [
     path('getCountries/',views.CountriesView.as_view()),
     path('getLanguages/',views.LanguagesView.as_view()),
     path('getTechnologiesMatchingTheSearchFiltered/',views.TechnologiesMatchingTheSearchViewFiltered.as_view()),
+    path('getNewsMatchingTheSearchRandom/',views.NewsMatchingTheSearchViewRandom.as_view()),
     path('getNewsMatchingTheSearch/',views.NewsMatchingTheSearchView.as_view()),
     path('getNewsMatchingTheSearchFiltered/',views.NewsMatchingTheSearchViewFiltered.as_view()),
     path('getEntertainmentNewsMatchingTheSearchFiltered/',views.EntertainmentNewsMatchingTheSearchViewFiltered.as_view()),
