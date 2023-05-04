@@ -128,6 +128,14 @@ class NewsEntertainmentLevel(models.Model):
     class Meta:
         ordering = ["level_number"]
 
+class NewsFinancial(models.Model):
+    name = models.CharField(max_length=30)
+    category = models.CharField(max_length=30, default='General')
+    contentType = models.CharField(max_length=30, default='FINANCIAL') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
+    imageLink =  models.CharField(max_length=400, default='Hi')
+    def __str__(self):
+        return self.name
+
 class CountryCode(models.Model):
     country = models.CharField(max_length=400, default='')
     code = models.CharField(max_length=400, default='') 
