@@ -1506,7 +1506,7 @@ class NewsMatchingTheSearchViewRandom(FormView):
         technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
         for technology in technologies:
-            courses =  random.shuffile(NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6])
+            courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
             if courses:
                 for tech in courses:
                     course_json = {}
@@ -1520,7 +1520,7 @@ class NewsMatchingTheSearchViewRandom(FormView):
 
         if not results:
 
-            technologies = random.shuffle(NewsFinancial.objects.all().order_by("-id")[:6])
+            technologies = NewsFinancial.objects.all().order_by("-id")[:6]
             for technology in technologies:
                 course_json = {}
                 course_json['name'] = technology.name
