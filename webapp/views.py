@@ -682,6 +682,9 @@ def news(request):
             return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
     if data.get('image'):
         img = data.get('image')
+    if data.get('direct'):
+        img = NewsFinancial.objects.get(name=data.get('technology')).imageLink
+        print('Hi'+img)
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
   
