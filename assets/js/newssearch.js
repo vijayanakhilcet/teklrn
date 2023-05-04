@@ -105,7 +105,7 @@ function populateStaticNews(pg){
         .done(function(data) {
             elm.innerHTML="";  
             $.each(data, function(index) {
-                html_message +='<div  onclick="gotoTechnology(\''+data[index].name+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none; width: 150px; height: 400px; object-fit: cover;"  src="'+data[index].imageLink+'"><p style="padding-left:10px !important;padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].name+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
+                html_message +='<div onclick="gotoTechnology2(\''+data[index].name+'\',\''+data[index].name+'\',\''+data[index].imageLink+'\')"  style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id="frameclk'+index+'" style="pointer-events: none; width: 150px; height: 400px; object-fit: cover;"  src="'+data[index].imageLink+'"><p style="padding-left:10px !important;padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].name+'</p><div class="indigo fs-s3 italic after-arrow-right my-4">Read..</div></a></div>';          
             });
           
     elm.innerHTML=html_message;
@@ -190,6 +190,7 @@ function refineSearchWithLangView(pg, lang, idx){
          
         return false;       
 }
+
 
 function refineSearchView(pg, lang, idx){
     if(idx==-1){
@@ -417,6 +418,12 @@ function gotoTechnology1(pg, url, img){
                                     // here we will handle errors and validation messages
                                 });
         event.preventDefault();*/
+}
+
+function gotoTechnology2(pg, url, img){   
+    window.stop();
+    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&direct=True", "_self");
+    
 }
 
 function gotoTechnology(pg){   
