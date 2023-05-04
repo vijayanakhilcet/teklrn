@@ -136,6 +136,15 @@ class NewsFinancial(models.Model):
     def __str__(self):
         return self.name
 
+class NewsFinancialLevel(models.Model):
+    news = models.ForeignKey(NewsFinancial, on_delete=models.CASCADE)
+    level_number = models.IntegerField(default=1)    
+    description = models.TextField(max_length=None, default='Hi')
+    imageLink =  models.CharField(max_length=400, default='')
+
+    class Meta:
+        ordering = ["level_number"]
+
 class CountryCode(models.Model):
     country = models.CharField(max_length=400, default='')
     code = models.CharField(max_length=400, default='') 
