@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
+from webapp.models import Country, Language, NewsFinancial, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -1506,7 +1506,7 @@ class NewsMatchingTheSearchViewRandom(FormView):
         technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
         for technology in technologies:
-            courses =  News.objects.filter(name__icontains=technology).order_by("-id")[:12]
+            courses =  random.shuffile(NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6])
             if courses:
                 for tech in courses:
                     course_json = {}
@@ -1520,7 +1520,7 @@ class NewsMatchingTheSearchViewRandom(FormView):
 
         if not results:
 
-            technologies = News.objects.all().order_by("-id")[:12]
+            technologies = random.shuffle(NewsFinancial.objects.all().order_by("-id")[:6])
             for technology in technologies:
                 course_json = {}
                 course_json['name'] = technology.name
