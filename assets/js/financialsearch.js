@@ -97,7 +97,7 @@ function populateStaticNews(pg){
     var html_message ="";
     $.ajax({
         url         : "/getNewsMatchingTheSearchRandom", // the url where we want to POST
-        data        : {"search_string":pg}, // our data object
+        data        : {"search_string":pg, "type":"Financial"}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -408,7 +408,7 @@ function gotoTechnology1(pg, url, img){
 
 function gotoTechnology2(pg, url, img){   
     window.stop();
-    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&direct=True", "_self");
+    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&direct=Financial", "_self");
     
 }
 

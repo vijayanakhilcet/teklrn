@@ -683,8 +683,11 @@ def news(request):
     if data.get('image'):
         img = data.get('image')
     if data.get('direct'):
-        img = NewsFinancial.objects.get(name=data.get('technology')).imageLink
-        print('Hi'+img)
+        if data.get('direct') == 'Financial':
+            img = NewsFinancial.objects.get(name=data.get('technology')).imageLink
+        elif data.get('direct') == 'Technology':
+            img = NewsTechnology.objects.get(name=data.get('technology')).imageLink
+
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
   
@@ -1115,7 +1118,51 @@ class FinancialMatchingTheSearchNewView(FormView):
         # codeC = datasplit[0]
         # our_url = datasplit[1]
         nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
-        contentType = 'FINANCIAL'.upper() + ' [' + nl.language.name + ']'
+        contentType = nl.category
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
+        our_url = nl.link
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.strip().split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['contentType'] = contentType
+                course_json['count'] = count
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
+class TechnologyMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsLinks.objects.filter(category='TECHNOLOGY')[5]
+        contentType = nl.category
         k = int(idx)
         if k >= 0:
             try:
@@ -1506,10 +1553,15 @@ class NewsMatchingTheSearchViewRandom(FormView):
         results= []
         data = request.GET
         topic = data.get("search_string")  
+        typeOfNews = data.get("type")  
         technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
         for technology in technologies:
-            courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
+            if typeOfNews == 'Financial':
+                courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
+            elif typeOfNews == 'Technology':
+                courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")[:6]
+    
             if courses:
                 for tech in courses:
                     course_json = {}
@@ -1522,8 +1574,11 @@ class NewsMatchingTheSearchViewRandom(FormView):
                     results.append(course_json)
 
         if not results:
-
-            technologies = NewsFinancial.objects.all().order_by("-id")[:6]
+            if typeOfNews == 'Financial':
+                technologies = NewsFinancial.objects.all().order_by("-id")[:6] 
+            elif typeOfNews == 'Technology':
+                technologies = NewsTechnology.objects.all().order_by("-id")[:6] 
+            
             for technology in technologies:
                 course_json = {}
                 course_json['name'] = technology.name

@@ -56,6 +56,7 @@ urlpatterns = [
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
     path('getTechnologiesMatchingTheSearchNew/',views.TechnologiesMatchingTheSearchNewView.as_view()),
     path('getFianncialMatchingTheSearchNew/',views.FinancialMatchingTheSearchNewView.as_view()),
+    path('getTechnologyMatchingTheSearchNew/',views.TechnologyMatchingTheSearchNewView.as_view()),
     path('getVideosMatchingTheSearchNew/',views.VideosMatchingTheSearchNewView.as_view()),
     path('getTechnologiesMatchingTheSearchWithLangNew/',views.TechnologiesMatchingTheSearchNewWithLanguageView.as_view()),
     path('getCountries/',views.CountriesView.as_view()),

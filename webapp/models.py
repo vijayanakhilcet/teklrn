@@ -131,7 +131,7 @@ class NewsEntertainmentLevel(models.Model):
 class NewsFinancial(models.Model):
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=30, default='General')
-    contentType = models.CharField(max_length=30, default='FINANCIAL') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
+    contentType = models.CharField(max_length=30, default='FINANCIAL [en]') # Tech - Certification Course, Edu - Education Content, General - General Video on a topic .
     imageLink =  models.CharField(max_length=400, default='Hi')
     def __str__(self):
         return self.name
@@ -166,6 +166,7 @@ class NewsLinks(models.Model):
     link = models.CharField(max_length=400)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    category = models.CharField(max_length=20, default='NEWS')
     def __str__(self):
         return self.link
         
