@@ -1194,6 +1194,50 @@ class TechnologyMatchingTheSearchNewView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
 
+class EntertainmentMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsLinks.objects.filter(category='ENTERTAINMENT')[0]
+        contentType = nl.category
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
+        our_url = nl.link
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.strip().split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['contentType'] = contentType
+                course_json['count'] = count
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
 
 class TechnologiesMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
@@ -1561,6 +1605,8 @@ class NewsMatchingTheSearchViewRandom(FormView):
                 courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
             elif typeOfNews == 'Technology':
                 courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")
+            elif typeOfNews == 'Entertainment':
+                courses =  NewsEntertainment.objects.filter(name__icontains=technology).order_by("-id")
     
             if courses:
                 for tech in courses:
@@ -1577,7 +1623,9 @@ class NewsMatchingTheSearchViewRandom(FormView):
             if typeOfNews == 'Financial':
                 technologies = NewsFinancial.objects.all().order_by("-id")[:6] 
             elif typeOfNews == 'Technology':
-                technologies = NewsTechnology.objects.all().order_by("-id")[:6] 
+                technologies = NewsTechnology.objects.all().order_by("-id")
+            elif typeOfNews == 'Entertainment':
+                technologies = NewsEntertainment.objects.all().order_by("-id")
             
             for technology in technologies:
                 course_json = {}
