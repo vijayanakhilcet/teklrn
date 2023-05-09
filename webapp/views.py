@@ -1560,7 +1560,7 @@ class NewsMatchingTheSearchViewRandom(FormView):
             if typeOfNews == 'Financial':
                 courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
             elif typeOfNews == 'Technology':
-                courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")[:6]
+                courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")
     
             if courses:
                 for tech in courses:
