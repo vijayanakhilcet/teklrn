@@ -1610,6 +1610,8 @@ class NewsMatchingTheSearchViewRandom(FormView):
                 courses =  NewsTechnology.objects.filter(name__icontains=technology).order_by("-id")
             elif typeOfNews == 'Entertainment':
                 courses =  NewsEntertainment.objects.filter(name__icontains=technology).order_by("-id")
+            elif typeOfNews == 'News':
+                courses =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
     
             if courses:
                 for tech in courses:
@@ -1629,7 +1631,9 @@ class NewsMatchingTheSearchViewRandom(FormView):
                 technologies = NewsTechnology.objects.all().order_by("-id")
             elif typeOfNews == 'Entertainment':
                 technologies = NewsEntertainment.objects.all().order_by("-id")
-            
+            elif typeOfNews == 'News':
+                technologies =  NewsFinancial.objects.filter(name__icontains=technology).order_by("-id")[:6]
+                
             for technology in technologies:
                 course_json = {}
                 course_json['name'] = technology.name
