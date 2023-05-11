@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsFinancial, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
+from webapp.models import Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -687,6 +687,9 @@ def news(request):
             img = NewsFinancial.objects.get(name=data.get('technology')).imageLink
         elif data.get('direct') == 'Technology':
             img = NewsTechnology.objects.get(name=data.get('technology')).imageLink
+        elif data.get('direct') == 'Entertainment':
+            img = NewsEntertainment.objects.get(name=data.get('technology')).imageLink
+
 
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
