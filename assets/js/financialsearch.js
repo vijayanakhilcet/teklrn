@@ -256,6 +256,8 @@ function refineSearchView(pg, lang, idx){
                     var elm = document.getElementById(data[index].title);
                     elm.src = data[index].src;
                     elm.style.visibility = "visible";
+                    document.getElementById("initial").remove();
+
                     });
         
                 });
