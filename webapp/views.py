@@ -1144,7 +1144,9 @@ class FinancialMatchingTheSearchNewView(FormView):
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
-                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                if len(course_json['description'].split(" "))<5:
+                    continue 
                 course_json['contentType'] = contentType
                 course_json['count'] = count
                 results.append(course_json)
@@ -1186,9 +1188,12 @@ class TechnologyMatchingTheSearchNewView(FormView):
         for a in soup.find_all('a'):
             if len(a.text.strip().split(' '))>4:
                 course_json = {}
-                img = '/static/image/test/certificate.jpg'
+                img = '/static/image/test/certificate.jpg'                
+                datatoshow = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['description'] = datatoshow
+                if len(datatoshow.split(" "))<5:
+                    continue 
                 course_json['technology'] = a['href']
-                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 course_json['contentType'] = contentType
                 course_json['count'] = count
                 results.append(course_json)
@@ -1232,7 +1237,9 @@ class EntertainmentMatchingTheSearchNewView(FormView):
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
-                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                course_json['description'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                if len(course_json['description'].split(" "))<5:
+                    continue 
                 course_json['contentType'] = contentType
                 course_json['count'] = count
                 results.append(course_json)
@@ -1616,7 +1623,9 @@ class NewsMatchingTheSearchViewRandom(FormView):
             if courses:
                 for tech in courses:
                     course_json = {}
-                    course_json['name'] = tech.name
+                    if len(tech.name.split(" "))<5:
+                        continue
+                    course_json['name'] = tech.name                    
                     course_json['category'] = tech.category
                     course_json['contentType'] = tech.contentType
                     course_json['imageLink'] = tech.imageLink
@@ -1636,6 +1645,8 @@ class NewsMatchingTheSearchViewRandom(FormView):
                 
             for technology in technologies:
                 course_json = {}
+                if len(technology.name.split(" "))<5:
+                        continue
                 course_json['name'] = technology.name
                 course_json['category'] = technology.category
                 course_json['contentType'] = technology.contentType
