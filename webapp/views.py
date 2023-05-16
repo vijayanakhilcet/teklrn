@@ -1188,7 +1188,7 @@ class MatchingTheSearchNewView(FormView):
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a.text
-                if "BBC" in a.text or "Read" in a.text or " FT " in a.text:
+                if "BBC" in a.text or "Read" in a.text or " FT " in a.text or "Learn more" in a.text:
                     continue
                 course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 if len(course_json['description'].split(" "))<5:
