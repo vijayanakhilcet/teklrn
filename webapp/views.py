@@ -1164,7 +1164,7 @@ class MatchingTheSearchNewView(FormView):
         c = data.get("search_string")
         l = data.get("lang")
         idx = data.get("idx")
-        nl = NewsSearchUrls.objects.all()[0]
+        nl = NewsSearchUrls.objects.all()[2]
         contentType = 'Search Results: '+data.get("srch")
         k = int(idx)
         if k >= 0:
