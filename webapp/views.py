@@ -1160,15 +1160,12 @@ class MatchingTheSearchNewView(FormView):
         EndOfData =  False
         results= []
         data = request.GET
-        # datasplit = data.get("search_string").split('---')
         searchData = data.get("srch").replace(" ", "+")
         c = data.get("search_string")
         l = data.get("lang")
         idx = data.get("idx")
-        # codeC = datasplit[0]
-        # our_url = datasplit[1]
         nl = NewsSearchUrls.objects.all()[0]
-        contentType = 'Search'
+        contentType = 'Search Results: '+data.get("srch")
         k = int(idx)
         if k >= 0:
             try:
@@ -1190,7 +1187,9 @@ class MatchingTheSearchNewView(FormView):
             if len(a.text.strip().split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = a['href']
+                course_json['technology'] = a.text
+                if "BBC" in a.text or "Read" in a.text or " FT " in a.text:
+                    continue
                 course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 if len(course_json['description'].split(" "))<5:
                     continue 
