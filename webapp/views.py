@@ -1155,6 +1155,53 @@ class FinancialMatchingTheSearchNewView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
 
+class MatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        searchData = data.get("srch").replace(" ", "+")
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        nl = NewsSearchUrls.objects.all()[0]
+        contentType = 'Search'
+        k = int(idx)
+        if k >= 0:
+            try:
+                anl = NewsSearchUrls.objects.all()[k]                
+                nl = anl
+            except:
+                EndOfData = True
+        count = 0
+        try:
+            count = NewsSearchUrls.objects.all().count()
+        except:
+            count = 0
+        if EndOfData:
+            count = 9999
+        our_url = nl.url
+        r = requests.get(our_url+searchData)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all(nl.rule):
+            if len(a.text.strip().split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                if len(course_json['description'].split(" "))<5:
+                    continue 
+                course_json['contentType'] = contentType
+                course_json['count'] = count
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
 class TechnologyMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         EndOfData =  False
