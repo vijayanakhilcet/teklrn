@@ -5,31 +5,37 @@ $(document).ready(function () {
     refineSearchView("zzz", 'en', -1);
    // document.getElementById("course-search").focus();
 
-    $("#course-search").autocomplete({  
-        source: "/autocomplete",
-        dataType: 'json',
-        select: function( event , ui ) {
-        gotoTechnology(ui.item.value);        
-        runit = 1;
-        return false;
-           }
+   $("#course-search").autocomplete({  
+    source: "/autocomplete",
+    dataType: 'json',
+    select: function( event , ui ) {
+    window.stop();
+    searchView('United States', 'en', -1, ui.item.value);
+    // gotoTechnology(ui.item.value);        
+    runit = 1;
+    return false;
+       }
 }) 
 .data("ui-autocomplete")._renderItem = function(ul, item) {
-    return $( "<li style='margin-top:25px'>" )
-    .data( "ui-autocomplete-item", item )
-    .append( "<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>"+ item.description)
-    .appendTo( ul );
-  };
+return $( "<li style='margin-top:25px'>" )
+.data( "ui-autocomplete-item", item )
+.append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>-->"+ item.description)
+.appendTo( ul );
+};
 
 $("#course-search").on('keyup', function (event) {
-        if(runit === 0){
-            if (event.keyCode === 13) {                                     
-                $("#course-search").blur();            
-                refineSearchView(event.target.value);    
-            }
-        }  
-                
-         runit = 0;   
+window.stop();
+    if(runit === 0){
+        if (event.keyCode === 13) {                                     
+            $("#course-search").blur(); 
+            //refineSearchView(event.target.value);    
+            // gotoTechnology(event.target.value);
+            searchView('United States', 'en', -1, event.target.value);
+
+        }
+    }  
+            
+     runit = 0;   
 });
 
     // toggle mobile menu
@@ -97,6 +103,88 @@ function gotoTechnology2(pg, url, img){
     window.stop();
     window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&direct=Technology", "_self");
     
+}
+
+function searchView(pg, lang, idx, srch){
+    if(idx==-1){
+    var datas = document.querySelectorAll('div[id^="searchD"]');
+    datas.forEach((userItem) => {
+        if (userItem.id != "searchD"){
+        var elem = document.getElementById(userItem.id); 
+        elem.remove();
+    }
+    });
+}    
+    
+    stringVal = "searchD"
+    if (idx >=0){
+        stringVal =stringVal + idx
+    }
+    else{window.scrollTo({ top: 0, behavior: "auto" });}
+    var elm = document.getElementById(stringVal);
+    var html_message ="";
+    count = 0
+    $.ajax({
+        url         : "/getMatchingTheSearchNew", // the url where we want to POST
+        data        : {"search_string":pg, "lang":lang, "idx":idx, "srch":srch}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            elm.innerHTML="";  
+            i=-1
+            $.each(data, function(index) {
+                i=i+1
+                count = data[index].count;
+                html_message +='<div  onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><div style="padding-left: 2% !important; color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" ><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4" style="padding-left: 13px !important;">Read..</div></a></div>';          
+
+            });
+          
+    elm.innerHTML=html_message
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("id", "searchD"+(idx+1));
+    newDiv.setAttribute("class", "flex flex-wrap");
+    elm.after(newDiv);
+        })
+        .complete(function(data) {
+            var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
+            // Code = $("#countryCode option:selected").val().split("---")[0];
+            data = ''
+            datas.forEach((userItem) => {
+                data=userItem.id+'---';
+                $.ajax({
+                    url: "/searchtopicsnewnewsForImg", // the url where we want to POST
+                    data: {
+                    "titles": data,
+                    "lang":"United States",
+                    "strVal": stringVal
+                    },
+                    dataType: 'json',
+                    encode: true
+                })
+                // using the done promise callback
+                .done(function (data) {
+                    $.each(data, function (index) {
+                    var elm = document.getElementById(data[index].title);
+                    elm.src = data[index].src;
+                    elm.style.visibility = "visible";   
+                    });
+        
+                });
+            });
+            if (count != 9999){
+                searchView(pg, lang, idx+1, srch);
+            }
+        });
+         
+        return false;       
+}
+
+function gotoTechnology1(pg, url, img){   
+    window.stop();
+    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&url="+url+"&image="+document.getElementById(img).src, "_self");
+   
 }
 
 function refineSearchView(pg, lang, idx){
