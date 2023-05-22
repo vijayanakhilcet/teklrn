@@ -1,7 +1,7 @@
 $(document).ready(function () {
     
     var runit = 0;     
-    populateStaticNews("zzz");
+    // populateStaticNews("zzz");
     refineSearchView("zzz", 'en', -1);
    // document.getElementById("course-search").focus();
 
