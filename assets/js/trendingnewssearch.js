@@ -10,6 +10,7 @@ $(document).ready(function () {
         select: function( event , ui ) {
             window.stop();
             searchView('United States', 'en', -1, ui.item.value);
+            
             runit = 1;
             return false;
            }

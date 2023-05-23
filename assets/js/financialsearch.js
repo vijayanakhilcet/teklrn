@@ -254,7 +254,7 @@ function searchView(pg, lang, idx, srch){
                     $.each(data, function (index) {
                     var elm = document.getElementById(data[index].title);
                     elm.src = data[index].src;
-                    elm.style.visibility = "visible";
+                    elm.style.visibility = "visible";   
                     });
         
                 });

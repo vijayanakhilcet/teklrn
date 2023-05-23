@@ -255,6 +255,7 @@ function refineSearchView(pg, lang, idx){
                         elm.src = data[index].src;
                         elm.style.visibility = "visible";
                         document.getElementById("initial").remove();
+                        
                         });
             
                     });
