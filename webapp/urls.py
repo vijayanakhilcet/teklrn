@@ -35,6 +35,7 @@ urlpatterns = [
     path('worldnews/', views.worldNews, name='hi-pre-Page'),
     path('technologynews/', views.technologyNews, name='t-pre-Page'),
     path('entertainmentnews/', views.entertainmentNews, name='e-pre-Page'),
+    path('financialnews/', views.financialNews, name='f-pre-Page'),    
     path('careers/', views.careers, name='careers-Page'),
     path('teach/', views.teach, name='teach-Page'),
     path('press/', views.press, name='press-Page'),

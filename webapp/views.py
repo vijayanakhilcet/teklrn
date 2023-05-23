@@ -280,6 +280,27 @@ def worldNews(request):
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
+def financialNews(request):
+    page = 'webapp/financial_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
 def entertainmentNews(request):
     page = 'webapp/entertainmentnews_pre_landing.html'
     data = request.GET
