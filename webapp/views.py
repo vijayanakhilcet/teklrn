@@ -1113,13 +1113,15 @@ class VideosMatchingTheSearchNewView(FormView):
                 a = alllinks[(int(idx)+1)*3+int(x)]
                 course_json['img'] = a.imgLink
                 course_json['video'] = a.link
-                course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
+                # course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
+                course_json['description'] =  a.person.country.name
+
                 course_json['contentType'] = a.txt 
                 course_json['count'] = count
-                news = self.allNews(a.person.name)
-                if news == "":
-                    news = self.allNews(a.person.country.name)         
-                course_json['news'] = news
+                # news = self.allNews(a.person.name)
+                # if news == "":
+                #     news = self.allNews(a.person.country.name)         
+                course_json['news'] = ''
             except Exception as e:
                 print("Exception "+str(e))
                 count = 9999  
