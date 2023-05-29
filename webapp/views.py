@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, PersonVideoLinks
+from webapp.models import Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -1103,9 +1103,13 @@ class VideosMatchingTheSearchNewView(FormView):
         count=0
         # all_person = Person.objects.filter(country=Country.objects.get(name=c))
         alllinks = []
+
         # for person in all_person:
         #     alllinks += PersonVideoLinks.objects.filter(person=person).order_by('id')
+        alllinks += DailyNewsVideos.objects.all().order_by('id')
         alllinks += PersonVideoLinks.objects.all().order_by('id')
+
+
         for x in range(3):              
             course_json = {}
             try:
@@ -1114,7 +1118,11 @@ class VideosMatchingTheSearchNewView(FormView):
                 course_json['img'] = a.imgLink
                 course_json['video'] = a.link
                 # course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
-                course_json['description'] =  a.person.country.name
+                try:    
+                    course_json['description'] =  a.person.country.name
+                except:
+                    course_json['description'] = a.person
+
 
                 course_json['contentType'] = a.txt 
                 course_json['count'] = count

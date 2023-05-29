@@ -202,8 +202,10 @@ class NewsSearchUrls(models.Model):
         return self.url
 
 class DailyNewsVideos(models.Model): 
-    url = models.CharField(max_length=1000, default='')
-    title = models.CharField(max_length=100, default='')
-    imgurl = models.CharField(max_length=1000, default='')
+    link = models.CharField(max_length=1000, default='')
+    person = models.CharField(max_length=100, default='')
+    imgLink = models.CharField(max_length=1000, default='')
+    txt = models.CharField(max_length=1000, default='')
+
     def __str__(self):
-        return self.url
+        return self.link
