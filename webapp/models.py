@@ -200,3 +200,9 @@ class NewsSearchUrls(models.Model):
     rule = models.CharField(max_length=5, default='')
     def __str__(self):
         return self.url
+
+class DailyNewsVideos(models.Model): 
+    url = models.CharField(max_length=1000, default='')
+    title = models.CharField(max_length=100, default='')
+    def __str__(self):
+        return self.url
