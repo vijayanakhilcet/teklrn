@@ -335,6 +335,30 @@ function refineSearchWithLangView(pg, lang, idx){
 //         return false;       
 // }
 
+function playVid1(id){
+    vid = document.getElementById(id.id)
+    vid.remove();
+    vid = document.getElementById(id.id.replace('_img', ''));
+    vid.style.visibility = "visible"; 
+    if (vid.paused || vid.ended){
+        document.querySelectorAll('video').forEach(vid => vid.pause());
+        vid.play();
+    }else{
+        vid.pause()
+    }
+}
+
+function playVid(id){
+    vid = document.getElementById(id.id)
+    if (vid.paused || vid.ended){
+        document.querySelectorAll('video').forEach(vid => vid.pause());
+        vid.play();
+    }else{
+        vid.pause()
+    }
+}
+
+
 
 function refineSearchView(pg, lang, idx){
     if(idx==-1){
@@ -369,8 +393,9 @@ function refineSearchView(pg, lang, idx){
                 i=i+1
                 count = data[index].count;
                 // html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="padding-left: 13px !important;color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;     font-weight: bold;">'+ '['+data[index].description+']  '+'</div><img  style="width: 700px; height: 400px; object-fit: cover;"  src="'+data[index].technology+'" /><a style="padding-left: 13px;font-size: small;     font-weight: bold;">'+data[index].contentType+'</a></p><div class="indigo fs-s3 after-arrow-right my-4" style="padding-left: 13px; !important">More Info</div></a></div>';                     
+                // html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="padding-left: 13px !important;color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em; font-weight: bold;">'+'LIVE'+'  '+'</div><img style="width: 700px; height: 300px; object-fit: cover;" class="w-100pc" onerror="this.src=\'/static/image/test/certificate.jpg\'" src='+data[index].img+' /><p style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;">'+data[index].description+'</p></p></a>';         
 
-                html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="padding-left: 13px !important;color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;     font-weight: bold;">'+'LIVE'+'  '+'</div><video poster='+data[index].img+' preload="none" style="width: 700px; height: 300px; object-fit: cover;" controls><source src="'+data[index].video+'" type="video/mp4">Your browser does not support the video tag.</video><div style="padding-left: 13px;padding-right: 13px;font-size: small; font-weight: bold;">'+data[index].description+'</div></p></a>';         
+                html_message +='<div style="visibility:none; padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding:0% !important" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<div style="padding-left: 13px !important;color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;     font-weight: bold;">'+'LIVE'+'  '+'</div><img onclick="playVid1(this)" id=\''+data[index].description.replaceAll(" ", "_")+'_img'+'\' style="width: 700px; height: 300px; object-fit: cover;" class="w-100pc" onerror="this.src=\'/static/image/test/certificate.jpg\'" src='+data[index].img+' /><video id=\''+data[index].description.replaceAll(" ", "_")+'\' onclick="playVid(this)" poster='+data[index].img+' preload="none" style="visibility:hidden; pointer-events: all;width: 700px; height: 300px; object-fit: cover;"><source src="'+data[index].video+'" type="video/mp4">Your browser does not support the video tag.</video><div style="padding-left: 13px;padding-right: 13px;font-size: small; font-weight: bold;">'+data[index].description+'</div></p></a>';         
                 var infos = data[index].news.split(';');
                 for (info in infos) {
                     html_message = html_message+'<div href="" onclick="gotoTechnology2(\''+infos[info]+'\')" class="indigo fs-s3 after-arrow-right my-4" style="padding-left: 13px; !important; font-weight: bold;">'+infos[info]+'</div><hr>';
