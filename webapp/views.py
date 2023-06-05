@@ -1118,10 +1118,14 @@ class VideosMatchingTheSearchNewView(FormView):
                 course_json['img'] = a.imgLink
                 course_json['video'] = a.link
                 # course_json['description'] =  a.person.name + ' - '+a.person.designation+'' +  ' - '+a.person.country.name
-                try:    
-                    course_json['description'] =  a.person.country.name
-                except:
-                    course_json['description'] = a.person
+                if a.txt != '':
+                    course_json['description'] = a.txt.split('.')[0]
+                else:
+
+                    try:    
+                        course_json['description'] =  a.person.country.name
+                    except:
+                        course_json['description'] = a.person
 
 
                 course_json['contentType'] = a.txt 
