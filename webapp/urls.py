@@ -61,6 +61,7 @@ urlpatterns = [
     path('getTechnologyMatchingTheSearchNew/',views.TechnologyMatchingTheSearchNewView.as_view()),
     path('getEntertainmentMatchingTheSearchNew/',views.EntertainmentMatchingTheSearchNewView.as_view()),
     path('getVideosMatchingTheSearchNew/',views.VideosMatchingTheSearchNewView.as_view()),
+    path('tmail/',views.TmailView.as_view()),
     path('getTechnologiesMatchingTheSearchWithLangNew/',views.TechnologiesMatchingTheSearchNewWithLanguageView.as_view()),
     path('getCountries/',views.CountriesView.as_view()),
     path('getLanguages/',views.LanguagesView.as_view()),

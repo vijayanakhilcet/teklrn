@@ -143,7 +143,7 @@ EMAIL_HOST_USER = 'teklrn.inc@gmail.com'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'teklrn.inc@gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = 'PAssw0RD8#'
+EMAIL_HOST_PASSWORD = 'ywwndqfsbfbvcwti'
 
 
 # Internationalization

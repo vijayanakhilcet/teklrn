@@ -1100,6 +1100,13 @@ class VideosMatchingTheSearchNewView(FormView):
         idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
+        # email_test = EmailMessage(
+        #     'Hi',
+        #     'Hello',
+        #     'teklrn.inc@gmail.com',
+        #     ['vijayan.akhil.cet@gmail.com'],
+        # )
+        # email_test.send(fail_silently=False)
         count=0
         # all_person = Person.objects.filter(country=Country.objects.get(name=c))
         alllinks = []
@@ -1140,6 +1147,42 @@ class VideosMatchingTheSearchNewView(FormView):
                 course_json['count'] = count
                 break
             results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)    
+
+
+class TmailView(FormView):
+    def get(self,request,*args,**kwargs):
+        results = []
+        data = request.GET
+        comment = data.get("comment")
+        img = data.get("img")
+        title = data.get("title")
+        to = data.get("to")
+        tmailfrom = data.get("from")
+        email_body = """\
+    <html>
+      <head></head>
+      <body>
+        <h5>TMAIL FROM  %s - </h5> 
+        <p>%s</p>
+        <h1 style='font-size: x-large;'>%s</h1>
+        <img src='%s'/>
+        <a href='http://teklrn.com/media'>Teklrn.com</a>
+           </body>
+    </html>
+    """ % (tmailfrom, comment, title, img)
+        email_test = EmailMessage(
+            title,
+            email_body,
+            'teklrn.inc@gmail.com',
+            [to],
+        )
+        email_test.content_subtype = "html"
+        email_test.send(fail_silently=False)
+        course_json = {}
+        results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)    
