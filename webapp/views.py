@@ -1156,23 +1156,21 @@ class TmailView(FormView):
     def get(self,request,*args,**kwargs):
         results = []
         data = request.GET
-        comment = data.get("comment")
         img = data.get("img")
         title = data.get("title")
         to = data.get("to")
-        tmailfrom = data.get("from")
+        # tmailfrom = data.get("from")
         email_body = """\
     <html>
       <head></head>
       <body>
-        <h5>TMAIL FROM  %s - </h5> 
-        <p>%s</p>
+        <a href='http://teklrn.com/media'>Teklrn.com</a>
         <h1 style='font-size: x-large;'>%s</h1>
         <img src='%s'/>
-        <a href='http://teklrn.com/media'>Teklrn.com</a>
+        
            </body>
     </html>
-    """ % (tmailfrom, comment, title, img)
+    """ % (title, img)
         email_test = EmailMessage(
             title,
             email_body,

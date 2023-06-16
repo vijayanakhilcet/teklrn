@@ -200,7 +200,7 @@ function submitted(){
     window.stop();
     $.ajax({
         url         : "/tmail", // the url where we want to POST
-        data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'comment':document.getElementById('viewpoint').value, 'to':document.getElementById('tmailto').value, 'from':document.getElementById('tmailfrom').value}, // our data object
+        data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'to':document.getElementById('tmailto').value}, // our data object
         dataType    : 'json', // what type of data do we expect back from the server
         encode      : true
     })
@@ -211,7 +211,6 @@ function submitted(){
         });
         return true; 
 }
-
 
 function searchView(pg, lang, idx, srch){
     if(idx==-1){
