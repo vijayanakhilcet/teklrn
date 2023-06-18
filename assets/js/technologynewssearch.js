@@ -99,7 +99,7 @@ function populateStaticNews(pg){
         return false;       
 }
 
-function submitted(){
+function submitted(event){
     window.stop();
     $.ajax({
         url         : "/tmail", // the url where we want to POST
@@ -110,8 +110,9 @@ function submitted(){
         // using the done promise callback
         .done(function(data) {
             $.each(data, function(index) {});
-            document.getElementById('closex').click();
         });
+        event.preventDefault();
+        document.getElementById('closex').click();
         return true; 
 }
 
