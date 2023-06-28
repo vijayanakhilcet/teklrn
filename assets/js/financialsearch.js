@@ -1,7 +1,8 @@
 $(document).ready(function () {
     var runit = 0;  
     populateStaticNews("zzz");
-    populateCountry();   
+    // populateCountry();   
+    refineSearchView("zzz", 'en', -1);
     
    // document.getElementById("course-search").focus();
     $("#course-search").autocomplete({  
@@ -337,7 +338,7 @@ function refineSearchView(pg, lang, idx){
         })
         .complete(function(data) {
             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
-            Code = $("#countryCode option:selected").val().split("---")[0];
+            // Code = $("#countryCode option:selected").val().split("---")[0];
             data = ''
             datas.forEach((userItem) => {
                 data=userItem.id+'---';
@@ -345,7 +346,7 @@ function refineSearchView(pg, lang, idx){
                     url: "/searchtopicsnewnewsForImg", // the url where we want to POST
                     data: {
                     "titles": data,
-                    "lang":Code,
+                    "lang":"Code",
                     "strVal": stringVal
                     },
                     dataType: 'json',
