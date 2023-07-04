@@ -39,8 +39,14 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
-    
+    <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
     <link type="text/css" rel="stylesheet" href="{% static 'css/magicscroll.css' %}" media="screen"/>
+    <link rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal/style.css' %}"> 
 
     <title>{{technology_desc}}</title>
     <meta name="description" content="Latest Technologies - {{technology_desc}}"/> 
@@ -70,7 +76,59 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <p id="img" hidden>{{img}}</p>
     <p id="pElement" hidden>{{pElement}}</p>
   
-    
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="ion-ios-close"></span>
+            </button>
+          </div>
+          <div class="modal-body p-4 py-5 p-md-5">
+              <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
+              <ul class="ftco-footer-social p-0 text-center">
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+        </ul>
+              <form class="signup-form">
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Sender</label>
+                      <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
+                  </div> -->
+                  <div class="form-group mb-2">
+                      <label for="email">TMAIL Recepient</label>
+                      <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
+                  </div>
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Comment</label>
+                      <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
+                  </div> -->
+                  <!-- <div class="form-group mb-2">
+                      <label for="name">Comment</label>
+                      <input  type="text" class="form-control" placeholder="John Doe">
+                  </div> -->
+                  
+                  <div class="form-group mb-2">
+                      <img id="comment" alt="Image" src=""/>
+                  </div>
+            <div class="form-group mb-2">
+              <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
+            </div>
+            <div class="form-group mb-2">
+                <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
+            </div>
+            <div class="form-group d-md-flex">
+                            <div class="w-100 text-center">
+                                <a href="#" class="forgot">Terms and Conditions</a>
+                            </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <aside class="sidebar">
       <!-- <div class="toggle" style="padding-top: 5px !important;">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -122,8 +180,10 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     </aside>
     
     <main style="background-color: white !important; height: 100% !important; ">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 25%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
-        <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 5%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
+        
+        <div>
+          
           <div>
             <!-- <a href="/technologies/technology?technology={{technology}}" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">Video</a>
             <a href="/news/technology?technology={{technology}}" style="padding-right: 4px; border-bottom-style: solid; border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .8rem;font-family: 'Poppins', sans-serif;color: #507acf;">News</a>
@@ -131,7 +191,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
   
           </div>
              <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1; margin: 0px -20px -0px 0px;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="155" height="55">  </a>
-            
+             <h class="indigo fs-s3 italic after-arrow-right my-4" style="font-size: .7rem !important;     color: #5A4FCF !important; font-family: 'Muli', sans-serif !important;     font-style: italic;padding-left: 13px !important;"><h onclick="clickh('1','2')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="15" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh('searchD-img-0Review. The best of TV and streaming this week','Review. The best of TV and streaming this week')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"></h>
             </div>
     </nav>
     <img style="padding-top: 100px;margin-left: 10px;z-index: 111; width: 40px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png">
@@ -163,6 +223,34 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
         
     </div>  -->
     </main>
+     <script type="text/javascript">
+        function clickh(d, t){
+            // var text = $("#textarea").val();
+            document.getElementById('comment').src=document.getElementById('img').innerHTML;
+            document.getElementById('desc').innerHTML =document.getElementById('technology_view').innerHTML;
+
+    }
+
+    function submitted(event){
+    window.stop();
+    $.ajax({
+        url         : "/tmail", // the url where we want to POST
+        data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'to':document.getElementById('tmailto').value}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $.each(data, function(index) {});
+            
+        });
+        event.preventDefault();
+        document.getElementById('closex').click();
+        return true; 
+}
+
+    
+    </script>
     <!-- <script src="{% static 'new/js/jquery-3.3.1.min.js' %}"></script> -->
     <!-- <script src="{% static 'new/js/popper.min.js' %}"></script> -->
     <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
