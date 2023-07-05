@@ -1416,11 +1416,15 @@ class TechnologiesMatchingTheSearchNewView(FormView):
             if len(a.text.strip().split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = a['href']
-                course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
-                course_json['contentType'] = contentType
-                course_json['count'] = count
-                results.append(course_json)
+                try:
+                    course_json['technology'] = a['href']
+                    course_json['description'] = a.text.replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
+                    course_json['contentType'] = contentType
+                    course_json['count'] = count
+                    results.append(course_json)
+                except:
+                    continue
+        
         random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
