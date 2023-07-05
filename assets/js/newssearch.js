@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var runit = 0;
-    populateStaticNews("zzz");
+    // populateStaticNews("zzz");
 
     populateCountry();   
     
@@ -38,8 +38,9 @@ $("#course-search").on('keyup', function (event) {
 $("#countryCode").on('change', function (event) {
     window.stop();
     window.scrollTo({ top: 0, behavior: "auto" });
+    refineSearchView(event.target.value, 'en', -1);
     getLanguage(event.target.value);
-    refineSearchView(event.target.value, document.getElementById("lang").value, -1);
+
 
 });
 
