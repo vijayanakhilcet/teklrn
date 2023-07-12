@@ -45,6 +45,7 @@ urlpatterns = [
     path('refund/', views.refund, name='refund-Page'),
     path('privacy/', views.privacy, name='privacy-Page'),
     path('', views.home, name='Home-Page'),
+    path('getRelatedNews/',views.RelatedNewsView.as_view()),
     path('autocomplete/',views.AutoCompleteViewNew.as_view()), #Previously AutoCompleteView
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
     path('searchtopicsnew/',views.AutoCompleteSearchTopicsViewNew.as_view()),

@@ -2133,6 +2133,31 @@ class AutoCompleteSearchTopicsViewNew(FormView):
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
+        return HttpResponse(data, mimetype)    
+    
+class RelatedNewsView(FormView):
+    def get(self,request,*args,**kwargs):
+        print('ENter Get Related')
+        results= []
+        data = request.GET
+        courseName = data.get("titles")
+        # headers = {
+        #     "User-Agent":
+        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        # }
+        # response = requests.get('https://ca.search.yahoo.com/search?p='+courseName, headers=headers)
+        # 
+        # 
+        url  = "https://ca.search.yahoo.com/search?p="+courseName
+        r = requests.get(url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('span')[:-2]:
+            if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+                course_json = {}
+                course_json['newtitle'] = a.text
+                results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
 class AutoCompleteViewNew(FormView):
