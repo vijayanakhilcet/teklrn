@@ -1959,6 +1959,50 @@ class AutoCompleteSearchTopicsViewNewTrending(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET
+        topic = data.get('titles')  
+        langg = data.get('lang') 
+        stringVal = data.get('strVal') 
+        print('IO :'+stringVal)
+        NonEnglish = False
+        if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
+            NonEnglish = True
+        if NonEnglish: 
+            translator = Translator() 
+            course_json = {} 
+            e = unquote(stringVal)
+            course_json['title'] = topic
+            try:
+                course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+            except:
+                    try:
+                        course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=4)[2]
+                    except:
+                        try:
+                            course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=10)[1]
+                        except:
+                            try:
+                                course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')[:len(e)//2], limit=1)[0]
+                            except:
+                                course_json['src'] =  '/static/image/test/certificate.jpg'                        
+            results.append(course_json)
+        else: 
+            course_json = {} 
+            e = unquote(stringVal)
+            course_json['title'] = topic
+            try:
+                course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+            except:
+                course_json['src'] =  '/static/image/test/certificate.jpg'
+            results.append(course_json)
+       # random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
 class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
     def get(self,request,*args,**kwargs):
         results= []

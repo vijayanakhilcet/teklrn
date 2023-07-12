@@ -67,13 +67,39 @@ $(function () {
             i=0
             $.each(data, function (index) {
                i=i+1;
-               li_el += '<li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'"  src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 400 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important">'+data[index].newtitle+'<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
+               li_el += '<li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 400 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="font-size: 14px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
               
               }); 
               document.getElementById("tree").innerHTML = "";
               document.getElementById("tree").innerHTML = li_el;
             
-         });
+         })
+         .complete(function(data) {
+                var datas = document.querySelectorAll('[id^="'+'RelatedNws'+'"]');
+                // Code = $("#countryCode option:selected").val().split("---")[0];
+                data = ''
+                datas.forEach((userItem) => {
+                    data=userItem.id;
+                    $.ajax({
+                        url: "/searchtopicsnewnewsForImgRelated", // the url where we want to POST
+                        data: {
+                        "strVal": data.split('---')[1],
+                        "titles": data,
+                        "lang":'en'
+                        
+                        },
+                        dataType: 'json',
+                        encode: true
+                    })
+                    .done(function (data) {
+                     $.each(data, function (index) {
+                       var elm = document.getElementById(data[index].title);
+                       elm.src = data[index].src;
+                       });
+                  
+                          });
+                  });
+               });
    });
 
 event.preventDefault();
