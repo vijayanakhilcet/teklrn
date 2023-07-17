@@ -2192,13 +2192,13 @@ class RelatedNewsView(FormView):
         # response = requests.get('https://ca.search.yahoo.com/search?p='+courseName, headers=headers)
         # 
         # 
-        url  = "https://ca.search.yahoo.com/search?p="+courseName
+        url  = "https://search.yahoo.com/search?p="+courseName
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
-        for a in soup.find_all('span')[:-2]:
+        for a in soup.find_all('span'):
             if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
                 course_json = {}
-                course_json['newtitle'] = a.text
+                course_json['newtitle'] = a.text.split('.')[0]
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
