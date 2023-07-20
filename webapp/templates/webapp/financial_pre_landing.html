@@ -3,6 +3,9 @@
 <html lang="en">
 
 <head>
+    <style>
+        #all_news{background: #507acf;width: 100%;height: 32px;margin: 40px auto 0;overflow: hidden;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;padding: 3px;position: relative;-webkit-box-shadow: inset 0px 1px 2px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 2px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 2px rgba(0,0,0,0.5)}span{float: left;color: rgba(0,0,0,.8);color: #fff;background: #00425a;padding: 6px;position: relative;border-radius: 4px;font-size: 12px;-webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);background: rgb(0,75,103);background: -moz-linear-gradient(top, rgba(0,75,103,1) 0%, rgba(0,53,72,1) 100%);background: -webkit-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -o-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -ms-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004b67', endColorstr='#003548',GradientType=0 )}ul{float: left;padding-left: 20px;-webkit-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-moz-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-ms-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite}ul:hover{-webkit-animation-play-state: paused;-moz-animation-play-state: paused;-ms-animation-play-state: paused;animation-play-state: paused}li{line-height: 25px}#all_news a{color: #fff;text-decoration: none;font-size: 13px}@-webkit-keyframes ticker{0%{margin-top: 0}25%{margin-top: -26px}50%{margin-top: -52px}75%{margin-top: -78px}100%{margin-top: 0}}@-moz-keyframes ticker{0%{margin-top: 0}25%{margin-top: -26px}50%{margin-top: -52px}75%{margin-top: -78px}100%{margin-top: 0}}@-ms-keyframes ticker{0%{margin-top: 0}25%{margin-top: -26px}50%{margin-top: -52px}75%{margin-top: -78px}100%{margin-top: 0}}@keyframes ticker{0%{margin-top: 0}25%{margin-top: -26px}50%{margin-top: -52px}75%{margin-top: -78px}100%{margin-top: 0}}
+    </style>
     <!-- <style>
         .loader {
 position: fixed;
@@ -57,7 +60,9 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
             <div style="flex-direction: column;display: flex;" class="container-fluid">
 
                 <div style="width: 100%;">
-                <a  onclick="doLaunch(event)" style="float: left;width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="210" height="25">  
+                    
+                <a  onclick="doLaunch(event)" style="float: left;width:100%; font-size: 1rem;font-family: Antietam;color: #629dd1;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="180" height="25">  
+                    
                     <!-- <select id="lang" style="color:#4976c8; font-family: 'Poppins', sans-serif;width : 7%; float:right; margin-top: 20px;" name="cars" id="cars">
                         <option selected  value='en-US'>en</option> 
                     </select>
@@ -68,12 +73,15 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
                     <!-- <img width="30" height="20" style="float:right;padding-top: 15px; margin-left: 10px;margin-right: 10px;" src="/static/image/images/39.jpg">
 
                     <img width="30" height="20" style="float:right;padding-top: 15px; " src="/static/image/images/29.jpg"> -->
-
-                    <img width="30" height="20" style="float:right;padding-top: 15px; margin-left: 10px;margin-right: 10px;" src="/static/image/images/globe.gif">
+                    
+                    <img width="25" height="20" style="float:right;padding-top: 15px; margin-left: 10px;margin-right: 10px;" src="/static/image/images/globe.gif">
 
                     <!-- <input type="submit" value="Submit"> -->
                    
                 </a>
+                <div id="all_news"> <ul style="float: right;"> <li><a href="#">WORLD NEWS</a></li> <li><a href="#">TECHNOLOGY</a></li> <li><a href="#">ENTERTAINMENT</a></li> <li><a href="#">FINANCIAL</a></li> </ul>
+                </div>
+                
                 <a id="Current_c"></a>
                 <p style="padding-top: 1% ;float: left;width:100%;"> <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="height: 50%; font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;">
      
