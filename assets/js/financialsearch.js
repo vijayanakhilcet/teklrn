@@ -177,7 +177,7 @@ function refineSearchWithLangView(pg, lang, idx){
                 html_message_marq +='<a><img style="padding-left:5px; padding-right: 5px; width: 60px; height: 40px; object-fit: cover;" src="'+data[index].imageLink+'"/>'+data[index].description+'     </a>'
             });
           
-    elm.innerHTML=html_message;
+    elm.innerHTML+=html_message;
     newDiv = document.createElement("div");
     newDiv.setAttribute("id", "searchD"+(idx+1));
     newDiv.setAttribute("class", "flex flex-wrap");
@@ -262,7 +262,7 @@ function searchView(pg, lang, idx, srch){
     newDiv.setAttribute("id", "searchD"+(idx+1));
     newDiv.setAttribute("class", "flex flex-wrap");
     elm.after(newDiv);
-    mrqelem.innerHTML = html_message_marq;
+    mrqelem.innerHTML += html_message_marq;
         })
         .complete(function(data) {
             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
@@ -348,7 +348,7 @@ function refineSearchView(pg, lang, idx){
     newDiv.setAttribute("id", "searchD"+(idx+1));
     newDiv.setAttribute("class", "flex flex-wrap");
     elm.after(newDiv);
-    mrqelem.innerHTML=html_message_marq
+    mrqelem.innerHTML+=html_message_marq
         })
         .complete(function(data) {
             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
