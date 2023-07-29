@@ -1,6 +1,8 @@
 $(document).ready(function () {
     var runit = 0;  
     populateCountry();   
+    // refineSearchView('US', document.getElementById("lang").value, -1); 
+
     
    // document.getElementById("course-search").focus();
     $("#course-search").autocomplete({  
@@ -393,6 +395,8 @@ function refineSearchView(pg, lang, idx){
         .done(function(data) {
             elm.innerHTML="";  
             i=-1
+            var mrqelem = document.getElementById('marq');
+            var html_message_marq="";
             $.each(data, function(index) {
                 i=i+1
                 count = data[index].count;
@@ -403,14 +407,19 @@ function refineSearchView(pg, lang, idx){
                 var infos = data[index].news.split(';');
                 for (info in infos) {
                     html_message = html_message+'<div href="" onclick="gotoTechnology2(\''+infos[info]+'\')" class="indigo fs-s3 my-4" style="padding-left: 13px; !important; font-weight: bold;">'+infos[info]+'</div><hr>';
-                }   
-                html_message = html_message+'</div>'         
+
+                }  
+                html_message_marq +='<a><img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="'+data[index].img+'" style="padding-left:5px; padding-right: 5px; width: 60px; height: 40px; object-fit: cover;" id="'+'marq'+data[index].description+'"/>'+data[index].description+'     </a>'
+ 
+                html_message = html_message+'</div>'   
+                  
             });
           
     elm.innerHTML=html_message
     newDiv = document.createElement("div");
     newDiv.setAttribute("id", "searchD"+(idx+1));
     newDiv.setAttribute("class", "flex flex-wrap");  
+    mrqelem.innerHTML += html_message_marq;
     // newDiv.setAttribute("style", "display:  inline-block !important;");
 
     elm.after(newDiv);
