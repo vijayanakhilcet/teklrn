@@ -1337,7 +1337,7 @@ class EntertainmentMatchingTheSearchNewView(FormView):
         idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
-        nl = NewsLinks.objects.filter(category='ENTERTAINMENT')[0]
+        nl = NewsLinks.objects.filter(category='ENTERTAINMENT')[3]
         contentType = nl.category
         k = int(idx)
         if k >= 0:
