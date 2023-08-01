@@ -311,7 +311,7 @@ function refineSearchView(pg, lang, idx){
     }
     });
 }    
-    if(idx==0){
+    if(idx==-1){
         elm1 = document.getElementById("ulNews");    
         html_message_1="";
         $.ajax({

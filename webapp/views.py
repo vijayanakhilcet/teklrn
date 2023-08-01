@@ -1198,7 +1198,7 @@ class GetLatestNewsView(FormView):
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
                 course_json['technology'] = a['href']
-                if 'Jazeera' in a.text or 'www.' in a.text or '›' in a.text or "Read" in a.text or " FT " in a.text or "FT " in a.text or "Learn more" in a.text or "Middle East & North Africa" in a.text or "our newsletter" in a.text:
+                if 'Opinion' in a.text or 'Jazeera' in a.text or 'www.' in a.text or '›' in a.text or "Read" in a.text or " FT " in a.text or "FT " in a.text or "Learn more" in a.text or "Middle East & North Africa" in a.text or "our newsletter" in a.text:
                     continue
                 course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
                 if len(course_json['description'].split(" "))<5:
