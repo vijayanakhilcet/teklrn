@@ -1185,6 +1185,30 @@ class TmailView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)    
 
+class GetLatestNewsView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET       
+        our_url = 'https://www.aljazeera.com/'
+        r = requests.get(our_url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('a'):
+            if len(a.text.strip().split(' '))>4:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a['href']
+                if 'Jazeera' in a.text or 'www.' in a.text or '›' in a.text or "Read" in a.text or " FT " in a.text or "FT " in a.text or "Learn more" in a.text or "Middle East & North Africa" in a.text or "our newsletter" in a.text:
+                    continue
+                course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
+                if len(course_json['description'].split(" "))<5:
+                    continue 
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
 class FinancialMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         EndOfData =  False
