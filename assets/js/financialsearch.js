@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
+
     var runit = 0;  
     populateStaticNews("zzz");
     // populateCountry();   
@@ -311,7 +313,7 @@ function refineSearchView(pg, lang, idx){
     }
     });
 }    
-    if(idx==-1){
+    if(idx==0){
         elm1 = document.getElementById("ulNews");    
         html_message_1="";
         $.ajax({
@@ -327,9 +329,9 @@ function refineSearchView(pg, lang, idx){
                 $.each(data, function(index) {
                     i=i+1
                     html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
-    
+                    
                 });
-              
+                localStorage.setItem("varValue", html_message_1);
         elm1.innerHTML=html_message_1
             })
 
