@@ -93,9 +93,10 @@ function getAllTechnologies(){
 
 
 function getAllNews(){
-    var elm1 = ""
     var elm = document.getElementById("trending_lst");
     var html_message ="";
+    var mrqelem = document.getElementById('marq');    
+    var html_message_marq="";
     $.ajax({
         url         : "/getNewsMatchingTheSearch", // the url where we want to POST
         data        : {"search_string":"zzz"}, // our data object
@@ -113,9 +114,14 @@ function getAllNews(){
                     html_message +='<div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div></div>';
   
                  }
+                 html_message_marq +='<span><img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="'+data[index].imageLink+'" style="padding-left:5px; padding-right: 5px; width: 60px; height: 40px; object-fit: cover;" id="'+'marq'+data[index].name+'"/></span>'+'<span><span>'+data[index].name+'</span></span>';
+
+
                 });
           
     elm.innerHTML=html_message;
+    mrqelem.innerHTML += html_message_marq;
+
         });getAllTechnologies();
         event.preventDefault();      
 }
