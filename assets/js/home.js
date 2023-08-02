@@ -114,7 +114,7 @@ function getAllNews(){
                     html_message +='<div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div></div>';
   
                  }
-                 html_message_marq +='<span><img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="'+data[index].imageLink+'" style="padding-left:5px; padding-right: 5px; width: 60px; height: 40px; object-fit: cover;" id="'+'marq'+data[index].name+'"/></span>'+'<span><span>'+data[index].name+'</span></span>';
+                 html_message_marq +='<img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="'+data[index].imageLink+'" style="vertical-align: middle !important;padding-left:5px; padding-right: 5px; width: 130px; height: 70px; object-fit: cover;" id="'+'marq'+data[index].name+'"/>'+'<span style="vertical-align: middle !important;">'+data[index].name+'</span>';
 
 
                 });
