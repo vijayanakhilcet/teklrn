@@ -1314,7 +1314,7 @@ class TechnologyMatchingTheSearchNewView(FormView):
         idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
-        nl = NewsLinks.objects.filter(category='TECHNOLOGY')[5]
+        nl = NewsLinks.objects.filter(category='TECHNOLOGY')[0]
         contentType = nl.category
         k = int(idx)
         if k >= 0:
