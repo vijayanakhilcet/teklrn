@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+    poulateLatest();
     var runit = 0;     
     refineSearchView("zzz");
    // document.getElementById("course-search").focus();
@@ -76,7 +76,35 @@ $("#course-search").on('keyup', function (event) {
     });
 });
 
+function poulateLatest(){
+        elm1 = document.getElementById("ulNews");    
+        html_message_1="";
+        $.ajax({
+            url         : "/getLatestNews", // the url where we want to POST
+            data        : {"search_string":"Hi", "lang":"en", "idx":-1}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                elm1.innerHTML="";  
+                i=-1
+                $.each(data, function(index) {
+                    i=i+1
+                    html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
+                    
+                });
+                localStorage.setItem("varValue", html_message_1);
+        elm1.innerHTML=html_message_1
+            })
+            return false;
+}
+
+
+
 function refineSearchView(pg){
+    
+    
     var elm = document.getElementById("searchD");
     var html_message ="";
     $.ajax({
