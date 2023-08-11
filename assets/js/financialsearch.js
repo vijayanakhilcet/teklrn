@@ -19,7 +19,7 @@ $(document).ready(function () {
            }
 }) 
 .data("ui-autocomplete")._renderItem = function(ul, item) {
-    return $( "<li style='margin-top:0px'><hr style='background-color:white;'>" )
+    return $( "<li style='margin-top:0px; max-width: 100%'><hr style='background-color:white;'>" )
     .data( "ui-autocomplete-item", item )
     .append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>-->"+ item.description)
     .appendTo( ul );
