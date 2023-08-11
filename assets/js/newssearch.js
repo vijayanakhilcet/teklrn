@@ -16,7 +16,7 @@ $(document).ready(function () {
            }
 }) 
 .data("ui-autocomplete")._renderItem = function(ul, item) {
-    return $( "<li style='margin-top:0px; max-width: 100%'><hr style='background-color:white;'>" )
+    return $( "<li style='margin-top:25px'>" )
     .data( "ui-autocomplete-item", item )
     .append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>-->"+ item.description)
     .appendTo( ul );
@@ -232,6 +232,8 @@ function searchView(pg, lang, idx, srch){
     else{window.scrollTo({ top: 0, behavior: "auto" });}
     var elm = document.getElementById(stringVal);
     var html_message ="";
+    var mrqwaterfall = document.getElementById('waterfall');
+    var html_message_marq_waterfall="";
     count = 0
     $.ajax({
         url         : "/getMatchingTheSearchNew", // the url where we want to POST
@@ -247,6 +249,7 @@ function searchView(pg, lang, idx, srch){
                 i=i+1
                 count = data[index].count;
                 html_message +='<div  style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 ease-300"><div style="font-size: x-small; padding-left: 70% !important;color: white; background-color: #4976c8; padding: 1.2%; border-radius: .5 em; font-weight: bold;">'+'<h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h><i class="fa fa-envelope" aria-hidden="true" style="color:lightyellow; margin-left:1%"></i>  <h style="text-decoration: underline;margin-left:8%;">TMS</h> <i class="fas fa-comment-alt" style="color:lightyellow; margin-left:1%;"></i>'+'  '+'</div><div onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')"  ><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" /></div><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4" style="padding-left: 13px !important;"><h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"><h onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">SCAN</h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/hie.gif"></div></a></div>';          
+                html_message_marq_waterfall +='<div style="padding-bottom:130px;"><div style="float: right; width: 50%;"><img id="'+'marqwaterfall'+data[index].description+'" style="width:200px;height:100px;object-fit: cover;visibility:hidden; border-radius: 10px;" onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="" alt="TEKLRN"/></div><div style="padding-left: 22px !important;padding-right: 12px !important;float: left; width: 50%; font-weight: 1050 !important; font-family: \'Poppins\', sans-serif; text-transform: Capitalize !important;"><a style="border-bottom-color: #507fce;text-align: -webkit-center;font-weight: 300; font-size: .7rem;font-family: \'Poppins\', sans-serif;color: black;">'+data[index].description+'<hr> </a></div></div><div><div></div><div></div></div>';
 
             });
           
@@ -255,6 +258,8 @@ function searchView(pg, lang, idx, srch){
     newDiv.setAttribute("id", "searchD"+(idx+1));
     newDiv.setAttribute("class", "flex flex-wrap");
     elm.after(newDiv);
+    mrqwaterfall.innerHTML=html_message_marq_waterfall
+
         })
         .complete(function(data) {
             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
@@ -278,6 +283,9 @@ function searchView(pg, lang, idx, srch){
                     var elm = document.getElementById(data[index].title);
                     elm.src = data[index].src;
                     elm.style.visibility = "visible";   
+                    var elm_mrq_waterfall = document.getElementById('marqwaterfall'+data[index].title.replace('searchD-img-','').replace(/^[0-9]+/g, ''));
+                    elm_mrq_waterfall.src=data[index].src;
+                    elm_mrq_waterfall.style.visibility = "visible"; 
                     });
         
                 });
@@ -395,7 +403,7 @@ if(idx==-1){
                     elm_mrq.style.visibility = "visible";   
                     var elm_mrq_waterfall = document.getElementById('marqwaterfall'+data[index].title.replace('searchD-img-','').replace(/^[0-9]+/g, ''));
                     elm_mrq_waterfall.src=data[index].src;
-                    elm_mrq_waterfall.style.visibility = "visible"; 
+                elm_mrq_waterfall.style.visibility = "visible"; 
                     });
         
                 });
