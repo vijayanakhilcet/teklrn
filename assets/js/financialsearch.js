@@ -268,7 +268,7 @@ function searchView(pg, lang, idx, srch){
         })
         .complete(function(data) {
             var datas = document.querySelectorAll('[id^="'+stringVal+'-img-"]');
-            Code = $("#countryCode option:selected").val().split("---")[0];
+            // Code = $("#countryCode option:selected").val().split("---")[0];
             data = ''
             datas.forEach((userItem) => {
                 data=userItem.id+'---';
@@ -276,7 +276,7 @@ function searchView(pg, lang, idx, srch){
                     url: "/searchtopicsnewnewsForImg", // the url where we want to POST
                     data: {
                     "titles": data,
-                    "lang":Code,
+                    "lang":"United States",
                     "strVal": stringVal
                     },
                     dataType: 'json',
@@ -290,8 +290,8 @@ function searchView(pg, lang, idx, srch){
                     elm.style.visibility = "visible";   
                     var elm_mrq = document.getElementById('marq'+data[index].title.replace('searchD-img-','').replace(/^[0-9]+/g, ''));
                     elm_mrq.src=data[index].src;
-                    elm_mrq.style.visibility = "visible";   
-                });
+                    elm_mrq.style.visibility = "visible"; 
+                    });
         
                 });
             });

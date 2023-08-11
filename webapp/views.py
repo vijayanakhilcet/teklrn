@@ -1257,7 +1257,7 @@ class FinancialMatchingTheSearchNewView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
 
-class MatchingTheSearchNewView(FormView):
+class MatchingTheSearchNewView1(FormView):
     def get(self,request,*args,**kwargs):
         EndOfData =  False
         results= []
@@ -1302,6 +1302,36 @@ class MatchingTheSearchNewView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
+    
+class MatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        searchData = data.get("srch").replace(" ", "+")
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")  
+        contentType= 'Search Results: '+data.get("srch")
+        url  = "https://search.yahoo.com/search?p="+searchData
+        r = requests.get(url)
+        soup = BeautifulSoup(r.content)
+        for a in soup.find_all('span'):
+            if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+                course_json = {}
+                img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = a.text
+                course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                if len(course_json['description'].split(" "))<5:
+                    continue 
+                course_json['contentType'] = contentType
+                course_json['count'] = 9999
+                results.append(course_json)
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+
 
 class TechnologyMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
@@ -2238,13 +2268,21 @@ class AutoCompleteViewNew(FormView):
             "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
         }
-        response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
-        for course in json.loads(response.text)[1]:
-            course_json = {}
-            course_json['value'] = course
-            course_json['name'] = course
-            course_json['description'] = course
-            results.append(course_json)
+        #response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
+        r = requests.get('https://globalnews.ca/?s='+courseName, headers=headers)
+        #for course in json.loads(response.text)[1]:
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(r.content)
+
+        for a in soup.find_all('span'):
+            if courseName.upper() in a.text.upper() and len(a.text.strip().split(' '))>6:
+                print(a.text.split('.')[0].strip())
+                course = a.text.split('.')[0].strip()
+                course_json = {}
+                course_json['value'] = course
+                course_json['name'] = course
+                course_json['description'] = course
+                results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
