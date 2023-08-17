@@ -277,7 +277,8 @@ def worldNews(request):
         except Exception:
             page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
-   # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+   # return
+   #  render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
 def financialNews(request):
@@ -2271,17 +2272,25 @@ class AutoCompleteViewNew(FormView):
         #response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
         r = requests.get('https://globalnews.ca/?s='+courseName, headers=headers)
         #for course in json.loads(response.text)[1]:
-        from bs4 import BeautifulSoup
         soup = BeautifulSoup(r.content)
 
         for a in soup.find_all('span'):
+            
             if courseName.upper() in a.text.upper() and len(a.text.strip().split(' '))>6:
-                print(a.text.split('.')[0].strip())
                 course = a.text.split('.')[0].strip()
                 course_json = {}
-                course_json['value'] = course
-                course_json['name'] = course
+                # course_json['value'] = course
+                # course_json['name'] = course
                 course_json['description'] = course
+                results.append(course_json)
+        if not results:
+            print("No results"+courseName)
+            wikidetails = wikipedia.search(courseName)
+            for a in wikidetails:
+                course_json = {}
+                # course_json['value'] = a
+                # course_json['name'] = a
+                course_json['description'] = a
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
