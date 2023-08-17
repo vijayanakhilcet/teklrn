@@ -2279,8 +2279,8 @@ class AutoCompleteViewNew(FormView):
             if courseName.upper() in a.text.upper() and len(a.text.strip().split(' '))>6:
                 course = a.text.split('.')[0].strip()
                 course_json = {}
-                # course_json['value'] = course
-                # course_json['name'] = course
+                course_json['value'] = course
+                course_json['name'] = course
                 course_json['description'] = course
                 results.append(course_json)
         if not results:
@@ -2288,8 +2288,8 @@ class AutoCompleteViewNew(FormView):
             wikidetails = wikipedia.search(courseName)
             for a in wikidetails:
                 course_json = {}
-                # course_json['value'] = a
-                # course_json['name'] = a
+                course_json['value'] = a
+                course_json['name'] = a
                 course_json['description'] = a
                 results.append(course_json)
         data = json.dumps(results)
