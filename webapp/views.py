@@ -1158,14 +1158,14 @@ class TmailView(FormView):
         results = []
         data = request.GET
         img = data.get("img")
-        title = data.get("title").capitalize()
+        title = (data.get("title")).capitalize()
         to = data.get("to")
         # tmailfrom = data.get("from")
         email_body = """\
     <html>
       <head></head>
       <body>
-        <a style='color: white;' href='http://teklrn.com/financial'>Teklrn.com AI News Engine</a>
+        <a href='http://teklrn.com/financial'>Teklrn.com AI News Engine: </a>
         <h1 href='http://teklrn.com/financial' style='font-size: x-large;'>%s</h1>
         <img href='http://teklrn.com/financial' src='%s'/>
         
