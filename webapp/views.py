@@ -663,6 +663,14 @@ def trendingnews(request):
 
 
 def news(request):
+    email_test = EmailMessage(
+            "New Visit News",
+            "New Visit News",
+            'teklrn.inc@gmail.com',
+            ['teklrn.inc@gmail.com'],
+        )
+    email_test.content_subtype = "html"
+    email_test.send(fail_silently=False)
     page = 'webapp/news.html' 
     data = request.GET
     defaultTechnology = 'Tensorflow'
