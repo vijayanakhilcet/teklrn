@@ -663,14 +663,17 @@ def trendingnews(request):
 
 
 def news(request):
-    email_test = EmailMessage(
-            "New Visit News",
-            "New Visit News",
-            'teklrn.inc@gmail.com',
-            ['teklrn.inc@gmail.com'],
-        )
-    email_test.content_subtype = "html"
-    email_test.send(fail_silently=False)
+    try:
+        email_test = EmailMessage(
+                "New Visit News",
+                "New Visit News",
+                'teklrn.inc@gmail.com',
+                ['teklrn.inc@gmail.com'],
+            )
+        email_test.content_subtype = "html"
+        email_test.send(fail_silently=False)
+    except:
+        print()
     page = 'webapp/news.html' 
     data = request.GET
     defaultTechnology = 'Tensorflow'
@@ -1196,14 +1199,17 @@ class TmailView(FormView):
 
 class GetLatestNewsView(FormView):
     def get(self,request,*args,**kwargs):
-        email_test = EmailMessage(
-            "New Visit",
-            "New Visit",
-            'teklrn.inc@gmail.com',
-            ['teklrn.inc@gmail.com'],
-        )
-        email_test.content_subtype = "html"
-        email_test.send(fail_silently=False)
+        try:
+            email_test = EmailMessage(
+                "New Visit",
+                "New Visit",
+                'teklrn.inc@gmail.com',
+                ['teklrn.inc@gmail.com'],
+            )
+            email_test.content_subtype = "html"
+            email_test.send(fail_silently=False)
+        except:
+            print('Mail Exception')
         EndOfData =  False
         results= []
         data = request.GET       

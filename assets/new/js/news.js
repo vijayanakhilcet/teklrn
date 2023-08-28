@@ -1,25 +1,39 @@
 $(function () {
 
-   // elm1 = document.getElementById("ulNews");    
-   //      html_message_1="";
-   //      $.ajax({
-   //          url         : "/getLatestNews", // the url where we want to POST
-   //          data        : {"search_string":'pg', "lang":'en', "idx":'1'}, // our data object
-   //          dataType    : 'json', // what type of data do we expect back from the server
-   //          encode      : true
-   //      })
-   //          // using the done promise callback
-   //          .done(function(data) {
-   //              elm1.innerHTML="";  
-   //              i=-1
-   //              $.each(data, function(index) {
-   //                  i=i+1
-   //                  html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
-                    
-   //              });
-   //              localStorage.setItem("varValue", html_message_1);
-   //      elm1.innerHTML=html_message_1
-   //          })
+   $("#course-search").autocomplete({  
+      source: "/autocomplete",
+      dataType: 'json',
+      select: function( event , ui ) {
+      window.stop();
+      searchView('United States', 'en', -1, ui.item.value);
+      // gotoTechnology(ui.item.value);        
+      runit = 1;
+      return false;
+         }
+}) 
+.data("ui-autocomplete")._renderItem = function(ul, item) {
+  return $( "<li style='margin-top:0px; max-width: 100%'><hr style='background-color:white;'>" )
+  .data( "ui-autocomplete-item", item )
+  .append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>--><i style=\"color:darkgrey\" class=\"fa fa-search\" aria-hidden=\"true\"></i> "+ item.description)
+  .appendTo(ul);
+};
+
+$("#course-search").on('keyup', function (event) {
+  window.stop();
+      if(runit === 0){
+          if (event.keyCode === 13) {                                 
+              $("#course-search").blur(); 
+              //refineSearchView(event.target.value);    
+              // gotoTechnology(event.target.value);
+              searchView('United States', 'en', -1, event.target.value);
+
+          }
+      }  
+              
+       runit = 0;   
+});
+   document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
+   getLatestNews();      
    //alert(document.getElementById('pElement').textContent)
     $(document).on('hidden.bs.modal', function (event) {
        if ($('.modal:visible').length) {
@@ -123,6 +137,29 @@ $(function () {
    });
 
 event.preventDefault();
+ }
+
+ function getLatestNews(){
+   elm1 = document.getElementById("ulNews");    
+        html_message_1="";
+        $.ajax({
+            url         : "/getLatestNews", // the url where we want to POST
+            data        : {"search_string":'pg', "lang":'en', "idx":'1'}, // our data object
+            dataType    : 'json', // what type of data do we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+            .done(function(data) {
+                elm1.innerHTML="";  
+                i=-1
+                $.each(data, function(index) {
+                    i=i+1
+                    html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
+                    
+                });
+                localStorage.setItem("varValue", html_message_1);
+        elm1.innerHTML=html_message_1
+            })
  }
 
  
