@@ -4,16 +4,16 @@
 <html>
 	<head>
 
-		<title>The Worlds Largest Hub of Technology Learning | Technology Training Video Content | Teklrn Inc.</title>
+		<title>World News</title>
 		<link rel="icon" href="{% static 'image/images/favicon.ico' %}">
-		<meta name="description" content="Latest Technologies, Teklrn Inc. Offers Technology Training Video Content Of Highest Quality - The List of Technologies Available At Teklrn Inc - Teklrn.com"/> 
+		<meta name="description" content="World News. Financial News. Trending News Topics. News Videos. Entertainment News"/> 
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />		
 		<meta name="robots" content="index, follow">
 	
-		<meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
+		<meta name="keywords" content="World News, Financial News, Trending News Topics, News Videos, Entertainment News, Learning, Latest, Science, Education, Quality" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 		<meta name="viewport" content="width=device-width, initial-scale=0.76, maximum-scale=0.76, minimum-scale=0.76">
-		
+		<meta property="og:title" content="Teklrn World News">
 		<script src="{% static 'js/jquery.min.js' %}"></script>
 		<script src="{% static 'js/skel.min.js' %}"></script>
 		<script src="{% static 'js/skel-layers.min.js' %}"></script>
@@ -47,9 +47,9 @@
 					<ul>
 							<li><a href="/">Home</a></li>
 						<li><a href="#cont">Contact</a></li>
-						<li><a href="#one">About</a></li>
-						<li><a href="#three">Refrences</a></li>
-						<li><a href="#" id="launch" onclick="doLaunch(event, 'worldnews')" class="button special">Get Started</a></li>
+						<li><a href="/media">Video</a></li>
+						<li><a href="/entertainmentnews">Entertainment</a></li>
+						<li><a href="/financial" id="launch" class="button special">GET STARTED</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -85,13 +85,13 @@
 					</ul> -->
 
 					<ul class="actions">
-						<li><a href="#content" id="launch1" onclick="doLaunch(event, 'technologynews')" class="button big special">Technology</a></li>
+						<li><a href="/technologynews" id="launch1" class="button big special">Technology</a></li>
 						{% if user.is_authenticated %}
 						<li><a href="#two"  class="button big alt">Quick Links</a></li>
 						{% endif %}
 						{% if not user.is_authenticated %}
-						<li><a href="#content" id="launch1" onclick="doLaunch(event, 'worldnews')" class="button big alt">World News</a></li>
-						<li><a href="#one" onclick="doLaunch(event, 'financialnews')" class="button big alt">Financial</a></li>
+						<li><a href="/news" id="launch1" class="button big alt">World News</a></li>
+						<li><a href="/financial" class="button big alt">Financial</a></li>
 						{% endif %}
 					</ul>
 				</div>
