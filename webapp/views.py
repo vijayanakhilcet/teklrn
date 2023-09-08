@@ -433,6 +433,26 @@ def newsPre(request):
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
+def scitechPre(request):
+    page = 'webapp/scitech_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
 def financialPre(request):
     page = 'webapp/financial_pre_landing.html'
     data = request.GET
@@ -1231,7 +1251,51 @@ class GetLatestNewsView(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
-
+    
+class SciTechMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        EndOfData =  False
+        results= []
+        data = request.GET
+        # datasplit = data.get("search_string").split('---')
+        c = data.get("search_string")
+        l = data.get("lang")
+        idx = data.get("idx")
+        # codeC = datasplit[0]
+        # our_url = datasplit[1]
+        # nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
+        # contentType = nl.category
+        k = int(idx)
+        count=0
+        if k >= 0:
+            count = 9999
+        o = 1
+        while o<13:
+            try:
+                o=o+1
+                our_url = "https://www.nih.gov/news-events/news-releases?page="+str(o)
+                r = requests.get(our_url)
+                soup = BeautifulSoup(r.content)
+                for a in soup.find_all("h4", class_ = "teaser-title" ):
+                    data=a.find('a').text
+                    href = 'https://www.nih.gov'+a.find('a')['href']
+                    if 'NIH' not in data and "National Institute" not in data:
+                        print('NIH'+data+':'+str(o))
+                        course_json = {}
+                        img = '/static/image/test/certificate.jpg'
+                        course_json['technology'] = data
+                        course_json['description'] =  data
+                        course_json['contentType'] = 'Financial'
+                        course_json['count'] = count
+                        results.append(course_json)
+            except:
+                continue
+        print('Total :'+str(o))
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
+    
 class FinancialMatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
         EndOfData =  False
