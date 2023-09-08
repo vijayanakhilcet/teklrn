@@ -681,6 +681,70 @@ def trendingnews(request):
     # data = re.sub("[\[].*?[\]]", "", soup.get_text()).replace("Wikipedia", "Teklrn Inc.").replace("Wiki", "Teklrn Inc. ").replace("wikipedia", "Teklrn Inc.").replace("wiki", "Teklrn Inc.")
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':''})
 
+def scitechnews(request):
+    try:
+        email_test = EmailMessage(
+                "New Visit News",
+                "New Visit News",
+                'teklrn.inc@gmail.com',
+                ['teklrn.inc@gmail.com'],
+            )
+        email_test.content_subtype = "html"
+        email_test.send(fail_silently=False)
+    except:
+        print()
+    page = 'webapp/news.html' 
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    defaultLevel = 1
+    img=''
+    pElement=''
+    
+    if data.get("level"):
+        defaultLevel = data.get("level")
+    if data.get("subject"):
+        try:
+            c = Course.objects.get(description=data.get("subject"))
+            defaultTechnology = c.name
+            contentType = c.contentType
+            request.session['contentType'] = c.contentType
+            technology_description = c.description
+        except:
+            try:
+                c = Course.objects.get(name=data.get("subject"))
+                defaultTechnology = c.name
+                contentType = c.contentType
+                request.session['contentType'] = c.contentType
+                technology_description = c.description
+            except:
+                defaultTechnology = data.get("subject")
+                contentType = data.get("subject")
+                request.session['contentType'] = data.get("subject")
+                technology_description = data.get("subject")
+
+       
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_login.html'
+            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+        except Exception:
+            page = 'webapp/hi_login_t.html'
+            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    if data.get('image'):
+        img = data.get('image')
+    if data.get('direct'):
+        if data.get('direct') == 'Financial':
+            img = NewsFinancial.objects.get(name=data.get('subject')).imageLink
+        elif data.get('direct') == 'Technology':
+            img = NewsTechnology.objects.get(name=data.get('subject')).imageLink
+        elif data.get('direct') == 'Entertainment':
+            img = NewsEntertainment.objects.get(name=data.get('subject')).imageLink
+
+
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
+
 
 def news(request):
     try:
@@ -1281,12 +1345,23 @@ class SciTechMatchingTheSearchNewView(FormView):
                     href = 'https://www.nih.gov'+a.find('a')['href']
                     if 'NIH' not in data and "National Institute" not in data:
                         print('NIH'+data+':'+str(o))
+                        all_p_ele = ""
+                        if not 'NIH' in data:                            
+                            soup1 = BeautifulSoup(requests.get(str(href)).content)
+                            try:
+                                for a2 in soup1.find_all("p"):
+                                    if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
+                                            print(a2.text)
+                                            all_p_ele+=a2.text
+                            except:
+                                continue
                         course_json = {}
                         img = '/static/image/test/certificate.jpg'
                         course_json['technology'] = data
                         course_json['description'] =  data
                         course_json['contentType'] = 'Financial'
                         course_json['count'] = count
+                        course_json['para'] = all_p_ele
                         results.append(course_json)
             except:
                 continue
