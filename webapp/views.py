@@ -693,12 +693,12 @@ def scitechnews(request):
         email_test.send(fail_silently=False)
     except:
         print()
-    page = 'webapp/news.html' 
+    page = 'webapp/scientificnews.html' 
     data = request.GET
     defaultTechnology = 'Tensorflow'
     defaultLevel = 1
     img=''
-    pElement=''
+    pElement=data.get("para")
     
     if data.get("level"):
         defaultLevel = data.get("level")
@@ -1352,7 +1352,10 @@ class SciTechMatchingTheSearchNewView(FormView):
                                 for a2 in soup1.find_all("p"):
                                     if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
                                             print(a2.text)
-                                            all_p_ele+=a2.text
+                                            paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
+                                            if len(paradata.split(" "))<5:
+                                                continue 
+                                            all_p_ele+=paradata
                             except:
                                 continue
                         course_json = {}

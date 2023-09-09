@@ -1,0 +1,635 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
+     crossorigin="anonymous"></script>
+    <style>
+      #all_news{background: white;width: 30%;height: 32px;overflow: hidden;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;padding: 0px;position: relative;}#all_news span{float: left;color: rgba(0,0,0,.8);color: #fff;background: #00425a;padding: 6px;position: relative;border-radius: 4px;font-size: 12px;-webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);background: rgb(0,75,103);background: -moz-linear-gradient(top, rgba(0,75,103,1) 0%, rgba(0,53,72,1) 100%);background: -webkit-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -o-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -ms-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004b67', endColorstr='#003548',GradientType=0 )}#all_news ul{float: left;padding-left: 20px;-webkit-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;-moz-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-ms-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite}#all_news ul:hover{-webkit-animation-play-state: paused;-moz-animation-play-state: paused;-ms-animation-play-state: paused;animation-play-state: paused}#all_news li{line-height: 25px}#all_news a{color:white; whitext-decoration: none;font-size: 10px; padding: 10px;}@-webkit-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-moz-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-ms-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}
+  </style>
+    <style>body {
+      margin: 30px;
+      font-family: sans-serif;
+      }
+    
+    #fontSizeWrapper { font-size: 16px; }
+    
+    #fontSize {
+      width: 100px;
+      font-size: 1em;
+      }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree core styles
+    */
+    .tree { margin: 1em; }
+    
+    .tree input {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      }
+    
+    .tree input ~ ul { display: none; }
+    
+    .tree input:checked ~ ul { display: block; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree rows
+    */
+    .tree li {
+      line-height: 1.2;
+      position: relative;
+      padding: 0 0 1em 1em;
+      }
+    
+    .tree ul li { padding: 1em 0 0 1em; }
+    
+    .tree > li:last-child { padding-bottom: 0; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree labels
+    */
+    .tree_label {
+      position: relative;
+      display: inline-block;
+      background: #fff;
+      }
+    
+    label.tree_label { cursor: pointer; }
+    
+    label.tree_label:hover { color: #666; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree expanded icon
+    */
+    label.tree_label:before {
+      background: #000;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      float: left;
+      margin: 0 1em 0 -2em;
+      width: 1em;
+      height: 1em;
+      border-radius: 1em;
+      content: '+';
+      text-align: center;
+      line-height: .9em;
+      }
+    
+    :checked ~ label.tree_label:before { content: '-'; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree branches
+    */
+    .tree li:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -.5em;
+      display: block;
+      width: 0;
+      border-left: 1px solid #777;
+      content: "";
+      }
+    
+    .tree_label:after {
+      position: absolute;
+      top: 0;
+      left: -1.5em;
+      display: block;
+      height: 0.5em;
+      width: 1em;
+      border-bottom: 1px solid #777;
+      border-left: 1px solid #777;
+      border-radius: 0 0 0 .3em;
+      content: '';
+      }
+    
+    label.tree_label:after { border-bottom: 0; }
+    
+    :checked ~ label.tree_label:after {
+      border-radius: 0 .3em 0 0;
+      border-top: 1px solid #777;
+      border-right: 1px solid #777;
+      border-bottom: 0;
+      border-left: 0;
+      bottom: 0;
+      top: 0.5em;
+      height: auto;
+      }
+    
+    .tree li:last-child:before {
+      height: 1em;
+      bottom: auto;
+      }
+    
+    .tree > li:last-child:before { display: none; }
+    
+    .tree_custom {
+      display: block;
+      background: #eee;
+      padding: 1em;
+      border-radius: 0.3em;
+    }
+    
+    .widget-selected{
+      color: red;
+    }
+    
+    h1{
+      font-weight: bold;
+    }</style>
+    
+    <script>
+    function isNumber(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+    
+    
+    
+    function setFontSize(el) {
+        var fontSize = el.val();
+        
+        if ( isNumber(fontSize) && fontSize >= 0.5 ) {
+          $('body').css({ fontSize: fontSize + 'em' });
+        } else if ( fontSize ) {
+          el.val('1');
+          $('body').css({ fontSize: '1em' });  
+        }
+    }
+    
+    $(function() {
+      
+      $('#fontSize')
+        .bind('change', function(){ setFontSize($(this)); })
+        .bind('keyup', function(e){
+          if (e.keyCode == 27) {
+            $(this).val('1');
+            $('body').css({ fontSize: '1em' });  
+          } else {
+            setFontSize($(this));
+          }
+        });
+      
+      $(window)
+        .bind('keyup', function(e){
+          if (e.keyCode == 27) {
+            $('#fontSize').val('1');
+            $('body').css({ fontSize: '1em' });  
+          }
+        });
+      
+    });
+    </script>
+        <style>
+        /* .loader {
+position: fixed;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+z-index: 9999;
+background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
+} */
+    </style>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><script src="{% static 'new/js/kit.js' %}"></script> 
+    <meta property="og:image" content="{{img}}" />
+    <!-- <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.4.456/build/pdf.min.js"></script>  
+     <script src="{% static 'new/js/solid.js' %}"></script> 
+    <script src="{% static 'new/js/solid.min.js' %}"></script> 
+
+    <link rel="stylesheet"  href="{% static 'new/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stackpath.css' %}" type="text/css" /> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'new/css/style.css' %}">
+    
+    <!-- <link rel="stylesheet" href="{% static 'css/dist/attention.css' %}" type="text/css" />     -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="{% static 'css/magicscroll.css' %}" media="screen"/>
+    <link rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal/style.css' %}"> 
+
+    <title>{{technology_desc}}</title>
+    <meta name="description" content="Latest Technologies - {{technology_desc}}"/> 
+    <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
+    <style>
+      
+      #mgc a{
+  visibility: hidden;
+}
+        
+        @font-face {
+  			font-family: 'Antietam';
+  			font-style: normal;
+  			font-weight: normal;
+			src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+			}
+
+    </style>
+
+  </head>
+  <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
+    <div class="loader"></div>  
+    <p id="technology_view" hidden>{{technology}}</p>
+    <p id="lvl_view" hidden>{{lvl}}</p>
+    <p id="technology_contentType" hidden>{{contentType}}</p>
+    <p id="Code" hidden>{{Code}}</p>
+    <p id="img" hidden>{{img}}</p>
+    <p id="pElement" hidden>{{pElement}}</p>
+  
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="ion-ios-close"></span>
+            </button>
+          </div>
+          <div class="modal-body p-4 py-5 p-md-5">
+              <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
+              <ul class="ftco-footer-social p-0 text-center">
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+        </ul>
+              <form class="signup-form">
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Sender</label>
+                      <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
+                  </div> -->
+                  <div class="form-group mb-2">
+                      <label for="email">TMAIL Recepient</label>
+                      <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
+                  </div>
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Comment</label>
+                      <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
+                  </div> -->
+                  <!-- <div class="form-group mb-2">
+                      <label for="name">Comment</label>
+                      <input  type="text" class="form-control" placeholder="John Doe">
+                  </div> -->
+                  
+                  <div class="form-group mb-2">
+                      <img id="comment" alt="Image" src=""/>
+                  </div>
+            <div class="form-group mb-2">
+              <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
+            </div>
+            <div class="form-group mb-2">
+                <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
+            </div>
+            <div class="form-group d-md-flex">
+                            <div class="w-100 text-center">
+                                <a href="#" class="forgot">Terms and Conditions</a>
+                            </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <!-- <div class="toggle" style="padding-top: 5px !important;">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span></span>
+            </a>
+      </div> -->
+      <div class="side-inner">
+
+        <div style="padding-left: 2%;padding-right: 2%;" onclick="login_l(event, course_name)" class="profile">
+          <img src="/static/image/images/{{technology}}_icon.png" style="width: 200px;height: 150px; border-radius: 10%;" alt="{{technology_desc}}" class="img-fluid">
+          <!--<img src="/static/image/images/play_b2.png" style="left: 50%; transform: translate(-00%, -210%);
+          -ms-transform: translate(-50%, -50%);
+          /* background-color: #6589c5; */
+          /* color: white; */
+          font-size: 16px;
+          padding: 5px 15px;
+          border: none;
+          cursor: pointer;
+          /* border-radius: 15px; */
+          text-align: center;">-->
+          <h3 style="padding-left:1%;" class="name">{{technology_desc}}</h3><br>
+         <!-- <span class="country">New York, USA</span> -->
+         <a style="font-size: smaller;">{{data}}</a>
+        </div>
+
+        <div class="counter d-flex justify-content-center">
+          <!-- <div class="row justify-content-center"> -->
+            <div class="col">
+              <strong class="number">18032</strong>
+              <span class="number-label">Users</span>
+            </div>
+            <div class="col">
+              <strong class="number">1781</strong>
+              <span class="number-label">Followers</span>
+            </div>
+            <div class="col">
+              <strong class="number">106</strong>
+              <span class="number-label">Topics</span>
+            </div>
+          <!-- </div> -->
+        </div>
+        
+        <div class="nav-menu">
+          <ul id="navig_side">
+                </ul>
+        </div>
+      </div>
+      
+    </aside>
+    
+    <main style="background-color: white !important; height: 100% !important; ">
+      
+      <nav style="padding-left: 0px !important;padding-right: 0px !important;z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
+        <div style="flex-direction: column;display: flex;" class="container-fluid">
+
+            <div style="width: 100%;">
+                <div style="padding-left: 0px !important;; width: 100% !important;" id="all_news">    
+                    <input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="width: 100% !important;height: 90%;font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312; border-radius: 0;">
+                </div>
+                <div style="padding-left: 0px !important;; width: 100% !important;" id="all_news"> <img width="25" height="20" style="float:right; margin-left: 20px;margin-right: 0px !important;" src="/static/image/images/globe.gif">   
+               
+                    <ul id="ulNews" style=" background-color: black; padding-left: 0px; font-size: .3rem; float: left !important;    font-family: 'Poppins', sans-serif; color:white;">   </ul>
+                </div>
+            <a id="Current_c"></a>
+            
+            <p style="margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%;"> <marquee id="marq"  style="text-transform: uppercase; background-color: #4976c8;padding-left: 6px; padding-bottom: 7px; font-size: .6rem;   font-family: 'Poppins', sans-serif; color:white; height: 40px;width: 100%; float: right;" scrollamount=4 loop="infinite"></marquee>
+            <div style="padding-left: 10px !important;padding-right: 10px !important;">
+                <div>
+                    <div style="float: left;  width: 50%; margin-bottom: .2%;">
+                            <div><img style="margin-top: .2%;" onclick="doLaunch(event)" src="/static/image/images/banner3.jpg" alt="TEKLRN" width="140" height="25"/>
+                            </div>
+                        <!-- <div><input type="text" name="course-search" id="course-search" class="form-control" placeholder="&#xF002;" style="width: 100% !important;height: 35%;font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312;"> 
+                        </div> -->
+                    </div>
+                    <div style="float: left; width: 50%;"><div style="float: right; width: 10%; padding: 3% !important;"><h  style="font-size: x-small;">TTV</h></div><div style="float: right; width: 90%;"> <video  width="15%" height="20" id="-1White_House_calls_for_consensus_building_in_Israel" preload= "true" autoplay = "autoplay" loop = "loop" controls muted style="margin-top: .2%;width: 80px; float: right;"><source src="https://teklr-in-video.s3.us-east-1.amazonaws.com/Moodys%20downgrades%20stoke%20banking%20fears.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASNAAYZON3WF4MBJG%2F20230808%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230808T184201Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=871297e21c9b8fa0c509eb06eb1f84feac6d7e9a32d441ab9d2c0988b7d0e8a9" type="video/mp4"> Your browser does not support the video tag.</video></div>
+                    </div>
+                </div>                
+            </div>
+            </p>
+            </div>
+            <div style="padding-left: 10px !important;padding-right: 10px !important;width: 100%;">
+            <a href="/financial" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-family: 'Poppins', sans-serif;padding: .5%; font-size: .7rem;">FINANCIAL</a>
+
+
+            <!-- <a href="/technologies" style="padding-right: 4px;width:100%;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">VIDEO</a> -->
+            <a href="/media" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">VIDEO</a>
+            <a href="/news" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">NEWS</a>
+
+            <a href="/worldnews" style="text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf;">TRENDING</a>
+            <a href="/technologynews" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">TECHNOLOGY</a>
+            <a href="/entertainmentnews" style=" border-bottom-color: #507fce;text-align: -webkit-center;/* margin-bottom: 20px; *//* padding-left: 10px; */font-weight: 400;/* width:100%; */ font-size: .7rem;font-family: 'Poppins', sans-serif;color: #507acf; padding-right: 4px;">ENTERTAINMENT</a>
+
+        </div>
+        <div style="padding-left: 10px !important;padding-right: 10px !important;width: 100%; padding-top: 10px;">
+
+        <h class="indigo fs-s3 italic after-arrow-right my-4" style="font-size: .7rem !important;     color: #5A4FCF !important; font-family: 'Muli', sans-serif !important;     font-style: italic;padding-top: 13px !important;"><h onclick="clickh('1','2')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="15" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh('searchD-img-0Review. The best of TV and streaming this week','Review. The best of TV and streaming this week')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"></h>
+  </div>
+        </div>
+    </nav>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 0px !important;margin-bottom: 0px !important;z-index: 111;position: fixed; width: 100%; top: 0; padding-left: 5%;padding-top: 0px; padding-bottom:0px !important;background-color: white !important;">
+        
+        <div>
+          
+          <div>
+           
+          </div>
+             <a style="font-size: 1.0rem;font-family: Antietam;color: #629dd1; margin: 0px -20px -0px 0px;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="155" height="55">  </a>
+             <h class="indigo fs-s3 italic after-arrow-right my-4" style="font-size: .7rem !important;     color: #5A4FCF !important; font-family: 'Muli', sans-serif !important;     font-style: italic;padding-left: 13px !important;"><h onclick="clickh('1','2')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="15" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh('searchD-img-0Review. The best of TV and streaming this week','Review. The best of TV and streaming this week')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"></h>
+            </div>
+   
+          </nav>
+    <img style="padding-top: 280px;margin-left: 10px;z-index: 311; width: 22px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png">
+     
+      <div style="padding-top: 0%;margin-top:10px;" style="padding: 1rem 0;" class="site-section">
+        
+        <div class="container">
+          <div style="padding-top: 230px !important; color: white !important; font-family: 'Muli', sans-serif !important;" >
+          
+            <ul class="tree">
+              <li>
+                <input type="checkbox"  id="c1" />
+                <label  class="tree_label" for="c1"><img width="24" height="20" style="margin-left: 10px;margin-right: 10px;" src="/static/image/images/hie.gif"><h style="font-style: italic;font-size: 13px; color: #5A4FCF;"> SCAN</h></label>
+                 <ul id="tree">
+                   <!-- <li><span class="tree_label"><img src="/static/image/test/certificate.jpg"/><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS 1</b>Mary Queen the best porttrait<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr></div></div></div></div></span></li> -->
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                   <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/images/loading.gif" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+
+                   <!-- <li>
+                     <input type="checkbox"  id="c5" />
+                     <label for="c5" class="tree_label">More info</label>
+                     <ul>
+                      <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS 1 </b>BPMN Diagram<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">BPMN Diagram</p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                      <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS 1 </b>BPMN Diagram2<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">BPMN Diagram</p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                     
+                     </ul>
+                     <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS 1 </b>BPMN Diagram<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">BPMN Diagram</p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+                     <li><span class="tree_label"><div class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="pointer-events: none; object-fit: cover;" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding-left:2% !important; padding-right:2% !important; padding: .3%; margin-right: 2%; ">NEWS 1 </b>BPMN Diagram2<img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">BPMN Diagram</p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>
+
+                     <li><span class="tree_label">Playbook</span></li>
+                     <li><span class="tree_label">Precedence Diagram Method</span></li>
+                     <li><span class="tree_label">Process Flow</span></li>
+                     <li><span class="tree_label">RACI Chart</span></li>
+                     <li><span class="tree_label">Roadmap</span></li>
+                     <li><span class="tree_label">Scorecard</span></li>
+                     <li><span class="tree_label">Service Blueprint</span></li>
+                     <li><span class="tree_label">Site Map</span></li>
+                     <li><span class="tree_label">Strategy Map</span></li>
+                     <li><span class="tree_label">SWOT Analysis</span></li>
+                     <li><span class="tree_label">Timeline</span></li> -->
+                      <!-- <li>
+                        <input type="checkbox"  id="c2" />
+                        <label for="c2" class="tree_label">UML Diagram</label>
+                        <ul>
+                           <li><span class="tree_label">Activity / State Diagram</span></li>
+                           <li><span class="tree_label">Class Diagram</span></li>
+                           <li><span class="tree_label">Component Diagram</span></li>
+                           <li><span class="tree_label">Sequence Diagram</span></li>
+                           <li><span class="tree_label">Use Case Diagram</span></li>
+                        </ul>
+                        <li><span class="tree_label">Value Proposition Canvas</span></li>
+                        <li><span class="tree_label">Value Stream Map</span></li>
+                        <li><span class="tree_label">Venn Diagram</span></li>
+                        <li><span class="tree_label">Wireframe</span></li>
+                     </li>   -->
+                </ul>
+              </li>
+              <!-- <li>
+                <input type="checkbox"  id="c50" />
+                <label class="tree_label" for="c50">Role</label>
+                 <ul>
+                   <li><span class="tree_label">Business Analysis</span></li>
+                   <li><span class="tree_label">Customer Success</span></li>
+                   <li><span class="tree_label">Data Analytics</span></li>
+                   <li><span class="tree_label">Design</span></li>
+                   <li><span class="tree_label">DevOps</span></li>
+                   <li><span class="tree_label">Engineering</span></li>
+                   <li><span class="tree_label">Finance</span></li>
+                   <li><span class="tree_label">Human Resources</span></li>
+                   <li><span class="tree_label">IT</span></li>
+                   <li><span class="tree_label">Education (K-12)</span></li>
+                   <li><span class="tree_label">Leadership / Management</span></li>
+                   <li><span class="tree_label">Marketing</span></li>
+                   <li><span class="tree_label">Network Engineering</span></li>
+                   <li><span class="tree_label">Process Improvement</span></li>
+                   <li><span class="tree_label">Project Management</span></li>
+                   <li><span class="tree_label">Sales</span></li>
+                   <li><span class="tree_label">Service Management</span></li>
+                   <li><span class="tree_label">Software Engineering</span></li>
+                   <li><span class="tree_label">Supply Chain Management</span></li>
+                </ul>
+              </li> -->
+            </ul>
+            </div>
+
+          
+          <div class="row justify-content-center">
+            <div class="col-md-12" style="margin: 0px !important;">
+              <div style="visibility: visible;" id="rowdata1" class="row">
+                
+              </div>
+              <!-- <p>Related News</p> -->
+              <div id="rowdata" class="row" style="font-size: smaller;">
+               
+             
+                {{pElement}} 
+                </div>
+              </div>
+            </div>
+            <h style="padding:20px !important ;background-color: #c4cfdb !important;margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%; color: #829ebc;"> Advertisement
+              <marquee id="ad-marq1" style="background-color: #c4cfdb !important;text-transform: uppercase; background-color: white;padding-left: 6px; padding-bottom: 7px; font-size: .6rem;   font-family: 'Poppins', sans-serif; color:white; height: 240px;width: 100%; float: right;" scrollamount=4 loop="infinite">
+                <div style="margin-left:-550px">
+                  <iframe  sandbox="padding-left:-245px;allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=teklrn0b-20&language=en_CA&o=15&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0008538824&linkId=417702a43e959fe8cfc3bf0ce7485696"></iframe>
+                  <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=teklrn0b-20&language=en_CA&o=15&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1774583410&linkId=0e924a5967517ed5c166c837cfc43eb7"></iframe>
+                  <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=teklrn0b-20&language=en_CA&o=15&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B0B9QM74LD&linkId=9cb6b61493d64f6089522744b5786c84"></iframe>
+                  <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=teklrn0b-20&language=en_CA&o=15&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0984358161&linkId=e661441c566af3f071b794058dd25c3e"></iframe>
+                  <iframe id="amazon-ad-1" sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-na.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=teklrn0b-20&language=en_CA&o=15&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B00CHRPUWM&linkId=e91789338be895d662528ce9e2f92b1b"></iframe>
+              </div>
+            </marquee>
+          </h>
+          </div>
+        </div>
+      <!-- <div id="mgc" class="MagicScroll" data-options="mode: cover-flow; height: 135px;" style="visibility: hidden; background-color: white;position: fixed; bottom: 0;">
+        <div class="mcs-item" data-item="0" style="width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;"><div onclick="gotoTechnology('Carbon Capture Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
+        <div class="mcs-item" data-item="1" style="width: 24.3716%; position: absolute; transform: translate3d(-295.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31668;"><div onclick="gotoTechnology('Ship Design Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
+        
+    </div>  -->
+    </main>
+     <script type="text/javascript">
+        function clickh(d, t){
+            // var text = $("#textarea").val();
+            document.getElementById('comment').src=document.getElementById('img').innerHTML;
+            document.getElementById('desc').innerHTML =document.getElementById('technology_view').innerHTML;
+
+    }
+
+    function submitted(event){
+    window.stop();
+    $.ajax({
+        url         : "/tmail", // the url where we want to POST
+        data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'to':document.getElementById('tmailto').value}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $.each(data, function(index) {});
+            
+        });
+        event.preventDefault();
+        document.getElementById('closex').click();
+        return true; 
+}
+
+    
+    </script>
+    <!-- <script src="{% static 'new/js/jquery-3.3.1.min.js' %}"></script> -->
+    <!-- <script src="{% static 'new/js/popper.min.js' %}"></script> -->
+    <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'new/js/main.js' %}"></script>    
+    <script src="{% static 'new/js/scientificnews.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/magicscroll.js' %}"></script>
+   
+<script>
+  pdfjsLib.getDocument('./static/image/Html_6.pdf').promise.then(doc =>{
+      console.log("This file has "+doc._pdfInfo.numPages + " pages");
+
+      doc.getPage(1).then(page =>{
+          var myCanvas = document.getElementById("my_canvas");
+          var context =  myCanvas.getContext("2d");
+
+          var viewport = page.getViewport({scale:1.5});
+          myCanvas.width = viewport.width;
+          myCanvas.height = viewport.height;
+          page.render({ 
+              canvasContext:context, 
+              viewport:viewport
+          });
+      });
+  });
+</script>
+  <!-- <script>
+      $(window).on('ajaxStop',function() {
+        //refineSearchView("zzz");
+        var dates = document.querySelectorAll('[id^="img-"]');
+        Code = document.getElementById("Code").textContent;
+        data = ''
+        dates.forEach((userItem) => {
+        data=userItem.id+'---';
+        $.ajax({
+          url: "/searchtopicsnewnewsForImg", // the url where we want to POST
+          data: {
+             "titles": data,
+             "lang":Code
+          },
+          dataType: 'json',
+          encode: true
+       })
+       // using the done promise callback
+       .done(function (data) {
+          $.each(data, function (index) {
+            var elm = document.getElementById(data[index].title);
+            elm.src = data[index].src;
+            elm.style.visibility = "visible";
+            });
+ 
+       });
+        });
+        
+        // $(window).off('scroll');
+   
+  }); 
+  </script> -->
+       
+  </body>
+</html>
