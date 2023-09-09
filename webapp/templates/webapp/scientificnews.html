@@ -321,19 +321,10 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 
         <div style="padding-left: 2%;padding-right: 2%;" onclick="login_l(event, course_name)" class="profile">
           <img src="/static/image/images/{{technology}}_icon.png" style="width: 200px;height: 150px; border-radius: 10%;" alt="{{technology_desc}}" class="img-fluid">
-          <!--<img src="/static/image/images/play_b2.png" style="left: 50%; transform: translate(-00%, -210%);
-          -ms-transform: translate(-50%, -50%);
-          /* background-color: #6589c5; */
-          /* color: white; */
-          font-size: 16px;
-          padding: 5px 15px;
-          border: none;
-          cursor: pointer;
-          /* border-radius: 15px; */
-          text-align: center;">-->
+          
           <h3 style="padding-left:1%;" class="name">{{technology_desc}}</h3><br>
          <!-- <span class="country">New York, USA</span> -->
-         <a style="font-size: smaller;">{{data}}</a>
+         <p style="font-size: smaller;  visibility: hidden;">{{data}}</p>
         </div>
 
         <div class="counter d-flex justify-content-center">
@@ -519,11 +510,11 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
                 
               </div>
               <!-- <p>Related News</p> -->
-              <div id="rowdata" class="row" style="font-size: smaller;">
-               
              
+               <p class="row" style="font-size: smaller; color: black; visibility: hidden;">            
                 {{pElement}} 
-                </div>
+              </p>  
+              
               </div>
             </div>
             <h style="padding:20px !important ;background-color: #c4cfdb !important;margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%; color: #829ebc;"> Advertisement
