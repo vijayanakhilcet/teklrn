@@ -699,6 +699,19 @@ def scitechnews(request):
     defaultLevel = 1
     img=''
     pElement=data.get("para")
+    all_p_ele=""
+    soup = BeautifulSoup(requests.get(str(pElement)).content)
+    
+    for a2 in soup.find_all("p"):
+        try:
+            if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
+                print(a2.text)
+                paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
+                if len(paradata.split(" "))<5:
+                    continue 
+                all_p_ele+=paradata
+        except:
+            continue
     
     if data.get("level"):
         defaultLevel = data.get("level")
@@ -743,7 +756,7 @@ def scitechnews(request):
             img = NewsEntertainment.objects.get(name=data.get('subject')).imageLink
 
 
-    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
+    return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':all_p_ele+'</div>'})
 
 
 def news(request):
@@ -1365,6 +1378,7 @@ class SciTechMatchingTheSearchNewView(FormView):
                         course_json['contentType'] = 'Financial'
                         course_json['count'] = count
                         course_json['para'] = all_p_ele
+                        course_json['link'] = href
                         results.append(course_json)
             except:
                 continue

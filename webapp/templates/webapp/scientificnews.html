@@ -231,8 +231,8 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <link rel="stylesheet" href="{% static 'css/modal/style.css' %}"> 
 
     <title>{{technology_desc}}</title>
-    <meta name="description" content="Latest Technologies - {{technology_desc}}"/> 
-    <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
+    <meta name="description" content="{{technology_desc}}"/> 
+    <meta name="keywords" content="{{technology_desc}}, Technology, Learning, Latest, Science, Education, Quality" />
     <style>
       
       #mgc a{
@@ -519,7 +519,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
                 
               </div>
               <!-- <p>Related News</p> -->
-              <div id="rowdata" class="row" style="font-size: smaller;">
+              <div id="rowdata" class="row">
                
              
                 {{pElement}} 
@@ -577,7 +577,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <!-- <script src="{% static 'new/js/popper.min.js' %}"></script> -->
     <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'new/js/main.js' %}"></script>    
-    <script src="{% static 'new/js/scientificnews.js' %}"></script>
+    <script src="{% static 'new/js/news.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/magicscroll.js' %}"></script>
    
 <script>
