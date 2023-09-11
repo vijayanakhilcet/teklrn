@@ -433,6 +433,26 @@ def newsPre(request):
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
+def scitechLatestTechPre(request):
+    page = 'webapp/scitech_emerging_technology_pre_landing.html'
+    data = request.GET
+    defaultTechnology = 'Tensorflow'
+    if data.get("technology"):
+        c = Course.objects.get(description=data.get("technology"))
+        defaultTechnology = c.name
+        contentType = c.contentType
+    request.session['course'] = defaultTechnology
+    if(request.user.is_authenticated):
+        try:
+            s  = Student.objects.get(email=request.user.email)
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        except Exception:
+            page = 'webapp/hi_pre_landing.html'
+            return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
+    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+
+
 def scitechSpacePre(request):
     page = 'webapp/scitech_space_pre_landing.html'
     data = request.GET
@@ -731,8 +751,11 @@ def scitechnews(request):
                     continue 
                 all_p_ele+=paradata
         except:
+            all_p_ele = wikipedia.summary(data.get('subject').split('|')[0])
             continue
     
+    if len(all_p_ele)<15:
+        all_p_ele = wikipedia.summary(data.get('subject').split('|')[0])
     if data.get("level"):
         defaultLevel = data.get("level")
     if data.get("subject"):
@@ -1367,15 +1390,17 @@ class SciTechMatchingTheSearchNewView(FormView):
         if k >= 0:
             count = 9999
         o = 1
-        while o<13:
+        while o<2:
             try:
                 o=o+1
                 our_url = "https://www.nih.gov/news-events/news-releases?page="+str(o)
                 r = requests.get(our_url)
                 soup = BeautifulSoup(r.content)
-                for a in soup.find_all("h4", class_ = "teaser-title" ):
-                    data=a.find('a').text
-                    href = 'https://www.nih.gov'+a.find('a')['href']
+                for a in ['Agricultural robotics','Closed ecological systems','Cultured meat','Atmospheric water generator','Nanotechnology in agriculture','Vertical farming','Active structure','Arcology','Domed city','6G cellular communications','Artificial general intelligence','Biometrics','Blockchain','Carbon nanotube field-effect transistor','Civic technology','Digital Infrastructure','Digital scent technology','DNA digital data storage','Electronic nose','Emerging memory technologies','Emerging magnetic data storage technologies','E-textiles','Exascale computing','Exocortex','Flexible electronics','Fourth-generation optical discs','Hybrid forensics','Li-Fi','Machine vision','Magnonics','Memristor','Molecular electronics','Multimodal contactless biometric face/iris systems','Nanoelectromechanical systems','Nanoradio','Neuromorphic engineering','Optical computing','Quantum computing','Quantum cryptography','Quantum radar','Radio-frequency identification','Software-defined radio','Solid-state transformer','Speech recognition','Spintronics','Subvocal recognition','Thermal copper pillar bump','Three-dimensional integrated circuit','Twistronics','Immersive virtual reality','Synthetic media','Laser video display','Holography','Optical transistor','Screenless display','Volumetric  display','Airborne wind turbine','Americium battery','Artificial photosynthesis','Concentrated solar power','Double-layer capacitor','Energy harvesting','Flywheel energy storage','Fusion power','Generation IV nuclear reactor','Gravity battery','Home fuel cell','Lithium–air battery','Lithium iron phosphate battery','Lithium–sulfur battery','Magnesium battery','Molten salt reactor','Nanowire battery','Nantenna','Ocean thermal energy conversion','Solid-state battery','Smart grid','Space-based solar power','Thorium nuclear fuel cycle','Vortex engine','Wireless energy transfer','Zero-energy building','4D printing','Aerogel','Amorphous metal','Bioplastic','Compositionally complex materials','Conductive polymers','Cryogenic treatment','Directional freezing','Electric armour','Fullerene','Graphene','Lab-on-a-chip','High-temperature superconductivity','Magnetic nanoparticles','Magnetorheological fluid','Microfluidics','High-temperature superfluidity','Metamaterials','Metal foam','Multi-function structures','Nanomaterials: carbon nanotubes','Quantum dot','Self-healing materials','Silicene','Superalloy','Synthetic diamond','Time crystal','Translucent concrete','Artificial uterus','Body implant, prosthesis','Cryonics','De-extinction','Electronic medical records','Human DNA vaccination and mRNA vaccination','Enzybiotics','Genetic engineering of organisms and viruses','Hibernation or suspended animation','Life extension, strategies for engineered negligible senescence','Nanomedicine','Nanosensors','Omni Processor','Oncolytic virus','Personalized medicine, full genome sequencing','Phage therapy','Plantibody','Regenerative medicine','Robotic surgery','Senolytic','Stem cell treatments','Synthetic biology, synthetic genomics','Tissue engineering','Tricorder','Virotherapy','Vitrification or cryoprotectant','Artificial brain','Brain–computer interface','Brain-reading, neuroinformatics','Electroencephalography','Head transplant','Memory erasure','Neuroprosthetics','Wetware computer','Caseless ammunition','Cloaking device','Directed-energy weapon','Electrolaser','Electrothermal-chemical technology','Force field','Green bullet','Hypersonic cruise missile','Laser weapon','MAHEM','Precision-guided firearm','Railgun','Stealth technology','Telescoped ammunition','Lightweight Small Arms Technologies','Artificial gravity','Asteroid mining','Inflatable space habitat','Reusable launch vehicle','Starshot','Stasis chamber','Android, gynoid','Gastrobot','Molecular nanotechnology, nanorobotics','Powered exoskeleton','Self-reconfiguring modular robot','Swarm robotics','Uncrewed vehicle','Airless tire','Atmospheric satellite','Autonomous Rail Rapid Transit','Flexible wings , fluidic flight controls','Distributed propulsion','Flying car','Fusion rocket','Ground-level power supply','Hoverbike','Hovertrain, Ground effect train, Ground effect vehicle','Ion-propelled aircraft','Jet pack or backpack helicopter','Low Cost Semi-High speed Rail','Regional Rapid Transit System','Maglev train','Magnetic levitation','Magnetohydrodynamic drive','Mass driver','Orbital propellant depot','Personal rapid transit','Physical Internet','Scooter-sharing system','Vactrain','Plasma propulsion','Pulse detonation engine','Self-driving car','Space elevator','Spaceplane','Vehicular communication systems']:
+                # for a in soup.find_all("h4", class_ = "teaser-title" ):
+                    # data=a.find('a').text
+                    data=a
+                    href  = 'https://www.nih.gov'
                     if 'NIH' not in data and "National Institute" not in data:
                         print('NIH'+data+':'+str(o))
                         all_p_ele = ""
@@ -1393,11 +1418,11 @@ class SciTechMatchingTheSearchNewView(FormView):
                                 continue
                         course_json = {}
                         img = '/static/image/test/certificate.jpg'
-                        course_json['technology'] = data
-                        course_json['description'] =  data
+                        course_json['technology'] = data + ' | Latest Technolologies 2024'
+                        course_json['description'] =  data+ ' | Latest Technolologies 2024'
                         course_json['contentType'] = 'Financial'
                         course_json['count'] = count
-                        course_json['para'] = all_p_ele
+                        course_json['para'] = ''
                         course_json['link'] = href
                         results.append(course_json)
             except:
