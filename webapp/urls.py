@@ -33,6 +33,7 @@ urlpatterns = [
     path('news/', views.newsPre, name='hi-pre-Page'),
     path('financial/', views.financialPre, name='financial-pre-Page'),
     path('Science-and-technology-research-and-findings/', views.scitechPre, name='scitech-pre-Page'),
+    path('Space-exploration-technologies-latest-2024/', views.scitechSpacePre, name='scitech-space-pre-Page'),
     path('media/', views.videoPre, name='hi-pre-Page'),
     path('worldnews/', views.worldNews, name='hi-pre-Page'),
     path('technologynews/', views.technologyNews, name='t-pre-Page'),
