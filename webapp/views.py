@@ -740,22 +740,27 @@ def scitechnews(request):
     img=''
     pElement=data.get("para")
     all_p_ele=""
-    soup = BeautifulSoup(requests.get(str(pElement)).content)
-    
-    for a2 in soup.find_all("p"):
-        try:
-            if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
-                print(a2.text)
-                paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
-                if len(paradata.split(" "))<5:
-                    continue 
-                all_p_ele+=paradata
-        except:
-            all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
-            continue
+    if pElement != "":    
+        soup = BeautifulSoup(requests.get(str(pElement)).content)
+        
+        for a2 in soup.find_all("p"):
+            try:
+                if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
+                    print(a2.text)
+                    paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
+                    if len(paradata.split(" "))<5:
+                        continue 
+                    all_p_ele+=paradata
+            except:
+                all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
+                continue
     
     if len(all_p_ele)<15:
-        all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
+        try:
+            all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
+        except:
+            all_p_ele = ""
+    
     if data.get("level"):
         defaultLevel = data.get("level")
     if data.get("subject"):
