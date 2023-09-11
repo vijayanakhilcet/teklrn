@@ -751,11 +751,11 @@ def scitechnews(request):
                     continue 
                 all_p_ele+=paradata
         except:
-            all_p_ele = wikipedia.summary(data.get('subject').split('|')[0])
+            all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
             continue
     
     if len(all_p_ele)<15:
-        all_p_ele = wikipedia.summary(data.get('subject').split('|')[0])
+        all_p_ele = wikipedia.summary(wikipedia.search(data.get('subject').split('|')[0])[0])
     if data.get("level"):
         defaultLevel = data.get("level")
     if data.get("subject"):
