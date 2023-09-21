@@ -243,7 +243,7 @@ def register_t(request):
     return render(request, 'webapp/registerT.html', context)
 
 def login_page(request):
-    return render(request, 'webapp/login.html', {'course': request.session['course']})
+    return render(request, 'webapp/login.html', {'course': 'Java'})
 
 def upload_complete(request):
     return render(request, 'webapp/upload_complete.html')       
