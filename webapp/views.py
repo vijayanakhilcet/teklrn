@@ -157,7 +157,8 @@ def register(request):
         form = ExtendedUserCreationForm()
         try:
             # form.fields["email"].initial = request.session['email']
-            form.fields["email"].initial = 'vij'
+            data = request.GET            
+            form.fields["email"].initial = data.get("email")
         except:
             print()
 
@@ -2604,7 +2605,7 @@ class CheckUserExistsView(FormView):
             return HttpResponseRedirect(HOSTNAME+'loginForm')
         # render(request, page, {'email': request.session['email']})
         request.session['email']=email_id
-        return HttpResponseRedirect(HOSTNAME+'register')
+        return HttpResponseRedirect(HOSTNAME+'register?email='+email_id)
 
 
 def logout_view(request): 
