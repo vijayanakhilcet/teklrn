@@ -2579,6 +2579,7 @@ class ChargeAccepted(FormView):
 class CheckUserExistsView(FormView):
     
     def get(self,request,*args,**kwargs):
+        HOSTNAME1 = 'https://teklrn.com/'
         data = request.GET
         email_id = data.get("email")
         student = None
@@ -2590,16 +2591,16 @@ class CheckUserExistsView(FormView):
              
         if student:
             request.session['email']=email_id
-            return HttpResponseRedirect(HOSTNAME+'login')
+            return HttpResponseRedirect(HOSTNAME1+'login')
         try:
             teacher = Teacher.objects.get(email=email_id)
         except ObjectDoesNotExist:
             teacher = None
         if teacher:
-            return HttpResponseRedirect(HOSTNAME+'loginForm')
+            return HttpResponseRedirect(HOSTNAME1+'loginForm')
         # render(request, page, {'email': request.session['email']})
         request.session['email']=email_id
-        return HttpResponseRedirect(HOSTNAME+'register')
+        return HttpResponseRedirect(HOSTNAME1+'register')
 
 
 def logout_view(request): 
