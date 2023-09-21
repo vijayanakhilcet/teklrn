@@ -44,7 +44,7 @@ import threading
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 # HOSTNAME = settings.APP_HOST_NAME
-HOSTNAME = 'https://www.teklrn.com/'
+HOSTNAME = 'teklrn.com/'
 
 
 
