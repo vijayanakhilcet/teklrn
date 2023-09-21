@@ -156,7 +156,8 @@ def register(request):
     else:
         form = ExtendedUserCreationForm()
         try:
-            form.fields["email"] = request.session['email']
+            request.session['email'] = user_obj.email
+            form.fields["email"].initial = user_obj.email
         except:
             print()
 
