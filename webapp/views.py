@@ -43,7 +43,8 @@ from dateutil.relativedelta import *
 import threading
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
-HOSTNAME = settings.APP_HOST_NAME
+# HOSTNAME = settings.APP_HOST_NAME
+HOSTNAME = 'https://www.teklrn.com/'
 
 
 
@@ -2579,7 +2580,6 @@ class ChargeAccepted(FormView):
 class CheckUserExistsView(FormView):
     
     def get(self,request,*args,**kwargs):
-        HOSTNAME1 = 'https://teklrn.com/'
         data = request.GET
         email_id = data.get("email")
         student = None
@@ -2591,16 +2591,16 @@ class CheckUserExistsView(FormView):
              
         if student:
             request.session['email']=email_id
-            return HttpResponseRedirect(HOSTNAME1+'login')
+            return HttpResponseRedirect(HOSTNAME+'login')
         try:
             teacher = Teacher.objects.get(email=email_id)
         except ObjectDoesNotExist:
             teacher = None
         if teacher:
-            return HttpResponseRedirect(HOSTNAME1+'loginForm')
+            return HttpResponseRedirect(HOSTNAME+'loginForm')
         # render(request, page, {'email': request.session['email']})
         request.session['email']=email_id
-        return HttpResponseRedirect(HOSTNAME1+'register')
+        return HttpResponseRedirect(HOSTNAME+'register')
 
 
 def logout_view(request): 
