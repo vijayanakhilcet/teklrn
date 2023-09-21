@@ -2680,6 +2680,9 @@ class LoginView(FormView):
             request.session['contentType'] = Course.objects.get(name=course_name).contentType
             return render(request, "webapp/bookCourse.html", {'course_name':  course_name, 'course_level': course_level, 'dat_val' : dt, 'dat_max_val' : dt_max, 'tz': tz })
         return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level })
+class LoginViewBusiness(FormView):
+    def get(self,request,*args,**kwargs):
+        return render(request, "webapp/emailBusiness.html", {'name':  'name'})
 
 class LoginTView(FormView):
     def get(self,request,*args,**kwargs):

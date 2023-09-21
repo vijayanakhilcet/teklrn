@@ -44,8 +44,7 @@
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form" method="POST" action="{% url 'register' %}">
 				
-				<h4 style="font-family: 'Antietam';text-align: center;color: #3590d5;">Teklrn</h4> <br>
-			
+				<div style="text-align: center;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="250" height="100"></div>
 				
 			<!--	<div style="text-align: center;"><img src="static/image/images/2.png" alt="TEKLRN" width="55" height="45"></div>
 			-->
@@ -85,6 +84,11 @@
 					{{form.last_name}}
 					<span class="focus-input100"></span>
 				</div>
+				<div class="wrap-input100 validate-input" data-validate="Name is required">
+					<span class="label-input100">{{form.business_name.label}}</span>
+					{{form.business_name}}
+					<span class="focus-input100"></span>
+				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
 					<span class="label-input100">{{form.email.label}}</span>
@@ -108,7 +112,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" >
+						<button style="background: black;" type="submit" class="contact100-form-btn" >
 							<span>
 								Register
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -122,7 +126,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" >
+						<button style="background: #3a69bb;" type="submit" class="contact100-form-btn" >
 							<span>
 								Back
 								<i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>

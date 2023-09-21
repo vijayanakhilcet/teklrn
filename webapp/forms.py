@@ -11,6 +11,8 @@ class ExtendedUserCreationForm(UserCreationForm):
                            (attrs={'placeholder':'Enter first name', 'class': 'input100'}))
     last_name = forms.CharField(max_length=30,  widget= forms.TextInput
                            (attrs={'placeholder':'Enter last name', 'class': 'input100'}))
+    business_name = forms.CharField(max_length=30,  widget= forms.TextInput
+                           (attrs={'placeholder':'Enter Business name', 'class': 'input100'}))
     password1 = forms.CharField(widget= forms.PasswordInput
                            (attrs={'placeholder':'Enter  password', 'class': 'input100'}))
     password2 = forms.CharField(widget= forms.PasswordInput
