@@ -155,7 +155,10 @@ def register(request):
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
     else:
         form = ExtendedUserCreationForm()
-        form.fields["email"].initial = request.session['email']
+        try:
+            form.fields["email"] = request.session['email']
+        except:
+            print()
 
     context = {'form' : form}
     return render(request, 'webapp/register.html', context)
