@@ -2596,13 +2596,13 @@ class CheckUserExistsView(FormView):
              
         if student:
             request.session['email']=email_id
-            return HttpResponseRedirect(HOSTNAME+'login')
+            return HttpResponseRedirect(HOSTNAME+'login?email='+email_id)
         try:
             teacher = Teacher.objects.get(email=email_id)
         except ObjectDoesNotExist:
             teacher = None
         if teacher:
-            return HttpResponseRedirect(HOSTNAME+'loginForm')
+            return HttpResponseRedirect(HOSTNAME+'loginForm?email='+email_id)
         # render(request, page, {'email': request.session['email']})
         request.session['email']=email_id
         return HttpResponseRedirect(HOSTNAME+'register?email='+email_id)
