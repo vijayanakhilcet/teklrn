@@ -1,595 +1,123 @@
 {% load static %}
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>The Worlds Largest Hub of Technology Learning -  Teklrn Inc.</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+   
+	<script src="{% static 'new/js/login.js' %}"></script>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'forms/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'forms/css/main.css' %}">
+<!--===============================================================================================-->
+<style>
+	@font-face {
+			font-family: 'Antietam';
+			font-style: normal;
+			font-weight: normal;
+		  src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+		  }
 
-<html>
-	<head>
-
-		<title>Technology Trends and Insights and World News</title>
-		<link rel="icon" href="{% static 'image/images/favicon.ico' %}">
-		<meta name="description" content="Technology Trends and Insights| World News | Financial World News | Trending News Topics | Entertainment News"/> 
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />		
-		<meta name="robots" content="index, follow">
-		<meta property="og:image" content="/static/image/images/poster.jpg">
-		<meta name="keywords" content="World News, World, News, Financial, Financial News, Trending, Videos, Entertainment, Learning, Latest, Science, Education, Quality" />
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-		<meta name="viewport" content="width=device-width, initial-scale=0.76, maximum-scale=0.76, minimum-scale=0.76">
-		<meta property="og:title" content="Teklrn World News">
-		<script src="{% static 'js/jquery.min.js' %}"></script>
-		<script src="{% static 'js/skel.min.js' %}"></script>
-		<script src="{% static 'js/skel-layers.min.js' %}"></script>
-		<script src="{% static 'js/init.js' %}"></script>
-		<script src="{% static 'js/home.js' %}"></script>
-		<!-- <noscript>
-			<link rel="stylesheet" href="{% static 'css/skel.css' %}" type="text/css" />
-			<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
-			<link rel="stylesheet" href="{% static 'css/style-xlarge.css' %}" type="text/css" />
-		</noscript>	 -->
-		<style>
-			.loader {
- position: fixed;
- left: 0px;
- top: 0px;
- width: 100%;
- height: 100%;
- z-index: 9999;
- background: url('static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 255, 255);
-}
-		</style>
-		 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
-		 crossorigin="anonymous"></script>
-	</head>
-	<body id="top">
-		<div class="loader"></div> 
-		<!-- Header -->
-			<header id="header" class="skel-layers-fixed">
-				<!--<h1><a href="#" style="font-family: Antietam;">TEKLRN</a></h1>-->
-				<nav id="nav">
-					<ul>
-							<li><a href="/">Home</a></li>
-						<li><a href="#cont">Contact</a></li>
-						<li><a href="/media">Video</a></li>
-						<li><a href="/entertainmentnews">Entertainment</a></li>
-						<li><a href="/Science-and-technology-research-and-findings">Science And Technology</a></li>
-						<li><a href="/Space-exploration-technologies-latest-2024">Space Exploration Technologies 2024</a></li>
-						<li><a href="/latest-emerging-technologies-2024">Emerging Technologies 2024</a></li>
-						<li><a href="/financial" id="launch" class="button special">GET STARTED</a></li>
-					</ul>
-				</nav>
-			</header>
-			
-		<!-- Banner -->
-		<section style="z-index: 200; position: relative; background-image: none !important; background-color: white !important;padding: 0px !important;" id="banner">
-			<div>
-			<marquee id="marq"  style="vertical-align: middle !important;text-transform: capitalize; background-color: #4976c8; font-size: .8rem;   font-family: 'Poppins', sans-serif; color:white; height: 40px;width: 100%; float: right; font-weight: 400 !important;" scrollamount="4" loop="infinite"></marquee>
-			</div>
-		</section>
-		
-			<section id="banner">
-				
-				<div class="inner" style="padding-top: 100px;"">
-					<!--<h2 href="#" style="height: 2%; width: 2%;" class="image fit"><img src="static/image/images/favicon.ico" alt="" /></h2>-->
-				<h2 style="font-family: Antietam; color:#629dd1;"><img src="/static/image/images/Capture11.png" height="45" width="280"></h2>
-				User {{user.first_name}}
-				
-					<!--<img src="static/image/images/icon_tek.png"></img>-->
-					<p style="color: #629dd1; visibility: hidden;">Technology World News Entertainment</p>
-					<!--<p style="color: lightyellow; font-size: medium;">We intend to partner with major UNIVERSITIES in US and CANADA and with the Software Industry at large.</p>
-					<p style="color: lightyellow; font-size: medium;">With Over 300 Highly Certified and Experienced Freelance Trainers we are the Fastest Growing e-Learning Platform in the World</p>
-					-->
+  </style>
+</head>
+<body>
+	<p id="technology_view" hidden>{{course}}</p>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" onsubmit="traineeLogin(event)">
 					
-					<!-- <ul class="actions">
-						<li><a href="#content" id="launch1" onclick="doLaunch(event)" class="button big special">Get Started</a></li>
-						{% if user.is_authenticated %}
-						<li><a href="#two"  class="button big alt">Quick Links</a></li>
-						{% endif %}
-						{% if not user.is_authenticated %}
-						<li><a href="#content" id="launch1" onclick="login_t(event)" class="button big alt">Freelance Trainer</a></li>
-						<li><a href="#one" onclick="login_l(event)" class="button big alt">Learner Login</a></li>
-						{% endif %}
-					</ul> -->
-
-					<ul class="actions">
-						<li><a href="/loginFormBusiness" id="launch1" class="button big special">Advertise</a></li>
-						{% if user.is_authenticated %}
-						<li><a href="#two"  class="button big alt">Quick Links</a></li>
-						{% endif %}
-						{% if not user.is_authenticated %}
-						<li><a href="/loginFormBusiness" id="launch1" class="button big alt">Business Login</a></li>
-                        {% endif %}
-					</ul>
-				</div>
-			</section>
-
-
-			<!-- Two 1--> 
-			<section id="two1" class="wrapper style2">
-				<header class="major">
-					<!-- <h2>WORLD NEWS</h2> -->
-					<!-- <p>Top World News</p> -->
-				</header>
-				<div id="trending_lst" class="container">
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="/Science-and-technology-research-and-findings/news/title?subject=Omega-3 fatty acids appear promising for maintaining lung health &amp;Code=undefined&amp;url=searchD-img-0Omega-3 fatty acids appear promising for maintaining lung health &amp;image=http://heartjoia.com/wp-content/uploads/2020/04/4-2048x1502.jpg&amp;para=https://www.nih.gov/news-events/news-releases/omega-3-fatty-acids-appear-promising-maintaining-lung-health" class="image fit"><img src="/static/image/test/certificate.jpg" alt="" /></a>
-								<h3>Omega-3 fatty acids appear promising for maintaining lung health</h3>
-								<p>We know a lot about the role of diet in cancer and cardiovascular diseases  but the role of diet in chronic lung disease is somewhat understudied ” said corresponding author Patricia A. Cassano  Ph.D.  director of the Division of Nutritional Sciences at Cornell University in Ithaca  New York. </p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=Omega-3 fatty acids appear promising for maintaining lung health &amp;Code=undefined&amp;url=searchD-img-0Omega-3 fatty acids appear promising for maintaining lung health &amp;image=http://heartjoia.com/wp-content/uploads/2020/04/4-2048x1502.jpg&amp;para=https://www.nih.gov/news-events/news-releases/omega-3-fatty-acids-appear-promising-maintaining-lung-health"   class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="/Science-and-technology-research-and-findings/news/title?subject=Large-scale genetic analysis shows microRNAs in human pancreas associated with diabetes&Code=undefined&url=searchD-img-8Large-scale genetic analysis shows microRNAs in human pancreas associated with diabetes&image=https://earimediaprodweb.azurewebsites.net/Api/v1/Multimedia/1a26b868-bfe8-4347-82a6-0526ca519b12/Rendition/low-res/Content/Public&para=https://www.nih.gov/news-events/news-releases/large-scale-genetic-analysis-shows-micrornas-human-pancreas-associated-diabetes" class="image fit"><img src="https://earimediaprodweb.azurewebsites.net/Api/v1/Multimedia/1a26b868-bfe8-4347-82a6-0526ca519b12/Rendition/low-res/Content/Public" alt="" /></a>
-								<h3>Large-scale genetic analysis shows microRNAs in human pancreas associated with diabetes</h3>
-								<p>In a new large-scale genetic analysis  scientists have found a set of small RNA molecules  called microRNAs  in human pancreatic cells that are strongly associated with type 2 diabetes. </p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=Large-scale genetic analysis shows microRNAs in human pancreas associated with diabetes&Code=undefined&url=searchD-img-8Large-scale genetic analysis shows microRNAs in human pancreas associated with diabetes&image=https://earimediaprodweb.azurewebsites.net/Api/v1/Multimedia/1a26b868-bfe8-4347-82a6-0526ca519b12/Rendition/low-res/Content/Public&para=https://www.nih.gov/news-events/news-releases/large-scale-genetic-analysis-shows-micrornas-human-pancreas-associated-diabetes"  class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a  href="/Science-and-technology-research-and-findings/news/title?subject=Intraocular corticosteroids best for treating complications of chronic inflammatory eye condition&amp;Code=undefined&amp;url=searchD-img-7Intraocular corticosteroids best for treating complications of chronic inflammatory eye condition&amp;image=https://www.nih.gov/sites/default/files/news-events/news-releases/2023/20230613-eye.png&amp;para=https://www.nih.gov/news-events/news-releases/intraocular-corticosteroids-best-treating-complications-chronic-inflammatory-eye-condition" class="image fit"><img src="https://www.nih.gov/sites/default/files/news-events/news-releases/2023/20230613-eye.png" alt="" /></a>
-								<h3>Intraocular corticosteroids best for treating complications of chronic inflammatory eye condition</h3>
-								<p>Prior to this study  we didnt know the best treatment for persistent or recurrent macular edema  a major cause of vision loss in people with uveitis ” said Douglas A. Jabs  M.D.  Johns Hopkins Bloomberg School of Public Health  Baltimore  chair of the study. </p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=Intraocular corticosteroids best for treating complications of chronic inflammatory eye condition&amp;Code=undefined&amp;url=searchD-img-7Intraocular corticosteroids best for treating complications of chronic inflammatory eye condition&amp;image=https://www.nih.gov/sites/default/files/news-events/news-releases/2023/20230613-eye.png&amp;para=https://www.nih.gov/news-events/news-releases/intraocular-corticosteroids-best-treating-complications-chronic-inflammatory-eye-condition" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="/Science-and-technology-research-and-findings/news/title?subject=New approach successfully traces genomic variants back to genetic disorders&amp;Code=undefined&amp;url=searchD-img-18New approach successfully traces genomic variants back to genetic disorders&amp;image=https://cdn.clinicallab.com/assets/articleNo/26989/aImg/50778/new-approach-successfully-traces-genomic-variants-back-to-genetic-disorders-m.jpg&amp;para=https://www.nih.gov/news-events/news-releases/new-approach-successfully-traces-genomic-variants-back-genetic-disorders" class="image fit"><img src="https://cdn.clinicallab.com/assets/articleNo/26989/aImg/50778/new-approach-successfully-traces-genomic-variants-back-to-genetic-disorders-m.jpg" alt="" /></a>
-								<h3>New approach successfully traces genomic variants back to genetic disorders</h3>
-								<p>We demonstrated that genotype-first research can work  especially for identifying people with rare disorders who otherwise might not have been brought to clinical attention </p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=New approach successfully traces genomic variants back to genetic disorders&amp;Code=undefined&amp;url=searchD-img-18New approach successfully traces genomic variants back to genetic disorders&amp;image=https://cdn.clinicallab.com/assets/articleNo/26989/aImg/50778/new-approach-successfully-traces-genomic-variants-back-to-genetic-disorders-m.jpg&amp;para=https://www.nih.gov/news-events/news-releases/new-approach-successfully-traces-genomic-variants-back-genetic-disorders"  class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="/Science-and-technology-research-and-findings/news/title?subject=Blood test identifies acute myeloid leukemia patients at greater risk for relapse after bone marrow transplant &Code=undefined&url=searchD-img-33Blood test identifies acute myeloid leukemia patients at greater risk for relapse after bone marrow transplant &image=https://cdn1.poz.com/134712_gene-sequencing-testtubes-iStock-165699832.jpg_17ce3457-d2c9-419d-971e-c3342ffe8c39_x2.jpeg&para=https://www.nih.gov/news-events/news-releases/blood-test-identifies-acute-myeloid-leukemia-patients-greater-risk-relapse-after-bone-marrow-transplant" class="image fit"><img src="https://cdn1.poz.com/134712_gene-sequencing-testtubes-iStock-165699832.jpg_17ce3457-d2c9-419d-971e-c3342ffe8c39_x2.jpeg" alt="" /></a>
-								<h3>Blood test identifies acute myeloid leukemia patients at greater risk for relapse after bone marrow transplant </h3>
-								<p>A small portion of adults in remission from a deadly blood cancer had persisting mutations that were detected  which predicted their risk of death from having the cancer return. </p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=Blood test identifies acute myeloid leukemia patients at greater risk for relapse after bone marrow transplant &Code=undefined&url=searchD-img-33Blood test identifies acute myeloid leukemia patients at greater risk for relapse after bone marrow transplant &image=https://cdn1.poz.com/134712_gene-sequencing-testtubes-iStock-165699832.jpg_17ce3457-d2c9-419d-971e-c3342ffe8c39_x2.jpeg&para=https://www.nih.gov/news-events/news-releases/blood-test-identifies-acute-myeloid-leukemia-patients-greater-risk-relapse-after-bone-marrow-transplant"   class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a  href="/Science-and-technology-research-and-findings/news/title?subject=Researchers find weaker immune response to viral infections in children with mitochondrial disorders&Code=undefined&url=searchD-img-55Researchers find weaker immune response to viral infections in children with mitochondrial disorders&image=https://img.mlo-online.com/files/base/ebm/mlo/image/2023/07/20230707_mitochondria.64ac1bf0676d6.png?auto=format,compress&amp;w=1050&amp;h=590&amp;fit=clip&para=https://www.nih.gov/news-events/news-releases/researchers-find-weaker-immune-response-viral-infections-children-mitochondrial-disorders"  class="image fit"><img src="https://img.mlo-online.com/files/base/ebm/mlo/image/2023/07/20230707_mitochondria.64ac1bf0676d6.png?auto=format,compress&amp;w=1050&amp;h=590&amp;fit=clip" alt="" /></a>
-								<h3>Researchers find weaker immune response to viral infections in children with mitochondrial disorders</h3>
-								<p>One of the first human studies on how mitochondrial function impacts immune cells to guide future treatments</p>
-								<ul class="actions">
-									<li><a href="/Science-and-technology-research-and-findings/news/title?subject=Researchers find weaker immune response to viral infections in children with mitochondrial disorders&Code=undefined&url=searchD-img-55Researchers find weaker immune response to viral infections in children with mitochondrial disorders&image=https://img.mlo-online.com/files/base/ebm/mlo/image/2023/07/20230707_mitochondria.64ac1bf0676d6.png?auto=format,compress&amp;w=1050&amp;h=590&amp;fit=clip&para=https://www.nih.gov/news-events/news-releases/researchers-find-weaker-immune-response-viral-infections-children-mitochondrial-disorders"    class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!--slider-->
-
-		<!--	<section id="one">
-				<header class="major" style="margin: 3%;">
-					</header>
-			</section>-->
-
-			<div style="padding:0px; margin:0px; background-color:#fff;font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
-
-				<!-- #region Jssor Slider Begin -->
-				<!-- Generator: Jssor Slider Composer -->
-				<!-- Source: https://www.jssor.com/demos/image-slider.slider/=edit -->
-				<script src="{% static 'js/jssor.slider-28.1.0.min.js' %}" type="text/javascript"></script>
-				<script type="text/javascript">
-					window.jssor_1_slider_init = function() {
-			
-						var jssor_1_SlideoTransitions = [
-						  [{b:500,d:1000,x:0,e:{x:6}}],
-						  [{b:-1,d:1,x:100,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
-						  [{b:-1,d:1,x:200,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
-						  [{b:-1,d:1,rX:20,rY:90},{b:0,d:4000,rX:0,e:{rX:1}}],
-						  [{b:-1,d:1,rY:-20},{b:0,d:4000,rY:-90,e:{rY:7}}],
-						  [{b:-1,d:1,sX:2,sY:2},{b:1000,d:3000,sX:1,sY:1,e:{sX:1,sY:1}}],
-						  [{b:-1,d:1,sX:2,sY:2},{b:1000,d:5000,sX:1,sY:1,e:{sX:3,sY:3}}],
-						  [{b:-1,d:1,tZ:300},{b:0,d:2000,o:1},{b:3500,d:3500,tZ:0,e:{tZ:1}}],
-						  [{b:-1,d:1,x:20,p:{x:{o:33,r:0.5}}},{b:0,d:1000,x:0,o:0.5,e:{x:3,o:1},p:{x:{dl:0.05,o:33},o:{dl:0.02,o:68,rd:2}}},{b:1000,d:1000,o:1,e:{o:1},p:{o:{dl:0.05,o:68,rd:2}}}],
-						  [{b:-1,d:1,da:[0,700]},{b:0,d:600,da:[700,700],e:{da:1}}],
-						  [{b:600,d:1000,o:0.4}],
-						  [{b:-1,d:1,da:[0,400]},{b:200,d:600,da:[400,400],e:{da:1}}],
-						  [{b:800,d:1000,o:0.4}],
-						  [{b:-1,d:1,sX:1.1,sY:1.1},{b:0,d:1600,o:1},{b:1600,d:5000,sX:0.9,sY:0.9,e:{sX:1,sY:1}}],
-						  [{b:0,d:1000,o:1,p:{o:{o:4}}}],
-						  [{b:1000,d:1000,o:1,p:{o:{o:4}}}]
-						];
-			
-						var jssor_1_options = {
-						  $AutoPlay: 1,
-						  $CaptionSliderOptions: {
-							$Class: $JssorCaptionSlideo$,
-							$Transitions: jssor_1_SlideoTransitions
-						  },
-						  $ArrowNavigatorOptions: {
-							$Class: $JssorArrowNavigator$
-						  },
-						  $BulletNavigatorOptions: {
-							$Class: $JssorBulletNavigator$,
-							$SpacingX: 16,
-							$SpacingY: 16
-						  }
-						};
-			
-						var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-			
-						/*#region responsive code begin*/
-			
-						var MAX_WIDTH = 2000;
-			
-						function ScaleSlider() {
-							var containerElement = jssor_1_slider.$Elmt.parentNode;
-							var containerWidth = containerElement.clientWidth;
-			
-							if (containerWidth) {
-			
-								var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
-			
-								jssor_1_slider.$ScaleWidth(expectedWidth);
-							}
-							else {
-								window.setTimeout(ScaleSlider, 30);
-							}
-						}
-			
-						ScaleSlider();
-			
-						$Jssor$.$AddEvent(window, "load", ScaleSlider);
-						$Jssor$.$AddEvent(window, "resize", ScaleSlider);
-						$Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-						/*#endregion responsive code end*/
-					};
-				</script>
-				<link href="https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&subset=latin-ext,cyrillic-ext,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
-				<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
-				<style>
-					/*jssor slider loading skin double-tail-spin css*/
-					.jssorl-004-double-tail-spin img {
-						animation-name: jssorl-004-double-tail-spin;
-						animation-duration: 1.6s;
-						animation-iteration-count: infinite;
-						animation-timing-function: linear;
-					}
-			
-					@keyframes jssorl-004-double-tail-spin {
-						from { transform: rotate(0deg); }
-						to { transform: rotate(360deg); }
-					}
-			
-					/*jssor slider bullet skin 031 css*/
-					.jssorb031 {position:absolute;}
-					.jssorb031 .i {position:absolute;cursor:pointer;}
-					.jssorb031 .i .b {fill:#000;fill-opacity:0.6;stroke:#fff;stroke-width:1600;stroke-miterlimit:10;stroke-opacity:0.8;}
-					.jssorb031 .i:hover .b {fill:#fff;fill-opacity:1;stroke:#000;stroke-opacity:1;}
-					.jssorb031 .iav .b {fill:#fff;stroke:#000;stroke-width:1600;fill-opacity:.6;}
-					.jssorb031 .i.idn {opacity:.3;}
-			
-					/*jssor slider arrow skin 051 css*/
-					.jssora051 {display:block;position:absolute;cursor:pointer;}
-					.jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
-					.jssora051:hover {opacity:.8;}
-					.jssora051.jssora051dn {opacity:.5;}
-					.jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-				</style>
-				<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:530px;overflow:hidden;visibility:hidden;">
-					<!-- Loading Screen -->
-					<div data-u="loading" class="jssorl-004-double-tail-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-						<img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="/static/image/test/double-tail-spin.svg" />
-					</div>
-					<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:530px;overflow:hidden;">
-						<div style="background-color:#000000;">
-							<img data-u="image" style="opacity:0.5;" src="/static/image/test/px-action-athlete-athletes-848618-image.jpg" />
-							<div data-ts="flat" data-p="320" style="left:144px;top:80px;width:550px;height:90px;position:absolute;overflow:hidden;">
-								<div data-to="50% 50%" data-ts="preserve-3d" data-t="0" style="left:550px;top:0px;width:550px;height:90px;position:absolute;overflow:hidden; font-family: 'Roboto', Helvetica, sans-serif;">
-									<div data-to="50% 50%" data-ts="preserve-3d" data-arr="1" style="left:20px;top:18px;width:200px;height:20px;position:absolute;color:#edf1f2;font-size:16px;font-weight:700;line-height:1.2;letter-spacing:0.1em;">Technology Training</div>
-									<div data-to="50% 50%" data-ts="preserve-3d" data-arr="2" style="left:19px;top:36px;width:600px;height:30px;position:absolute;color:#edf1f2;font-size:24px;line-height:1.2;letter-spacing:0.05em;"><span style="font-weight:900;color: #629DD1;">HIGHEST QUALITY </span>LEARNING CONTENT...</div>
-								</div>
-							</div>
-						</div>
-						 <div>
-							<img data-u="image" src="/static/image/test/certificate.jpg" />
-							<div data-ts="flat" data-p="2720" data-po="50% 48%" style="left:0px;top:0px;width:980px;height:380px;position:absolute;">
-								<div data-to="50% 50%" data-ts="preserve-3d" data-t="3" style="left:400px;top:-30px;width:500px;height:400px;position:absolute;">
-									<div data-to="50% 50%" data-ts="preserve-3d" data-t="4" style="left:0px;top:0px;width:500px;height:400px;position:absolute;">
-										<div data-to="50% 50%" data-ts="preserve-3d" data-t="5" style="left:0px;top:0px;width:500px;height:400px;position:absolute;">
-											<div data-to="50% 50%" data-ts="preserve-3d" data-t="6" style="left:0px;top:0px;width:500px;height:400px;position:absolute;">
-												<div data-to="50% 50%" data-t="7" style="font-family: Roboto, Helvetica, sans-serif ;left:-50px;top:175px;width:600px;height:38px;position:absolute;opacity:0;color:rgb(93, 166, 221);font-size:92px;font-weight:700;line-height:1.2;text-align:center;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> </div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> 
+		
+					<div style="text-align: center;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="250" height="100"></div>
+					<span class="login100-form-title p-b-26">
 						
-						<div>
-							<img data-u="image" src="static/image/test/px-fun-man-person-2361598-image.jpg" />
-							<div data-ts="flat" data-p="2720" data-po="50% 48%" style="left:0px;top:0px;width:980px;height:380px;position:absolute;">
-								<div data-to="50% 50%" data-ts="preserve-3d" data-arr="8" style="font-weight: bolder; left:-2px;top:20px;width:1000px;height:20px;position:absolute;opacity:0;color:white;font-family:'Roboto', Helvetica, sans-serif;font-size:15px;line-height:1.2;letter-spacing:1.3em;text-align:center;">WORLD POLITICS</div>
-							</div>
-						</div>
+					</span>
+					<span class="login100-form-title p-b-26">
 						
+					</span>
+					<div style="color: white; padding: .3em; border-radius:.3em;" class="wrap-input100 validate-input" >
+						<input name="file" id="uploadfile" type="file">
+						<span class="focus-input100" ></span>
+					</div>
 
-						<div style="background-color:#000000;">
-							<img data-u="image" style="opacity:0.5;" src="/static/image/test/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg" />
-							<div data-ts="flat" data-p="1800" data-po="50% -100%" style="left:120px;top:90px;width:600px;height:300px;position:absolute;">
-								<svg viewbox="0 0 200 200" width="200" height="200" data-t="10" style="left:66px;top:21px;display:block;position:absolute;opacity:0.6;overflow:visible;">
-									<path stroke-dasharray="0,700" fill="none" stroke="#ffffff" d="M0,100C0,44.77152 44.77152,0 100,0C155.22848,0 200,44.77152 200,100C200,155.22848 155.22848,200 100,200C44.77152,200 0,155.22848 0,100Z" data-t="9"></path>
-								</svg>
-								<svg viewbox="0 0 80 80" width="80" height="80" data-t="12" style="left:3px;top:124px;display:block;position:absolute;opacity:0.6;overflow:visible;">
-									<path stroke-dasharray="0,400" fill="none" stroke="#ffffff" shape-rendering="crispEdges" d="M80,80L0,80L0,0L80,0Z" data-t="11"></path>
-								</svg>
-								<svg viewbox="0 0 500 200" data-to="50% 50%" width="500" height="200" data-t="13" style="left:50px;top:50px;display:block;position:absolute;opacity:0;overflow:visible;">
-									<g>
-										<text fill="#ffffff" x="17" y="110" style="position:absolute;font-family:'Roboto', Helvetica, sans-serif;font-size:32px;font-weight:300;overflow:visible;">THE
-										</text>
-										<text fill="#ffffff" x="188" y="110" style="position:absolute;font-family:'Roboto', Helvetica, sans-serif;font-size:32px;font-weight:500;letter-spacing:0.1em;overflow:visible;">INTERNATIONAL NEWS
-										</text>
-										<text fill="#629DD1" x="218" y="130" style="position:absolute;font-family:'Roboto', Helvetica, sans-serif;font-size:16px;font-weight:900;letter-spacing:0.1em;overflow:visible;">AND 
-										</text>
-										<text fill="#629DD1" x="333" y="130" style="position:absolute;opacity:0.8;font-family:'Roboto', Helvetica, sans-serif;font-size:16px;font-weight:700;letter-spacing:0.1em;overflow:visible;">GLOBAL AFFAIRS
-										</text>
-									</g>
-								</svg>
-							</div>
-						</div>
-						<div>
-							<img data-u="image" src="static/image/test/px-bloom-blossom-flora-65219-image.jpg" />
-							<div data-ts="flat" data-p="500" style="left:160px;top:-30px;width:800px;height:200px;position:absolute;">
-								<div data-arr="14" style="left:0px;top:36px;width:800px;height:70px;position:absolute;opacity:0;color:white;font-family:'Roboto', Helvetica, sans-serif;font-size:32px;font-weight:400;line-height:1.2;letter-spacing:-0.05em;text-align:center;text-shadow:2px 1px #666f77;">TECHNOLOGY &nbsp;&nbsp;<span style="font-size:2em;">PROFICIENCY</span>&nbsp; &nbsp; &nbsp;&nbsp;<span style="font-size:1.6em;"></span></div>
-								<div data-arr="15" style="left:0px;top:106px;width:800px;height:48px;position:absolute;opacity:0;color:#666f77;font-family:'Roboto', Helvetica, sans-serif;font-size:20px;font-weight:400;line-height:1.2;letter-spacing:0.2em;text-align:center;text-shadow:1px 1px black;">LATEST  <span style="font-size:2em;">IN </span>THE WORLD OF TECHNOLOGY</div>
-							</div>
-						</div>
-					</div><a data-scale="0" href="https://www.jssor.com" style="display:none;position:absolute;">slider html</a>
-					<!-- Bullet Navigator -->
-					<div data-u="navigator" class="jssorb031" style="position:absolute;bottom:16px;right:16px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-						<div data-u="prototype" class="i" style="width:13px;height:13px;">
-							<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-								<circle class="b" cx="8000" cy="8000" r="5800"></circle>
-							</svg>
-						</div>
-					</div>
-					<!-- Arrow Navigator -->
-					<div data-u="arrowleft" class="jssora051" style="width:55px;height:55px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-						<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-							<polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-						</svg>
-					</div>
-					<div data-u="arrowright" class="jssora051" style="width:55px;height:55px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-						<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-							<polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-						</svg>
-					</div>
-				</div>
-				</div>
-				<script type="text/javascript">jssor_1_slider_init();
-				 $('.loader').fadeOut();  
-				</script>
+					<!-- <div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass" required>
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div> -->
+					<!-- <div class="text-right p-t-8 p-b-31">
+						<span class="txt1">
+							Forgot Password?
+						</span>
 
-		<!-- One -->
-			<!-- <section id="one" class="wrapper style1">
-				<header class="major">
-					<h2> </h2>
-					<p>Delivers Technology Training, Video Courses, Options to Book Trainer</p>
-				</header>
-				<div class="container">
-					<div class="row">
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-area-chart major"></i>
-								<h3>Technology Training Content</h3>
-								<p style="text-align: left;">Teklrn maintains the latest, up-to-date data, on every technology training content it delivers. With our staff working round to the clock to update every content with latest information and removing obsolete data. This way we ensure our technology training courses provide the highest value to the learners/customers.
-								</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-refresh major"></i>
-								<h3>Video and Live Trainer Sessions</h3>
-								<p style="text-align: left;">Technology training courses are offered in the form video training content and with the option to book trainer for one-to-one live sessions.
-									Most technology training content has a set of free training video content, that explains the initial basics of the technology. </p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-cog major"></i>
-								<h3>Teklrns approach to training</h3>
-								<p style="text-align: left;">Technologies are divided into levels. All the video courses are based on the syllabus for that level. Syllabus for each level is freely accessible on our website. That aids deciding the level to book.</p>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section> -->
-				
-			
-		<!-- Two --> 
-			<section id="two" class="wrapper style2">
-				<header class="major">
-					<h2>Technologies</h2>
-					<p>Top Technology Training Video Contents</p>
-				</header>
-				<div id="course_lst" class="container">
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="?technology=Java" class="image fit"><img src="/static/image/images/pic01.jpg" alt="" /></a>
-								<h3>Java  (Programming Language)</h3>
-								<p>Stable release Java SE 15 / September 15, 2020</p>
-								<ul class="actions">
-									<li><a href="?technology=Java"  class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="?technology=Python" class="image fit"><img src="static/image/images/pic02.jpg" alt="" /></a>
-								<h3>Python (Programming Language)</h3>
-								<p>Python 3.9.1 / 7 December 2020</p>
-								<ul class="actions">
-									<li><a href="?technology=Python"  class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a  href="?technology=Docker" class="image fit"><img src="static/image/images/pic01Docker.png" alt="" /></a>
-								<h3>Docker (Software)</h3>
-								<p>The latest stable release 19.03.14 /  December 1, 2020 </p>
-								<ul class="actions">
-									<li><a href="?technology=Docker"class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a href="?technology=Kubernetes" class="image fit"><img src="static/image/images/pic01Kub.png" alt="" /></a>
-								<h3>Kubernetes (Software)</h3>
-								<p>Latest stable release 1.20 / December 8, 2020 </p>
-								<ul class="actions">
-									<li><a href="?technology=Kubernetes"   class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-					<div class="row">
-						<div class="6u">
-							<section class="special">
-								<a href="?technology=Spring" class="image fit"><img src="static/image/images/pic01Spring.jpg" alt="" /></a>
-								<h3>Spring (Software Framework)</h3>
-								<p>Stable release 5.3.1 / 10 November 2020 </p>
-								<ul class="actions">
-									<li><a href="?technology=Spring"   class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-						<div class="6u">
-							<section class="special">
-								<a  href="?technology=Tensorflow"  class="image fit"><img src="static/image/images/pic01tensorflow.png" alt="" /></a>
-								<h3>TensorFlow (Software Library)</h3>
-								<p>Stable release 2.3.1 / September 24, 2020</p>
-								<ul class="actions">
-									<li><a href="?technology=Tensorflow"    class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section>
+						<a class="txt2" href="/reset_password" >
+							Reset
+						</a>
+					</div> -->
+					
 
-		<!-- Three -->
-			<section id="three" class="wrapper style1">
-				<div class="container">
-					<div class="row">
-						<div class="8u">
-							<section>
-								<h2>Whom our courses benefit</h2>
-								<a href="#" class="image fit"><img src="static/image/images/pic03.jpg" alt="" /></a>
-								<p>Beginners,  with no technology experience (recommended approach is to start from level 1 of the technology). Experienced professional, who want to learn new technology (recommended approach is to start with level 1 and reach the level required for their need. It’s advised to read the syllabus of each level to decide what to learn). Highly skilled professionals who want to learn higher level of the technology they already know(recommended approach is to check the levels and figure out the level they want to start learning and book the courses)</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section>
-								<h3>Technology learning with teklrn </h3>
-								<p>Click the button "Get Started" on the home page. Enter the technology on the search box and select the option from the list. Browse through the syllabus of each level. Check the free video training content for each technology, for higher levels follow the instructions to access video content or to book a 1-to-1 session with trainer.</p>
-								<ul class="actions">
-									<li><a href=""  onclick="doLaunch(event)" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-							<hr />
-							<section id="four">
-							<!--	<h3>Quick Links</h3>-->
-								<ul class="alt">
-								<!--	<li><a href="?technology=Electricproulsion">Electric Propulsion</a></li>
-									<li><a href="?technology=Quantumtechnologies">Quantum Technologies</a></li>
-									<li><a href="?technology=Marineengineering">Marine Engineering</a></li>
-									<li><a href="?technology=Python">Python</a></li>
-									<li><a href="?technology=Greenaviation">Green Aviation  </a></li>
-									<li><a href="?technology=Timecrystals">Time Crystals</a></li>
-									<li><a href="?technology=Keras">Keras</a></li>
-									<li><a href="?technology=Spaceelevator">Space Elevator</a></li>
-								--></ul>
-							</section>
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button style="background: black;" class="login100-form-btn" type="submit" >
+								Next
+							</button>
 						</div>
 					</div>
-				</div>
-			</section>			
-			
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<div class="row double">
-						<div class="6u">
-							<div class="row collapse-at-2">
-								<div class="6u">
-									<h3>Get to Know Us</h3>
-									<ul class="alt">
-										<li><a onclick="doLaunchCareer(event)" href="#">Careers</a></li>
-										<li><a onclick="doLaunchTeach(event)" href="#">Teach wth TEKLRN</a></li>
-										<li><a onclick="doLaunchPress(event)" href="#">Press Releases</a></li>
-										<li><a onclick="doLaunchBusiness(event)" href="#">Business</a></li>
-									</ul>
-								</div>
-								<div class="6u">
-									<h3>Let Us Help You</h3>
-									<ul class="alt">
-										<li><a onclick="doLaunchHelp(event)" href="#">Help and Support</a></li>
-										<li><a onclick="doLaunchTerm(event)" href="#">Terms</a></li>
-										<li><a onclick="doLaunchRefund(event)" href="#">Refund Policies</a></li>
-										<li><a onclick="doLaunchPrivacy(event)" href="#">Privacy policy and cookie policy</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="6u" id="cont">
-							<h2>Teklrn Inc.</h2>
-							<p>Email: teklrn.inc@gmail.com, <br>Ontario, Canada</p>
-							
-							<p><b>Akhil Vijayan</b><br>Founder, CEO and CTO at Teklrn Inc.	</p>
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="https://www.facebook.com/teklrn/?modal=admin_todo_tour" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="https://www.linkedin.com/company/69842916" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-							</ul>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button style="background: #3a69bb;" class="login100-form-btn" onclick="backtolandingmain(event)"   type="button" >
+								Back
+							</button>
 						</div>
 					</div>
-					<ul class="copyright">
-						<li>Copyright &copy; 2020, TEKLRN Inc. or its affiliates. All Rights Reserved</li>
-						<li>TEKLRN</a></li>
-						<li>Technology Learning</a></li>
-					</ul>
-				</div>
-			</footer>
-			<script>
-			// $(window).load(function(){  
-			// 	     $('.loader').fadeOut();  
-			// 	 });
-				 $(window).ready(function(){  
-					getAllNews();  
-				 });
-			
-			// document.addEventListener("DOMContentLoaded	",getAllNews());
+				</form>
+			</div>
+		</div>
+	</div>
+	
 
-				 </script>  
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'forms/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'forms/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'forms/js/main.js' %}"></script>
 
-	</body>
+</body>
 </html>
