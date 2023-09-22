@@ -140,7 +140,7 @@ if (uTeacher &&  uTeacher=="true") {
         
                 // process the form
                 $.ajax({
-                    url         : "/login_student", // the url where we want to POST
+                    url         : "/login_business", // the url where we want to POST
                     type        : 'post',
                     data        : {"course": course_name, "level": course_level, "email":mail_id, "pwd":pwd, "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server

@@ -245,7 +245,7 @@ def register_t(request):
     return render(request, 'webapp/registerT.html', context)
 
 def login_page(request):
-    return render(request, 'webapp/login.html', {'course': 'Java'})
+    return render(request, 'webapp/login.html', {'course': 'Tensorflow'})
 
 def upload_complete(request):
     return render(request, 'webapp/upload_complete.html')       
@@ -2737,7 +2737,28 @@ class LoginTeacherView(FormView):
            page="webapp/hi_login_t.html"  
         return render(request, page)
         
-
+class LoginBusinessView(FormView):
+    def post(self,request,*args,**kwargs):
+        email_id = request.POST['email']
+        pwd = request.POST['pwd']
+        student = Student.objects.get(email=email_id)
+        page = "webapp/businesslogin.html"
+        if student is not None:
+            user = authenticate(request, username = email_id, password = pwd)
+            if user is not None:
+                login(request, user)
+                tz = Student.objects.get(email=user.email).time_zn
+                now = datetime.datetime.now().astimezone(pytz.timezone(tz)) + relativedelta(days=10)
+                dt = now.strftime('%Y-%m-%dT%H:%M')
+                max_v = now + relativedelta(months=2)
+                dt_max = max_v.strftime('%Y-%m-%dT%H:%M')
+                name = student.user.first_name
+                email_id = student.user.username
+                request.session['name']=name
+                request.session['email']=email_id
+           
+        return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
+   
 
 class LoginStudentView(FormView):
     def post(self,request,*args,**kwargs):
@@ -2843,7 +2864,7 @@ class RegisterStudentView(FormView):
     def post(self,request,*args,**kwargs):
         results= []
         if 'course' not in request.POST:
-          course_name = "Java"
+          course_name = "Tensorflow"
         else:
           course_name = request.POST['course']
           course_description = request.post['course_description']

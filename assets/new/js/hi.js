@@ -91,7 +91,7 @@ function traineeLogin(event){
         
                 // process the form
                 $.ajax({
-                    url         : "/login_student", // the url where we want to POST
+                    url         : "/login_business", // the url where we want to POST
                     type        : 'post',
                     data        : {"email":mail_id, "pwd":pwd}, // our data object
                     dataType    : "html", // what type of data do\ we expect back from the server
