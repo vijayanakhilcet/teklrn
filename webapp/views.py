@@ -43,7 +43,7 @@ from dateutil.relativedelta import *
 import threading
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
-# HOSTNAME = settings.APP_HOST_NAME
+#HOSTNAME = settings.APP_HOST_NAME
 HOSTNAME = 'https://www.teklrn.com/'
 
 
@@ -2596,7 +2596,8 @@ class CheckUserExistsView(FormView):
              
         if student:
             request.session['email']=email_id
-            return HttpResponseRedirect(HOSTNAME+'login?email='+email_id)
+            render(request, 'webapp/login.html', {'email': request.session['email']})
+            # return HttpResponseRedirect(HOSTNAME+'login?email='+email_id)
         try:
             teacher = Teacher.objects.get(email=email_id)
         except ObjectDoesNotExist:
