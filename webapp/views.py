@@ -2759,6 +2759,33 @@ class LoginBusinessView(FormView):
            
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
    
+class UploadFileUsingClientView(FormView):
+    def post(self,request,*args,**kwargs):
+        import boto3
+        from pprint import pprint
+        import pathlib
+        import os
+
+        """
+        Uploads file to S3 bucket using S3 client object
+        :return: None
+        """
+        from django.core.files.storage import FileSystemStorage
+        fs = FileSystemStorage()
+        filename = fs.save(request.FILES['file'].name, request.FILES['file'])
+        s3 = boto3.client("s3")        
+        bucket_name = "binary-guy-frompython-1"
+        object_name = "akhil_resume.docx"
+        # # print(request.FILES)
+        # file_name = request.FILES['file']
+        print(fs.path(filename))
+        try:
+            response = s3.upload_file(fs.path(filename), 'tekl-rn-img', request.FILES['file'].name)
+        except:
+            return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
+        return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
+
+        # pprint(response)  # prints None
 
 class LoginStudentView(FormView):
     def post(self,request,*args,**kwargs):
