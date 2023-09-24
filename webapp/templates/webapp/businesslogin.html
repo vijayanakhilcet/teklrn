@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
    
-	<script src="{% static 'new/js/login.js' %}"></script>
+	<script src="{% static 'js/login.js' %}"></script>
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="{% static 'forms/images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -52,7 +52,7 @@
 						
 					</span>
 					<p style="font-size: xx-small;/* font-style: italic; */color: white;background: #4c76cd;padding: 6px !important;">
-						Advertisement 1 (Required)</p>
+						{{display}}  </p>
 					<span class="login100-form-title p-b-26">
 						
 					</span>
@@ -79,14 +79,22 @@
 						</a>
 					</div> -->
 
-					
-					
+					{% if skip %}					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button style="background: black;" class="login100-form-btn" type="button" onclick="paymentPage(event)" >
+								SKIP AND PROCEED
+							</button>
+						</div>
+					</div>
+					{% endif %}
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button style="background: black;" class="login100-form-btn" type="submit" >
-								Next
+								UPLOAD
 							</button>
 						</div>
 					</div>
@@ -94,7 +102,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button style="background: #3a69bb;" class="login100-form-btn" onclick="backtolandingmain(event)"   type="button" >
+							<button style="background: #3a69bb;" class="login100-form-btn"    type="button" >
 								Back
 							</button>
 						</div>

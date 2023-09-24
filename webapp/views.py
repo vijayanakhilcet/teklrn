@@ -2739,8 +2739,9 @@ class LoginTeacherView(FormView):
 
 class AddAdvertisementsView(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
-
+        request.session['count']=1
+        request.session['display'] = '** Advertisement ' +str(request.session['count']) + '   (Required)'
+        return render(request, 'webapp/businesslogin.html', {'skip':False, 'display': request.session['display'], 'count': request.session['count']})
 
 class LoginBusinessView(FormView):
     def post(self,request,*args,**kwargs):
@@ -2776,6 +2777,7 @@ class UploadFileUsingClientView(FormView):
         :return: None
         """
         from django.core.files.storage import FileSystemStorage
+        request.session['count']=request.session['count']+1
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
@@ -2785,12 +2787,14 @@ class UploadFileUsingClientView(FormView):
         # # print(request.FILES)
         # file_name = request.FILES['file']
         print(fs.path(filename))
-        print(request.user.username+'|'+webaddress+'|'+request.FILES['file'].name)
+        print(request.user.username+'|'+webaddress+'|'+str(request.session['count'])+'|'+request.FILES['file'].name)
         try:
             response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+request.FILES['file'].name)
         except:
             return render(request, 'webapp/businesslogin_error.html', {'email': request.session['email'], 'name': request.session['name']})
-        return render(request, 'webapp/businesslogin_next_add.html', {'email': request.session['email'], 'name': request.session['name']})
+     
+        request.session['display'] = '** Advertisement ' +str(request.session['count']) + '  (Optional)'
+        return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': request.session['count']})
 
         # pprint(response)  # prints None
 
@@ -3004,6 +3008,20 @@ class BookCourseView(FormView):
         request.session['contentType'] = Course.objects.get(name=course_name).contentType
         request.session['level']=course_level
         request.session['description'] = course_description
+        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
+
+class ProceedToPay(FormView):
+    def post(self,request,*args,**kwargs):
+        results= []
+        course_description = 'Tensorflow'
+        course_name = 'Tensorflow'
+        course_level = '1'
+        request.session['datetimeval']='2'
+        request.session['name']=request.user.first_name
+        request.session['course']='Tensorflow'
+        request.session['contentType'] = 'Tensorflow'
+        request.session['level']='1'
+        request.session['description'] = 'Tensorflow'
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
 class MostSoughTechView(FormView):

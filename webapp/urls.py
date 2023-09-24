@@ -122,6 +122,7 @@ urlpatterns = [
     path('reset_student_password',views.ResetStudentPwdView.as_view(), name='reset'),
     path('reset_trainer_password',views.ResetStudentPwdView.as_view()),
     path('book_course',views.BookCourseView.as_view()),
+    path('proceed_to_pay',views.ProceedToPay.as_view()),
     path('book_video',views.BookVideoView.as_view()),
     path('checkTrainer/',views.CheckTeacherExistsView.as_view()),
     path('register_teacher',views.RegisterTeacherView.as_view()),

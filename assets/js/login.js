@@ -790,6 +790,53 @@ function trainerResetPassword(event){
                 event.preventDefault();
 }
     ``
+
+function paymentPage(event) {
+
+    // get the form data
+    // there are many ways to get this data using jQuery (you can use the class or id also)
+    // var course = $('input[id=course]').val();
+    // var level = $('input[id=level]').val();
+    // var datetimeval = $('input[id=time]').val();
+    // var sel = document.getElementById('timezone-offset');    
+    // process the form
+    $.ajax({
+        url         : "/proceed_to_pay", // the url where we want to POST
+        type        : 'post',
+        data        : {"course":'Ternsorflow', "level":'1', "datetimeval": '1' , "zone":'1', "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+        dataType    : "html", // what type of data do\ we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+       .done(function(data) {
+        // closeBookingForm(); 
+        // document.open("text/html", "load")
+        // document.write(data);
+        // document.close();
+            // here we will handle errors and validation messages
+        });
+       
+    // stop the form from submitting the normal way and refreshing the page
+    event.preventDefault();
+
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 function traineeLogin(event){   
 
                 // get the form data
