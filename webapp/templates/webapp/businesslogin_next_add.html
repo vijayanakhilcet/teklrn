@@ -44,18 +44,18 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form method="post" class="login100-form validate-form" action="/upload_file_using_client" enctype="multipart/form-data">
+				<form method="post" class="login100-form validate-form" action="/book_course" enctype="multipart/form-data">
 					
 		
 					<div style="text-align: center;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="250" height="100"></div>
 					<span class="login100-form-title p-b-26">
 						
 					</span>
-					<p style="font-size: xx-small;/* font-style: italic; */color: white;background: #4c76cd;padding: 6px !important;">
-						Advertisement 1 (Required)</p>
 					<span class="login100-form-title p-b-26">
 						
 					</span>
+					<p style="font-size: xx-small;/* font-style: italic; */color: white;background: #4c76cd;padding: 6px !important;">
+						Advertisement 2 (Optional)</p>
 					<div style="color: white; padding: .3em; border-radius:.3em;" class="wrap-input100 validate-input" >
 						<input name="file" id="uploadfile" name="uploadfile"  type="file" required>
 						<span class="focus-input100" ></span>
@@ -80,13 +80,20 @@
 					</div> -->
 
 					
-					
-
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button style="background: black;" class="login100-form-btn" type="submit" >
 								Next
+							</button>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button style="background: black;" class="login100-form-btn" type="submit"  onclick="proceedtopay(event)">
+								Skip and Proceed
 							</button>
 						</div>
 					</div>

@@ -2736,13 +2736,18 @@ class LoginTeacherView(FormView):
         if(request.user.is_authenticated):
            page="webapp/hi_login_t.html"  
         return render(request, page)
-        
+
+class AddAdvertisementsView(FormView):
+    def get(self,request,*args,**kwargs):
+        return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
+
+
 class LoginBusinessView(FormView):
     def post(self,request,*args,**kwargs):
         email_id = request.POST['email']
         pwd = request.POST['pwd']
         student = Student.objects.get(email=email_id)
-        page = "webapp/businesslogin.html"
+        page = "webapp/businessdashboard.html"
         if student is not None:
             user = authenticate(request, username = email_id, password = pwd)
             if user is not None:
@@ -2771,19 +2776,21 @@ class UploadFileUsingClientView(FormView):
         :return: None
         """
         from django.core.files.storage import FileSystemStorage
+        webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
         s3 = boto3.client("s3")        
-        bucket_name = "binary-guy-frompython-1"
+        bucket_name = "tekl-rn-img"
         object_name = "akhil_resume.docx"
         # # print(request.FILES)
         # file_name = request.FILES['file']
         print(fs.path(filename))
+        print(request.user.username+'|'+webaddress+'|'+request.FILES['file'].name)
         try:
-            response = s3.upload_file(fs.path(filename), 'tekl-rn-img', request.FILES['file'].name)
+            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+request.FILES['file'].name)
         except:
-            return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
-        return render(request, 'webapp/businesslogin.html', {'email': request.session['email'], 'name': request.session['name']})
+            return render(request, 'webapp/businesslogin_error.html', {'email': request.session['email'], 'name': request.session['name']})
+        return render(request, 'webapp/businesslogin_next_add.html', {'email': request.session['email'], 'name': request.session['name']})
 
         # pprint(response)  # prints None
 
