@@ -2585,6 +2585,9 @@ class ChargeAccepted(FormView):
 class CheckUserExistsView(FormView):
     
     def get(self,request,*args,**kwargs):
+        if(request.user.is_authenticated):
+            request.session['display'] = '** Advertisement ' +'1' + '   (Required)'
+            return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': '1'})
         data = request.GET
         email_id = data.get("email")
         student = None
@@ -2612,7 +2615,7 @@ class CheckUserExistsView(FormView):
 def logout_view(request): 
         logout(request)    
         defaultTechnology='Tensorflow'        
-        return render(request, "webapp/hi_pre_landing.html", {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+        return render(request, "webapp/business.html", {'technology':'Tensorflow', 'technology_desc':defaultTechnology})
 
 def logout_t_view(request): 
         logout(request)   
@@ -2689,7 +2692,11 @@ class LoginView(FormView):
         return render(request, "webapp/email.html", {'name':  'name', 'course': course_name, 'level': course_level })
 class LoginViewBusiness(FormView):
     def get(self,request,*args,**kwargs):
-        return render(request, "webapp/emailBusiness.html", {'name':  'name'})
+        page = "webapp/emailBusiness.html"
+        if(request.user.is_authenticated):
+            request.session['display'] = '** Advertisement ' +'1' + '   (Required)'
+            return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': '1'})
+        return render(request, page, {'name':  'name'})
 
 class LoginTView(FormView):
     def get(self,request,*args,**kwargs):
@@ -2739,6 +2746,8 @@ class LoginTeacherView(FormView):
 
 class AddAdvertisementsView(FormView):
     def get(self,request,*args,**kwargs):
+        if (not request.user.is_authenticated):           
+           return render(request, "webapp/emailBusiness.html", {'name':  'name'})
         request.session['count']=1
         request.session['display'] = '** Advertisement ' +str(request.session['count']) + '   (Required)'
         return render(request, 'webapp/businesslogin.html', {'skip':False, 'display': request.session['display'], 'count': request.session['count']})
@@ -3031,7 +3040,7 @@ class ProceedToPay(FormView):
         request.session['contentType'] = 'Tensorflow'
         request.session['level']='1'
         request.session['description'] = 'Tensorflow'
-        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
+        return render(request, "webapp/buy.html", {'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):
