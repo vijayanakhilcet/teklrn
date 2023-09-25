@@ -2777,7 +2777,8 @@ class UploadFileUsingClientView(FormView):
         :return: None
         """
         from django.core.files.storage import FileSystemStorage
-        request.session['count']=request.session['count']+1
+        cnt = request.session['count'] 
+        request.session['count']=cnt +1
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
