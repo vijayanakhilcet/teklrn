@@ -2791,7 +2791,9 @@ class UploadFileUsingClientView(FormView):
         try:
             response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count)+'|'+request.FILES['file'].name)
         except:
-            return render(request, 'webapp/businesslogin_error.html', {'email': request.session['email'], 'name': request.session['name']})
+            count=count-1
+            request.session['display'] = '** Advertisement ' +str(count) + '  (Optional) Upload Failed Try again'
+            return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
      
         request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
