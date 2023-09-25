@@ -2777,8 +2777,7 @@ class UploadFileUsingClientView(FormView):
         :return: None
         """
         from django.core.files.storage import FileSystemStorage
-        cnt = request.session['count'] 
-        request.session['count']=cnt +1
+        count=int(request.POST['cnt'])+1
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
@@ -2788,14 +2787,14 @@ class UploadFileUsingClientView(FormView):
         # # print(request.FILES)
         # file_name = request.FILES['file']
         print(fs.path(filename))
-        print(request.user.username+'|'+webaddress+'|'+str(request.session['count'])+'|'+request.FILES['file'].name)
+        print(request.user.username+'|'+webaddress+'|'+str(count)+'|'+request.FILES['file'].name)
         try:
-            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+request.FILES['file'].name)
+            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count)+'|'+request.FILES['file'].name)
         except:
             return render(request, 'webapp/businesslogin_error.html', {'email': request.session['email'], 'name': request.session['name']})
      
-        request.session['display'] = '** Advertisement ' +str(request.session['count']) + '  (Optional)'
-        return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': request.session['count']})
+        request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
+        return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
 
         # pprint(response)  # prints None
 
