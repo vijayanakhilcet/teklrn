@@ -2781,7 +2781,15 @@ class UploadFileUsingClientView(FormView):
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
-        s3 = boto3.client("s3")        
+        s3=''
+        if settings.AWS_ACCESS_KEY_ID=='1':
+            s3 = boto3.client("s3") 
+        else:
+            s3 = boto3.client("s3",
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
+                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
+                        region_name=settings.AWS_DEFAULT_REGION
+                            )        
         bucket_name = "tekl-rn-img"
         object_name = "akhil_resume.docx"
         # # print(request.FILES)
