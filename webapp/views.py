@@ -3012,7 +3012,6 @@ class BookCourseView(FormView):
 
 class ProceedToPay(FormView):
     def post(self,request,*args,**kwargs):
-        results= []
         course_description = 'Tensorflow'
         course_name = 'Tensorflow'
         course_level = '1'
@@ -3022,7 +3021,7 @@ class ProceedToPay(FormView):
         request.session['contentType'] = 'Tensorflow'
         request.session['level']='1'
         request.session['description'] = 'Tensorflow'
-        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
+        return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):

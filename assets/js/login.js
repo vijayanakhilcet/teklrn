@@ -810,9 +810,9 @@ function paymentPage(event) {
         // using the done promise callback
        .done(function(data) {
         // closeBookingForm(); 
-        // document.open("text/html", "load")
-        // document.write(data);
-        // document.close();
+        document.open("text/html", "load")
+        document.write(data);
+        document.close();
             // here we will handle errors and validation messages
         });
        
