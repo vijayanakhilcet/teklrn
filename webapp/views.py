@@ -64,24 +64,26 @@ def charge(request): # new
             )
         except Exception as e:
             return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
-    tz = Student.objects.get(email=request.session['email']).time_zn
-    d_aware = datetime.datetime.strptime(request.session['datetimeval'], '%Y-%m-%dT%H:%M').astimezone(pytz.timezone(tz))
-    student_obj = Student.objects.get(email=request.session['email'])
-    course_obj= Course.objects.get(name=request.session['course'])
-    assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=request.session['level'], status="P", date_joined=d_aware, teacher=None)
-    assignCourse.save()
-    #Sening email
+        return render(request, 'webapp/businessdashboard.html', {'name': request.user.first_name})
+   
+    # tz = Student.objects.get(email=request.session['email']).time_zn
+    # d_aware = datetime.datetime.strptime(request.session['datetimeval'], '%Y-%m-%dT%H:%M').astimezone(pytz.timezone(tz))
+    # student_obj = Student.objects.get(email=request.session['email'])
+    # course_obj= Course.objects.get(name=request.session['course'])
+    # assignCourse = StudentCourse.objects.create(student=student_obj, course=course_obj, level=request.session['level'], status="P", date_joined=d_aware, teacher=None)
+    # assignCourse.save()
+    # #Sening email
     
-    email_subject = 'Teklrn Course Booked Alert'
-    email_body = 'Hello '+request.session["name"]+', \n\n You have booked \n\nCourse: '+request.session["course"]+'\n\nLevel: '+request.session["level"]+'\n\n You will be notified once the Booking is accepted by a trainer. \n\n Thanks And Regards, \n Teklrn Backend Team'
-    email_test = EmailMessage(
-                email_subject,
-                email_body,
-                'teklrn.inc@gmail.com',
-                [student_obj.email],
-            )
-    email_test.send(fail_silently=False)
-    return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
+    # email_subject = 'Teklrn Course Booked Alert'
+    # email_body = 'Hello '+request.session["name"]+', \n\n You have booked \n\nCourse: '+request.session["course"]+'\n\nLevel: '+request.session["level"]+'\n\n You will be notified once the Booking is accepted by a trainer. \n\n Thanks And Regards, \n Teklrn Backend Team'
+    # email_test = EmailMessage(
+    #             email_subject,
+    #             email_body,
+    #             'teklrn.inc@gmail.com',
+    #             [student_obj.email],
+    #         )
+    # email_test.send(fail_silently=False)
+    # return render(request, 'webapp/hi_login.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
    
 def chargevideo(request): # new
     if request.method == 'POST':
@@ -2806,14 +2808,16 @@ class UploadFileUsingClientView(FormView):
         # # print(request.FILES)
         # file_name = request.FILES['file']
         print(fs.path(filename))
-        print(request.user.username+'|'+webaddress+'|'+str(count)+'|'+request.FILES['file'].name)
+        print(request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+request.FILES['file'].name)
         try:
-            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count)+'|'+request.FILES['file'].name)
+            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1])
         except:
             count=count-1
             request.session['display'] = '** Advertisement ' +str(count) + '  (Optional) Upload Failed Try again'
+            fs.delete(filename)
             return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
-     
+        
+        fs.delete(filename)
         request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
 

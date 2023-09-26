@@ -19,7 +19,7 @@ font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue'
 <div style="
     background: black;
 ">
-<p style="color: white;background: black;">Business Name:  Akhil</p>
+<p style="color: white;background: black;">Business Email:  {{user.email}}</p>
 
 <p style="color: white;background: #3264bb;">Total Cost: 13.00 CAD</p>
 </div>
@@ -32,7 +32,7 @@ font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue'
     data-locale="auto">
 </script>
 <script src="{% static 'new/js/hi.js' %}"></script>
-<button onclick="backtolandingmain(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Cancel</span></button>
+<button onclick="history.back()" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Back</span></button>
 
 </form> 
 <body>
