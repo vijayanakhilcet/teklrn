@@ -89,9 +89,11 @@
 
 					<ul class="actions">
 						{% if user.is_authenticated %}
-						<li><a href="/loginFormBusiness" id="launch1" class="button big special">View Statistics</a></li>
+						<li><a href="/loginFormBusiness" id="launch1" class="button big special">Welcome {{request.session.business_name}}</a></li>
 						
 						<li><a href="/add_advertisements"  class="button big alt">Add Advertisements</a></li>
+						<li><a href="/add_advertisements"  class="button big alt">View Advertisements</a></li>
+
 						{% endif %} 
 						{% if user.is_authenticated %}
 						<li><a href="/logout" id="launch1" class="button big special">Logout</a></li>

@@ -2779,6 +2779,7 @@ class LoginBusinessView(FormView):
                 email_id = student.user.username
                 request.session['name']=name
                 request.session['email']=email_id
+                request.session['business_name']=Student.objects.get(email=user.email).business_name
            
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
    
