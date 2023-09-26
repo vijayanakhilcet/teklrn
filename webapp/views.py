@@ -2745,8 +2745,10 @@ class LoginTeacherView(FormView):
         return render(request, page)
 
 class AddAdvertisementsView(FormView):
+    
     def get(self,request,*args,**kwargs):
-        if (not request.user.is_authenticated):           
+        print(request.user.first_name)
+        if not request.user.is_authenticated:           
            return render(request, "webapp/emailBusiness.html", {'name':  'name'})
         request.session['count']=1
         request.session['display'] = '** Advertisement ' +str(request.session['count']) + '   (Required)'
