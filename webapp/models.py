@@ -20,6 +20,8 @@ class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     time_zn = models.CharField(max_length=30)
     courses = models.ManyToManyField(Course, through='StudentCourse')
+    business_name=models.CharField(max_length=60, default='Default')
+    advertisement_count=models.IntegerField(default=0)   
     def __str__(self):
         return self.user.username
 

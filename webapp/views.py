@@ -134,11 +134,12 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
+            business_name = form.cleaned_data.get('business_name')
             user_obj = form.save()
             freegeoip_response = requests.get('http://ip-api.com/json/')
             freegeoip_response_json = freegeoip_response.json()
             user_time_zone = freegeoip_response_json['timezone']
-            student = Student.objects.create(user=user_obj, time_zn=user_time_zone, email=username)
+            student = Student.objects.create(user=user_obj, time_zn=user_time_zone, email=username, business_name=business_name)
             student.save()
             domain = get_current_site(request).domain        
             uidb64 = urlsafe_base64_encode(force_bytes(user_obj.pk))
@@ -153,7 +154,10 @@ def register(request):
                 'teklrn.inc@gmail.com',
                 [user_obj.email],
             )
-            email_test.send(fail_silently=False)
+            try:
+                email_test.send(fail_silently=False)
+            except:
+                print('Mail Err')
             return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
     else:
         form = ExtendedUserCreationForm()
