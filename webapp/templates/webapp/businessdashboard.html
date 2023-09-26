@@ -52,7 +52,7 @@
 						<li><a href="/Science-and-technology-research-and-findings">Science And Technology</a></li>
 						<li><a href="/Space-exploration-technologies-latest-2024">Space Exploration Technologies 2024</a></li>
 						<li><a href="/latest-emerging-technologies-2024">Emerging Technologies 2024</a></li>
-						<li><a href="/financial" id="launch" class="button special">Add Advertisements</a></li>
+						<li><a href="/logout" id="launch" class="button special">Logout</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -89,7 +89,7 @@
 
 					<ul class="actions">
 						{% if user.is_authenticated %}
-						<li><a href="/loginFormBusiness" id="launch1" class="button big special">Welcome {{request.session.business_name}}</a></li>
+						<li><a href="" id="launch1" class="button big special">Welcome {{request.session.business_name}}</a></li>
 						
 						<li><a href="/add_advertisements"  class="button big alt">Add Advertisements</a></li>
 						<li><a href="/add_advertisements"  class="button big alt">View Advertisements</a></li>
