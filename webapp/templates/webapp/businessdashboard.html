@@ -89,8 +89,11 @@
 
 					<ul class="actions">
 						{% if user.is_authenticated %}
-						<li><a href="" id="launch1" class="button big special">Welcome {{request.session.business_name}}</a></li>
-						
+						<li><p style="padding: 20px;font-size: medium;color: white;background: black;" href="" id="launch1" class=" big special">Business Name: {{request.session.business_name}}</p></li>
+						<li><p style="padding: 20px;font-size: medium;color: white;background: #426fcc;" href="" id="launch1" class=" big special">Total Advertisements: {{request.session.advertisement_count}}</p></li>
+						<br>
+						<br>
+
 						<li><a href="/add_advertisements"  class="button big alt">Add Advertisements</a></li>
 						<li><a href="/add_advertisements"  class="button big alt">View Advertisements</a></li>
 

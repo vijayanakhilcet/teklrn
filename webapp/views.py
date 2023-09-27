@@ -2780,7 +2780,8 @@ class LoginBusinessView(FormView):
                 request.session['name']=name
                 request.session['email']=email_id
                 request.session['business_name']=Student.objects.get(email=user.email).business_name
-           
+                request.session['advertisement_count']=Student.objects.get(email=user.email).advertisement_count
+
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
    
 class UploadFileUsingClientView(FormView):
