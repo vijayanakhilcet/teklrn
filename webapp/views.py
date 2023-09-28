@@ -2081,6 +2081,102 @@ class NewsMatchingTheSearchViewRandom(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class AllAdvertisementsForUserView(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        import boto3
+        from pprint import pprint
+        import pathlib
+        import os
+
+        """
+        Uploads file to S3 bucket using S3 client object
+        :return: None
+        """
+        from django.core.files.storage import FileSystemStorage
+        user_email = request.user.email
+        # count=int(request.POST['cnt'])+1
+        # webaddress = request.POST['web']
+        # fs = FileSystemStorage()
+        # filename = fs.save(request.FILES['file'].name, request.FILES['file'])
+        s3=''
+        s3_client = boto3.client("s3") 
+        
+        session=''
+        if settings.AWS_ACCESS_KEY_ID=='1':
+            session = boto3.Session()
+            
+        else:
+            session = boto3.Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+            # s3 = boto3.client("s3",
+            #                 aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
+            #             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
+            #             region_name=settings.AWS_DEFAULT_REGION
+            #                 )        
+        #aws_access_key_id='<your_access_key_id>', aws_secret_access_key='<your_secret_access_key>')
+        s3 = session.resource('s3')
+        bucket_name = "tekl-rn-img"
+        my_bucket = s3.Bucket(bucket_name)
+        for my_bucket_object in my_bucket.objects.all():
+            if user_email+'|' in my_bucket_object.key:
+                print(my_bucket_object.key)
+                response = s3_client.generate_presigned_url('get_object',
+                                                    Params={'Bucket': bucket_name,
+                                                            'Key': my_bucket_object.key},
+                                                    ExpiresIn=3600)
+                course_json = {}
+                course_json['link'] = 'Advertisement '+str(my_bucket_object.key.split('|')[2]) +'  '+ my_bucket_object.key.split('|')[1]
+                course_json['image_url'] = response
+                results.append(course_json)
+        # object_name = "akhil_resume.docx"
+        # # print(request.FILES)
+        # file_name = request.FILES['file']
+        # print(fs.path(filename))
+        # print(request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+request.FILES['file'].name)
+        # try:
+        #     response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1])
+        # except:
+        #     count=count-1
+        #     request.session['display'] = '** Advertisement ' +str(count) + '  (Optional) Upload Failed Try again'
+        #     fs.delete(filename)
+        #     return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
+        
+
+        # cate = 'GENERAL'
+        # results= []
+        # data = request.GET
+        # topic = data.get("search_string")  
+        # technologies = re.split(r'[;,\s]\s*', topic.strip())
+        # results = []
+        # for technology in technologies:
+        #     courses =  News.objects.filter(name__icontains=technology).order_by("-id")
+        #     if courses:
+        #         for tech in courses:
+        #             course_json = {}
+        #             course_json['name'] = tech.name
+        #             course_json['category'] = tech.category
+        #             course_json['contentType'] = tech.contentType
+        #             course_json['imageLink'] = tech.imageLink
+
+        #             #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+        #             results.append(course_json)
+
+        # if not results:
+
+        #     technologies = News.objects.all().order_by("-id")
+        #     for technology in technologies:
+        #         course_json = {}
+        #         course_json['name'] = technology.name
+        #         course_json['category'] = technology.category
+        #         course_json['contentType'] = technology.contentType
+        #         course_json['imageLink'] = technology.imageLink
+        #         #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+        #         results.append(course_json)
+        # random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
 class NewsMatchingTheSearchView(FormView):
     def get(self,request,*args,**kwargs):
         cate = 'GENERAL'
