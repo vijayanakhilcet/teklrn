@@ -2100,19 +2100,21 @@ class AllAdvertisementsForUserView(FormView):
         # fs = FileSystemStorage()
         # filename = fs.save(request.FILES['file'].name, request.FILES['file'])
         s3=''
+        s3_client = ''
         s3_client = boto3.client("s3") 
         
         session=''
         if settings.AWS_ACCESS_KEY_ID=='1':
             session = boto3.Session()
+            s3_client = boto3.client("s3") 
             
         else:
             session = boto3.Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
-            # s3 = boto3.client("s3",
-            #                 aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
-            #             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
-            #             region_name=settings.AWS_DEFAULT_REGION
-            #                 )        
+            s3_client = boto3.client("s3",
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
+                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
+                        region_name=settings.AWS_DEFAULT_REGION
+                            )        
         #aws_access_key_id='<your_access_key_id>', aws_secret_access_key='<your_secret_access_key>')
         s3 = session.resource('s3')
         bucket_name = "tekl-rn-img"
