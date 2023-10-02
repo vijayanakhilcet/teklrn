@@ -119,7 +119,7 @@ urlpatterns = [
     path('upload_file_using_client',views.UploadFileUsingClientView.as_view()),
     path('login_business',views.LoginBusinessView.as_view()),
     path('add_advertisements', views.AddAdvertisementsView.as_view()),
-    path('add_advertisements', views.AddAdvertisementsView.as_view()),
+    # path('add_advertisements', views.AddAdvertisementsView.as_view()),
     path('redirect_to_landing_page/', views.RedirectToLandingStudentView, name='redirectToLandingStudentView'),
     path('reset_student_password',views.ResetStudentPwdView.as_view(), name='reset'),
     path('reset_trainer_password',views.ResetStudentPwdView.as_view()),

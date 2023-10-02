@@ -64,6 +64,9 @@ def charge(request): # new
             )
         except Exception as e:
             return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+        s = Student.objects.get(email=request.user.email)
+        s.advertisement_count = s.advertisement_count+request.session['count']
+        s.save()
         return render(request, 'webapp/businessdashboard.html', {'name': request.user.first_name})
    
     # tz = Student.objects.get(email=request.session['email']).time_zn
@@ -2851,12 +2854,19 @@ class LoginTeacherView(FormView):
 class AddAdvertisementsView(FormView):
     
     def get(self,request,*args,**kwargs):
-        print(request.user.first_name)
         if not request.user.is_authenticated:           
            return render(request, "webapp/emailBusiness.html", {'name':  'name'})
-        request.session['count']=1
-        request.session['display'] = '** Advertisement ' +str(request.session['count']) + '   (Required)'
-        return render(request, 'webapp/businesslogin.html', {'skip':False, 'display': request.session['display'], 'count': request.session['count']})
+        skip = False
+        ad_count = Student.objects.get(email=request.user.email).advertisement_count+1
+        request.session['count'] = ad_count
+        if ad_count == 1:
+            request.session['display'] = '** Advertisement ' +str(ad_count) + '   (Required)'
+        else:
+            request.session['display'] = '** Advertisement ' +str(ad_count) + '   (Optional)'
+            ad_count_existing = Student.objects.get(email=request.user.email).advertisement_count
+            if int(ad_count_existing) !=  (int(ad_count)-1):
+                skip = True
+        return render(request, 'webapp/businesslogin.html', {'skip':skip, 'display': request.session['display'], 'count': ad_count})
 
 class LoginBusinessView(FormView):
     def post(self,request,*args,**kwargs):
@@ -2917,11 +2927,13 @@ class UploadFileUsingClientView(FormView):
             response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1])
         except:
             count=count-1
+            request.session['count'] =count
             request.session['display'] = '** Advertisement ' +str(count) + '  (Optional) Upload Failed Try again'
             fs.delete(filename)
             return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
         
         fs.delete(filename)
+        request.session['count'] =count
         request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
 
@@ -3150,7 +3162,9 @@ class ProceedToPay(FormView):
         request.session['contentType'] = 'Tensorflow'
         request.session['level']='1'
         request.session['description'] = 'Tensorflow'
-        return render(request, "webapp/buy.html", {'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
+        current_count = Student.objects.get(email = request.user.email).advertisement_count
+        request.session['count']=request.session['count']-1-current_count
+        return render(request, "webapp/buy.html", {'count':current_count, 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):
