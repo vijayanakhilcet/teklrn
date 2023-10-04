@@ -57,7 +57,7 @@ def charge(request): # new
     if request.method == 'POST':
         try:
             charge = stripe.Charge.create(
-                amount=1300,
+                amount=1300*(request.session['count']),
                 currency='cad',
                 description='A Django charge',
                 source=request.POST['stripeToken']
@@ -71,7 +71,7 @@ def charge(request): # new
         for fl in all_files:
             student_ads =  StudentAds(student=s, ad_name=fl, payed=True)
             student_ads.save()
-        request.session['upd_file']=''
+        del request.session['upd_file']
         return render(request, 'webapp/businessdashboard.html', {'name': request.user.first_name})
    
     # tz = Student.objects.get(email=request.session['email']).time_zn
@@ -2133,8 +2133,10 @@ class AllAdvertisementsForUserView(FormView):
                                                             'Key': s.ad_name},
                                                     ExpiresIn=3600)
                 course_json = {}
-                course_json['link'] = 'Advertisement ' +str(s.ad_name.split('|')[2]) +' Link ['+ s.ad_name.split('|')[1]+']'
+                course_json['link'] = 'Advertisement ' +str(s.ad_name.split('|')[2])
                 course_json['image_url'] = response
+                course_json['url'] = ' Link to Ad ['+ s.ad_name.split('|')[1]+']'
+
                 results.append(course_json)
         # object_name = "akhil_resume.docx"
         # # print(request.FILES)
@@ -2854,13 +2856,16 @@ class LoginTeacherView(FormView):
            page="webapp/hi_login_t.html"  
         return render(request, page)
 
-class AddAdvertisementsView(FormView):
-    
+class AddAdvertisementsView(FormView):    
     def get(self,request,*args,**kwargs):
         if not request.user.is_authenticated:           
            return render(request, "webapp/emailBusiness.html", {'name':  'name'})
         skip = False
-        ad_count = Student.objects.get(email=request.user.email).advertisement_count+1
+        ad_count=0
+        try:
+            ad_count = Student.objects.get(email=request.user.email).advertisement_count+1+len(request.session['upd_file'].split('----'))             
+        except:
+            ad_count = Student.objects.get(email=request.user.email).advertisement_count+1
         request.session['count'] = ad_count
         if ad_count == 1:
             request.session['display'] = '** Advertisement ' +str(ad_count) + '   (Required)'
@@ -3171,6 +3176,7 @@ class ProceedToPay(FormView):
         request.session['description'] = 'Tensorflow'
         current_count = Student.objects.get(email = request.user.email).advertisement_count
         request.session['count']=request.session['count']-1-current_count
+        request.session['amount'] = request.session['count'] * 13.00
         return render(request, "webapp/buy.html", {'count':current_count, 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
