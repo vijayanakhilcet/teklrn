@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
+from webapp.models import StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -67,6 +67,11 @@ def charge(request): # new
         s = Student.objects.get(email=request.user.email)
         s.advertisement_count = s.advertisement_count+request.session['count']
         s.save()
+        all_files = request.session['upd_file'].split('----')
+        for fl in all_files:
+            student_ads =  StudentAds(student=s, ad_name=fl, payed=True)
+            student_ads.save()
+        request.session['upd_file']=''
         return render(request, 'webapp/businessdashboard.html', {'name': request.user.first_name})
    
     # tz = Student.objects.get(email=request.session['email']).time_zn
@@ -2122,15 +2127,13 @@ class AllAdvertisementsForUserView(FormView):
         s3 = session.resource('s3')
         bucket_name = "tekl-rn-img"
         my_bucket = s3.Bucket(bucket_name)
-        for my_bucket_object in my_bucket.objects.all():
-            if user_email+'|' in my_bucket_object.key:
-                print(my_bucket_object.key)
+        for s in StudentAds.objects.filter(student=Student.objects.get(email=request.user.email)):
                 response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bucket_name,
-                                                            'Key': my_bucket_object.key},
+                                                            'Key': s.ad_name},
                                                     ExpiresIn=3600)
                 course_json = {}
-                course_json['link'] = 'Advertisement '+str(my_bucket_object.key.split('|')[2]) +'  '+ my_bucket_object.key.split('|')[1]
+                course_json['link'] = 'Advertisement ' +str(s.ad_name.split('|')[2]) +' Link ['+ s.ad_name.split('|')[1]+']'
                 course_json['image_url'] = response
                 results.append(course_json)
         # object_name = "akhil_resume.docx"
@@ -2918,13 +2921,17 @@ class UploadFileUsingClientView(FormView):
                         region_name=settings.AWS_DEFAULT_REGION
                             )        
         bucket_name = "tekl-rn-img"
-        object_name = "akhil_resume.docx"
         # # print(request.FILES)
         # file_name = request.FILES['file']
         print(fs.path(filename))
         print(request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+request.FILES['file'].name)
+        f_name = request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1]
         try:
-            response = s3.upload_file(fs.path(filename), bucket_name, request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1])
+            request.session['upd_file'] = request.session['upd_file']+'----'+f_name
+        except:
+            request.session['upd_file']=f_name
+        try:
+            response = s3.upload_file(fs.path(filename), bucket_name, f_name)
         except:
             count=count-1
             request.session['count'] =count

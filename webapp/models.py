@@ -21,7 +21,7 @@ class Student(models.Model):
     time_zn = models.CharField(max_length=30)
     courses = models.ManyToManyField(Course, through='StudentCourse')
     business_name=models.CharField(max_length=60, default='Default')
-    advertisement_count=models.IntegerField(default=0)   
+    advertisement_count=models.IntegerField(default=0) 
     def __str__(self):
         return self.user.username
 
@@ -35,6 +35,11 @@ class Teacher(models.Model):
      courses = models.ManyToManyField(Course, through='TeacherCourse')
      meetingLink = models.URLField(max_length=400)
      is_teklrn_authorized = models.BooleanField(default=False)
+
+class StudentAds(models.Model):    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    ad_name = models.CharField(max_length=1000)
+    payed = models.BooleanField(default=False)    
 
 
 class StudentCourse(models.Model):    
