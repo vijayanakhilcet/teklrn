@@ -18,6 +18,11 @@ function checkout() {
     //event.preventDefault();
 }
 
+function addAds(event){
+    window.open(window.location.origin+"/add_advertisements", "_self");
+  
+}
+
 function checkoutVideo() {
     $.ajax({
         url         : "chargevideo/", // the url where we want to POST

@@ -1193,6 +1193,144 @@ class TrendingNewsForNews(FormView):
         return HttpResponse(data, mimetype)
 
 
+class CheckoutRemoveAdd(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        import boto3
+        from pprint import pprint
+        import pathlib
+        import os
+
+        """
+        Uploads file to S3 bucket using S3 client object
+        :return: None
+        """
+        from django.core.files.storage import FileSystemStorage
+        user_email = request.user.email
+        s3=''
+        s3_client = ''
+        s3_client = boto3.client("s3") 
+        
+        session=''
+        if settings.AWS_ACCESS_KEY_ID=='1':
+            session = boto3.Session()
+            s3_client = boto3.client("s3") 
+            
+        else:
+            session = boto3.Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+            s3_client = boto3.client("s3",
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
+                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
+                        region_name=settings.AWS_DEFAULT_REGION
+                            )        
+        s3 = session.resource('s3')
+        bucket_name = "tekl-rn-img"
+        my_bucket = s3.Bucket(bucket_name)
+        data = request.GET
+        ad_number = data.get("ad_number")
+        news_session = ''
+        i=-1
+        counterReduce = False
+        for add_Data in request.session['upd_file'].split('----'):
+            i=i+1
+            if add_Data.split('|')[2]==ad_number:
+                counterReduce=True
+            else:
+                if counterReduce:
+                    print('Counter Reduce ')
+                    oldCount = add_Data.split('|')[2]
+                    newCOunt = str(int(oldCount)-1)
+                    temp_Add_Data = add_Data.split('|')[0]+'|'+add_Data.split('|')[1]+'|'+newCOunt+'|'+add_Data.split('|')[3]
+                    news_session+=temp_Add_Data+'----' 
+                    s3_client.copy_object(CopySource = '/'+bucket_name+'/'+add_Data, Bucket = bucket_name, Key = temp_Add_Data)
+                    print('Counter Reduce ')
+                else:
+                    news_session+=add_Data+'----'
+        request.session['upd_file'] = news_session[:-4]
+        print('New Session '+ request.session['upd_file'])
+        if(request.session['upd_file']==''):
+            course_json={}
+            course_json['imageUrl'] = 'NONE'
+            course_json['display'] = 'NONE'
+            course_json['link'] = 'NONE'
+            results.append(course_json)
+            data = json.dumps(results)
+            mimetype = 'application/json'
+            return HttpResponse(data, mimetype)
+        
+        
+        all_items = request.session['upd_file'].split('----')
+        for technology in all_items:
+            print(technology)
+            course_json = {}
+            response = s3_client.generate_presigned_url('get_object',
+                                                    Params={'Bucket': bucket_name,
+                                                            'Key': technology},
+                                                    ExpiresIn=3600)
+            course_json['imageUrl'] = response
+            course_json['display'] = 'Advertisement '+technology.split('|')[2]
+            course_json['link'] = technology.split('|')[1]
+            print(course_json)
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
+
+class Checkout(FormView):
+    def get(self,request,*args,**kwargs):
+        import boto3
+        from pprint import pprint
+        import pathlib
+        import os
+
+        """
+        Uploads file to S3 bucket using S3 client object
+        :return: None
+        """
+        from django.core.files.storage import FileSystemStorage
+        user_email = request.user.email
+        # count=int(request.POST['cnt'])+1
+        # webaddress = request.POST['web']
+        # fs = FileSystemStorage()
+        # filename = fs.save(request.FILES['file'].name, request.FILES['file'])
+        s3=''
+        s3_client = ''
+        s3_client = boto3.client("s3") 
+        
+        session=''
+        if settings.AWS_ACCESS_KEY_ID=='1':
+            session = boto3.Session()
+            s3_client = boto3.client("s3") 
+            
+        else:
+            session = boto3.Session(aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+            s3_client = boto3.client("s3",
+                            aws_access_key_id=settings.AWS_ACCESS_KEY_ID, 
+                        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, 
+                        region_name=settings.AWS_DEFAULT_REGION
+                            )        
+        #aws_access_key_id='<your_access_key_id>', aws_secret_access_key='<your_secret_access_key>')
+        s3 = session.resource('s3')
+        bucket_name = "tekl-rn-img"
+        my_bucket = s3.Bucket(bucket_name)
+        results= []
+        all_items = request.session['upd_file'].split('----')
+        for technology in all_items:
+            print(technology)
+            course_json = {}
+            response = s3_client.generate_presigned_url('get_object',
+                                                    Params={'Bucket': bucket_name,
+                                                            'Key': technology},
+                                                    ExpiresIn=3600)
+            course_json['imageUrl'] = response
+            course_json['display'] = 'Advertisement '+technology.split('|')[2]
+            course_json['link'] = technology.split('|')[1]
+            print(course_json)
+            results.append(course_json)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
 
 class TechnologiesMatchingTheDesignationView(FormView):
     def get(self,request,*args,**kwargs):
@@ -2863,7 +3001,10 @@ class AddAdvertisementsView(FormView):
         skip = False
         ad_count=0
         try:
-            ad_count = Student.objects.get(email=request.user.email).advertisement_count+1+len(request.session['upd_file'].split('----'))             
+            if request.session['upd_file']=='':
+                ad_count = Student.objects.get(email=request.user.email).advertisement_count+1             
+            else:
+                ad_count = Student.objects.get(email=request.user.email).advertisement_count+1+len(request.session['upd_file'].split('----'))             
         except:
             ad_count = Student.objects.get(email=request.user.email).advertisement_count+1
         request.session['count'] = ad_count
@@ -2899,7 +3040,7 @@ class LoginBusinessView(FormView):
                 request.session['advertisement_count']=Student.objects.get(email=user.email).advertisement_count
 
         return render(request, page, {'email': request.session['email'], 'name': request.session['name']})
-   
+
 class UploadFileUsingClientView(FormView):
     def post(self,request,*args,**kwargs):
         import boto3
@@ -2932,7 +3073,10 @@ class UploadFileUsingClientView(FormView):
         print(request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+request.FILES['file'].name)
         f_name = request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1]
         try:
-            request.session['upd_file'] = request.session['upd_file']+'----'+f_name
+            if request.session['upd_file']=='':
+                request.session['upd_file'] = f_name    
+            else:
+                request.session['upd_file'] = request.session['upd_file']+'----'+f_name
         except:
             request.session['upd_file']=f_name
         try:
@@ -3163,7 +3307,7 @@ class BookCourseView(FormView):
         request.session['description'] = course_description
         return render(request, "webapp/buy.html", {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'email': request.session['email']})
 
-class ProceedToPay(FormView):
+class ProceedToCheckout(FormView):
     def post(self,request,*args,**kwargs):
         course_description = 'Tensorflow'
         course_name = 'Tensorflow'
@@ -3177,7 +3321,26 @@ class ProceedToPay(FormView):
         current_count = Student.objects.get(email = request.user.email).advertisement_count
         request.session['count']=request.session['count']-1-current_count
         request.session['amount'] = request.session['count'] * 13.00
-        return render(request, "webapp/buy.html", {'count':current_count, 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
+        request.session['Pay'] = request.session['amount']*100
+        return render(request, "webapp/buyCheckout.html", {'count':current_count, 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
+
+
+class ProceedToPay(FormView):
+    def post(self,request,*args,**kwargs):
+        course_description = 'Tensorflow'
+        course_name = 'Tensorflow'
+        course_level = '1'
+        request.session['datetimeval']='2'
+        request.session['name']=request.user.first_name
+        request.session['course']='Tensorflow'
+        request.session['contentType'] = 'Tensorflow'
+        request.session['level']='1'
+        request.session['description'] = 'Tensorflow'
+        current_count = Student.objects.get(email = request.user.email).advertisement_count
+        request.session['count']=len(request.session['upd_file'].split('----'))
+        request.session['amount'] = request.session['count'] * 13.00
+        request.session['Pay'] = request.session['amount']*100
+        return render(request, "webapp/buy.html", {'count':request.session['count'], 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):

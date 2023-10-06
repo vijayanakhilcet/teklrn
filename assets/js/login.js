@@ -790,6 +790,36 @@ function trainerResetPassword(event){
                 event.preventDefault();
 }
     ``
+function checkOutPage(event){
+
+
+        // get the form data
+        // there are many ways to get this data using jQuery (you can use the class or id also)
+        // var course = $('input[id=course]').val();
+        // var level = $('input[id=level]').val();
+        // var datetimeval = $('input[id=time]').val();
+        // var sel = document.getElementById('timezone-offset');    
+        // process the form
+        $.ajax({
+            url         : "/proceed_to_checkout", // the url where we want to POST
+            type        : 'post',
+            data        : {"course":'Ternsorflow', "level":'1', "datetimeval": '1' , "zone":'1', "csrfmiddlewaretoken" : getCookie('csrftoken')}, // our data object
+            dataType    : "html", // what type of data do\ we expect back from the server
+            encode      : true
+        })
+            // using the done promise callback
+           .done(function(data) {
+            // closeBookingForm(); 
+            document.open("text/html", "load")
+            document.write(data);
+            document.close();
+                // here we will handle errors and validation messages
+            });
+           
+        // stop the form from submitting the normal way and refreshing the page
+        event.preventDefault();
+    
+}
 
 function paymentPage(event) {
 
