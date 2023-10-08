@@ -27,12 +27,11 @@ font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue'
     {% csrf_token %}
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_jTcRWlzqkJz3v3ZGMXPI6CfP00T9Kq1pU7"
-    data-description="Teklrn Inc."
+    data-description="Teklrn Pay"
     data-amount={{request.session.Pay}}
     data-locale="auto">
 </script>
-<script src="{% static 'new/js/hi.js' %}"></script>
-<button onclick="addAds(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Back</span></button>
+<button type="button" onclick="addAds(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Back</span></button>
 
 </form> 
 <body>
