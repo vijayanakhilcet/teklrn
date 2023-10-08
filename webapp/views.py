@@ -292,7 +292,7 @@ def worldNews(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
             page = 'webapp/hi_pre_landing.html'
@@ -334,10 +334,10 @@ def entertainmentNews(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
@@ -403,10 +403,10 @@ def technologyNews(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
@@ -424,10 +424,10 @@ def videoPre(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
@@ -445,10 +445,10 @@ def newsPre(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
@@ -525,10 +525,10 @@ def financialPre(request):
     if(request.user.is_authenticated):
         try:
             s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
         except Exception:
-            page = 'webapp/hi_pre_landing.html'
+            #page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
     return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
 
