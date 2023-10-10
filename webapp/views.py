@@ -1092,7 +1092,7 @@ def teach(request):
     return render(request, 'webapp/teach.html')
 
 def business(request):
-    return render(request, 'webapp/business.html')
+    return render(request, 'webapp/businessdashboard.html')
 
 def careers(request):
     return render(request, 'webapp/careers.html')
@@ -2865,7 +2865,7 @@ class CheckUserExistsView(FormView):
 def logout_view(request): 
         logout(request)    
         defaultTechnology='Tensorflow'        
-        return render(request, "webapp/business.html", {'technology':'Tensorflow', 'technology_desc':defaultTechnology})
+        return render(request, "webapp/businessdashboard.html", {'technology':'Tensorflow', 'technology_desc':defaultTechnology})
 
 def logout_t_view(request): 
         logout(request)   
@@ -2945,7 +2945,7 @@ class LoginViewBusiness(FormView):
         page = "webapp/emailBusiness.html"
         if(request.user.is_authenticated):
             request.session['display'] = '** Advertisement ' +'1' + '   (Required)'
-            return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': '1'})
+            return render(request, 'webapp/businessdashboard.html', {'skip':True,'display': request.session['display'], 'count': '1'})
         return render(request, page, {'name':  'name'})
 
 class LoginTView(FormView):
