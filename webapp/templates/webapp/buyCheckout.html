@@ -48,8 +48,8 @@
 			<div class="wrap-login100">
 				<form  class="login100-form validate-form" onsubmit="paymentPage(event)">
 				<span class="contact100-form-title">
-				</span>
 					<div style="text-align: center;"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="250" height="100"></div>
+				</span>
 
 					<span class="login100-form-title p-b-26">
 						
@@ -61,9 +61,18 @@
 						<input class="input100" readonly value="{{request.user.email}}" type="email" name="email" required>
 						<span class="focus-input100"></span>
 					</div>
-                    <div id="checkout_list">
-                      
-                </div>
+                    <div id="checkout_list"></div>
+					<br/>
+				<div class="wrap-input100 validate-input" data-validate="Enter Website Link">
+					<label for="items">Count:  </label>
+					<input class="input100" type="text" id="items" name="items"  value="{{request.session.count}}" required>
+					<span class="focus-input100"></span>
+				</div>
+				<div  class="wrap-input100 validate-input" data-validate="Enter Website Link">
+					<label for="amount">Total (CAD):</label>
+					<input class="input100" type="text" id="amount" name="amount" value="{{request.session.amount}}" required>
+					<span class="focus-input100"></span>
+				</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
