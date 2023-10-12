@@ -58,18 +58,18 @@
 						
 					</span>
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Business Email </label>
 						<input class="input100" readonly value="{{request.user.email}}" type="email" name="email" required>
 						<span class="focus-input100"></span>
 					</div>
                     <div id="checkout_list"></div>
 					<br/>
 				<div class="wrap-input100 validate-input" data-validate="Enter Website Link">
-					<label for="items">Count:  </label>
-					<input class="input100" type="text" id="items" name="items"  value="{{request.session.count}}" required>
+					<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Count</label>					<input class="input100" type="text" id="items" name="items"  value="{{request.session.count}}" required>
 					<span class="focus-input100"></span>
 				</div>
 				<div  class="wrap-input100 validate-input" data-validate="Enter Website Link">
-					<label for="amount">Total (CAD):</label>
+					<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Total (CAD)</label>
 					<input class="input100" type="text" id="amount" name="amount" value="{{request.session.amount}}" required>
 					<span class="focus-input100"></span>
 				</div>
