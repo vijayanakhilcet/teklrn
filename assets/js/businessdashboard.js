@@ -106,10 +106,10 @@ function getAllAdvertisements(){
             elm.innerHTML="";  
             $.each(data, function(index) {
                  if(index % 2 == 0) {
-                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].link+'" class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].link+'" class="button alt">Update Advertisement</a></li></ul></section></div>';
+                 html_message +='<div class="row"><div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a class="button alt">Update Expiry</a></li></ul></section></div>';
                  }
                  else{
-                    html_message +='<div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].link+'" class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].link+'" class="button alt">Update Advertisement</a></li></ul></section></div></div>';
+                    html_message +='<div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a class="button alt"></a></li></ul></section></div></div>';
   
                  }
 
