@@ -1,10 +1,10 @@
 $(function() {      
-    checkout();
+    checkout_Pre();
     
 });
 
 
-function checkout(event){
+function checkout_Pre(event){
                 // process the form
                 $.ajax({
                     url         : "/checkout", // the url where we want to POST

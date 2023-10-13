@@ -1,4 +1,4 @@
-function checkout() {
+function checkoutAndPay() {
     $.ajax({
         url         : "charge/", // the url where we want to POST
         type        : 'post',

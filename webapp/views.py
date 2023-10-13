@@ -66,7 +66,9 @@ def charge(request): # new
             return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
         s = Student.objects.get(email=request.user.email)
         s.advertisement_count = s.advertisement_count+request.session['count']
+        request.session['advertisement_count'] = s.advertisement_count
         s.save()
+        
         all_files = request.session['upd_file'].split('----')
         for fl in all_files:
             student_ads =  StudentAds(student=s, ad_name=fl, payed=True)
