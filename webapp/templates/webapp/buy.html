@@ -67,7 +67,18 @@
 						<span class="focus-input100"></span>
 					</div>
 					
+					{% if card %}
+					<div class="wrap-input100 checkbox">
+						<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Use default card: </label>         <br><br>                  
+						<input  style="margin-left: 12px;" checked="" type="checkbox" name="use_default_card" id="use_default_card" >
+						<label style="margin-left: 2px;font-size: small;" for="use_default_card">**** **** **** {{ card.last4 }}</label>
+						<!-- <label style="margin-left: 24px;font-size: initial;" for="use_default_card">Exp: {{ card.exp_month }}/{{ card.exp_year }}</label> -->
+					
+					</div> 
+				  {% endif %}
+
 				
+				<div style="display: none;" id="frm-display">
                 <form action="javascript:checkoutAndPay()" method="post" id="buy-form">
                     {% csrf_token %}
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -77,9 +88,30 @@
                     data-image="/static/image/images/2.png"
                     data-locale="auto"> 
                 </script>
-                <button type="button" onclick="addAds(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Back</span></button>
+                <!-- <button type="button" onclick="addAds(event)" class="stripe-button-el" style="visibility: visible;"><span style="display: block; min-height: 30px;">Back</span></button> -->
                 
                 </form> 
+				</div>
+				
+				<div id="frm-auto-pay-display">
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button onclick="makePayment(event)"  style="background: black;"  type="button" id="email_enter"  class="login100-form-btn">
+							Pay
+						</button>
+					</div>
+				</div>
+
+				<div class="container-login100-form-btn">
+					<div class="wrap-login100-form-btn">
+						<div class="login100-form-bgbtn"></div>
+						<button onclick="addAds(event)" style="background: #3a69bb;"  type="button" id="email_enter" onclick="addAds(event)"   class="login100-form-btn">
+							Cancel 
+						</button>
+					</div>
+				</div>
+			</div>		
 			</div>
 		</div>
 	</div>

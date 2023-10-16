@@ -55,16 +55,61 @@ def get_context_data(self, **kwargs): # new
 
 def charge(request): # new
     if request.method == 'POST':
+        s = Student.objects.get(email=request.user.email)
+        if 'auto_pay' in request.POST:
+            try:
+                charge = stripe.Charge.create(
+                    amount=1300*(request.session['count']),
+                    currency='cad',
+                    description='A Django charge',
+                    customer=s.cust_id
+                )
+            except Exception as e:
+                print(e)
+                return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
+            s.advertisement_count = s.advertisement_count+request.session['count']
+            request.session['advertisement_count'] = s.advertisement_count
+            s.save()
+        
+            all_files = request.session['upd_file'].split('----')
+            for fl in all_files:
+                student_ads =  StudentAds(student=s, ad_name=fl, payed=True)
+                student_ads.save()
+            del request.session['upd_file']
+            return render(request, 'webapp/businessdashboard.html', {'name': request.user.first_name})
+            
+        use_default=False
         try:
-            charge = stripe.Charge.create(
+            if not s.cust_id:
+                customer = stripe.Customer.create(
+                    email=request.user.email,
+                    source=request.POST['stripeToken']
+                )
+                s.cust_id=customer['id']
+                s.one_click=True
+                s.save()
+            else:
+                stripe.Customer.create_source(
+                    s.cust_id,
+                    source=request.POST['stripeToken']
+                )
+            if not use_default:
+                charge = stripe.Charge.create(
                 amount=1300*(request.session['count']),
                 currency='cad',
                 description='A Django charge',
-                source=request.POST['stripeToken']
+                customer=s.cust_id
             )
+            else:
+                charge = stripe.Charge.create(
+                    amount=1300*(request.session['count']),
+                    currency='cad',
+                    description='A Django charge',
+                    source=request.POST['stripeToken']
+                )
         except Exception as e:
+            print(e)
             return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
-        s = Student.objects.get(email=request.user.email)
         s.advertisement_count = s.advertisement_count+request.session['count']
         request.session['advertisement_count'] = s.advertisement_count
         s.save()
@@ -3329,6 +3374,7 @@ class ProceedToCheckout(FormView):
 
 class ProceedToPay(FormView):
     def post(self,request,*args,**kwargs):
+        context={}
         course_description = 'Tensorflow'
         course_name = 'Tensorflow'
         course_level = '1'
@@ -3338,11 +3384,23 @@ class ProceedToPay(FormView):
         request.session['contentType'] = 'Tensorflow'
         request.session['level']='1'
         request.session['description'] = 'Tensorflow'
-        current_count = Student.objects.get(email = request.user.email).advertisement_count
+        user_profile = Student.objects.get(email = request.user.email)
+        current_count = user_profile.advertisement_count
         request.session['count']=len(request.session['upd_file'].split('----'))
         request.session['amount'] = request.session['count'] * 13.00
         request.session['Pay'] = request.session['amount']*100
-        return render(request, "webapp/buy.html", {'count':request.session['count'], 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
+        if user_profile.one_click:
+            cards = stripe.Customer.list_sources(
+                user_profile.cust_id,
+                limit=3,
+                object='card'
+            )
+            card_list=cards['data']
+            if len(card_list)>0:
+                context.update({
+                    'card': card_list[0]
+                })
+        return render(request, "webapp/buy.html", context, {'count':request.session['count'], 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
 class MostSoughTechView(FormView):
     def get(self,request,*args,**kwargs):

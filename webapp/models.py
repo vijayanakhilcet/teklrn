@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phone_field import PhoneField
+from django.utils import timezone 
+from datetime import timedelta
 
 
 
@@ -22,6 +24,8 @@ class Student(models.Model):
     courses = models.ManyToManyField(Course, through='StudentCourse')
     business_name=models.CharField(max_length=60, default='Default')
     advertisement_count=models.IntegerField(default=0) 
+    cust_id=models.CharField(max_length=50, blank=True, null=True)
+    one_click = models.BooleanField(default=False)
     def __str__(self):
         return self.user.username
 
@@ -39,7 +43,8 @@ class Teacher(models.Model):
 class StudentAds(models.Model):    
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     ad_name = models.CharField(max_length=1000)
-    payed = models.BooleanField(default=False)    
+    payed = models.BooleanField(default=False)  
+    expiry_date = models.DateTimeField(default=timezone.now()+timedelta(days=30))
 
 
 class StudentCourse(models.Model):    
