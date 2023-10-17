@@ -3101,6 +3101,16 @@ class UploadFileUsingClientView(FormView):
         """
         from django.core.files.storage import FileSystemStorage
         count=int(request.POST['cnt'])+1
+        try:
+            if len(request.session['upd_file'].split('----'))>0:
+                for d in request.session['upd_file'].split('----'):
+                    if int(d.split('|')[2])==int(request.POST['cnt']):
+                        request.session['count'] =count
+                        request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
+                        return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
+
+        except:
+            print('continue')
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
