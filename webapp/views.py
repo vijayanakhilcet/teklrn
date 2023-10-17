@@ -80,7 +80,7 @@ def charge(request): # new
             
         use_default=False
         try:
-            if not s.cust_id:
+            if not s.one_click:
                 customer = stripe.Customer.create(
                     email=request.user.email,
                     source=request.POST['stripeToken']

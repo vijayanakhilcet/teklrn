@@ -15,7 +15,7 @@ function makePayment(event){
     var deflt = document.getElementById("use_default_card");
     var x = document.getElementById("buy-form");
     var y = document.getElementById("frm-auto-pay-display");
-        if( ! deflt.checked) {
+        if(typeof(deflt) == 'undefined' ||  deflt == null || ! deflt.checked) {
             x.children[2].click();
             x.click();
         }
