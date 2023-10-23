@@ -25,6 +25,7 @@ a:focus {
 }
 
 .navbar {
+    background-color: white !important;
     padding: 15px 10px;
     background: #fff;
     border: none;
@@ -84,8 +85,8 @@ a:focus {
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
+    padding: 20px;
+    font-size: .9em;
     display: block;
 }
 
