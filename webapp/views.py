@@ -2321,6 +2321,10 @@ class AllAdvertisementsForUserView(FormView):
                 course_json['link'] = 'Advertisement ' +str(s.ad_name.split('|')[2])
                 course_json['image_url'] = response
                 course_json['url'] = ' Link to Ad ['+ s.ad_name.split('|')[1]+']'
+                if s.expiry_date > datetime.datetime.now():
+                    course_json['isActive'] =  True
+                else:
+                    course_json['isActive'] =  False
 
                 results.append(course_json)
         # object_name = "akhil_resume.docx"

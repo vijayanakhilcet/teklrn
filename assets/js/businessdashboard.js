@@ -105,14 +105,27 @@ function getAllAdvertisements(){
         .done(function(data) {
             elm.innerHTML="";  
             $.each(data, function(index) {
+                 act = ''
+                 temp_html = ''
+
                  if(index % 2 == 0) {
-                 html_message +='<div class="row"><div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a class="button alt">Update Expiry</a></li></ul></section></div>';
+                    
+                    temp_html='<div class="row"><div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p>';
+                 if (data[index].isActive)
+                   temp_html+='<ul class="actions"><li><a class="button alt">Active</a></li></ul>'
+                 else
+                    temp_html+='<ul class="actions"><li><a class="button alt">Expired</a></li></ul>'
+                 temp_html+='</section></div>';
                  }
                  else{
-                    html_message +='<div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p><ul class="actions"><li><a class="button alt"></a></li></ul></section></div></div>';
-  
+                    temp_html +='<div class="6u"><section class="special"><a class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].image_url+'" alt=""></a><h3>'+data[index].link+'</h3><p>'+data[index].url+'</p>';
+                    if (data[index].isActive)
+                        temp_html+='<ul class="actions"><li><a class="button alt">Active</a></li></ul>';
+                    else
+                        temp_html+='<ul class="actions"><li><a class="button alt">Expired</a></li></ul>'
+                    temp_html+='</section></div></div>';
                  }
-
+                 html_message+=temp_html
 
                 });
           
