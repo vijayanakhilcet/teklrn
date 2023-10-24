@@ -70,12 +70,17 @@
 				</div>
 				<div  class="wrap-input100 validate-input" data-validate="Enter Website Link">
 					<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Total (CAD)</label>
-					<input class="input100" type="text" id="amount" name="amount" value="{{request.session.amount}}" required>
+					<input readonly class="input100" type="text" id="amount" name="amount" value="{{request.session.amount}}" required>
 					<span class="focus-input100"></span>
 				</div>
 				<div  class="wrap-input100 validate-input" data-validate="Enter Website Link">
 					<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Expiry </label>
-					<input class="input100" type="text" id="amount" name="amount" value='30 Days' required>
+					<input class="input100" type="text" id="amount" name="amount" value='30 Days' readonly required>
+					<span class="focus-input100"></span>
+				</div>
+				<div  class="wrap-input100 validate-input" data-validate="Enter Website Link">
+					<label for="amount" style="margin-bottom: 0px !important; padding-left: 5px; color: darkgrey;">Plan </label>
+					<input class="input100" type="text" id="amount" name="amount" readonly value='30 Cents Per Click' required>
 					<span class="focus-input100"></span>
 				</div>
 					<div class="container-login100-form-btn">

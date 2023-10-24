@@ -3381,7 +3381,7 @@ class ProceedToCheckout(FormView):
         request.session['description'] = 'Tensorflow'
         current_count = Student.objects.get(email = request.user.email).advertisement_count
         request.session['count']=request.session['count']-1-current_count
-        request.session['amount'] = request.session['count'] * 13.00
+        request.session['amount'] = request.session['count'] * 0.00
         request.session['Pay'] = request.session['amount']*100
         return render(request, "webapp/buyCheckout.html", {'count':current_count, 'name': request.user.first_name, 'course': request.session['course'], 'level': request.session['level'], 'email': request.user.email})
 
@@ -3401,7 +3401,7 @@ class ProceedToPay(FormView):
         user_profile = Student.objects.get(email = request.user.email)
         current_count = user_profile.advertisement_count
         request.session['count']=len(request.session['upd_file'].split('----'))
-        request.session['amount'] = request.session['count'] * 13.00
+        request.session['amount'] = request.session['count'] * 0.00
         request.session['Pay'] = request.session['amount']*100
         if user_profile.one_click:
             cards = stripe.Customer.list_sources(
