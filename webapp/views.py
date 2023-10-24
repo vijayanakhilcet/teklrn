@@ -917,14 +917,14 @@ def news(request):
 
        
     request.session['course'] = defaultTechnology
-    if(request.user.is_authenticated):
-        try:
-            s  = Student.objects.get(email=request.user.email)
-            page = 'webapp/hi_login.html'
-            return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
-        except Exception:
-            page = 'webapp/hi_login_t.html'
-            return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
+    # if(request.user.is_authenticated):
+    #     try:
+    #         s  = Student.objects.get(email=request.user.email)
+    #         page = 'webapp/hi_login.html'
+    #         return render(request, page, {'lvl':defaultLevel,'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':technology_description})
+    #     except Exception:
+    #         page = 'webapp/hi_login_t.html'
+    #         return render(request, page, {'lvl':defaultLevel,'technology':defaultTechnology, 'technology_desc':technology_description})    
     if data.get('image'):
         img = data.get('image')
     if data.get('direct'):
