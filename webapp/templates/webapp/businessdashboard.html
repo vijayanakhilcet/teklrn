@@ -48,13 +48,11 @@
 				<nav id="nav">
 					<ul>
 							<li><a href="/">Home</a></li>
-						<li><a href="#cont">Contact</a></li>
-						<li><a href="/media">Video</a></li>
-						<li><a href="/entertainmentnews">Entertainment</a></li>
-						<li><a href="/Science-and-technology-research-and-findings">Science And Technology</a></li>
-						<li><a href="/Space-exploration-technologies-latest-2024">Space Exploration Technologies 2024</a></li>
-						<li><a href="/latest-emerging-technologies-2024">Emerging Technologies 2024</a></li>
+						
 						{% if user.is_authenticated %}
+						<li><a href="#all_ads">{{request.session.business_name}}   Ads {{request.session.advertisement_count}}</a></li>
+					
+					
 							<li><a href="/logout" id="launch" class="button special">Logout</a></li>
 						{% endif %}
 						{% if not user.is_authenticated %}
@@ -70,10 +68,12 @@
 			<marquee id="marq"  style="vertical-align: middle !important;text-transform: capitalize; background-color: #4976c8; font-size: .8rem;   font-family: 'Poppins', sans-serif; color:white; height: 40px;width: 100%; float: right; font-weight: 400 !important;" scrollamount="4" loop="infinite"></marquee>
 			</div>
 		</section>
+
+		
 		
 			<section id="banner">
 				
-				<div class="inner" style="padding-top: 100px;"">
+				<div class="inner" style="padding-top: 100px;">
 					<!--<h2 href="#" style="height: 2%; width: 2%;" class="image fit"><img src="static/image/images/favicon.ico" alt="" /></h2>-->
 				<h2 style="font-family: Antietam; color:#629dd1;"><img src="/static/image/images/Capture11.png" height="45" width="280"></h2>
 				
@@ -83,31 +83,17 @@
 					<p style="color: lightyellow; font-size: medium;">With Over 300 Highly Certified and Experienced Freelance Trainers we are the Fastest Growing e-Learning Platform in the World</p>
 					-->
 					
-					<!-- <ul class="actions">
-						<li><a href="#content" id="launch1" onclick="doLaunch(event)" class="button big special">Get Started</a></li>
-						{% if user.is_authenticated %}
-						<li><a href="#two"  class="button big alt">Quick Links</a></li>
-						{% endif %}
-						{% if not user.is_authenticated %}
-						<li><a href="#content" id="launch1" onclick="login_t(event)" class="button big alt">Freelance Trainer</a></li>
-						<li><a href="#one" onclick="login_l(event)" class="button big alt">Learner Login</a></li>
-						{% endif %}
-					</ul> -->
+			
 
 					<ul class="actions">
 						{% if user.is_authenticated %}
-						<li><p style="padding: 20px;font-size: medium;color: white;background: black;" href="" id="launch1" class=" big special">Business Name: {{request.session.business_name}}</p></li>
-						<li><p style="padding: 20px;font-size: medium;color: white;background: #426fcc;" href="" id="launch1" class=" big special">Total Advertisements: {{request.session.advertisement_count}}</p></li>
-						<br>
-						<br>
+						
 
 						<li><a href="/add_advertisements"  class="button big alt">Add Advertisements</a></li>
-						<li><a href="#all_ads"  class="button big alt">View Advertisements</a></li>
+						<li><a href="#all_ads"  class="button big special">View Advertisements</a></li>
 
 						{% endif %} 
-						{% if user.is_authenticated %}
-						<li><a href="/logout" id="launch1" class="button big special">Logout</a></li>
-						{% endif %} 
+						
 
 						{% if not user.is_authenticated %}
 						<li><a href="/add_advertisements" id="launch1" class="button big special">Advertise</a></li>
@@ -118,6 +104,83 @@
 					</ul>
 				</div>
 			</section>
+
+			<section id="three" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="8u">
+							<section>
+								<h2>Advertising Partnership Programme</h2>
+								<a href="#" class="image fit"><img src="static/image/images/pic03.jpg" alt="" /></a>
+								<p>
+									Teklrn advertising partnership programme also knows as Teklrn for business, seeks to help its customers succeed by creating and growing their customer and member relationships through its advertising plans. We achieve this by allowing businesses to upload advertisements on Teklrn, once your create your business account, you have the options to upload unlimited advertisements and links to your business. Teklrns algorithms decide viewership of your Ads to its users. Teklrn has very large volume of viewership through its media offerings. We help our business users advertise to our users though this platform. </p>
+									<p>To get started </p>
+									<p>1. Create a Teklrn business account </p>
+									<p>2. Add advertisements </p>
+									<p>3. Choose the plans available </p>
+									<p>4. Enter billing information </p>
+							</section>
+						</div>
+						<div class="4u">
+							<section>
+								<h3>Business Plans </h3>
+								<p>Choose the plan that fits your need. Your pricing will based on the plans you choose. Teklrn provides one month free trial wherein you can upload unilimited advertisements for your business, which would give you better knowledge on what pricing plan to opt for after trial expiry. All pricing plans are designed to provide best value for your business. After expiry of free trial you will be automatically enrolled to our default plan existing at that time.</p>
+								<ul class="actions">
+									<li><a href=""  onclick="" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+							<hr />
+							<!-- <section id="four">
+								<h3>Quick Links</h3>
+								<ul class="alt">
+									<li><a href="?technology=Electricproulsion">Electric Propulsion</a></li>
+									<li><a href="?technology=Quantumtechnologies">Quantum Technologies</a></li>
+									<li><a href="?technology=Marineengineering">Marine Engineering</a></li>
+									<li><a href="?technology=Python">Python</a></li>
+									<li><a href="?technology=Greenaviation">Green Aviation  </a></li>
+									<li><a href="?technology=Timecrystals">Time Crystals</a></li>
+									<li><a href="?technology=Keras">Keras</a></li>
+									<li><a href="?technology=Spaceelevator">Space Elevator</a></li>
+								</ul>
+							</section> -->
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- <section id="one" class="wrapper style1">
+				<header class="major">
+					<h2> </h2>
+					<p>Delivers Technology Training, Video Courses, Options to Book Trainer</p>
+				</header>
+				<div class="container">
+					<div class="row">
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-area-chart major"></i>
+								<h3>Technology Training Content</h3>
+								<p style="text-align: left;">Teklrn maintains the latest, up-to-date data, on every technology training content it delivers. With our staff working round to the clock to update every content with latest information and removing obsolete data. This way we ensure our technology training courses provide the highest value to the learners/customers.
+								</p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-refresh major"></i>
+								<h3>Video and Live Trainer Sessions</h3>
+								<p style="text-align: left;">Technology training courses are offered in the form video training content and with the option to book trainer for one-to-one live sessions.
+									Most technology training content has a set of free training video content, that explains the initial basics of the technology. </p>
+							</section>
+						</div>
+						<div class="4u">
+							<section class="special box">
+								<i class="icon fa-cog major"></i>
+								<h3>Teklrns approach to training</h3>
+								<p style="text-align: left;">Technologies are divided into levels. All the video courses are based on the syllabus for that level. Syllabus for each level is freely accessible on our website. That aids deciding the level to book.</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</section> -->
 
 
 			<!-- Two 1--> 
@@ -427,39 +490,7 @@
 				</script>
 
 		<!-- One -->
-			<!-- <section id="one" class="wrapper style1">
-				<header class="major">
-					<h2> </h2>
-					<p>Delivers Technology Training, Video Courses, Options to Book Trainer</p>
-				</header>
-				<div class="container">
-					<div class="row">
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-area-chart major"></i>
-								<h3>Technology Training Content</h3>
-								<p style="text-align: left;">Teklrn maintains the latest, up-to-date data, on every technology training content it delivers. With our staff working round to the clock to update every content with latest information and removing obsolete data. This way we ensure our technology training courses provide the highest value to the learners/customers.
-								</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-refresh major"></i>
-								<h3>Video and Live Trainer Sessions</h3>
-								<p style="text-align: left;">Technology training courses are offered in the form video training content and with the option to book trainer for one-to-one live sessions.
-									Most technology training content has a set of free training video content, that explains the initial basics of the technology. </p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-cog major"></i>
-								<h3>Teklrns approach to training</h3>
-								<p style="text-align: left;">Technologies are divided into levels. All the video courses are based on the syllabus for that level. Syllabus for each level is freely accessible on our website. That aids deciding the level to book.</p>
-							</section>
-						</div>
-					</div>
-				</div>
-			</section> -->
+	
 				
 			
 		<!-- Two --> 
