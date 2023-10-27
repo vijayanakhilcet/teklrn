@@ -214,7 +214,7 @@ def register(request):
                 email_test.send(fail_silently=False)
             except:
                 print('Mail Err')
-            return render(request, 'webapp/loginActivate.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
+            return render(request, 'webapp/loginActivate.html', {'email' : request.session['email']})
 
             # return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
     else:
