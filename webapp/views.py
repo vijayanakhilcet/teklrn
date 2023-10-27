@@ -203,7 +203,7 @@ def register(request):
                      'uidb64': uidb64, 'token': token_generator.make_token(user_obj)})
             activate_url = 'http://'+domain+link
             email_subject = 'Teklrn Account Activation'
-            email_body = 'Hello '+user_obj.first_name+ ', \nPlease use this link to verify your Teklrn business account\n' + activate_url
+            email_body = 'Hello '+user_obj.first_name+ ', \n\nPlease use this link to verify your Teklrn business account\n' + activate_url+ ' \n\nTeklrn for Business.\n https://teklrn.com/business/ \nEmail: teklrn.com@gmail.com'
             email_test = EmailMessage(
                 email_subject,
                 email_body,

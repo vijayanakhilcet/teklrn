@@ -23,7 +23,7 @@ else if(tech == 'UploadComplete'){
 }
 
 else if(tech == 'redirecttologin'){
-    page = "/login_student"
+    page = "/login"
 }
 else if(tech == 'redirecttologinTA'){
     page = "/loginTA"
