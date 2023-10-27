@@ -3242,7 +3242,8 @@ class ActivateTrainerView(FormView):
                 ['teklrn@yahoo.com',],
             )
             email_test.send(fail_silently=False)
-            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
+            return render(request, 'webapp/login.html', {'email' : request.session['email']})
+            # return  HttpResponseRedirect(HOSTNAME+'?redirecttologinT')
         return HttpResponseRedirect(HOSTNAME+'?toerrorT')
 
 class ActivateStudentView(FormView):
@@ -3256,7 +3257,9 @@ class ActivateStudentView(FormView):
             user.is_active=True
             user.save()
             request.session['email'] = user.email
-            return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
+            return render(request, 'webapp/loginActivate.html', {'email' : request.session['email']})
+
+            # return  HttpResponseRedirect(HOSTNAME+'?redirecttologin')
         return HttpResponseRedirect(HOSTNAME+'?toerror')
 
 class RegisterStudentView(FormView):
