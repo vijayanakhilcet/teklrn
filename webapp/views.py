@@ -188,6 +188,7 @@ def register(request):
 
         if form.is_valid():
             username = form.cleaned_data.get('email')
+            request.session['email']=username
             password = form.cleaned_data.get('password1')
             business_name = form.cleaned_data.get('business_name')
             user_obj = form.save()
@@ -202,7 +203,7 @@ def register(request):
                      'uidb64': uidb64, 'token': token_generator.make_token(user_obj)})
             activate_url = 'http://'+domain+link
             email_subject = 'Teklrn Account Activation'
-            email_body = 'Hello '+user_obj.first_name+ ', \nPlease use this link to verify your Teklrn Student Account\n' + activate_url
+            email_body = 'Hello '+user_obj.first_name+ ', \nPlease use this link to verify your Teklrn business account\n' + activate_url
             email_test = EmailMessage(
                 email_subject,
                 email_body,
