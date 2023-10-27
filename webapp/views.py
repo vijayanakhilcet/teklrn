@@ -214,7 +214,9 @@ def register(request):
                 email_test.send(fail_silently=False)
             except:
                 print('Mail Err')
-            return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
+            return render(request, 'webapp/loginActivate.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level'], 'technology' : request.session['course']})
+
+            # return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
     else:
         form = ExtendedUserCreationForm()
         try:
