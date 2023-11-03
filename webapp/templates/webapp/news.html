@@ -631,38 +631,6 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
       });
   });
 </script>
-  <!-- <script>
-      $(window).on('ajaxStop',function() {
-        //refineSearchView("zzz");
-        var dates = document.querySelectorAll('[id^="img-"]');
-        Code = document.getElementById("Code").textContent;
-        data = ''
-        dates.forEach((userItem) => {
-        data=userItem.id+'---';
-        $.ajax({
-          url: "/searchtopicsnewnewsForImg", // the url where we want to POST
-          data: {
-             "titles": data,
-             "lang":Code
-          },
-          dataType: 'json',
-          encode: true
-       })
-       // using the done promise callback
-       .done(function (data) {
-          $.each(data, function (index) {
-            var elm = document.getElementById(data[index].title);
-            elm.src = data[index].src;
-            elm.style.visibility = "visible";
-            });
  
-       });
-        });
-        
-        // $(window).off('scroll');
-   
-  }); 
-  </script> -->
-       
   </body>
 </html>
