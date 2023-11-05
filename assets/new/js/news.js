@@ -63,8 +63,8 @@ $("#course-search").on('keyup', function (event) {
       elm1.style.visibility = 'hidden';
     }
     document.getElementById('img-ins').src=document.getElementById("img").textContent;
-    document.getElementById('title-ins').textContent =document.getElementById("technology_view").textContent;
-    document.getElementById('para-ins').textContent =document.getElementById("pElement").textContent;
+    document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+    document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
 getNewsContent();
    // searchTopicsNews();
  
@@ -84,7 +84,7 @@ getNewsContent();
    // using the done promise callback
    .done(function (data) {
       $.each(data, function (index) {
-         document.getElementById("para-ins").textContent  = data[index].para
+         document.getElementById("para-ins").innerHTML = data[index].para
         }); 
       
    })
@@ -499,8 +499,8 @@ event.preventDefault();
       .done(function (data) {
          sideMenu();
          document.getElementById('img-ins').src=document.getElementById("img").textContent;
-         document.getElementById('title-ins').textContent =document.getElementById("technology_view").textContent;
-         document.getElementById('para-ins').textContent =document.getElementById("pElement").textContent;
+         document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+         document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
 
          })
        .complete(function(data) {
