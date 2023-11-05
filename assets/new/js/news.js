@@ -84,7 +84,7 @@ getNewsContent();
    // using the done promise callback
    .done(function (data) {
       $.each(data, function (index) {
-         document.getElementById("newscontent").innerHTML = data[index].para
+         document.getElementById("para-ins").innerHTML = data[index].para
         }); 
       
    })
