@@ -58,12 +58,14 @@ $("#course-search").on('keyup', function (event) {
     course_description = view_to_show;
     Code = document.getElementById("Code").textContent
     var runit = 0;
-    var elm1 = document.getElementById('rowdata1');
+
     if (document.getElementById("img").textContent == ''){
       elm1.style.visibility = 'hidden';
     }
-    elm1.innerHTML = '<div class="col-md-12" <p style="padding:0px; pointer-events: none; object-fit: cover;"><img src="'+document.getElementById("img").textContent+'"  style="pointer-events: none; object-fit: cover;"  width="100%" height="120px" alt="Image" class="img-fluid"></p> '+'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095" crossorigin="anonymous"</script><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3671375601838095" data-ad-slot="7874188453"></ins> <script> (adsbygoogle = window.adsbygoogle || ]).push({});</script>'+'<div style="padding:10px !important;" class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><div style="text-transform: capitalize; padding-top: 2% ;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 14px !important;  color:black !important">'+document.getElementById("technology_view").textContent+'</div><hr><p id="newscontent" style="color: #4d4c4c;font-size:13px;display: block;  line-height: 1.8em;">'+'</p></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta">'+ " " +'</div><div class="post-meta"><span></div></h4></span></div></div></div></div>';
-    getNewsContent();
+    document.getElementById('img-ins').src=document.getElementById("img").textContent;
+    document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+    document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
+getNewsContent();
    // searchTopicsNews();
  
  });
@@ -496,8 +498,10 @@ event.preventDefault();
       // using the done promise callback
       .done(function (data) {
          sideMenu();
-         var elm1 = document.getElementById('rowdata1');
-         elm1.innerHTML = '<div class="col-md-12" <p style="padding:0px; pointer-events: none; object-fit: cover;"><img src="'+document.getElementById("img").textContent+'"  style="pointer-events: none; object-fit: cover;"  width="100%" height="120px" alt="Image" class="img-fluid"></p><div style="padding:10px !important;" class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><div style="text-transform: capitalize; padding-top: 2% ;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 14px !important;  color:black !important">'+document.getElementById("technology_view").textContent+'</div><hr><p style="color: #4d4c4c;font-size:13px;display: block;  line-height: 1.8em;">'+document.getElementById("pElement").textContent+'</p></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"></p><div class="post-meta">'+ " " +'</div><div class="post-meta"><span></div></h4></span></div></div></div></div>';
+         document.getElementById('img-ins').src=document.getElementById("img").textContent;
+         document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+         document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
+
          })
        .complete(function(data) {
          $.ajax({
