@@ -112,9 +112,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'teklrn',
+        'USER': 'postgres',
+        'PASSWORD': 'PAssw0RD8#',
+        'HOST': 'database-1.cmdqkekork1r.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -160,7 +168,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
