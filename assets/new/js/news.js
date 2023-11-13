@@ -115,12 +115,17 @@ getNewsContent();
               }); 
               document.getElementById("tree").innerHTML = "";
               document.getElementById("tree").innerHTML = li_el;
-              document.getElementById("ad-p-2").innerHTML = document.getElementById("forAd").innerHTML
-              document.getElementById("ad-p-5").innerHTML = document.getElementById("forAd").innerHTML
-              document.getElementById("ad-p-8").innerHTML = document.getElementById("forAd").innerHTML
-              document.getElementById("ad-p-10").innerHTML = document.getElementById("forAd").innerHTML
+              try {               
+             
+                  document.getElementById("ad-p-2").innerHTML = document.getElementById("forAd").innerHTML
+                  document.getElementById("ad-p-5").innerHTML = document.getElementById("forAd").innerHTML
+                  document.getElementById("ad-p-8").innerHTML = document.getElementById("forAd").innerHTML
+                  document.getElementById("ad-p-10").innerHTML = document.getElementById("forAd").innerHTML
 
-
+               }
+               catch(err) {
+               
+               }
               
          })
          .complete(function(data) {
