@@ -108,7 +108,7 @@ getNewsContent();
               }); 
               document.getElementById("tree").innerHTML = "";
               document.getElementById("tree").innerHTML = li_el;
-            
+              
          })
          .complete(function(data) {
                 var datas = document.querySelectorAll('[id^="'+'RelatedNws'+'"]');
@@ -132,10 +132,13 @@ getNewsContent();
                        var elm = document.getElementById(data[index].title);
                        elm.src = data[index].src;
                        });
-                  
+                       
                           });
+                          
                   });
                });
+               
+                       document.getElementById("scan_clicker").click();
    });
 
 event.preventDefault();
