@@ -116,10 +116,10 @@ getNewsContent();
               document.getElementById("tree").innerHTML = li_el;
               try {               
              
-                  document.getElementById("ad-p-2").innerHTML = document.getElementById("forAd").innerHTML
-                  document.getElementById("ad-p-5").innerHTML = document.getElementById("forAd").innerHTML
-                  document.getElementById("ad-p-8").innerHTML = document.getElementById("forAd").innerHTML
-                  document.getElementById("ad-p-10").innerHTML = document.getElementById("forAd").innerHTML
+                  document.getElementById("ad-p-2").innerHTML = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w" data-ad-client="ca-pub-3671375601838095" data-ad-slot="8904473136"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>';
+                  document.getElementById("ad-p-5").innerHTML = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w" data-ad-client="ca-pub-3671375601838095" data-ad-slot="8904473136"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>';
+                  document.getElementById("ad-p-8").innerHTML  = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w" data-ad-client="ca-pub-3671375601838095" data-ad-slot="8904473136"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>';
+                  document.getElementById("ad-p-10").innerHTML =  = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-6t+ed+2i-1n-4w" data-ad-client="ca-pub-3671375601838095" data-ad-slot="8904473136"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>';
 
                }
                catch(err) {
