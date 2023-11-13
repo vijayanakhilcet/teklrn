@@ -2796,7 +2796,7 @@ class RelatedNewsView(FormView):
         for a in soup.find_all('span'):
             if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
                 course_json = {}
-                course_json['newtitle'] = a.text.split('.')[0]
+                course_json['newtitle'] = a.text.split('.')[0].replace("'", "")
                 results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
