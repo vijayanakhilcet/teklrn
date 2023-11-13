@@ -86,8 +86,7 @@ getNewsContent();
       $.each(data, function (index) {
          document.getElementById("para-ins").innerHTML = data[index].para
         });
-        document.getElementById("forAd").innerHTML = document.getElementById("ads").innerHTML
-        document.getElementById("ads").innerHTML=''
+        document.getElementById("forAd").innerHTML = document.getElementById("ads").innerHTML;
    })
    .complete(function(data) {
           $.ajax({
