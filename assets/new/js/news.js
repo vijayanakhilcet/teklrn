@@ -86,19 +86,7 @@ getNewsContent();
       $.each(data, function (index) {
          document.getElementById("para-ins").innerHTML = data[index].para
         });
-        try { 
-               document.getElementById("forAd-4").innerHTML = document.getElementById("ads").innerHTML;
-               document.getElementById("forAd-8").innerHTML = document.getElementById("ads").innerHTML;
-               document.getElementById("forAd-12").innerHTML = document.getElementById("ads").innerHTML;
-               document.getElementById("forAd-16").innerHTML = document.getElementById("ads").innerHTML;
-               document.getElementById("forAd-20").innerHTML = document.getElementById("ads").innerHTML;
-
-
-
-            }
-            catch(err) {
-               
-            }
+        document.getElementById("forAd").innerHTML = document.getElementById("ads").innerHTML;
    })
    .complete(function(data) {
           $.ajax({
