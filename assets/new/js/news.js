@@ -106,7 +106,7 @@ getNewsContent();
              
                li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
               
-               if (i==2 || i==5 || i==8 || i==10){
+               if (i%3==0){
                   li_el += '<li><span class="tree_label"><div class="col-md-6"><p id="ad-p-'+i+'" style="object-fit: cover !important; overflow-clip-margin: content-box; overflow: clip;"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+''+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
 
                }
@@ -115,17 +115,22 @@ getNewsContent();
               document.getElementById("tree").innerHTML = li_el;
               try {               
              
-                  document.getElementById("ad-p-2").innerHTML = document.getElementById("copy-ads").innerHTML
-                  document.getElementById("ad-p-5").innerHTML = document.getElementById("copy-ads").innerHTML
-                  document.getElementById("ad-p-8").innerHTML = document.getElementById("copy-ads").innerHTML
-                  document.getElementById("ad-p-10").innerHTML = document.getElementById("copy-ads").innerHTML
-                  document.getElementById("ads").innerHTML=''
-                  document.getElementById("copy-ads").innerHTML=''
+                  document.getElementById("ad-p-3").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-6").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-9").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-12").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-15").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-18").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-21").innerHTML = document.getElementById("copy-ads").innerHTML
+                  document.getElementById("ad-p-24").innerHTML = document.getElementById("copy-ads").innerHTML
+
+                  document.getElementById("ads").remove();
+                  document.getElementById("li-copy-ads").remove();
 
                }
                catch(err) {
-                  document.getElementById("ads").innerHTML=''
-                  document.getElementById("copy-ads").innerHTML=''
+                  document.getElementById("ads").remove();
+                  document.getElementById("li-copy-ads").remove();
                }
               
          })
