@@ -87,8 +87,11 @@ getNewsContent();
          document.getElementById("para-ins").innerHTML = data[index].para
         });
         try { 
-               document.getElementById("forAd").innerHTML = document.getElementById("ads").innerHTML;
-               document.getElementById("forAd1").innerHTML = document.getElementById("ads").innerHTML;
+               document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
+               document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
+               document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
+               document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
+               document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
             }
             catch(err) {
             }
