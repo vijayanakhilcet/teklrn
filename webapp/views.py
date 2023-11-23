@@ -2821,28 +2821,39 @@ class AutoCompleteViewNew(FormView):
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
         }
         #response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
-        r = requests.get('https://globalnews.ca/?s='+courseName, headers=headers)
+        r = requests.get('https://apnews.com/search?q='+courseName, headers=headers)
         #for course in json.loads(response.text)[1]:
         soup = BeautifulSoup(r.content)
-
-        for a in soup.find_all('span'):
-            
-            if courseName.upper() in a.text.upper() and len(a.text.strip().split(' '))>6:
-                course = a.text.split('.')[0].strip()
+        for a in soup.find_all('span', {'class' : 'PagePromoContentIcons-text'}):    
+            if len(a.text.strip().split(' '))>6:
+                course = a.text.strip()
                 course_json = {}
                 course_json['value'] = course
                 course_json['name'] = course
                 course_json['description'] = course
                 results.append(course_json)
-        if not results:
-            print("No results"+courseName)
-            wikidetails = wikipedia.search(courseName)
-            for a in wikidetails:
-                course_json = {}
-                course_json['value'] = a
-                course_json['name'] = a
-                course_json['description'] = a
-                results.append(course_json)
+        if not results:        
+            r = requests.get('https://globalnews.ca/?s='+courseName, headers=headers)
+            #for course in json.loads(response.text)[1]:
+            soup = BeautifulSoup(r.content)
+
+            for a in soup.find_all('span'):            
+                if courseName.upper() in a.text.upper() and len(a.text.strip().split(' '))>6:
+                    course = a.text.split('.')[0].strip()
+                    course_json = {}
+                    course_json['value'] = course
+                    course_json['name'] = course
+                    course_json['description'] = course
+                    results.append(course_json)
+            if not results:
+                print("No results"+courseName)
+                wikidetails = wikipedia.search(courseName)
+                for a in wikidetails:
+                    course_json = {}
+                    course_json['value'] = a
+                    course_json['name'] = a
+                    course_json['description'] = a
+                    results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
