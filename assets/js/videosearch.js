@@ -110,7 +110,7 @@ function searchView(pg, lang, idx, srch){
     else{window.scrollTo({ top: 0, behavior: "auto" });}
     var elm = document.getElementById(stringVal);
     var html_message ="";
-    count = 0
+    count = 9999
     $.ajax({
         url         : "/getMatchingTheSearchNew", // the url where we want to POST
         data        : {"search_string":pg, "lang":lang, "idx":idx, "srch":srch}, // our data object
