@@ -1742,23 +1742,23 @@ class MatchingTheSearchNewView1(FormView):
     
 class MatchingTheSearchNewView(FormView):
     def get(self,request,*args,**kwargs):
-        EndOfData =  False
+        # EndOfData =  False
         results= []
         data = request.GET
         searchData = data.get("srch").replace(" ", "+")
-        c = data.get("search_string")
-        l = data.get("lang")
-        idx = data.get("idx")  
+        # c = data.get("search_string")
+        # l = data.get("lang")
+        # idx = data.get("idx")  
         contentType= 'Search Results: '+data.get("srch")
-        url  = "https://search.yahoo.com/search?p="+searchData
+        url  = "https://www.bing.com/search?q="+searchData
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
-        for a in soup.find_all('span'):
-            if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+        for a in soup.find_all('h2'):
+            # if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
                 course_json = {}
-                img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = a.text
-                course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                # img = '/static/image/test/certificate.jpg'
+                course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                course_json['description'] =  course_json['technology'] 
                 if len(course_json['description'].split(" "))<5:
                     continue 
                 course_json['contentType'] = contentType
