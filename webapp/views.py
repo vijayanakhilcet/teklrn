@@ -1746,25 +1746,41 @@ class MatchingTheSearchNewView(FormView):
         results= []
         data = request.GET
         searchData = data.get("srch").replace(" ", "+")
+        print(searchData)
         # c = data.get("search_string")
         # l = data.get("lang")
         # idx = data.get("idx")  
         contentType= 'Search Results: '+data.get("srch")
-        url  = "https://www.bing.com/search?q="+searchData
+        url  = "https://search.yahoo.com/search?p="+searchData
+        print(url)
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
-        for a in soup.find_all('h2'):
-            # if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+        for a in soup.find_all('a'):
+            if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text and 'See All' not in a.text:
                 course_json = {}
                 # img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
-                course_json['description'] =  course_json['technology'] 
-                if len(course_json['description'].split(" "))<5:
-                    continue 
+                course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("\"", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                course_json['description'] =  course_json['technology']                 
                 course_json['contentType'] = contentType
                 course_json['count'] = 9999
                 results.append(course_json)
+        # results=[]
+        if not results:
+            for a in soup.find_all('span'):
+                # if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+                if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text:
+                    course_json = {}
+                    # img = '/static/image/test/certificate.jpg'
+                    course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("\"", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                    course_json['description'] =  course_json['technology'] 
+                    if len(course_json['description'].split(" "))<5:
+                        continue 
+                    course_json['contentType'] = contentType
+                    course_json['count'] = 9999
+                    results.append(course_json)
+
         random.shuffle(results)
+        print(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
@@ -2846,7 +2862,7 @@ class AutoCompleteViewNew(FormView):
                     course_json['description'] = course
                     results.append(course_json)
             if not results:
-                print("No results"+courseName)
+                # print("No results"+courseName)
                 wikidetails = wikipedia.search(courseName)
                 for a in wikidetails:
                     course_json = {}
