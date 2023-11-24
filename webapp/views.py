@@ -2695,7 +2695,7 @@ class NewsContent(FormView):
             #first_link = search.find_all('a')[3]
             for link in search.find_all('a'):
                 d = link['href']
-                print(d)
+                # print(d)
                 if "ft-com" in d or "ft.com" in d or "twitter.com" in d:
                     continue
                 try:
@@ -2720,7 +2720,7 @@ class NewsContent(FormView):
                             pElement = pElement+ '<p style="color:black;">'+all_p.text.strip()+'</p>'
                     if len(pElement.split())>=200:
                         course_json = {}
-                        course_json['para'] = pElement
+                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement)
                         results.append(course_json)
                         break
                 except:
