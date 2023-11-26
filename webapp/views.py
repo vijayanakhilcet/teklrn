@@ -2850,6 +2850,14 @@ class AutoCompleteViewNew(FormView):
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
         }
         #response = requests.get('http://google.com/complete/search?client=chrome&q='+courseName, headers=headers)
+        wikidetails = wikipedia.search(courseName)
+        for a in wikidetails:
+                    course_json1 = {}
+                    course_json1['value'] = a
+                    course_json1['name'] = a
+                    course_json1['description'] = a
+                    results.append(course_json1)
+        
         r = requests.get('https://apnews.com/search?q='+courseName, headers=headers)
         #for course in json.loads(response.text)[1]:
         soup = BeautifulSoup(r.content)
@@ -2874,15 +2882,9 @@ class AutoCompleteViewNew(FormView):
                     course_json['name'] = course
                     course_json['description'] = course
                     results.append(course_json)
-            if not results:
+        # if not results:
                 # print("No results"+courseName)
-                wikidetails = wikipedia.search(courseName)
-                for a in wikidetails:
-                    course_json = {}
-                    course_json['value'] = a
-                    course_json['name'] = a
-                    course_json['description'] = a
-                    results.append(course_json)
+        
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
