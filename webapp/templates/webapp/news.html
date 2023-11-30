@@ -2,8 +2,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
-    crossorigin="anonymous"></script> -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
+    crossorigin="anonymous"></script>
     <style>
       #all_news{background: white;width: 30%;height: 32px;overflow: hidden;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;padding: 0px;position: relative;}#all_news span{float: left;color: rgba(0,0,0,.8);color: #fff;background: #00425a;padding: 6px;position: relative;border-radius: 4px;font-size: 12px;-webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);background: rgb(0,75,103);background: -moz-linear-gradient(top, rgba(0,75,103,1) 0%, rgba(0,53,72,1) 100%);background: -webkit-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -o-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -ms-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004b67', endColorstr='#003548',GradientType=0 )}#all_news ul{float: left;padding-left: 20px;-webkit-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;-moz-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-ms-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite}#all_news ul:hover{-webkit-animation-play-state: paused;-moz-animation-play-state: paused;-ms-animation-play-state: paused;animation-play-state: paused}#all_news li{line-height: 25px}#all_news a{color:white; whitext-decoration: none;font-size: 10px; padding: 10px;}@-webkit-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-moz-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-ms-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}
   </style>
@@ -224,7 +224,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <link type="text/css" rel="stylesheet" href="{% static 'css/magicscroll.css' %}" media="screen"/>
     <link rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
@@ -249,7 +249,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     </style>
 
   </head>
-  <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%) !important;">
+  <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
     <div class="loader"></div>  
     <p id="technology_view" hidden>{{technology}}</p>
     <p id="lvl_view" hidden>{{lvl}}</p>
@@ -258,7 +258,59 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <p id="img" hidden>{{img}}</p>
     <p id="pElement" hidden>{{pElement}}</p>
   
-   
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="ion-ios-close"></span>
+            </button>
+          </div>
+          <div class="modal-body p-4 py-5 p-md-5">
+              <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
+              <ul class="ftco-footer-social p-0 text-center">
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+        </ul>
+              <form class="signup-form">
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Sender</label>
+                      <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
+                  </div> -->
+                  <div class="form-group mb-2">
+                      <label for="email">TMAIL Recepient</label>
+                      <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
+                  </div>
+                  <!-- <div class="form-group mb-2">
+                      <label for="email">Comment</label>
+                      <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
+                  </div> -->
+                  <!-- <div class="form-group mb-2">
+                      <label for="name">Comment</label>
+                      <input  type="text" class="form-control" placeholder="John Doe">
+                  </div> -->
+                  
+                  <div class="form-group mb-2">
+                      <img id="comment" alt="Image" src=""/>
+                  </div>
+            <div class="form-group mb-2">
+              <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
+            </div>
+            <div class="form-group mb-2">
+                <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
+            </div>
+            <div class="form-group d-md-flex">
+                            <div class="w-100 text-center">
+                                <a href="#" class="forgot">Terms and Conditions</a>
+                            </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <aside class="sidebar">
       <!-- <div class="toggle" style="padding-top: 5px !important;">
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
@@ -511,7 +563,18 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
               </ul>
               </div>
 
-             
+             <section class="p-0 md-p-5">
+              <div id="initial"  class="flex flex-wrap">
+            
+              </div>
+              <!-- <marquee  id="waterfall" direction="up"  loop="infinite" style="height: 400px;" scrollamount=3>
+                            
+              </marquee> -->
+            
+              <div id="searchD"  class="flex flex-wrap">
+            
+              </div>
+          </section>
        
              
              
@@ -600,72 +663,7 @@ data-full-width-responsive="true"></ins>
         <div class="mcs-item" data-item="1" style="width: 24.3716%; position: absolute; transform: translate3d(-295.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31668;"><div onclick="gotoTechnology('Ship Design Technology')" style="opacity: 1; visibility: visible;"></div><canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas></div>
         
     </div>  -->
-    <section class="p-0 md-p-5">
-      <div id="initial"  class="flex flex-wrap">
-    
-      </div>
-      <!-- <marquee  id="waterfall" direction="up"  loop="infinite" style="height: 400px;" scrollamount=3>
-                    
-      </marquee> -->
-    
-      <div id="searchD"  class="flex flex-wrap">
-    
-      </div>
-  </section>
     </main>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true" class="ion-ios-close"></span>
-            </button>
-          </div>
-          <div class="modal-body p-4 py-5 p-md-5">
-              <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
-              <ul class="ftco-footer-social p-0 text-center">
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
-          <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
-        </ul>
-              <form class="signup-form">
-                  <!-- <div class="form-group mb-2">
-                      <label for="email">Sender</label>
-                      <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
-                  </div> -->
-                  <div class="form-group mb-2">
-                      <label for="email">TMAIL Recepient</label>
-                      <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
-                  </div>
-                  <!-- <div class="form-group mb-2">
-                      <label for="email">Comment</label>
-                      <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
-                  </div> -->
-                  <!-- <div class="form-group mb-2">
-                      <label for="name">Comment</label>
-                      <input  type="text" class="form-control" placeholder="John Doe">
-                  </div> -->
-                  
-                  <div class="form-group mb-2">
-                      <img id="comment" alt="Image" src=""/>
-                  </div>
-            <div class="form-group mb-2">
-              <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
-            </div>
-            <div class="form-group mb-2">
-                <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
-            </div>
-            <div class="form-group d-md-flex">
-                            <div class="w-100 text-center">
-                                <a href="#" class="forgot">Terms and Conditions</a>
-                            </div>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
      <script type="text/javascript">
         function clickh(d, t){
             // var text = $("#textarea").val();
