@@ -131,58 +131,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
       
         </div>
     </section>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="ion-ios-close"></span>
-              </button>
-            </div>
-            <div class="modal-body p-4 py-5 p-md-5">
-                <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
-                <ul class="ftco-footer-social p-0 text-center">
-            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
-            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
-            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
-          </ul>
-                <form class="signup-form">
-                    <!-- <div class="form-group mb-2">
-                        <label for="email">Sender</label>
-                        <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
-                    </div> -->
-                    <div class="form-group mb-2">
-                        <label for="email">TMAIL Recepient</label>
-                        <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
-                    </div>
-                    <!-- <div class="form-group mb-2">
-                        <label for="email">Comment</label>
-                        <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
-                    </div> -->
-                    <!-- <div class="form-group mb-2">
-                        <label for="name">Comment</label>
-                        <input  type="text" class="form-control" placeholder="John Doe">
-                    </div> -->
-                    
-                    <div class="form-group mb-2">
-                        <img id="comment" src=""/>
-                    </div>
-              <div class="form-group mb-2">
-                <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
-              </div>
-              <div class="form-group mb-2">
-                  <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
-              </div>
-              <div class="form-group d-md-flex">
-                              <div class="w-100 text-center">
-                                  <a href="#" class="forgot">Terms and Conditions</a>
-                              </div>
-              </div>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
+   
 	
 	    <!-- testimonials -->
  <!--   <section class="p-10 md-p-l5">
@@ -255,7 +204,58 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
        <script src="{% static 'js/modal/bootstrap.min.js' %}"></script>
        <script src="{% static 'js/modal/main.js' %}"></script>
 
-     
+       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" id="closex" class="close d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="ion-ios-close"></span>
+              </button>
+            </div>
+            <div class="modal-body p-4 py-5 p-md-5">
+                <h3 class="text-center mb-3"><img src="/static/image/images/banner3.jpg" alt="TEKLRN" width="150" height="20"></h3>
+                <ul class="ftco-footer-social p-0 text-center">
+            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+          </ul>
+                <form class="signup-form">
+                    <!-- <div class="form-group mb-2">
+                        <label for="email">Sender</label>
+                        <input type="text" id="tmailfrom" class="form-control" placeholder="Sender Name">
+                    </div> -->
+                    <div class="form-group mb-2">
+                        <label for="email">TMAIL Recepient</label>
+                        <input type="text" id="tmailto" class="form-control" placeholder="id@gmail.com">
+                    </div>
+                    <!-- <div class="form-group mb-2">
+                        <label for="email">Comment</label>
+                        <textarea placeholder="Hey Bob, Check this tmail" id="viewpoint"   class="form-control"></textarea>
+                    </div> -->
+                    <!-- <div class="form-group mb-2">
+                        <label for="name">Comment</label>
+                        <input  type="text" class="form-control" placeholder="John Doe">
+                    </div> -->
+                    
+                    <div class="form-group mb-2">
+                        <img id="comment" src=""/>
+                    </div>
+              <div class="form-group mb-2">
+                <p  id="desc" style="padding-top: 3%;padding-left: 13px;padding-right: 13px;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;"></p>
+              </div>
+              <div class="form-group mb-2">
+                  <button onclick="submitted(event)" type="submit" class="form-control btn btn-primary rounded submit px-3">Send</button>
+              </div>
+              <div class="form-group d-md-flex">
+                              <div class="w-100 text-center">
+                                  <a href="#" class="forgot">Terms and Conditions</a>
+                              </div>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
        
 </body>
 </html>
