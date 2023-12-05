@@ -336,7 +336,7 @@ function refineSearchView22(pg){
        .done(function(data) {
            elm.innerHTML="";  
            $.each(data, function(index) {
-               html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].name+'\''+',\''+data[index].name+'\''+',\''+'mgc'+index+'---'+data[index].name+'\''+')" ><img id="mgc'+index+'---'+data[index].name+'" style="float: left;width: 200px; height:135px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
+               html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].name+'\''+',\''+data[index].name+'\''+',\''+'mgc'+index+'---'+data[index].name+'\''+')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="mgc'+index+'---'+data[index].name+'" style="float: left;width: 200px; height:135px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
            });
          
    elm.innerHTML=html_message;
