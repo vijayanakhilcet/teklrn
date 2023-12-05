@@ -63,7 +63,7 @@ $("#course-search").on('keyup', function (event) {
     if (document.getElementById("img").textContent == ''){
       elm1.style.visibility = 'hidden';
     }
-    document.getElementById('img-ins').src=document.getElementById("img").textContent;
+    document.getElementById('img-ins').src=document.getElementById("img").textContent.replaceAll('-----','&');
     document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
 getNewsContent();
@@ -474,7 +474,7 @@ function refineSearchView22(pg){
  
  function gotoTechnology1(pg, url, img){   
    window.stop();
-   window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&url="+url+"&image="+document.getElementById(img).src, "_self");
+   window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&url="+url+"&image="+document.getElementById(img).src.replaceAll('&', '-----'), "_self");
   
 }
  
