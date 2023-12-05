@@ -265,8 +265,7 @@ function refineSearchView1(pg, lang, idx){
              //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><video class="w-100pc" poster="static/image/images/poster.jpg"  playsinline id="frameclk" controls style="pointer-events: none;" preload="none" controlsList="nofullscreen nodownload"  height="100%" width="100%"> type="video/mp4"></video><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
                //  html_message +='<div onclick="gotoTechnology(\''+data[index].description+'\')" style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a href="#" class="block no-underline p-5 br-8 hover-bg-indigo-lightest-10 hover-scale-up-1 ease-300"><img class="w-100pc" playsinline="" id="frameclk" style="pointer-events: none;" height="100%" width="100%" src="/static/image/images/poster_video.jpg"><p style=" font-size: medium !important; color: black !important;" class="fw-600 white fs-m3 mt-3">'+'<img style="float: right;padding-bottom:10px;width:35px; height: 35px;object-fit: cover;" src="/static/image/images/'+data[index].technology+'_icon.png">'+data[index].description+'</p><div style="color: white; background-color: #4976c8; font-size: small; padding: 1.2%; border-radius: .5 em;">'+data[index].contentType+'</div><div class="indigo fs-s3 italic after-arrow-right my-4">More Info..</div></a></div>';          
                html_message +='<div  style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 ease-300"><div style="font-size: x-small; padding-left: 70% !important;color: white; background-color: #4976c8; padding: 1.2%; border-radius: .5 em; font-weight: bold;">'+'<h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h><i class="fa fa-envelope" aria-hidden="true" style="color:lightyellow; margin-left:1%"></i>  <h style="text-decoration: underline;margin-left:8%;">TMS</h> <i class="fas fa-comment-alt" style="color:lightyellow; margin-left:1%;"></i>'+'  '+'</div><div onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')"  ><img class="w-100pc" playsinline="" id= "'+stringVal+'-img-'+i+data[index].description+'"  onerror="this.src=\'/static/image/test/certificate.jpg\'" style="visibility:hidden;pointer-events: none; width: 150px; height: 400px; object-fit: cover;" /></div><p style="padding-left:10px !important; padding-right:10px !important;font-weight: 450 !important; text-transform: capitalize;font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].description+'</p><div class="indigo fs-s3 italic after-arrow-right my-4" style="padding-left: 13px !important;"><h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh(\''+stringVal+'-img-'+i+data[index].description+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"><h onclick="gotoTechnology1(\''+data[index].description+'\',\''+data[index].technology+'\',\''+stringVal+'-img-'+i+data[index].description+'\')" data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">SCAN</h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/hie.gif"></div></a></div>';          
-               html_message_marq +='<img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="" style="visibility:hidden;padding-left:5px; padding-right: 5px; width: 250px; height: 100px; object-fit: cover;" id="'+'marq'+data[index].description+'"/>'+'<a style="vertical-align: middle;padding-bottom: 2px;color:white !important;">'+data[index].description+'</a>'
-               // html_message_marq +='<div style="position: relative;"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20230823115825/pexels-jaime-reimer-2662116.jpg"><div style="position: absolute;left: 18rem;top: 2rem;padding: 0 1rem;"><h3>'+data[index].description+' </h3></div></div>'
+               html_message_marq +='<a style="color:white !important;"><img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="" style="visibility:hidden;padding-left:5px; padding-right: 5px; width: 250px; height: 100px; object-fit: cover;" id="'+'marq'+data[index].description+'"/>'+data[index].description+'     </a>'
             });
          
    elm.innerHTML+=html_message
@@ -313,6 +312,43 @@ function refineSearchView1(pg, lang, idx){
        });
         
        return false;       
+}
+
+function refineSearchView22(pg){
+   var elm = document.getElementById("mgc2");
+   // if( getCookie("mgc") != ""){
+   //     alert(getCookie("mgc"));
+   //     elm.innerHTML=getCookie("mgc");
+   // }
+   // var datafromlocal = localStorage.getItem("mgc");
+   // if(datafromlocal){
+   //     elm.innerHTML=datafromlocal;}
+   // else{
+   var html_message ="";
+   $.ajax({
+       url         : "/getNewsMatchingTheSearchFiltered", // the url where we want to POST
+       data        : {"search_string":pg}, // our data object
+       dataType    : 'json', // what type of data do we expect back from the server
+       encode      : true
+   })
+       // using the done promise callback
+       .done(function(data) {
+           elm.innerHTML="";  
+           $.each(data, function(index) {
+               html_message +='<div style="position:relative;" onclick="gotoTechnology(\''+data[index].name+'\')" ><img style="float: left;width: 200px; height:135px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
+           });
+         
+   elm.innerHTML=html_message;
+   // localStorage.setItem("mgc", html_message);
+   //setCookie("mgc", html_message, 10);
+//     elm.addEventListener("animationend", function() {
+//         elm.style.visibility='visible';
+// });
+   
+       });
+      
+       // event.preventDefault();     
+   // } 
 }
 
  function getLatestNews(){
