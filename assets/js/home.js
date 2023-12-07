@@ -60,8 +60,6 @@ else if(tech == 'redirecttologinA'){
 
 );
 
-trending_lst
-
 
 function getAllTechnologies(){
     var elm1 = ""
