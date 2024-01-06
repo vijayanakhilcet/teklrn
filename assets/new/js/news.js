@@ -87,11 +87,7 @@ getNewsContent();
       $.each(data, function (index) {
          document.getElementById("para-ins").innerHTML = data[index].para
         });
-        
-   })
-   .complete(function(data) {
-
-      try { 
+        try { 
          document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
          document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
          document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
@@ -100,6 +96,11 @@ getNewsContent();
       }
       catch(err) {
       }
+        
+   })
+   .complete(function(data) {
+
+   
           
    });
    $.ajax({
