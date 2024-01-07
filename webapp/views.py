@@ -2835,6 +2835,26 @@ class RelatedNewsView(FormView):
                 course_json = {}
                 course_json['newtitle'] = a.text.split('.')[0].replace("'", "")
                 results.append(course_json)
+        if len(results)<90:
+            url = 'https://www.google.com/search'
+
+            headers = {
+                'Accept' : '*/*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+            }
+            parameters = {'q': courseName}
+
+            content = requests.get(url, headers = headers, params = parameters).text
+            soup = BeautifulSoup(content, 'html.parser')
+
+            search = soup.find(id = 'search')
+            for a in search.find_all('a'):
+                 if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+                    course_json = {}
+                    course_json['newtitle'] = a.text.split('.')[0].replace("'", "")
+                    results.append(course_json)
+
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
