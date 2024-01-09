@@ -137,7 +137,7 @@ getNewsContent();
        if (i%3==0){
           li_el += '<li><span class="tree_label"><div class="col-md-6"><p id="ad-p-'+i+'" style="object-fit: cover !important; overflow-clip-margin: content-box; overflow: clip;"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+''+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
           
-          test_html_message +='<div id="ad-pp-'+i+'" style="position:relative;" ></div>';
+          test_html_message +='<div style="position:relative;" ><a style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></a></div>';
 
        }
       }); 
