@@ -5,34 +5,32 @@ $(function () {
       source: "/autocomplete",
       dataType: 'json',
       select: function( event , ui ) {
-      window.stop();
-      searchView('United States', 'en', -1, ui.item.value);
-      // gotoTechnology(ui.item.value);        
-      runit = 1;
-      return false;
+          window.stop();
+          searchView('United States', 'en', -1, ui.item.value);
+          runit = 1;
+          return false;
          }
-}) 
-.data("ui-autocomplete")._renderItem = function(ul, item) {
-  return $( "<li style='margin-top:0px; max-width: 100%'><hr style='background-color:white;'>" )
+  }) 
+  .data("ui-autocomplete")._renderItem = function(ul, item) {
+      return $( "<li style='margin-top:0px; max-width: 100%'><hr style='background-color:white;'>" )
   .data( "ui-autocomplete-item", item )
   .append( "<!--<img style='margin-right: 40px; width:25px; height:25px;' src='/static/image/images/" + item.name +"_icon.png'/>--><i style=\"color:darkgrey\" class=\"fa fa-search\" aria-hidden=\"true\"></i> "+ item.description)
-  .appendTo(ul);
-};
-
-$("#course-search").on('keyup', function (event) {
+  .appendTo( ul );
+  };
+  
+  $("#course-search").on('keyup', function (event) {
   window.stop();
-      if(runit === 0){
-          if (event.keyCode === 13) {                                 
-              $("#course-search").blur(); 
-              //refineSearchView(event.target.value);    
-              // gotoTechnology(event.target.value);
-              searchView('United States', 'en', -1, event.target.value);
-
-          }
-      }  
-              
-       runit = 0;   
-});
+  if(runit === 0){
+      if (event.keyCode === 13) {                                     
+          $("#course-search").blur(); 
+          //refineSearchView(event.target.value);    
+          searchView('United States', 'en', -1, event.target.value);
+  
+      }
+  }  
+          
+   runit = 0;   
+  });
    document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
    getLatestNews();      
    //alert(document.getElementById('pElement').textContent)
@@ -1180,6 +1178,25 @@ function refineSearchView22(pg){
        scrollable: false
     });
     return false;
+ }
+
+ function searchView(pg, lang, idx, srch){
+   var img;
+   $.ajax({
+      url: "/searchtopicsnewnewsForImgRelated", // the url where we want to POST
+      data: {
+      "strVal": srch,
+      "titles": srch,
+      "lang":'en'
+      
+      },
+      dataType: 'json',
+      encode: true
+  })
+  .done(function (data) {
+   window.open(window.location.origin+"/news/technology?technology="+srch+"&Code="+$("#countryCode option:selected").val()+"&url="+data[0].src+"&image="+data[0].src, "_self");
+                 });
+
  }
  
  function version_history() {
