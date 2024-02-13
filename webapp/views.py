@@ -2696,7 +2696,7 @@ class NewsContent(FormView):
             for link in search.find_all('a'):
                 d = link['href']
                 # print(d)
-                if "ft-com" in d or "ft.com" in d or "twitter.com" in d:
+                if "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d:
                     continue
                 try:
                     r = requests.get(d)
