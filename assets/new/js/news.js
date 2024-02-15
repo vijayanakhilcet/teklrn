@@ -88,25 +88,36 @@ getNewsContent();
         
    })
    .complete(function(data) {
+      var adsVal = document.getElementById("ads").innerHTML
 
       try { 
-         document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
+         document.getElementById("forAd4").innerHTML = adsVal;
+         document.getElementById("forAd8").innerHTML = adsVal;
+         document.getElementById("forAd12").innerHTML = adsVal;
+         document.getElementById("forAd16").innerHTML = adsVal;
+         document.getElementById("forAd20").innerHTML = adsVal;
       }
       catch(err) {
          try { 
-            document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
+            document.getElementById("forAd4").innerHTML = adsVal;
+            document.getElementById("forAd8").innerHTML = adsVal;
+            document.getElementById("forAd12").innerHTML = adsVal;
+            document.getElementById("forAd16").innerHTML = adsVal;
+            document.getElementById("forAd20").innerHTML = adsVal;
          }
-         catch(err) {
+         catch(err1) {
+            try { 
+               document.getElementById("forAd4").innerHTML = adsVal;
+               document.getElementById("forAd8").innerHTML = adsVal;
+               document.getElementById("forAd12").innerHTML = adsVal;
+               document.getElementById("forAd16").innerHTML = adsVal;
+               document.getElementById("forAd20").innerHTML = adsVal;
+            }
+            catch(err2) {
+   
+            }  
 
-      }  
+         }  
       document.getElementById("ads").remove();
    }
           
@@ -174,6 +185,40 @@ getNewsContent();
 
        }
        catch(err) {
+         try {               
+     
+            document.getElementById("ad-p-3").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-3").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-6").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-6").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-9").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-9").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-12").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-12").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-15").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-15").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-18").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-18").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-21").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-21").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+            document.getElementById("ad-p-24").innerHTML = document.getElementById("copy-ads").innerHTML
+            document.getElementById("ad-pp-24").innerHTML = document.getElementById("copy-ads").innerHTML
+  
+           //  document.getElementById("ads").remove();
+            document.getElementById("li-copy-ads").remove();
+  
+         }
+         catch(err1) {
+            
+            document.getElementById("li-copy-ads").remove();
+         }
           
           document.getElementById("li-copy-ads").remove();
        }
