@@ -64,7 +64,7 @@ $(function () {
     document.getElementById('img-ins').src=document.getElementById("img").textContent.replaceAll('-----','&');
     document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
-getNewsContent();
+   getNewsContent();
    // searchTopicsNews();
  
  });
@@ -89,26 +89,26 @@ getNewsContent();
    })
    .complete(function(data) {
 
-      try { 
-         document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-         document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
-      }
-      catch(err) {
-         try { 
-            document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-            document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
-         }
-         catch(err) {
+   //    try { 
+   //       document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
+   //       document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
+   //       document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
+   //       document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
+   //       document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
+   //    }
+   //    catch(err) {
+   //       try { 
+   //          document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
+   //          document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
+   //          document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
+   //          document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
+   //          document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
+   //       }
+   //       catch(err) {
 
-      }  
-      document.getElementById("ads").remove();
-   }
+   //    }  
+   //    document.getElementById("ads").remove();
+   // }
           
    });
    
