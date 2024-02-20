@@ -143,6 +143,7 @@ $(function () {
       document.getElementById("tree").innerHTML = li_el;
       
       document.getElementById("mgc2").innerHTML = test_html_message;
+      // document.getElementById("mgc3").innerHTML = test_html_message;
       try {               
      
           document.getElementById("ad-p-3").innerHTML = document.getElementById("copy-ads").innerHTML
@@ -204,6 +205,8 @@ $(function () {
                elm.src = data[index].src;
                });
                
+                  }) .complete(function(data) {
+                     document.getElementById("mgc3").innerHTML=document.getElementById("mgc2").innerHTML;
                   });
                  
                
@@ -354,6 +357,7 @@ function refineSearchView1(pg, lang, idx){
 
 function refineSearchView22(pg){
    var elm = document.getElementById("mgc2");
+   var elm3 = document.getElementById("mgc3");
    // if( getCookie("mgc") != ""){
    //     alert(getCookie("mgc"));
    //     elm.innerHTML=getCookie("mgc");
