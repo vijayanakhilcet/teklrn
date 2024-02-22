@@ -182,12 +182,12 @@ $(function () {
           document.getElementById("ad-ppp-24").innerHTML = document.getElementById("copy-ads").innerHTML
 
          //  document.getElementById("ads").remove();
-          document.getElementById("li-copy-ads").remove();
+         //  document.getElementById("li-copy-ads").remove();
 
        }
        catch(err) {
           
-          document.getElementById("li-copy-ads").remove();
+         //  document.getElementById("li-copy-ads").remove();
        }
       
  })
