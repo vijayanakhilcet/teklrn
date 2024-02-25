@@ -147,48 +147,128 @@ $(function () {
       
       document.getElementById("mgc2").innerHTML = test_html_message;
       document.getElementById("mgc3").innerHTML = test_html_message_mgc3;
-      try {               
+                    
      
-          document.getElementById("ad-p-3").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-3").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-3").innerHTML = document.getElementById("ads").innerHTML
+         try { document.getElementById("ad-p-3").innerHTML = document.getElementById("ads").innerHTML
+         }catch(err){
 
-          document.getElementById("ad-p-6").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-6").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-6").innerHTML = document.getElementById("ads").innerHTML
+         }
 
-          document.getElementById("ad-p-9").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-9").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-9").innerHTML = document.getElementById("ads").innerHTML
+           try {document.getElementById("ad-pp-3").innerHTML = document.getElementById("ads").innerHTML
+         }catch(err){
 
-          document.getElementById("ad-p-12").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-12").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-12").innerHTML = document.getElementById("ads").innerHTML
+         }
+         try {document.getElementById("ad-ppp-3").innerHTML = document.getElementById("ads").innerHTML
+      }catch(err){
 
-          document.getElementById("ad-p-15").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-15").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-15").innerHTML = document.getElementById("ads").innerHTML
+      }
 
-          document.getElementById("ad-p-18").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-18").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-18").innerHTML = document.getElementById("ads").innerHTML
+      try { document.getElementById("ad-p-6").innerHTML = document.getElementById("ads").innerHTML
+   }catch(err){
 
-          document.getElementById("ad-p-21").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-21").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-21").innerHTML = document.getElementById("ads").innerHTML
+   }
 
-          document.getElementById("ad-p-24").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-pp-24").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-24").innerHTML = document.getElementById("ads").innerHTML
+     try {document.getElementById("ad-pp-6").innerHTML = document.getElementById("ads").innerHTML
+   }catch(err){
+
+   }
+   try {document.getElementById("ad-ppp-6").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+//
+try { document.getElementById("ad-p-9").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-9").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-9").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+//
+try { document.getElementById("ad-p-12").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-12").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-12").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+          //
+try { document.getElementById("ad-p-15").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-15").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-15").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+         //
+try { document.getElementById("ad-p-18").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-18").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-18").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+         //
+try { document.getElementById("ad-p-21").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-21").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-21").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+         //
+try { document.getElementById("ad-p-24").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+
+  try {document.getElementById("ad-pp-24").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
+try {document.getElementById("ad-ppp-24").innerHTML = document.getElementById("ads").innerHTML
+}catch(err){
+
+}
 
          //  document.getElementById("ads").remove();
          //  document.getElementById("li-copy-ads").remove();
 
-       }
-       catch(err) {
-          
-         //  document.getElementById("li-copy-ads").remove();
-       }
+       
       
  })
  .complete(function(data) {
