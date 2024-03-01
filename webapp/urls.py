@@ -53,6 +53,7 @@ urlpatterns = [
     path('autocomplete/',views.AutoCompleteViewNew.as_view()), #Previously AutoCompleteView
     path('searchtopics/',views.AutoCompleteSearchTopicsView.as_view()),
     path('Ads.txt', views.AdsView.as_view()),
+    path('ads.txt', views.AdsView.as_view()),
     path('searchtopicsnew/',views.AutoCompleteSearchTopicsViewNew.as_view()),
     path('searchtopicsnewnews/',views.AutoCompleteSearchTopicsViewNewNews.as_view()),
     path('newsContent/',views.NewsContent.as_view()),
