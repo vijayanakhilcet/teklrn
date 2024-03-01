@@ -2624,6 +2624,12 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
+    
+
+class AdsView(FormView):
+    line = "google.com, pub-3671375601838095, DIRECT, f08c47fec0942fa0"
+    def get(self,request,*args,**kwargs):
+        return HttpResponse(line)
 
 class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
     def get(self,request,*args,**kwargs):
