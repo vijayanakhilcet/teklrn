@@ -151,35 +151,35 @@ $(function () {
      
           document.getElementById("ad-p-3").innerHTML =  document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-3").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-3").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-3").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-6").innerHTML =  document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-6").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-6").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-6").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-9").innerHTML =  document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-9").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-9").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-9").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-12").innerHTML =  document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-12").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-12").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-12").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-15").innerHTML = document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-15").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-15").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-15").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-18").innerHTML = document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-18").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-18").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-18").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-21").innerHTML = document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-21").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-21").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-21").innerHTML = document.getElementById("ads").innerHTML
 
           document.getElementById("ad-p-24").innerHTML = document.getElementById("li-copy-ads").innerHTML
           document.getElementById("ad-pp-24").innerHTML = document.getElementById("ads").innerHTML
-          document.getElementById("ad-ppp-24").innerHTML = document.getElementById("ads").innerHTML
+         //  document.getElementById("ad-ppp-24").innerHTML = document.getElementById("ads").innerHTML
 
          //  document.getElementById("ads").remove();
          //  document.getElementById("li-copy-ads").remove();
