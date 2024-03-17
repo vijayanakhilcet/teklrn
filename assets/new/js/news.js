@@ -122,14 +122,14 @@ $(function () {
   })
   .done(function (data) {
    var test_html_message=""
-   var test_html_message_mgc3 = ""
+   // var test_html_message_mgc3 = ""
     
     li_el = "";
     i=0
     $.each(data, function (index) {
        i=i+1;
        test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
-       test_html_message_mgc3 ='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTestNws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTestNws'+i+'---'+data[index].newtitle+'" style="float: left;width: 200px; height:75px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>'+test_html_message_mgc3;
+      //  test_html_message_mgc3 ='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTestNws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTestNws'+i+'---'+data[index].newtitle+'" style="float: left;width: 200px; height:75px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>'+test_html_message_mgc3;
 
      
        li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
@@ -138,7 +138,7 @@ $(function () {
           li_el += '<li id="ad-p-'+i+'"><span class="tree_label"><div class="col-md-6"><p id="ad-ppppp-'+i+'" style="width: 377px !important;object-fit: cover !important; overflow-clip-margin: content-box; overflow: clip;"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+''+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
           
           test_html_message +='<div style=""><p id="ad-pp-'+i+'" style="padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></p></div>';
-          test_html_message_mgc3 +='<div style=""><p id="ad-ppp-'+i+'" style="padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></p></div>';
+         //  test_html_message_mgc3 +='<div style=""><p id="ad-ppp-'+i+'" style="padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></p></div>';
 
        }
       }); 
@@ -146,7 +146,7 @@ $(function () {
       document.getElementById("tree").innerHTML = li_el;
       
       document.getElementById("mgc2").innerHTML = test_html_message;
-      document.getElementById("mgc3").innerHTML = test_html_message_mgc3;
+      // document.getElementById("mgc3").innerHTML = test_html_message_mgc3;
       try {               
      
           document.getElementById("ad-p-3").innerHTML =  document.getElementById("li-copy-ads").innerHTML
@@ -370,7 +370,7 @@ function refineSearchView1(pg, lang, idx){
 
 function refineSearchView22(pg){
    var elm = document.getElementById("mgc2");
-   var elm3 = document.getElementById("mgc3");
+   // var elm3 = document.getElementById("mgc3");
    // if( getCookie("mgc") != ""){
    //     alert(getCookie("mgc"));
    //     elm.innerHTML=getCookie("mgc");
