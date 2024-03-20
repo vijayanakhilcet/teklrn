@@ -525,9 +525,6 @@ function refineSearchView22(pg){
  function doLaunch(event) {
     window.open(window.location.origin + "/technologies", "_self");
  }
- function clickFun(link){
-   window.open(window.location.origin + "/"+link, "_self");
- }
  
  function gotoTechnology1(pg, url, img){   
    window.stop();
