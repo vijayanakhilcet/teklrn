@@ -361,7 +361,7 @@ function refineSearchView1(pg, lang, idx){
                });
            });
            if (count != 9999){
-               refineSearchView1(pg, lang, idx+1);
+               // refineSearchView1(pg, lang, idx+1);
            }
        });
         
