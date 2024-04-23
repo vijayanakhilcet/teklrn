@@ -4,7 +4,7 @@ $(document).ready(function () {
     var runit = 0;  
     populateStaticNews("zzz");
     // populateCountry();   
-    // refineSearchView("zzz", 'en', -1);
+    refineSearchView("zzz", 'en', -1);
     
    // document.getElementById("course-search").focus();
     $("#course-search").autocomplete({  

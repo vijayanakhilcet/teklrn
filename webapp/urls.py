@@ -66,7 +66,7 @@ urlpatterns = [
     path('getTechnologiesMatchingTheSearch/',views.TechnologiesMatchingTheSearchView.as_view()),
     path('getTechnologiesMatchingTheSearchNew/',views.TechnologiesMatchingTheSearchNewView.as_view()),
     path('getFianncialMatchingTheSearchNew/',views.FinancialMatchingTheSearchNewView.as_view()),
-    # path('getBooksMatchingTheSearchNew/',views.BooksMatchingTheSearchNewView.as_view()),
+    path('getBooksMatchingTheSearchNew/',views.BooksMatchingTheSearchNewView.as_view()),
     path('getSciTechMatchingTheSearchNew/',views.SciTechMatchingTheSearchNewView.as_view()),
     path('getLatestNews/',views.GetLatestNewsView.as_view()),
     path('getMatchingTheSearchNew/',views.MatchingTheSearchNewView.as_view()),

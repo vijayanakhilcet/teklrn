@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
+from webapp.models import Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -1714,62 +1714,62 @@ class FinancialMatchingTheSearchNewView(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
     
-# class BooksMatchingTheSearchNewView(FormView):
-#     def get(self,request,*args,**kwargs):
-#         # EndOfData =  False
-#         results= []
-#         # data = request.GET
-#         # # datasplit = data.get("search_string").split('---')
-#         # c = data.get("search_string")
-#         # l = data.get("lang")
-#         # idx = data.get("idx")
-#         # # codeC = datasplit[0]
-#         # # our_url = datasplit[1]
-#         # nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
-#         # contentType = nl.category
-#         # k = int(idx)
-#         # if k >= 0:
-#         #     try:
-#         #         anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
-#         #         nl = anl
-#         #     except:
-#         #         EndOfData = True
-#         # count = 0
-#         # try:
-#         #     count = AllNewsLinks.objects.filter(newLinks=nl).count()
-#         # except:
-#         #     count = 0
-#         # if EndOfData:
-#         #     count = 9999
-#         # our_url = nl.link
-#         # r = requests.get(our_url)
-#         # soup = BeautifulSoup(r.content)
-#         # for a in soup.find_all('a'):
-#         #     if len(a.text.strip().split(' '))>4:
-#         #         course_json = {}
-#         #         img = '/static/image/test/certificate.jpg'
-#         #         course_json['technology'] = a['href']
-#         #         if "BBC" in a.text or "Read" in a.text or " FT " in a.text or "FT " in a.text or "Learn more" in a.text or "Middle East & North Africa" in a.text or "our newsletter" in a.text:
-#         #             continue
-#         #         course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
-#         #         if len(course_json['description'].split(" "))<5:
-#         #             continue 
-#         #         course_json['contentType'] = contentType
-#         #         course_json['count'] = count
-#         #         results.append(course_json)
-#         books = Books.objects.all()
-#         for b in books:
-#             course_json = {}
-#             course_json['technology'] = b.pdf_link
-#             course_json['description'] = b.name
-#             course_json['contentType'] = b.imageLink
-#             course_json['count'] = 10
-#             results.append(course_json)
+class BooksMatchingTheSearchNewView(FormView):
+    def get(self,request,*args,**kwargs):
+        # EndOfData =  False
+        results= []
+        # data = request.GET
+        # # datasplit = data.get("search_string").split('---')
+        # c = data.get("search_string")
+        # l = data.get("lang")
+        # idx = data.get("idx")
+        # # codeC = datasplit[0]
+        # # our_url = datasplit[1]
+        # nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
+        # contentType = nl.category
+        # k = int(idx)
+        # if k >= 0:
+        #     try:
+        #         anl = AllNewsLinks.objects.filter(newLinks=nl)[k]                
+        #         nl = anl
+        #     except:
+        #         EndOfData = True
+        # count = 0
+        # try:
+        #     count = AllNewsLinks.objects.filter(newLinks=nl).count()
+        # except:
+        #     count = 0
+        # if EndOfData:
+        #     count = 9999
+        # our_url = nl.link
+        # r = requests.get(our_url)
+        # soup = BeautifulSoup(r.content)
+        # for a in soup.find_all('a'):
+        #     if len(a.text.strip().split(' '))>4:
+        #         course_json = {}
+        #         img = '/static/image/test/certificate.jpg'
+        #         course_json['technology'] = a['href']
+        #         if "BBC" in a.text or "Read" in a.text or " FT " in a.text or "FT " in a.text or "Learn more" in a.text or "Middle East & North Africa" in a.text or "our newsletter" in a.text:
+        #             continue
+        #         course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
+        #         if len(course_json['description'].split(" "))<5:
+        #             continue 
+        #         course_json['contentType'] = contentType
+        #         course_json['count'] = count
+        #         results.append(course_json)
+        books = Books.objects.all()
+        for b in books:
+            course_json = {}
+            course_json['technology'] = b.pdf_link
+            course_json['description'] = b.name
+            course_json['contentType'] = b.imageLink
+            course_json['count'] = 10
+            results.append(course_json)
            
-#         random.shuffle(results)
-#         data = json.dumps(results)
-#         mimetype = 'application/json'
-#         return HttpResponse(data, mimetype) 
+        random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype) 
 
 class MatchingTheSearchNewView1(FormView):
     def get(self,request,*args,**kwargs):

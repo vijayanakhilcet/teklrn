@@ -88,6 +88,14 @@ class CourseCategory(models.Model):
     courses = models.ManyToManyField(Course)
     def __str__(self):
         return self.name
+    
+class Books(models.Model):
+    name = models.CharField(max_length=1000)
+    category = models.CharField(max_length=40, default='General')
+    imageLink =  models.CharField(max_length=1000, default='Hi')
+    pdf_link =  models.CharField(max_length=1000, default='Hi')
+    def __str__(self):
+        return self.name
 
 class News(models.Model):
     name = models.CharField(max_length=1000)
