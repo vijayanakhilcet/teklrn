@@ -523,15 +523,17 @@ function populateCountry(pg){
 
 function gotoTechnology1(pg, url, img){   
     window.stop();
-    document.getElementById('reader').innerHTML='<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url='+img+'" type="application/pdf" type="application/pdf" width="100%" height="700px"></iframe>';  
+    document.getElementById('reader').innerHTML='<iframe loading="eager" src="https://drive.google.com/viewerng/viewer?embedded=true&url='+img+'" type="application/pdf" type="application/pdf" width="100%" height="500px"></iframe>';  
+    $(window).scrollTop(0);
 }
 
 function lol(){
     alert('hi');
 }
 function clickh(d, t){
-       
-    document.getElementById('reader').innerHTML='<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://ia802301.us.archive.org/22/items/homo-deus-a-brief-history-of-tomorrow_202110/Homo%20Deus%20-%20A%20Brief%20History%20of%20Tomorrow.pdf" type="application/pdf" type="application/pdf" width="100%" height="700px"></iframe>';
+    window.stop();   
+    document.getElementById('reader').innerHTML='<iframe loading="eager" src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://ia802301.us.archive.org/22/items/homo-deus-a-brief-history-of-tomorrow_202110/Homo%20Deus%20-%20A%20Brief%20History%20of%20Tomorrow.pdf" type="application/pdf" type="application/pdf" width="100%" height="700px"></iframe>';
+    $(window).scrollTop(0);
 }
 
 function gotoTechnology2(pg, url, img){   
