@@ -521,10 +521,17 @@ function populateCountry(pg){
     }   
 
 
-function gotoTechnology1(pg, url, img){   
-    window.stop();
-    document.getElementById('reader').innerHTML='<iframe loading="eager" src="https://drive.google.com/viewerng/viewer?embedded=true&url='+img+'" type="application/pdf" type="application/pdf" width="100%" height="500px"></iframe>';  
-    $(window).scrollTop(0);
+function gotoTechnology1(pg, url, img){  
+        // window.stop();
+        insert_code = ''
+        if (img.includes('drive.google.com')){
+            insert_code = '<iframe id="myiframe" loading="eager" src="'+img+'" type="application/pdf" type="application/pdf" width="100%" height="500px"></iframe>';
+        }else{
+            insert_code =  '<iframe id="myiframe" loading="eager" src="https://drive.google.com/viewerng/viewer?embedded=true&url='+img+'" type="application/pdf" type="application/pdf" width="100%" height="500px"></iframe>';
+        }   
+        
+        document.getElementById('reader').innerHTML= insert_code;
+        $(window).scrollTop(0);
 }
 
 function lol(){
