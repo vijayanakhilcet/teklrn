@@ -30,6 +30,7 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="{% static 'image/images/favicon.ico' %}">
+    <meta property="og:image" content="{{img}}" />
 	<meta name="description" content="Latest Financial World News at Teklrn Inc. Up to date latest News and events  happenging Globally. Current Events "/> 
 	<title>Financial News | World News | Top News of the Hour </title><link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
     <meta name="keywords" content="Finance, News, Latest, World" />
@@ -54,10 +55,12 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
 	
     <!-- <link rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}" /> -->
     <link rel="stylesheet" href="{% static 'css/modal/style.css' %}" />
+    <title>{{technology1}}</title>
 </head>
 
 <body style="font-family: Antietam; background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);" class="bg-black muli">
     <div class="loader"></div> 
+    <p id="technology_view1" hidden>{{technology1}}</p>
     <div  style="padding: 0px !important; background-color:white !important;overflow-x: hidden;" id="content">
 
         <nav style="padding-left: 0px !important;padding-right: 0px !important;padding-top: 1px !important;z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -265,15 +268,15 @@ background: url('/static/image/images/loading.gif') 50% 50% no-repeat rgb(255, 2
         </div>
     </section> -->
     
-    
+
         
 
 
        <script src="{% static 'js/books.js' %}"></script>
        <script src="{% static 'js/modal/popper.js' %}"></script>
        <script src="{% static 'js/modal/bootstrap.min.js' %}"></script>
-       <script src="{% static 'js/modal/main.js' %}"></script>
-
+       <script src="{% static 'js/modal/main.js' %}"></script>     
+      
      
        
 </body>

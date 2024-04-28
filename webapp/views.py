@@ -1121,10 +1121,16 @@ def books(request):
     page = 'webapp/books_pre_landing.html'
     data = request.GET
     defaultTechnology = 'Tensorflow'
+    defView = ''
+    defImg = 'https://wordsrated.com/wp-content/uploads/2022/02/Number-of-Books-Published-Per-Year.jpg'
     if data.get("technology"):
         c = Course.objects.get(description=data.get("technology"))
         defaultTechnology = c.name
         contentType = c.contentType
+    if data.get("technology1"):
+       defView=data.get("technology1")
+    if data.get("img1"):
+       defImg=data.get("img1")
     request.session['course'] = defaultTechnology
     if(request.user.is_authenticated):
         try:
@@ -1135,7 +1141,7 @@ def books(request):
             page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
-    return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})
+    return render(request, page, {'img':defImg, 'technology1':defView})
 
 
 def test(request):
