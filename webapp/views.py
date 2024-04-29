@@ -1141,7 +1141,7 @@ def books(request):
             page = 'webapp/hi_pre_landing.html'
             return render(request, page, {'technology':defaultTechnology, 'technology_desc':defaultTechnology})    
    # return render(request, page, {'contentType':contentType, 'technology':defaultTechnology, 'technology_desc':defaultTechnology})
-    return render(request, page, {'img':defImg, 'technology1':defView})
+    return render(request, page, {'img':defImg, 'technology1':defView, 'technology':defView.replace('_', ' ')})
 
 
 def test(request):
