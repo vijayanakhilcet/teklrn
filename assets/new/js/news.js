@@ -1,5 +1,4 @@
 $(function () {
-   // refineSearchView22('zzz')
 
    $("#course-search").autocomplete({  
       source: "/autocomplete",
@@ -23,7 +22,7 @@ $(function () {
   if(runit === 0){
       if (event.keyCode === 13) {                                     
           $("#course-search").blur(); 
-          //refineSearchView(event.target.value);    
+
           searchView('United States', 'en', -1, event.target.value);
   
       }
@@ -33,7 +32,6 @@ $(function () {
   });
    document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
    getLatestNews();      
-   //alert(document.getElementById('pElement').textContent)
     $(document).on('hidden.bs.modal', function (event) {
        if ($('.modal:visible').length) {
           $('body').addClass('modal-open');
@@ -65,7 +63,6 @@ $(function () {
     document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
    getNewsContent();
-   // searchTopicsNews();
  
  });
  
@@ -88,32 +85,11 @@ $(function () {
         
    })
    .complete(function(data) {
-
-   //    try { 
-   //       document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-   //       document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-   //       document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-   //       document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-   //       document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
-   //    }
-   //    catch(err) {
-   //       try { 
-   //          document.getElementById("forAd4").innerHTML = document.getElementById("ads").innerHTML;
-   //          document.getElementById("forAd8").innerHTML = document.getElementById("ads").innerHTML;
-   //          document.getElementById("forAd12").innerHTML = document.getElementById("ads").innerHTML;
-   //          document.getElementById("forAd16").innerHTML = document.getElementById("ads").innerHTML;
-   //          document.getElementById("forAd20").innerHTML = document.getElementById("ads").innerHTML;
-   //       }
-   //       catch(err) {
-
-   //    }  
-   //    document.getElementById("ads").remove();
-   // }
           
    });
    
    $.ajax({
-      url: "/getRelatedNews", // the url where we want to POST
+      url: "/getRelatedNews", 
       data: {
       "titles": document.getElementById("technology_view").textContent
       },
@@ -129,71 +105,20 @@ $(function () {
     $.each(data, function (index) {
        i=i+1;
        test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
-      //  test_html_message_mgc3 ='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTestNws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTestNws'+i+'---'+data[index].newtitle+'" style="float: left;width: 200px; height:75px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>'+test_html_message_mgc3;
 
      
        li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
       
-      //  if (i%3==0){
-      //     li_el += '<li id="ad-p-'+i+'"><span class="tree_label"><div class="col-md-6"><p id="ad-ppppp-'+i+'" style="width: 377px !important;object-fit: cover !important; overflow-clip-margin: content-box; overflow: clip;"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+''+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
-          
-      //     test_html_message +='<div style=""><p id="ad-pp-'+i+'" style="padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></p></div>';
-      //    //  test_html_message_mgc3 +='<div style=""><p id="ad-ppp-'+i+'" style="padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; "></p></div>';
-
-      //  }
+    
       }); 
       document.getElementById("tree").innerHTML = "";
       document.getElementById("tree").innerHTML = li_el;
       
       document.getElementById("mgc2").innerHTML = test_html_message;
-      // document.getElementById("mgc3").innerHTML = test_html_message_mgc3;
-      // try {               
      
-      //     document.getElementById("ad-p-3").innerHTML =  document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-3").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-3").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-6").innerHTML =  document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-6").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-6").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-9").innerHTML =  document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-9").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-9").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-12").innerHTML =  document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-12").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-12").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-15").innerHTML = document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-15").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-15").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-18").innerHTML = document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-18").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-18").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-21").innerHTML = document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-21").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-21").innerHTML = document.getElementById("ads").innerHTML
-
-      //     document.getElementById("ad-p-24").innerHTML = document.getElementById("li-copy-ads").innerHTML
-      //     document.getElementById("ad-pp-24").innerHTML = document.getElementById("ads").innerHTML
-      //    //  document.getElementById("ad-ppp-24").innerHTML = document.getElementById("ads").innerHTML
-
-      //    //  document.getElementById("ads").remove();
-      //    //  document.getElementById("li-copy-ads").remove();
-
-      //  }
-      //  catch(err) {
-          
-      //    //  document.getElementById("li-copy-ads").remove();
-      //  }
-      
  })
  .complete(function(data) {
         var datas = document.querySelectorAll('[id^="'+'RelatedNws'+'"]');
-        // Code = $("#countryCode option:selected").val().split("---")[0];
         data = ''
         datas.forEach((userItem) => {
             data=userItem.id;
@@ -219,13 +144,11 @@ $(function () {
                });
                
                   }) .complete(function(data) {
-                     // document.getElementById("mgc3").innerHTML=document.getElementById("mgc2").innerHTML;
                   });
                  
                
           });
                   populateStaticNews("zzz");
-                  // populateCountry();   
                   refineSearchView1("zzz", 'en', -1);
        });
        
@@ -361,7 +284,6 @@ function refineSearchView1(pg, lang, idx){
                });
            });
            if (count != 9999){
-               // refineSearchView1(pg, lang, idx+1);
            }
        });
         
@@ -370,15 +292,7 @@ function refineSearchView1(pg, lang, idx){
 
 function refineSearchView22(pg){
    var elm = document.getElementById("mgc2");
-   // var elm3 = document.getElementById("mgc3");
-   // if( getCookie("mgc") != ""){
-   //     alert(getCookie("mgc"));
-   //     elm.innerHTML=getCookie("mgc");
-   // }
-   // var datafromlocal = localStorage.getItem("mgc");
-   // if(datafromlocal){
-   //     elm.innerHTML=datafromlocal;}
-   // else{
+   
    var html_message ="";
    $.ajax({
        url         : "/getNewsMatchingTheSearchFiltered", // the url where we want to POST
@@ -393,17 +307,11 @@ function refineSearchView22(pg){
                html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].name+'\''+',\''+data[index].name+'\''+',\''+'mgc'+index+'---'+data[index].name+'\''+')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="mgc'+index+'---'+data[index].name+'" style="float: left;width: 250px; height:95px;object-fit: cover;" src="'+data[index].imageLink+'" /><p style="padding-left:2%;font-size:small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].name+'</p></div>'
            });
          
-   // elm.innerHTML=html_message;
-   // localStorage.setItem("mgc", html_message);
-   //setCookie("mgc", html_message, 10);
-//     elm.addEventListener("animationend", function() {
-//         elm.style.visibility='visible';
-// });
+   
    
        });
       
-       // event.preventDefault();     
-   // } 
+       
 }
 
  function getLatestNews(){
@@ -415,7 +323,6 @@ function refineSearchView22(pg){
             dataType    : 'json', // what type of data do we expect back from the server
             encode      : true
         })
-            // using the done promise callback
             .done(function(data) {
                 elm1.innerHTML="";  
                 i=-1
@@ -675,7 +582,6 @@ function refineSearchView22(pg){
  
  
  function videoClk1(event, crse, lvl, description, videolink, levels_total) {
-    //var iframe = '<iframe id="frameclk"  src="'+videolink+'" width="100%"  height="100%" allow=autoplay frameborder="0" allowfullscreen="allowfullscreen"></iframe><div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;"> </div>';
     var iframe = '<video poster="/static/image/images/poster.jpg" autoplay playsinline id="frameclk" controls  controlsList="nodownload"  height="100%" width="100%"><source src="' + videolink + '" type="video/mp4"></video>';
     $.createModalVid({
        message: iframe,
@@ -800,8 +706,6 @@ function refineSearchView22(pg){
             $.each(data, function (index) {
                a1Html = " ";
                a2Html = " ";
-               //a1Html += '<button style="font-size: small; border: 1px solid transparent;background-color: #0665b8;  vertical-align: middle;font-size: x-small;color: white;border-radius: .25rem;" onclick="lvlclk('+data[index].level+')"'+ '>Syllabus <i style="vertical-align:middle;" class="fa fa-book" aria-hidden="true"></i>'+'</button>'+
-               // a1Html+='<img src="/static/image/images/syl_b.png" style="width: 10%;height: 10%; margin-right:10px" onclick="lvlclk('+data[index].title+')"'+'</img>';
                a2Html += '</div></h4>';
    
                //aHtml += '<div class="col-md-6"><div class="d-flex post-entry"><div class="custom-thumbnail"><img style="padding-left:30%;" src="/static/image/images/' + course_name + '_icon.png" width="55px" height="30px" alt="Image" class="img-fluid"></div><div onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\')"  class="post-content"><div style="text-transform: capitalize;font-weight: 300 !important; font-family: \'Poppins\', sans-serif; font-size: 16px !important;  color:black !important"><b style=" background: #1c8ccd; color: white; font-size: small; padding: 1.5%; margin-right: 2%; ">NEWS ' + (index + 1) + ' </b>' + data[index].title + '<img onclick="lvlclk(\'' + data[index].link + '\', \'' + data[index].title + '\', \'' + course_description + '\')" src="/static/image/images/read_b.png" style="width: 30%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;">' + data[index].description + '</p><div class="post-meta">' + a1Html + '</div><div class="post-meta"><span>' + a2Html + '</span></div></div></div></div>';
@@ -1096,24 +1000,11 @@ function refineSearchView22(pg){
  function gotoTechnology(pg) {
  
     window.open(window.location.origin + "/news/technology?technology=" + pg, "_self");
-    /*
-    $.ajax({
-        url         : "hi", // the url where we want to POST
-        data        : {"technology":pg}, // our data object
-        dataType    : "html", // what type of data do\ we expect back from the server
-        encode      : true,
-    }) .done(function(data) {
-                            document.open("text/html", "load")
-                            document.write(data);
-                            document.close();
-                                // here we will handle errors and validation messages
-                                });
-                                event.preventDefault();*/
+   
  }
  
  
  function hi() {
-    //alert(crse+lvl);
     $.ajax({
           url: "/", // the url where we want to POST
           data: {
@@ -1141,15 +1032,7 @@ function refineSearchView22(pg){
  
  
  function lvlclk(url, heading, technology, imgLink) {
-    /*
-    var iframe = '<canvas id="my_canvas" style="width : 100%; max-height: 70%;"></canvas><script>pdfjsLib.getDocument("./static/image/'+image_name+pg+'.pdf").promise.then(doc =>{console.log("This file has "+doc._pdfInfo.numPages + " pages");  doc.getPage(1).then(page =>{ var myCanvas = document.getElementById("my_canvas");var context =  myCanvas.getContext("2d");var viewport = page.getViewport({scale:1.5}); myCanvas.width = viewport.width; myCanvas.height = viewport.height;  page.render({ canvasContext:context, viewport:viewport  });   }); }); </script>'
-    $.createModal({
-    message: iframe,
-    current_level: pg,
-    closeButton:true,
-    scrollable:false
-    });
-    return false;   */
+   
     window.open(window.location.origin + "/news/technology/read?url=" + url + '&heading=' + heading + '&technology=' + technology + '&imgLink='+document.getElementById('img-'+heading).src, "_self");
  }
  
@@ -1157,9 +1040,7 @@ function refineSearchView22(pg){
  
     document.getElementById(lvl_to_show).click();
  
-    /*if(document.getElementById('1').innerText.includes("FREE")){
-    document.getElementById('1').click();
-    }*/
+  
  
  }
  
