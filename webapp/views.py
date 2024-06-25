@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
+from webapp.models import RelatedNews,UrlLink,Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -65,7 +65,6 @@ def charge(request): # new
                     customer=s.cust_id
                 )
             except Exception as e:
-                print(e)
                 return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
             s.advertisement_count = s.advertisement_count+request.session['count']
             request.session['advertisement_count'] = s.advertisement_count
@@ -108,7 +107,6 @@ def charge(request): # new
                     source=request.POST['stripeToken']
                 )
         except Exception as e:
-            print(e)
             return render(request, 'webapp/stripe_err.html', {'name': request.session['name'], 'course': request.session['course'], 'level': request.session['level']})
         s.advertisement_count = s.advertisement_count+request.session['count']
         request.session['advertisement_count'] = s.advertisement_count
@@ -213,7 +211,7 @@ def register(request):
             try:
                 email_test.send(fail_silently=False)
             except:
-                print('Mail Err')
+                1>2
             return render(request, 'webapp/loginActivate.html', {'email' : request.session['email']})
 
             # return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
@@ -816,7 +814,6 @@ def scitechnews(request):
         for a2 in soup.find_all("p"):
             try:
                 if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
-                    print(a2.text)
                     paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
                     if len(paradata.split(" "))<5:
                         continue 
@@ -1026,7 +1023,6 @@ def medianews(request):
                             img =  '/static/image/test/certificate.jpg'  
             
         except Exception as e:
-            print(e)
             pElement = ''
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology, 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
@@ -1313,17 +1309,15 @@ class CheckoutRemoveAdd(FormView):
                 counterReduce=True
             else:
                 if counterReduce:
-                    print('Counter Reduce ')
                     oldCount = add_Data.split('|')[2]
                     newCOunt = str(int(oldCount)-1)
                     temp_Add_Data = add_Data.split('|')[0]+'|'+add_Data.split('|')[1]+'|'+newCOunt+'|'+add_Data.split('|')[3]
                     news_session+=temp_Add_Data+'----' 
                     s3_client.copy_object(CopySource = '/'+bucket_name+'/'+add_Data, Bucket = bucket_name, Key = temp_Add_Data)
-                    print('Counter Reduce ')
+                    
                 else:
                     news_session+=add_Data+'----'
         request.session['upd_file'] = news_session[:-4]
-        print('New Session '+ request.session['upd_file'])
         if(request.session['upd_file']==''):
             course_json={}
             course_json['imageUrl'] = 'NONE'
@@ -1337,7 +1331,6 @@ class CheckoutRemoveAdd(FormView):
         
         all_items = request.session['upd_file'].split('----')
         for technology in all_items:
-            print(technology)
             course_json = {}
             response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bucket_name,
@@ -1346,7 +1339,6 @@ class CheckoutRemoveAdd(FormView):
             course_json['imageUrl'] = response
             course_json['display'] = 'Advertisement '+technology.split('|')[2]
             course_json['link'] = technology.split('|')[1]
-            print(course_json)
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -1393,7 +1385,6 @@ class Checkout(FormView):
         results= []
         all_items = request.session['upd_file'].split('----')
         for technology in all_items:
-            print(technology)
             course_json = {}
             response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bucket_name,
@@ -1402,7 +1393,6 @@ class Checkout(FormView):
             course_json['imageUrl'] = response
             course_json['display'] = 'Advertisement '+technology.split('|')[2]
             course_json['link'] = technology.split('|')[1]
-            print(course_json)
             results.append(course_json)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -1533,7 +1523,6 @@ class VideosMatchingTheSearchNewView(FormView):
                 #     news = self.allNews(a.person.country.name)         
                 course_json['news'] = ''
             except Exception as e:
-                print("Exception "+str(e))
                 count = 9999  
                 course_json['count'] = count
                 break
@@ -1641,14 +1630,13 @@ class SciTechMatchingTheSearchNewView(FormView):
                     data=a
                     href  = 'https://www.nih.gov'
                     if 'NIH' not in data and "National Institute" not in data:
-                        print('NIH'+data+':'+str(o))
                         all_p_ele = ""
                         if not 'NIH' in data:                            
                             soup1 = BeautifulSoup(requests.get(str(href)).content)
                             try:
                                 for a2 in soup1.find_all("p"):
                                     if "NIH" not in a2.text and "National Institute" not in a2.text and "More »" not in a2.text and "Quick Links" not in a2.text and "News Release" not in a2.text:
-                                            print(a2.text)
+                                            
                                             paradata= ' '.join(a2.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
                                             if len(paradata.split(" "))<5:
                                                 continue 
@@ -1666,7 +1654,6 @@ class SciTechMatchingTheSearchNewView(FormView):
                         results.append(course_json)
             except:
                 continue
-        print('Total :'+str(o))
         random.shuffle(results)
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -1846,7 +1833,6 @@ class MatchingTheSearchNewView(FormView):
                 results.append(course_json)
         if not results:
             url  = "https://search.yahoo.com/search?p="+searchData
-            print(url)
             r = requests.get(url, headers=headers)
             soup = BeautifulSoup(r.content)
             for a in soup.find_all('a'):
@@ -1876,7 +1862,6 @@ class MatchingTheSearchNewView(FormView):
                         results.append(course_json)
 
         random.shuffle(results)
-        print(results)
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype) 
@@ -2671,7 +2656,6 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
         topic = data.get('titles')  
         langg = data.get('lang') 
         stringVal = data.get('strVal') 
-        print('IO :'+stringVal)
         NonEnglish = False
         if langg not in ('us', 'gb', 'nz', 'au', 'ca'):
             NonEnglish = True
@@ -2680,6 +2664,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             course_json = {} 
             e = unquote(stringVal)
             course_json['title'] = topic
+            URLTITLE = topic.split('---')[1]
             try:
                 course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
             except:
@@ -2692,7 +2677,22 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
                             try:
                                 course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')[:len(e)//2], limit=1)[0]
                             except:
-                                course_json['src'] =  '/static/image/test/certificate.jpg'                        
+                                course_json['src'] =  '/static/image/test/certificate.jpg'    
+            UrlTitle = data.get('UrlTitle') 
+            urlLink = ''
+            try:
+                urlLink = UrlLink.objects.get(name=UrlTitle)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = URLTITLE)
+                rn.save() 
+            except UrlLink.DoesNotExist:
+                try:
+                    urlLink = UrlLink(name=UrlTitle)
+                    urlLink.save()
+                except:
+                     urlLink = UrlLink.objects.get(name=UrlTitle)
+                
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = URLTITLE)
+                rn.save()                                
             results.append(course_json)
         else: 
             course_json = {} 
@@ -2702,6 +2702,20 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
                 course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
             except:
                 course_json['src'] =  '/static/image/test/certificate.jpg'
+            UrlTitle = data.get('UrlTitle')  
+            urlLink = ''
+            try:
+                urlLink = UrlLink.objects.get(name=UrlTitle)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = str(course_json['title']))
+                rn.save()    
+            except UrlLink.DoesNotExist:
+                try:
+                    urlLink = UrlLink(name=UrlTitle)
+                    urlLink.save()
+                except:
+                     urlLink = UrlLink.objects.get(name=UrlTitle)
+            rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = str(course_json['title']))
+            rn.save()            
             results.append(course_json)
        # random.shuffle(results)
         data = json.dumps(results)
@@ -2765,6 +2779,18 @@ class NewsContent(FormView):
         data = request.GET        
         if data.get('heading'):
             heading = data.get('heading')
+        urlLink = ''
+        try:
+            urlLink = UrlLink.objects.get(name=heading)
+            course_json = {}
+            course_json['para'] = urlLink.para
+            results.append(course_json)
+            data = json.dumps(results)
+            mimetype = 'application/json'
+            return HttpResponse(data, mimetype)
+        except UrlLink.DoesNotExist:
+            print('Not Exists')
+            
         try:
             search = heading
             url = 'https://www.google.com/search'
@@ -2807,12 +2833,18 @@ class NewsContent(FormView):
                     if len(pElement.split())>=200:
                         course_json = {}
                         course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement)
+                        try:
+                            urlLink = UrlLink.objects.get(name=heading)            
+                        except UrlLink.DoesNotExist:
+                            urlLink = UrlLink(name=heading)
+                            urlLink.save()
+                        urlLink.para = course_json['para']
+                        urlLink.save()
                         results.append(course_json)
                         break
                 except:
                     continue
         except Exception as e:
-            print(e)
             pElement = ''
             course_json = {}
             course_json['para'] = pElement
@@ -2902,17 +2934,24 @@ class AutoCompleteSearchTopicsViewNew(FormView):
     
 class RelatedNewsView(FormView):
     def get(self,request,*args,**kwargs):
-        print('ENter Get Related')
         results= []
         data = request.GET
         courseName = data.get("titles")
-        # headers = {
-        #     "User-Agent":
-        #     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
-        # }
-        # response = requests.get('https://ca.search.yahoo.com/search?p='+courseName, headers=headers)
-        # 
-        # 
+        try:
+            urlLink = UrlLink.objects.get(name=courseName)
+            listNews = RelatedNews.objects.filter(NewsLink=urlLink)
+            if len(listNews)>0:
+                for ns in listNews:
+                    course_json = {}
+                    course_json['newtitle'] = ns.txt
+                    course_json['img'] = ns.imgLink
+                    results.append(course_json)
+                data = json.dumps(results)
+                mimetype = 'application/json'
+                return HttpResponse(data, mimetype)
+        except UrlLink.DoesNotExist:
+            urlLink = UrlLink(name=courseName)
+            urlLink.save()
         url  = "https://search.yahoo.com/search?p="+courseName
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
@@ -2923,24 +2962,21 @@ class RelatedNewsView(FormView):
                 results.append(course_json)
         if len(results)<90:
             url = 'https://www.google.com/search'
-
             headers = {
                 'Accept' : '*/*',
                 'Accept-Language': 'en-US,en;q=0.5',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
             }
             parameters = {'q': courseName}
-
             content = requests.get(url, headers = headers, params = parameters).text
             soup = BeautifulSoup(content, 'html.parser')
-
             search = soup.find(id = 'search')
             for a in search.find_all('span'):
                  if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
                     course_json = {}
                     course_json['newtitle'] = a.text.split('.')[0].replace("'", "")
+                    course_json['img'] = False
                     results.append(course_json)
-
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
@@ -3273,7 +3309,7 @@ class UploadFileUsingClientView(FormView):
                         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
 
         except:
-            print('continue')
+            1>2
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
@@ -3287,10 +3323,6 @@ class UploadFileUsingClientView(FormView):
                         region_name=settings.AWS_DEFAULT_REGION
                             )        
         bucket_name = "tekl-rn-img"
-        # # print(request.FILES)
-        # file_name = request.FILES['file']
-        print(fs.path(filename))
-        print(request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+request.FILES['file'].name)
         f_name = request.user.username+'|'+webaddress+'|'+str(count-1)+'|'+'.'+request.FILES['file'].name.split('.')[-1]
         try:
             if request.session['upd_file']=='':

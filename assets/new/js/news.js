@@ -67,7 +67,7 @@ $(function () {
  });
  
  function getNewsContent(){
-
+   imageExists = 0
    $.ajax({
       url: "/newsContent", // the url where we want to POST
       data: {
@@ -76,7 +76,6 @@ $(function () {
       dataType: "json", // what type of data do\ we expect back from the server
       encode: true
    })
-
    // using the done promise callback
    .done(function (data) {
       $.each(data, function (index) {
@@ -89,7 +88,7 @@ $(function () {
    });
    
    $.ajax({
-      url: "/getRelatedNews", 
+      url: "/getRelatedNews",
       data: {
       "titles": document.getElementById("technology_view").textContent
       },
@@ -97,18 +96,30 @@ $(function () {
       encode: true
   })
   .done(function (data) {
-   var test_html_message=""
-   // var test_html_message_mgc3 = ""
-    
+    var test_html_message=""    
     li_el = "";
     i=0
+    
     $.each(data, function (index) {
+       if (i == 0){
+         if(data[index].img){
+         imageExists=0
+       }
+       else{
+         imageExists=1
+       }
+      }
        i=i+1;
-       test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
-
-     
-       li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
+       if (imageExists == 0){
+         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].img+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
+         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="'+data[index].img+'" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
       
+       }
+       else{
+         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
+         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
+       }
+       
     
       }); 
       document.getElementById("tree").innerHTML = "";
@@ -118,6 +129,13 @@ $(function () {
      
  })
  .complete(function(data) {
+   
+   if (imageExists==0){
+      
+      populateStaticNews("zzz");
+      refineSearchView1("zzz", 'en', -1);
+   }
+   else{
         var datas = document.querySelectorAll('[id^="'+'RelatedNws'+'"]');
         data = ''
         datas.forEach((userItem) => {
@@ -127,8 +145,8 @@ $(function () {
                 data: {
                 "strVal": data.split('---')[1],
                 "titles": data,
-                "lang":'en'
-                
+                "lang":'en',
+                "UrlTitle": document.getElementById("technology_view").textContent
                 },
                 dataType: 'json',
                 encode: true
@@ -150,6 +168,7 @@ $(function () {
           });
                   populateStaticNews("zzz");
                   refineSearchView1("zzz", 'en', -1);
+         }
        });
        
                 document.getElementById("scan_clicker").click();
@@ -942,7 +961,6 @@ function refineSearchView22(pg){
  
  
  function videoClk(event, crse, lvl) {
-    //alert(crse+lvl);
     $.ajax({
           url: "/loginFormForVideoAccess", // the url where we want to POST
           data: {

@@ -230,3 +230,17 @@ class DailyNewsVideos(models.Model):
 
     def __str__(self):
         return self.link
+    
+class UrlLink(models.Model):
+    name = models.CharField(max_length=10001)
+    para = models.CharField(max_length=10000)
+    def __str__(self):
+
+        return self.name
+    
+class RelatedNews(models.Model): 
+    NewsLink = models.ForeignKey(UrlLink, on_delete=models.CASCADE)
+    imgLink = models.CharField(max_length=10001, default='')
+    txt = models.CharField(max_length=10000, default='')
+    def __str__(self):
+        return self.txt
