@@ -289,6 +289,7 @@ function refineSearchView1(pg, lang, idx){
                })
                // using the done promise callback
                .done(function (data) {
+                  try{
                    $.each(data, function (index) {
                    var elm = document.getElementById(data[index].title);
                    elm.src = data[index].src;
@@ -299,7 +300,10 @@ function refineSearchView1(pg, lang, idx){
                    document.getElementById("initial").remove();
 
                    });
-       
+                  }
+                  catch(err) {
+                     
+                   }
                });
            });
            if (count != 9999){
