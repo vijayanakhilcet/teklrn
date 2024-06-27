@@ -211,7 +211,7 @@ def register(request):
             try:
                 email_test.send(fail_silently=False)
             except:
-                1>2
+                ji='Error'
             return render(request, 'webapp/loginActivate.html', {'email' : request.session['email']})
 
             # return  HttpResponseRedirect(HOSTNAME+'?redirecttologinA')
@@ -3309,7 +3309,7 @@ class UploadFileUsingClientView(FormView):
                         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
 
         except:
-            1>2
+            ji = 'Error'
         webaddress = request.POST['web']
         fs = FileSystemStorage()
         filename = fs.save(request.FILES['file'].name, request.FILES['file'])
