@@ -62,7 +62,7 @@ $(function () {
     document.getElementById('img-ins').src=document.getElementById("img").textContent.replaceAll('-----','&');
     document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
-   // getNewsContent();
+   getNewsContent();
  
  });
  
