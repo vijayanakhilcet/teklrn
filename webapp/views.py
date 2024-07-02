@@ -16,7 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
 from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
-from webapp.models import RelatedNews,UrlLink,Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
+from webapp.models import FinancialRelatedNews, RelatedNews,UrlLink,Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
 from django.utils.timezone import make_aware
 import datetime, pytz
@@ -222,7 +222,7 @@ def register(request):
             data = request.GET            
             form.fields["email"].initial = data.get("email")
         except:
-            print()
+            kl=0
 
     context = {'form' : form}
     return render(request, 'webapp/register.html', context)
@@ -1670,6 +1670,22 @@ class FinancialMatchingTheSearchNewView(FormView):
         idx = data.get("idx")
         # codeC = datasplit[0]
         # our_url = datasplit[1]
+        try:
+            if FinancialRelatedNews.objects.count() > 0:
+                for val in FinancialRelatedNews.objects.all():
+                    course_json = {}
+                    course_json['technology'] = val.url
+                    course_json['description'] = val.txt
+                    course_json['contentType'] = True
+                    course_json['count'] = 0
+                    course_json['imgLink'] = val.imgLink
+                    results.append(course_json)
+                random.shuffle(results)
+                data = json.dumps(results)
+                mimetype = 'application/json'
+                return HttpResponse(data, mimetype) 
+        except:
+            kl = 0
         nl = NewsLinks.objects.filter(link='https://www.ft.com')[0]
         contentType = nl.category
         k = int(idx)
@@ -1699,8 +1715,11 @@ class FinancialMatchingTheSearchNewView(FormView):
                 course_json['description'] =  ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("Tech Tonic.", "").strip()
                 if len(course_json['description'].split(" "))<5:
                     continue 
+                ful = FinancialRelatedNews(url=course_json['technology'], txt=course_json['description'])
+                ful.save()
                 course_json['contentType'] = contentType
                 course_json['count'] = count
+                course_json['contentType'] = False
                 results.append(course_json)
         random.shuffle(results)
         data = json.dumps(results)
@@ -2664,7 +2683,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             course_json = {} 
             e = unquote(stringVal)
             course_json['title'] = topic
-            URLTITLE = topic.split('---')[1]
+            # URLTITLE = topic.split('---')[1]
             try:
                 course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
             except:
@@ -2682,7 +2701,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             urlLink = ''
             try:
                 urlLink = UrlLink.objects.get(name=UrlTitle)
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = URLTITLE)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = UrlTitle)
                 rn.save() 
             except UrlLink.DoesNotExist:
                 try:
@@ -2691,7 +2710,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
                 except:
                      urlLink = UrlLink.objects.get(name=UrlTitle)
                 
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = URLTITLE)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = UrlTitle)
                 rn.save()                                
             results.append(course_json)
         else: 
@@ -2756,7 +2775,14 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                             try:
                                 course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')[:len(e)//2], limit=1)[0]
                             except:
-                                course_json['src'] =  '/static/image/test/certificate.jpg'                        
+                                course_json['src'] =  '/static/image/test/certificate.jpg'         
+                try:
+                    ful = FinancialRelatedNews.objects.filter(txt=e.lstrip(digits).replace(stringVal+'-img-', ''))[0]
+                    
+                    ful.imgLink = course_json['src']
+                    ful.save()  
+                except:
+                    kl=0
                 results.append(course_json)
         else:            
             for entry in alltitles:
@@ -2767,6 +2793,13 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                     course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
+                try:
+                    ful = FinancialRelatedNews.objects.filter(txt=e.lstrip(digits).replace(stringVal+'-img-', ''))[0]   
+                    
+                    ful.imgLink = course_json['src']
+                    ful.save()  
+                except:
+                    kl=0
                 results.append(course_json)
        # random.shuffle(results)
         data = json.dumps(results)
@@ -2789,7 +2822,7 @@ class NewsContent(FormView):
             mimetype = 'application/json'
             return HttpResponse(data, mimetype)
         except UrlLink.DoesNotExist:
-            print('Not Exists')
+            kl=0
             
         try:
             search = heading
