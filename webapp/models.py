@@ -243,4 +243,11 @@ class RelatedNews(models.Model):
     imgLink = models.CharField(max_length=10001, default='')
     txt = models.CharField(max_length=10000, default='')
     def __str__(self):
+        return self.txt  
+    
+class FinancialRelatedNews(models.Model): 
+    url = models.CharField(max_length=10001, default='')
+    imgLink = models.CharField(max_length=10001, default='')
+    txt = models.CharField(max_length=10000, default='')
+    def __str__(self):
         return self.txt
