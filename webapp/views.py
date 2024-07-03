@@ -2684,24 +2684,25 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             e = unquote(stringVal)
             course_json['title'] = topic
             # URLTITLE = topic.split('---')[1]
+            srch_text = translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')
             try:
-                course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                course_json['src'] =  bing_image_urls(srch_text, limit=1)[0]
             except:
                     try:
-                        course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=4)[2]
+                        course_json['src'] =  bing_image_urls(srch_text, limit=4)[2]
                     except:
                         try:
-                            course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=10)[1]
+                            course_json['src'] =  bing_image_urls(srch_text, limit=10)[1]
                         except:
                             try:
-                                course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')[:len(e)//2], limit=1)[0]
+                                course_json['src'] =  bing_image_urls(srch_text[:len(e)//2], limit=1)[0]
                             except:
                                 course_json['src'] =  '/static/image/test/certificate.jpg'    
             UrlTitle = data.get('UrlTitle') 
             urlLink = ''
             try:
                 urlLink = UrlLink.objects.get(name=UrlTitle)
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = UrlTitle)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
                 rn.save() 
             except UrlLink.DoesNotExist:
                 try:
@@ -2710,7 +2711,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
                 except:
                      urlLink = UrlLink.objects.get(name=UrlTitle)
                 
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = UrlTitle)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
                 rn.save()                                
             results.append(course_json)
         else: 
@@ -2718,14 +2719,14 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             e = unquote(stringVal)
             course_json['title'] = topic
             try:
-                course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                course_json['src'] =  bing_image_urls(srch_text, limit=1)[0]
             except:
                 course_json['src'] =  '/static/image/test/certificate.jpg'
             UrlTitle = data.get('UrlTitle')  
             urlLink = ''
             try:
                 urlLink = UrlLink.objects.get(name=UrlTitle)
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = str(course_json['title']))
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
                 rn.save()    
             except UrlLink.DoesNotExist:
                 try:
@@ -2763,17 +2764,18 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 course_json = {} 
                 e = unquote(entry.replace(stringVal+'-img-', ''))
                 course_json['title'] = stringVal+'-img-'+e
+                srch_txt = translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')
                 try:
-                    course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                    course_json['src'] =  bing_image_urls(srch_txt, limit=1)[0]
                 except:
                     try:
-                        course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=4)[2]
+                        course_json['src'] =  bing_image_urls(srch_txt, limit=4)[2]
                     except:
                         try:
-                            course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=10)[1]
+                            course_json['src'] =  bing_image_urls(srch_txt, limit=10)[1]
                         except:
                             try:
-                                course_json['src'] =  bing_image_urls(translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')[:len(e)//2], limit=1)[0]
+                                course_json['src'] =  bing_image_urls(srch_txt[:len(e)//2], limit=1)[0]
                             except:
                                 course_json['src'] =  '/static/image/test/certificate.jpg'         
                 try:
@@ -2790,7 +2792,7 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 e = unquote(entry.replace(stringVal+'-img-', ''))
                 course_json['title'] = stringVal+'-img-'+e
                 try:
-                    course_json['src'] =  bing_image_urls(e.lstrip(digits).replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
+                    course_json['src'] =  bing_image_urls(srch_txt, limit=1)[0]
                 except:
                     course_json['src'] =  '/static/image/test/certificate.jpg'
                 try:
