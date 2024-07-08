@@ -2851,8 +2851,9 @@ class NewsContent(FormView):
                     soup = BeautifulSoup(r.content, features="lxml")
                     pElement = '<div style="font-size:small;">'
                     i=0
-                    for all_p in soup.find_all('p')[1:-1]:
-                        if len(all_p.text.strip().split())>=10:
+                    for all_p in soup.find_all('p'):
+                        lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
+                        if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
                             i=i+1
                             if i==4:          
                                 pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd4"></p>'
