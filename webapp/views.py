@@ -2701,18 +2701,21 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             UrlTitle = data.get('UrlTitle') 
             urlLink = ''
             try:
-                urlLink = UrlLink.objects.get(name=UrlTitle)
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
-                rn.save() 
-            except UrlLink.DoesNotExist:
                 try:
-                    urlLink = UrlLink(name=UrlTitle)
-                    urlLink.save()
-                except:
-                     urlLink = UrlLink.objects.get(name=UrlTitle)
-                
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
-                rn.save()                                
+                    urlLink = UrlLink.objects.get(name=UrlTitle)
+                    rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
+                    rn.save() 
+                except UrlLink.DoesNotExist:
+                    try:
+                        urlLink = UrlLink(name=UrlTitle)
+                        urlLink.save()
+                    except:
+                        urlLink = UrlLink.objects.get(name=UrlTitle)
+                    
+                    rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
+                    rn.save()       
+            except:
+                kl=11                         
             results.append(course_json)
         else: 
             course_json = {} 
@@ -2725,17 +2728,20 @@ class AutoCompleteSearchTopicsViewNewNewsForImgRelated(FormView):
             UrlTitle = data.get('UrlTitle')  
             urlLink = ''
             try:
-                urlLink = UrlLink.objects.get(name=UrlTitle)
-                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
-                rn.save()    
-            except UrlLink.DoesNotExist:
                 try:
-                    urlLink = UrlLink(name=UrlTitle)
-                    urlLink.save()
-                except:
-                     urlLink = UrlLink.objects.get(name=UrlTitle)
-            rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = str(course_json['title']))
-            rn.save()            
+                    urlLink = UrlLink.objects.get(name=UrlTitle)
+                    rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = srch_text)
+                    rn.save()    
+                except UrlLink.DoesNotExist:
+                    try:
+                        urlLink = UrlLink(name=UrlTitle)
+                        urlLink.save()
+                    except:
+                        urlLink = UrlLink.objects.get(name=UrlTitle)
+                rn  = RelatedNews(NewsLink = urlLink, imgLink = str(course_json['src']), txt = str(course_json['title']))
+                rn.save()      
+            except:
+                ksdjhsk=1      
             results.append(course_json)
        # random.shuffle(results)
         data = json.dumps(results)
