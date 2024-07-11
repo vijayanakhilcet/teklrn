@@ -2855,7 +2855,7 @@ class NewsContent(FormView):
                 try:
                     r = requests.get(d)
                     soup = BeautifulSoup(r.content, features="lxml")
-                    pElement = '<div style="font-size:small;">'
+                    pElement = '<div style="font-size:1.4em !important;">'
                     i=0
                     for all_p in soup.find_all('p'):
                         lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
