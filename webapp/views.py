@@ -2814,6 +2814,86 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
 
+class NewsContentAdditional(FormView):
+    def get(self,request,*args,**kwargs):
+        results= []
+        data = request.GET        
+        if data.get('heading'):
+            heading = data.get('heading')
+        urlLink = ''
+        # try:
+        #     urlLink = UrlLink.objects.get(name=heading)
+        #     course_json = {}
+        #     course_json['para'] = urlLink.para
+        #     results.append(course_json)
+        #     data = json.dumps(results)
+        #     mimetype = 'application/json'
+        #     return HttpResponse(data, mimetype)
+        # except UrlLink.DoesNotExist:
+        #     kl=0
+            
+        try:
+            search = heading
+            url = 'https://www.google.com/search'
+
+            headers = {
+                'Accept' : '*/*',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+            }
+            parameters = {'q': search}
+
+            content = requests.get(url, headers = headers, params = parameters).text
+            soup = BeautifulSoup(content, 'html5lib')
+
+            search = soup.find(id = 'search')
+            f = 0
+            for link in search.find_all('a'):               
+                d = link['href']
+                # print(d)
+                if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
+                    continue
+                try:
+                    r = requests.get(d)
+                    soup = BeautifulSoup(r.content, features="html5lib")
+                    pElement = '<hr>'
+                    pElement1 = '<div style="font-size:1.4em !important;">'
+                    
+                    i=0
+                    for all_p in soup.find_all('p'):
+                        lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
+                        if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
+                          pElement = pElement+ '<p style="padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+                          pElement1 = pElement1+ '<p style="padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+
+                    if len(pElement.split())>=200:
+                        if f==0:
+                            f=f+1                            
+                            continue  
+                        f=f+1
+                        course_json = {}
+                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
+                        try:
+                            urlLink = UrlLink.objects.get(name=heading)            
+                        except UrlLink.DoesNotExist:
+                            urlLink = UrlLink(name=heading)
+                            urlLink.save()
+                        urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                        urlLink.save()
+                        results.append(course_json)
+                except:
+                    continue
+        except Exception as e:
+            pElement = ''
+            course_json = {}
+            course_json['para'] = pElement
+            results.append(course_json)
+                
+       # random.shuffle(results)
+        data = json.dumps(results)
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)
+
 class NewsContent(FormView):
     def get(self,request,*args,**kwargs):
         results= []
@@ -2860,18 +2940,7 @@ class NewsContent(FormView):
                     for all_p in soup.find_all('p'):
                         lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
                         if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
-                            i=i+1
-                            if i==4:          
-                                pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd4"></p>'
-                            if i==8:          
-                                pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd8"></p>'
-                            if i==12:          
-                                pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd12"></p>'
-                            if i==16:          
-                                pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd16"></p>'
-                            if i==20:          
-                                pElement = pElement+'<p style="padding-top:3% !important;padding-bottom:3% !important;margin: -3% !important;width: 100% !important;pointer-events: all !important;" id="forAd20"></p>'
-                            pElement = pElement+ '<p style="padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+                          pElement = pElement+ '<p style="padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
                     if len(pElement.split())>=200:
                         course_json = {}
                         course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement)

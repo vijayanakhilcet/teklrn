@@ -84,6 +84,23 @@ $(function () {
         
    })
    .complete(function(data) {
+      if (!document.getElementById("para-ins").innerHTML.toLowerCase().includes('<hr>'.toLocaleLowerCase())){
+      $.ajax({
+         url: "/newsContentAdditional", // the url where we want to POST
+         data: {
+            "heading": document.getElementById("technology_view").textContent
+         }, // our data object
+         dataType: "json", // what type of data do\ we expect back from the server
+         encode: true
+      })
+      // using the done promise callback
+      .done(function (data) {
+         $.each(data, function (index) {
+            document.getElementById("para-ins-additional").innerHTML =  document.getElementById("para-ins-additional").innerHTML+ data[index].para
+           });
+           
+      })
+      }
           
    });
    
