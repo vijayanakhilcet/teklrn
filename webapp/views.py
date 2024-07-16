@@ -2844,7 +2844,7 @@ class NewsContentAdditional(FormView):
             parameters = {'q': search}
 
             content = requests.get(url, headers = headers, params = parameters).text
-            soup = BeautifulSoup(content, 'html5lib')
+            soup = BeautifulSoup(content, 'html.parser')
 
             search = soup.find(id = 'search')
             f = 0
@@ -2855,7 +2855,7 @@ class NewsContentAdditional(FormView):
                     continue
                 try:
                     r = requests.get(d)
-                    soup = BeautifulSoup(r.content, features="html5lib")
+                    soup = BeautifulSoup(r.content, features="lxml")
                     pElement = '<hr>'
                     pElement1 = '<div style="font-size:1.4em !important;">'
                     
