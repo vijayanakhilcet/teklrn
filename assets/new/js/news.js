@@ -83,7 +83,7 @@ $(function () {
         });
         
    })
-   .complete(function(data) {
+   .always(function(data) {
       if (!document.getElementById("para-ins").innerHTML.toLowerCase().includes('<hr>'.toLocaleLowerCase())){
       $.ajax({
          url: "/newsContentAdditional", // the url where we want to POST
