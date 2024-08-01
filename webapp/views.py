@@ -874,7 +874,7 @@ def scitechnews(request):
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':all_p_ele+'</div>'})
 
 
-def news(request):
+def news1(request):
     # try:
     #     email_test = EmailMessage(
     #             "New Visit News",
@@ -938,7 +938,17 @@ def news(request):
 
     return render(request, page, {'lvl':defaultLevel,'contentType':request.session['contentType'], 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':technology_description, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
 
-  
+def news(request):
+    page = 'webapp/news.html' 
+    data = request.GET
+    img=''
+    pElement=''
+    defaultTechnology = data.get("technology")
+    if data.get('image'):
+        img = data.get('image')
+    return render(request, page, {'lvl':1,'contentType':defaultTechnology, 'technology':defaultTechnology,'Code':data.get('Code'), 'technology_desc':defaultTechnology, 'data':'', 'img':img, 'pElement':pElement+'</div>'})
+
+    
 
 def medianews(request):
     page = 'webapp/medianews.html' 
