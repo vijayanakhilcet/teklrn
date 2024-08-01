@@ -13,11 +13,11 @@
     <meta property="og:description" content="{{technology_desc}}"> 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
     crossorigin="anonymous"></script>
-    <link  rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">    
-    <link  rel="stylesheet" href="{% static 'new/css/style.css' %}">    
-    <link  rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
-    <script  src="{% static 'new/js/jquery-1.11.1.js' %}"></script>
-    <script  src="{% static 'new/js/jquery-1.12.1.js' %}"></script> 
+    <link rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">    
+    <link rel="stylesheet" href="{% static 'new/css/style.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />
+    <script src="{% static 'new/js/jquery-1.11.1.js' %}"></script>
+    <script src="{% static 'new/js/jquery-1.12.1.js' %}"></script> 
     
   </head>
   <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
@@ -168,21 +168,267 @@
       </div>
   </section>
 
+     <script type="text/javascript">
+        function clickh(d, t){
+          
+            document.getElementById('comment').src=document.getElementById('img').innerHTML;
+            document.getElementById('desc').innerHTML =document.getElementById('technology_view').innerHTML;
 
-    <script  src="{% static 'js/modal/bootstrap.min.js' %}"></script>
-    <script  src="{% static 'js/modal/main.js' %}"></script> 
-    <script  src="{% static 'new/js/news.js' %}"></script>
-    <script  type="text/javascript" src="{% static 'js/magicscroll.js' %}"></script>
-    <script  src="{% static 'js/modal/popper.js' %}"></script>
-    <link  type="text/css" rel="stylesheet" href="{% static 'css/magicscroll.css' %}" media="screen"/>
-    <link  rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
+    }
+
+    function submitted(event){
+    window.stop();
+    $.ajax({
+        url         : "/tmail", // the url where we want to POST
+        data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'to':document.getElementById('tmailto').value}, // our data object
+        dataType    : 'json', // what type of data do we expect back from the server
+        encode      : true
+    })
+        // using the done promise callback
+        .done(function(data) {
+            $.each(data, function(index) {});
+            
+        });
+        event.preventDefault();
+        document.getElementById('closex').click();
+        return true; 
+}
+
+    
+    </script>
+
+    <script src="{% static 'js/modal/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/modal/main.js' %}"></script> 
+    <script src="{% static 'new/js/news.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/magicscroll.js' %}"></script>
+    <script src="{% static 'js/modal/popper.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/magicscroll.css' %}" media="screen"/>
+    <link rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/modal/style.css' %}"> 
 
- 
-<link  rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
-<link  rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
-<link  rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
-<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
+    <style>body {
+      margin: 0px !important;
+      font-family: sans-seri;
+      }
+    
+    #fontSizeWrapper { font-size: 16px; }
+    
+    #fontSize {
+      width: 100px;
+      font-size: 1em;
+      }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree core styles
+    */
+    .tree { margin: 1em; }
+    
+    .tree input {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      }
+    
+    .tree input ~ ul { display: none; }
+    
+    .tree input:checked ~ ul { display: block; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree rows
+    */
+    .tree li {
+      line-height: 1.2;
+      position: relative;
+      padding: 0 0 1em 1em;
+      }
+    
+    .tree ul li { padding: 1em 0 0 1em; }
+    
+    .tree > li:last-child { padding-bottom: 0; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree labels
+    */
+    .tree_label {
+      position: relative;
+      display: inline-block;
+      background: #fff;
+      }
+      #mgc2 a{
+      visibility: hidden;
+      }
+      #mgc3 a{
+      visibility: hidden;
+      }
+      #terms a{
+      visibility: hidden;
+      }
+    
+    label.tree_label { cursor: pointer; }
+    
+    label.tree_label:hover { color: #666; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree expanded icon
+    */
+    label.tree_label:before {
+      background: #000;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      float: left;
+      margin: 0 1em 0 -2em;
+      width: 1em;
+      height: 1em;
+      border-radius: 1em;
+      content: '+';
+      text-align: center;
+      line-height: .9em;
+      }
+    
+    :checked ~ label.tree_label:before { content: '-'; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree branches
+    */
+    .tree li:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -.5em;
+      display: block;
+      width: 0;
+      border-left: 1px solid #777;
+      content: "";
+      }
+    
+    .tree_label:after {
+      position: absolute;
+      top: 0;
+      left: -1.5em;
+      display: block;
+      height: 0.5em;
+      width: 1em;
+      border-bottom: 1px solid #777;
+      border-left: 1px solid #777;
+      border-radius: 0 0 0 .3em;
+      content: '';
+      }
+    
+    label.tree_label:after { border-bottom: 0; }
+    
+    :checked ~ label.tree_label:after {
+      border-radius: 0 .3em 0 0;
+      border-top: 1px solid #777;
+      border-right: 1px solid #777;
+      border-bottom: 0;
+      border-left: 0;
+      bottom: 0;
+      top: 0.5em;
+      height: auto;
+      }
+    
+    .tree li:last-child:before {
+      height: 1em;
+      bottom: auto;
+      }
+    
+    .tree > li:last-child:before { display: none; }
+    
+    .tree_custom {
+      display: block;
+      background: #eee;
+      padding: 1em;
+      border-radius: 0.3em;
+    }
+    
+    .widget-selected{
+      color: red;
+    }
+    
+    h1{
+      font-weight: bold;
+    }</style>
+        <style>
+      
+          #mgc a{
+      visibility: hidden;
+    }
+            
+            @font-face {
+            font-family: 'Antietam';
+            font-style: normal;
+            font-weight: normal;
+          src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+          }
+    
+        </style>
+           <style>
+            #all_news{background: white;width: 30%;height: 32px;overflow: hidden;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;padding: 0px;position: relative;}#all_news span{float: left;color: rgba(0,0,0,.8);color: #fff;background: #00425a;padding: 6px;position: relative;border-radius: 4px;font-size: 12px;-webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);background: rgb(0,75,103);background: -moz-linear-gradient(top, rgba(0,75,103,1) 0%, rgba(0,53,72,1) 100%);background: -webkit-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -o-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -ms-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004b67', endColorstr='#003548',GradientType=0 )}#all_news ul{float: left;padding-left: 20px;-webkit-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;-moz-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-ms-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite}#all_news ul:hover{-webkit-animation-play-state: paused;-moz-animation-play-state: paused;-ms-animation-play-state: paused;animation-play-state: paused}#all_news li{line-height: 25px}#all_news a{color:white; whitext-decoration: none;font-size: 10px; padding: 10px;}@-webkit-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-moz-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-ms-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}
+        </style>
+            
+    <script>
+      function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+      
+      
+      
+      function setFontSize(el) {
+          var fontSize = el.val();
+          
+          if ( isNumber(fontSize) && fontSize >= 0.5 ) {
+            $('body').css({ fontSize: fontSize + 'em' });
+          } else if ( fontSize ) {
+            el.val('1');
+            $('body').css({ fontSize: '1em' });  
+          }
+      }
+      
+      $(function() {
+        
+        $('#fontSize')
+          .bind('change', function(){ setFontSize($(this)); })
+          .bind('keyup', function(e){
+            if (e.keyCode == 27) {
+              $(this).val('1');
+              $('body').css({ fontSize: '1em' });  
+            } else {
+              setFontSize($(this));
+            }
+          });
+        
+        $(window)
+          .bind('keyup', function(e){
+            if (e.keyCode == 27) {
+              $('#fontSize').val('1');
+              $('body').css({ fontSize: '1em' });  
+            }
+          });
+        
+      });
+      </script>
+<script>
+  pdfjsLib.getDocument('./static/image/Html_6.pdf').promise.then(doc =>{
+      console.log("This file has "+doc._pdfInfo.numPages + " pages");
+
+      doc.getPage(1).then(page =>{
+          var myCanvas = document.getElementById("my_canvas");
+          var context =  myCanvas.getContext("2d");
+
+          var viewport = page.getViewport({scale:1.5});
+          myCanvas.width = viewport.width;
+          myCanvas.height = viewport.height;
+          page.render({ 
+              canvasContext:context, 
+              viewport:viewport
+          });
+      });
+  });
+</script>
+<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shorthandcss@1.1.1/dist/shorthand.min.css" />
 
  
   </body>
