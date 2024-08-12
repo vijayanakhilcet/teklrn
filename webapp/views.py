@@ -3077,7 +3077,7 @@ class RelatedNewsView(FormView):
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
         for a in soup.find_all('span'):
-            datatotest = a.text.split('.')[0].replace("'", "").trim()
+            datatotest = a.text.split('.')[0].replace("'", "").strip()
             if len(datatotest.split(' '))>4 and 'www.' not in a.text and '›' not in a.text and 'searches related to' not in a.text.lower()  and ' ago' not in a.text.lower():
                 course_json = {}
                 course_json['newtitle'] = datatotest
@@ -3094,7 +3094,7 @@ class RelatedNewsView(FormView):
             soup = BeautifulSoup(content, 'html.parser')
             search = soup.find(id = 'search')
             for a in search.find_all('span'):
-                 datatotest = a.text.split('.')[0].replace("'", "").trim()
+                 datatotest = a.text.split('.')[0].replace("'", "").strip()
                  if len(datatotest.split(' '))>4 and 'www.' not in a.text and '›' not in a.text and 'searches related to' not in a.text.lower() and ' ago' not in a.text.lower():
                     course_json = {}
                     course_json['newtitle'] = datatotest
