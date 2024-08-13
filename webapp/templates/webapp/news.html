@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head> 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
-    crossorigin="anonymous"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3671375601838095"
+    crossorigin="anonymous"></script> -->
     <meta charset="utf-8">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -209,17 +209,7 @@
     <link async rel="stylesheet" href="{% static 'css/modal/ionicons.min.css' %}">
     <link async rel="stylesheet" href="{% static 'css/modal/style.css' %}"> 
 
-    <style>body {
-      margin: 0px !important;
-      font-family: sans-seri;
-      }
-    
-    #fontSizeWrapper { font-size: 16px; }
-    
-    #fontSize {
-      width: 100px;
-      font-size: 1em;
-      }
+    <style>
     
     /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
       Tree core styles
@@ -370,47 +360,9 @@
         </style>
             
     <script>
-      function isNumber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-      }
-      
-      
-      
-      function setFontSize(el) {
-          var fontSize = el.val();
-          
-          if ( isNumber(fontSize) && fontSize >= 0.5 ) {
-            $('body').css({ fontSize: fontSize + 'em' });
-          } else if ( fontSize ) {
-            el.val('1');
-            $('body').css({ fontSize: '1em' });  
-          }
-      }
-      
-      $(function() {
-        
-        $('#fontSize')
-          .bind('change', function(){ setFontSize($(this)); })
-          .bind('keyup', function(e){
-            if (e.keyCode == 27) {
-              $(this).val('1');
-              $('body').css({ fontSize: '1em' });  
-            } else {
-              setFontSize($(this));
-            }
-          });
-        
-        $(window)
-          .bind('keyup', function(e){
-            if (e.keyCode == 27) {
-              $('#fontSize').val('1');
-              $('body').css({ fontSize: '1em' });  
-            }
-          });
-        
-      });
+    
       </script>
-<script>
+<!-- <script>
   pdfjsLib.getDocument('./static/image/Html_6.pdf').promise.then(doc =>{
       console.log("This file has "+doc._pdfInfo.numPages + " pages");
 
@@ -427,7 +379,7 @@
           });
       });
   });
-</script>
+</script> -->
 <link async rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" type="text/css" />
 <link async rel="stylesheet" href="{% static 'new/css/style.robo.css' %}" type="text/css" />
 <link async rel="stylesheet" href="{% static 'new/css/style.pop.css' %}" type="text/css" />
