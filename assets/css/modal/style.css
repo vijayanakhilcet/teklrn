@@ -4,6 +4,148 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .tree { margin: 1em; }
+    
+    .tree input {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      }
+    
+    .tree input ~ ul { display: none; }
+    
+    .tree input:checked ~ ul { display: block; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree rows
+    */
+    .tree li {
+      line-height: 1.2;
+      position: relative;
+      padding: 0 0 1em 1em;
+      }
+    
+    .tree ul li { padding: 1em 0 0 1em; }
+    
+    .tree > li:last-child { padding-bottom: 0; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree labels
+    */
+    .tree_label {
+      position: relative;
+      display: inline-block;
+      background: #fff;
+      }
+      #mgc2 a{
+      visibility: hidden;
+      }
+      #mgc3 a{
+      visibility: hidden;
+      }
+      #terms a{
+      visibility: hidden;
+      }
+    
+    label.tree_label { cursor: pointer; }
+    
+    label.tree_label:hover { color: #666; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree expanded icon
+    */
+    label.tree_label:before {
+      background: #000;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      float: left;
+      margin: 0 1em 0 -2em;
+      width: 1em;
+      height: 1em;
+      border-radius: 1em;
+      content: '+';
+      text-align: center;
+      line-height: .9em;
+      }
+    
+    :checked ~ label.tree_label:before { content: '-'; }
+    
+    /* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“
+      Tree branches
+    */
+    .tree li:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -.5em;
+      display: block;
+      width: 0;
+      border-left: 1px solid #777;
+      content: "";
+      }
+    
+    .tree_label:after {
+      position: absolute;
+      top: 0;
+      left: -1.5em;
+      display: block;
+      height: 0.5em;
+      width: 1em;
+      border-bottom: 1px solid #777;
+      border-left: 1px solid #777;
+      border-radius: 0 0 0 .3em;
+      content: '';
+      }
+    
+    label.tree_label:after { border-bottom: 0; }
+    
+    :checked ~ label.tree_label:after {
+      border-radius: 0 .3em 0 0;
+      border-top: 1px solid #777;
+      border-right: 1px solid #777;
+      border-bottom: 0;
+      border-left: 0;
+      bottom: 0;
+      top: 0.5em;
+      height: auto;
+      }
+    
+    .tree li:last-child:before {
+      height: 1em;
+      bottom: auto;
+      }
+    
+    .tree > li:last-child:before { display: none; }
+    
+    .tree_custom {
+      display: block;
+      background: #eee;
+      padding: 1em;
+      border-radius: 0.3em;
+    }
+    
+    .widget-selected{
+      color: red;
+    }
+    
+    h1{
+      font-weight: bold;
+    }
+      
+          #mgc a{
+      visibility: hidden;
+    }
+            
+            @font-face {
+            font-family: 'Antietam';
+            font-style: normal;
+            font-weight: normal;
+          src: url("{% static 'fonts/antietam-font/AntietamTitle-lvjX.otf' %}") format("opentype");
+          }
+    
+      
+            #all_news{background: white;width: 30%;height: 32px;overflow: hidden;-webkit-border-radius: 0px;-moz-border-radius: 0px;border-radius: 0px;padding: 0px;position: relative;}#all_news span{float: left;color: rgba(0,0,0,.8);color: #fff;background: #00425a;padding: 6px;position: relative;border-radius: 4px;font-size: 12px;-webkit-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0,0,0,0.5);background: rgb(0,75,103);background: -moz-linear-gradient(top, rgba(0,75,103,1) 0%, rgba(0,53,72,1) 100%);background: -webkit-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -o-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: -ms-linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);background: linear-gradient(top, rgba(0,75,103,1) 0%,rgba(0,53,72,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004b67', endColorstr='#003548',GradientType=0 )}#all_news ul{float: left;padding-left: 20px;-webkit-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;-moz-animation: ticker 10s cubic-bezier(1, 0, .5, 0) infinite;-ms-animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite;animation: ticker 20s cubic-bezier(1, 0, .5, 0) infinite}#all_news ul:hover{-webkit-animation-play-state: paused;-moz-animation-play-state: paused;-ms-animation-play-state: paused;animation-play-state: paused}#all_news li{line-height: 25px}#all_news a{color:white; whitext-decoration: none;font-size: 10px; padding: 10px;}@-webkit-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-moz-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@-ms-keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}@keyframes ticker{0%{margin-top: 0}12.5%{margin-top: -26px}25%{margin-top: -52px}37.5%{margin-top: -78px}50%{margin-top: -104px}62.5%{margin-top: -130px}75%{margin-top: -156px}87.5%{margin-top: -182px}100%{margin-top: -206px}}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
