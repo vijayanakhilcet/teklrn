@@ -374,6 +374,30 @@ function isNumber(n) {
    return !isNaN(parseFloat(n)) && isFinite(n);
  }
  
+ function clickh(d, t){
+          
+   document.getElementById('comment').src=document.getElementById('img').innerHTML;
+   document.getElementById('desc').innerHTML =document.getElementById('technology_view').innerHTML;
+
+}
+
+function submitted(event){
+window.stop();
+$.ajax({
+url         : "/tmail", // the url where we want to POST
+data        : {"img":document.getElementById('comment').src, 'title': document.getElementById('desc').innerHTML, 'to':document.getElementById('tmailto').value}, // our data object
+dataType    : 'json', // what type of data do we expect back from the server
+encode      : true
+})
+// using the done promise callback
+.done(function(data) {
+   $.each(data, function(index) {});
+   
+});
+event.preventDefault();
+document.getElementById('closex').click();
+return true; 
+}
  
  
  function setFontSize(el) {
