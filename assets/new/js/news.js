@@ -30,8 +30,8 @@ $(function () {
           
    runit = 0;   
   });
-   document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
-   getLatestNews();      
+   // document.getElementById("ulNews").innerHTML=localStorage.getItem("varValue")
+   // getLatestNews();      
     $(document).on('hidden.bs.modal', function (event) {
        if ($('.modal:visible').length) {
           $('body').addClass('modal-open');
