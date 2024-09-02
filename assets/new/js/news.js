@@ -70,10 +70,6 @@ $(function () {
    imageExists = 0
    $.ajax({
       url: "/newsContent", // the url where we want to POST
-      headers: {
-         "Content-Encoding":"gzip",
-         "Accept-Encoding":"gzip"
-     },
       data: {
          "heading": document.getElementById("technology_view").textContent
       }, // our data object
@@ -94,10 +90,6 @@ $(function () {
          data: {
             "heading": document.getElementById("technology_view").textContent
          }, // our data object
-         headers: {
-            "Content-Encoding":"gzip",
-            "Accept-Encoding":"gzip"
-        },
          dataType: "json", // what type of data do\ we expect back from the server
          encode: true
       })
@@ -117,10 +109,6 @@ $(function () {
       data: {
       "titles": document.getElementById("technology_view").textContent
       },
-      headers: {
-         "Content-Encoding":"gzip",
-         "Accept-Encoding":"gzip"
-     },
       dataType: 'json',
       encode: true
   })
@@ -212,10 +200,6 @@ event.preventDefault();
        url         : "/getNewsMatchingTheSearchRandom", // the url where we want to POST
        data        : {"search_string":pg, "type":"Financial"}, // our data object
        dataType    : 'json', // what type of data do we expect back from the server
-       headers: {
-         "Content-Encoding":"gzip",
-         "Accept-Encoding":"gzip"
-     },
        encode      : true
    })
        // using the done promise callback
