@@ -60,7 +60,7 @@ $(function () {
       elm1.style.visibility = 'hidden';
     }
     document.getElementById('img-ins').src=document.getElementById("img").textContent.replaceAll('-----','&');
-    document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+    document.getElementById('title-ins').innerHTML=course_name;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
    getNewsContent();
  
@@ -71,7 +71,7 @@ $(function () {
    $.ajax({
       url: "/newsContent", // the url where we want to POST
       data: {
-         "heading": document.getElementById("technology_view").textContent
+         "heading": course_name
       }, // our data object
       dataType: "json", // what type of data do\ we expect back from the server
       encode: true
@@ -88,7 +88,7 @@ $(function () {
       $.ajax({
          url: "/newsContentAdditional", // the url where we want to POST
          data: {
-            "heading": document.getElementById("technology_view").textContent
+            "heading": course_name
          }, // our data object
          dataType: "json", // what type of data do\ we expect back from the server
          encode: true
@@ -107,7 +107,7 @@ $(function () {
    $.ajax({
       url: "/getRelatedNews",
       data: {
-      "titles": document.getElementById("technology_view").textContent
+      "titles": course_name
       },
       dataType: 'json',
       encode: true
@@ -163,7 +163,7 @@ $(function () {
                 "strVal": data.split('---')[1],
                 "titles": data,
                 "lang":'en',
-                "UrlTitle": document.getElementById("technology_view").textContent
+                "UrlTitle": course_name
                 },
                 dataType: 'json',
                 encode: true
@@ -798,7 +798,7 @@ return true;
       .done(function (data) {
          sideMenu();
          document.getElementById('img-ins').src=document.getElementById("img").textContent;
-         document.getElementById('title-ins').innerHTML=document.getElementById("technology_view").textContent;
+         document.getElementById('title-ins').innerHTML=course_name;
          document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
 
          })
