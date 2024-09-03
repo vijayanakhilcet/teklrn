@@ -1,5 +1,29 @@
 $(function () {
-
+  
+    var view_to_show = null;
+    lvl_to_show = null; 
+    lvl_to_show = document.getElementById("lvl_view").textContent; 
+ 
+    if (document.getElementById("technology_view")) {
+       view_to_show = document.getElementById("technology_view").textContent;
+    }
+    contentType = null;
+    if (document.getElementById("technology_contentType")) {
+       contentType = document.getElementById("technology_contentType").textContent
+    }
+    image_name = view_to_show + '_';
+    course_name = view_to_show;
+    course_description = view_to_show;
+    Code = document.getElementById("Code").textContent
+    var runit = 0;
+    img_content = document.getElementById("img").textContent;
+    if (img_content == ''){
+      elm1.style.visibility = 'hidden';
+    }
+    document.getElementById('img-ins').src=img_content.replaceAll('-----','&');
+    document.getElementById('title-ins').innerHTML=course_name;
+    document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
+   getNewsContent();
    $("#course-search").autocomplete({  
       source: "/autocomplete",
       dataType: 'json',
@@ -22,7 +46,6 @@ $(function () {
   if(runit === 0){
       if (event.keyCode === 13) {                                     
           $("#course-search").blur(); 
-
           searchView('United States', 'en', -1, event.target.value);
   
       }
@@ -37,43 +60,17 @@ $(function () {
           $('body').addClass('modal-open');
        }
     });
-    var view_to_show = null;
-    lvl_to_show = null;
- 
-    lvl_to_show = document.getElementById("lvl_view").textContent;
- 
- 
-    if (document.getElementById("technology_view")) {
-       view_to_show = document.getElementById("technology_view").textContent;
-    }
-    contentType = null;
-    if (document.getElementById("technology_contentType")) {
-       contentType = document.getElementById("technology_contentType").textContent
-    }
-    image_name = view_to_show + '_';
-    course_name = view_to_show;
-    course_description = view_to_show;
-    Code = document.getElementById("Code").textContent
-    var runit = 0;
-
-    if (document.getElementById("img").textContent == ''){
-      elm1.style.visibility = 'hidden';
-    }
-    document.getElementById('img-ins').src=document.getElementById("img").textContent.replaceAll('-----','&');
-    document.getElementById('title-ins').innerHTML=course_name;
-    document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
-   getNewsContent();
  
  });
  
  function getNewsContent(){
    imageExists = 0
    $.ajax({
-      url: "/newsContent", // the url where we want to POST
+      url: "/newsContent", 
       data: {
          "heading": course_name
-      }, // our data object
-      dataType: "json", // what type of data do\ we expect back from the server
+      },
+      dataType: "json", 
       encode: true
    })
    // using the done promise callback
@@ -115,8 +112,7 @@ $(function () {
   .done(function (data) {
     var test_html_message=""    
     li_el = "";
-    i=0
-    
+    i=0    
     $.each(data, function (index) {
        if (i == 0){
          if(data[index].img){
@@ -139,16 +135,13 @@ $(function () {
        
     
       }); 
-      document.getElementById("tree").innerHTML = "";
-      document.getElementById("tree").innerHTML = li_el;
-      
+      document.getElementById("tree").innerHTML = li_el;      
       document.getElementById("mgc2").innerHTML = test_html_message;
      
  })
  .complete(function(data) {
    
    if (imageExists==0){
-      
       // populateStaticNews("zzz");
       refineSearchView1("zzz", 'en', -1);
    }
@@ -170,16 +163,16 @@ $(function () {
             })
             .done(function (data) {
              $.each(data, function (index) {
+               to_insert= data[index].src;
                var elm = document.getElementById(data[index].title);
-               elm.src = data[index].src;
+               elm.src = to_insert;
                var elm = document.getElementById(data[index].title.replace('RelatedNws', 'RelatedTest2Nws'));
-               elm.src = data[index].src;
+               elm.src = to_insert;
                var elm = document.getElementById(data[index].title.replace('RelatedNws', 'RelatedTestNws'));
-               elm.src = data[index].src;
+               elm.src = to_insert;
                });
                
-                  }) .complete(function(data) {
-                  });
+                  })
                  
                
           });
@@ -206,7 +199,7 @@ event.preventDefault();
        .done(function(data) {
            elm.innerHTML="";  
            $.each(data, function(index) { 
-               html_message +='<div   style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 ease-300"><div style="font-size: x-small; padding-left: 70% !important;color: white; background-color: #4976c8; padding: 1.2%; border-radius: .5 em; font-weight: bold;">'+'<h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h><i class="fa fa-envelope" aria-hidden="true" style="color:lightyellow; margin-left:1%"></i>  <h style="text-decoration: underline;margin-left:8%;">TMS</h> <i class="fas fa-comment-alt" style="color:lightyellow; margin-left:1%;"></i>'+'  '+'</div><div onclick="gotoTechnology2(\''+data[index].name+'\',\''+data[index].name+'\',\''+data[index].imageLink+'\')" ><img class="w-100pc" playsinline="" id="frameclk'+index+'" style="pointer-events: none; width: 150px; height: 400px; object-fit: cover;"  src="'+data[index].imageLink+'"/></div><p style="padding-left:10px !important;padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].name+'</p><div class="indigo fs-s3 italic after-arrow-right my-4" style="padding-left: 13px !important;"><h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"><h onclick="gotoTechnology2(\''+data[index].name+'\',\''+data[index].name+'\',\''+data[index].imageLink+'\')"    data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">SCAN</h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/hie1.jpg"></div></a></div>';          
+               html_message +='<div style="padding: 0 !important;" class="w-100pc md-w-33pc p-10"><a style="padding: 0% !important;" class="block no-underline p-5 br-8 ease-300"><div style="font-size: x-small; padding-left: 70% !important;color: white; background-color: #4976c8; padding: 1.2%; border-radius: .5 em; font-weight: bold;">'+'<h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h><i class="fa fa-envelope" aria-hidden="true" style="color:lightyellow; margin-left:1%"></i>  <h style="text-decoration: underline;margin-left:8%;">TMS</h> <i class="fas fa-comment-alt" style="color:lightyellow; margin-left:1%;"></i>'+'  '+'</div><div onclick="gotoTechnology2(\''+data[index].name+'\',\''+data[index].name+'\',\''+data[index].imageLink+'\')" ><img class="w-100pc" playsinline="" id="frameclk'+index+'" style="pointer-events: none; width: 150px; height: 400px; object-fit: cover;"  src="'+data[index].imageLink+'"/></div><p style="padding-left:10px !important;padding-right:10px !important;font-weight: 450 !important; font-size: small !important; color: black !important;" class="fw-400 white fs-m3 mt-3">'+data[index].name+'</p><div class="indigo fs-s3 italic after-arrow-right my-4" style="padding-left: 13px !important;"><h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMAIL </h>  <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/29.jpg"> <h onclick="clickh(\''+data[index].imageLink+'\',\''+data[index].description+'\')"  data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">TMS </h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/39.jpg"><h onclick="gotoTechnology2(\''+data[index].name+'\',\''+data[index].name+'\',\''+data[index].imageLink+'\')"    data-toggle="modal" data-target="#exampleModalCenter" style="text-decoration: underline;">SCAN</h>   <img width="25" height="20" style="margin-left: 15px; margin-right: 15px;" src="/static/image/images/hie1.jpg"></div></a></div>';          
            });
          
    elm.innerHTML=html_message;
