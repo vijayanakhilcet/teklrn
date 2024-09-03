@@ -9,38 +9,26 @@ import wikipedia
 import urllib.request
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
-import numpy as np
 import re
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import FormView
-from dal import autocomplete
 from django.core.exceptions import ObjectDoesNotExist
 from webapp.models import FinancialRelatedNews, RelatedNews,UrlLink,Books,StudentAds, Country, Language, NewsFinancial, NewsEntertainment, NewsLinks, AllNewsLinks, NewsSearchUrls, NewsEntertainment, NewsEntertainmentLevel, NewsTechnology, NewsTechnologyLevel, News, NewsLevel, CareerRoles,Course, Student, StudentCourse, Teacher, TeacherCourse, CourseLevel, StudentCourseVideoBookings, Person, DailyNewsVideos, PersonVideoLinks
 import json
-from django.utils.timezone import make_aware
 import datetime, pytz
-import dateutil.parser
-from django.db.models import Q
 from django.conf import settings
 import stripe # new
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.utils import timezone
 from django.core.mail import EmailMessage
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import views as auth_views
 from django.urls import reverse
 from .utils import token_generator
-from django.shortcuts import redirect
-from .forms import StudentForm, ExtendedUserCreationForm
+from .forms import ExtendedUserCreationForm
 from django.contrib.auth.models import User
-import socket
 from dateutil.relativedelta import *
-import threading
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # new
 #HOSTNAME = settings.APP_HOST_NAME
@@ -2939,7 +2927,6 @@ class NewsContent(FormView):
             search = soup.find(id = 'search')
             for link in search.find_all('a'):
                 d = link['href']
-                # print(d)
                 if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
                     continue
                 try:
@@ -2997,8 +2984,7 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 course_json = {}                
                 course_json['description'] = entry["desc"].replace('\'', '')
                 course_json['link'] = entry["link"]
-                titles = entry["title"]
-                course_json['title'] = titles
+                course_json['title'] = entry["title"]
                 titles = translator.translate(titles, dest="en").text                                    
                 try:
                     course_json['imgLink'] =  '/static/image/test/certificate.jpg' #bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=1)[0]
@@ -3008,12 +2994,10 @@ class AutoCompleteSearchTopicsViewNewNews(FormView):
                 results.append(course_json)
         else:
             for entry in alldata:
-                course_json = {}
-                
+                course_json = {}                
                 course_json['description'] = entry["desc"].replace('\'', '')
                 course_json['link'] = entry["link"]
-                titles = entry["title"].replace('\'', '')
-                course_json['title'] = titles
+                course_json['title'] = entry["title"].replace('\'', '')
                     
                 try:
                     course_json['imgLink'] =  '/static/image/test/certificate.jpg' #bing_image_urls(titles.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', ''), limit=0)[0]
