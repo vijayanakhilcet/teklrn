@@ -56,8 +56,8 @@ $(function () {
     if (img_content == ''){
       elm1.style.visibility = 'hidden';
     }
-    document.getElementById('img-ins').src=img_content.replaceAll('-----','&');
-    document.getElementById('title-ins').innerHTML=course_name;
+   //  document.getElementById('img-ins').src=img_content.replaceAll('-----','&');
+   //  document.getElementById('title-ins').innerHTML=course_name;
     document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
    getNewsContent();
  
@@ -793,7 +793,7 @@ return true;
       // using the done promise callback
       .done(function (data) {
          sideMenu();
-         document.getElementById('img-ins').src=document.getElementById("img").textContent;
+         // document.getElementById('img-ins').src=document.getElementById("img").textContent;
          document.getElementById('title-ins').innerHTML=course_name;
          document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
 
