@@ -57,7 +57,7 @@ $(function () {
     }
    //  document.getElementById('img-ins').src=img_content.replaceAll('-----','&');
    //  document.getElementById('title-ins').innerHTML=course_name;
-    document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
+   document.getElementById('para-ins').innerHTML=document.getElementById("pElement").textContent;
    getNewsContent();
  
  
@@ -123,22 +123,21 @@ $(function () {
        }
       }
        i=i+1;
-       if (imageExists == 0){
-         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].img+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
-         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="'+data[index].img+'" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
+       title_temp = data[index].newtitle
+       if (imageExists == 0){         
+         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+title_temp+'\',\''+title_temp+'\',\''+'RelatedTest2Nws'+i+'---'+title_temp+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+title_temp+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].img+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+title_temp+'</p></div>';
+         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+title_temp+'\',\''+title_temp+'\',\''+'RelatedNws'+i+'---'+title_temp+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+title_temp+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="'+data[index].img+'" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+title_temp+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
       
        }
        else{
-         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedTest2Nws'+i+'---'+data[index].newtitle+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+data[index].newtitle+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+data[index].newtitle+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+data[index].newtitle+'</p></div>';
-         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+data[index].newtitle+'\',\''+data[index].newtitle+'\',\''+'RelatedNws'+i+'---'+data[index].newtitle+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+data[index].newtitle+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+data[index].newtitle+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
-       }
-       
+         test_html_message +='<div style="position:relative;" onclick="gotoTechnology1(\''+title_temp+'\',\''+title_temp+'\',\''+'RelatedTest2Nws'+i+'---'+title_temp+'\')" ><img onerror="this.src=\'/static/image/test/certificate.jpg\'"   id="RelatedTest2Nws'+i+'---'+title_temp+'" style="border-radius:8px;float: left;width: 200px; height:95px;object-fit: cover;" src="'+title_temp+'" /><p  style="background: black;padding-left:2%;font-size:xx-small;position:absolute; color:white;font-weight:600;bottom: 2px; text-transform: uppercase;border-bottom: 1mm ridge #1c8ccd;z-index:31222; width:100%; text-overflow: clip; overflow: hidden; ">'+title_temp+'</p></div>';
+         li_el += '<li><span class="tree_label"><div onclick="gotoTechnology1(\''+title_temp+'\',\''+title_temp+'\',\''+'RelatedNws'+i+'---'+title_temp+'\')" class="col-md-6"><p style="pointer-events: none; object-fit: cover;"><img style="border-radius: 11px;width: 100%; height: 250px; pointer-events: none; object-fit: cover;" id="RelatedNws'+i+'---'+title_temp+'" onerror="this.src=\'/static/image/test/certificate.jpg\'" src="/static/image/test/certificate.jpg" width="100%" height="30px" alt="Image" class="img-fluid"></p><div class="d-flex post-entry"><div class="post-content"><div style="text-transform: capitalize;font-weight: 450 !important; font-family: \'Poppins\', sans-serif; font-size: 13px !important;  color:black !important"><a style="padding-left: 0px !important;background: none; font-weight: 450px;">'+title_temp+'</a><img src="/static/image/images/read_b.png" style="width: 20%;float: right;"></div><hr><p style="font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;"> </p><div class="post-meta"> </div><div class="post-meta"></div></h4></div></div></div></span></li>';
+       }       
     
       }); 
-
       document.getElementById("tree").innerHTML = li_el;
+      document.getElementById("mgc2").innerHTML = test_html_message;      
       
-      document.getElementById("mgc2").innerHTML = test_html_message;
      
  })
  .complete(function(data) {
@@ -166,11 +165,12 @@ $(function () {
             .done(function (data) {
              $.each(data, function (index) {
                to_insert= data[index].src;
-               var elm = document.getElementById(data[index].title);
+               temp_title = data[index].title
+               var elm = document.getElementById(temp_title);
                elm.src = to_insert;
-               var elm = document.getElementById(data[index].title.replace('RelatedNws', 'RelatedTest2Nws'));
+               var elm = document.getElementById(temp_title.replace('RelatedNws', 'RelatedTest2Nws'));
                elm.src = to_insert;
-               var elm = document.getElementById(data[index].title.replace('RelatedNws', 'RelatedTestNws'));
+               var elm = document.getElementById(temp_title.replace('RelatedNws', 'RelatedTestNws'));
                elm.src = to_insert;
                });
                
