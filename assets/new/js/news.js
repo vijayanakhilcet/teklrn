@@ -175,8 +175,7 @@ $(function () {
                });
                
                   })
-                 
-               
+                                
           });
                   // populateStaticNews("zzz");
                   refineSearchView1("zzz", 'en', -1);
@@ -213,6 +212,7 @@ event.preventDefault();
 }
 
 function refineSearchView1(pg, lang, idx){
+   window.scrollTo({ top: 0, behavior: "auto" });
    doesDBDATAExists = false
    if(idx==-1){
    var datas = document.querySelectorAll('div[id^="searchD"]');
