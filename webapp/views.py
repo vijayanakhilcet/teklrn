@@ -3067,7 +3067,7 @@ class RelatedNewsView(FormView):
                 course_json = {}
                 course_json['newtitle'] = datatotest
                 results.append(course_json)
-        if len(results)<90:
+        if len(results)<10:
             url = 'https://www.google.com/search'
             headers = {
                 'Accept' : '*/*',
