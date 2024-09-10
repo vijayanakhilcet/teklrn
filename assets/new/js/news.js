@@ -66,7 +66,7 @@ $(function () {
  function getNewsContent(){
    imageExists = 0
    $.ajax({
-      url: "/newsContent", 
+      url: "/newsContentPre", 
       data: {
          "heading": course_name
       },
@@ -83,7 +83,7 @@ $(function () {
    .always(function(data) {
       if (!document.getElementById("para-ins").innerHTML.toLowerCase().includes('<hr>'.toLocaleLowerCase())){
       $.ajax({
-         url: "/newsContentAdditional", // the url where we want to POST
+         url: "/newsContent", // the url where we want to POST
          data: {
             "heading": course_name
          }, // our data object
@@ -226,24 +226,24 @@ function refineSearchView1(pg, lang, idx){
    if(idx==-1){
        elm1 = document.getElementById("ulNews");    
        html_message_1="";
-       $.ajax({
-           url         : "/getLatestNews", // the url where we want to POST
-           data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
-           dataType    : 'json', // what type of data do we expect back from the server
-           encode      : true
-       })
-           // using the done promise callback
-           .done(function(data) {
-               elm1.innerHTML="";  
-               i=-1
-               $.each(data, function(index) {
-                   i=i+1
-                   html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
+      //  $.ajax({
+      //      url         : "/getLatestNews", // the url where we want to POST
+      //      data        : {"search_string":pg, "lang":lang, "idx":idx}, // our data object
+      //      dataType    : 'json', // what type of data do we expect back from the server
+      //      encode      : true
+      //  })
+      //      // using the done promise callback
+      //      .done(function(data) {
+      //          elm1.innerHTML="";  
+      //          i=-1
+      //          $.each(data, function(index) {
+      //              i=i+1
+      //              html_message_1 +='<li><a href="#">'+data[index].description+'</a></li>';
                    
-               });
-               localStorage.setItem("varValue", html_message_1);
-       elm1.innerHTML=html_message_1
-           })
+      //          });
+      //          localStorage.setItem("varValue", html_message_1);
+      //  elm1.innerHTML=html_message_1
+      //      })
 
    }
    

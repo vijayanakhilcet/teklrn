@@ -251,3 +251,9 @@ class FinancialRelatedNews(models.Model):
     txt = models.CharField(max_length=10000, default='')
     def __str__(self):
         return self.txt
+    
+class RandomTechNews(models.Model): 
+    txt = models.CharField(max_length=10000)
+    def __str__(self):
+        return self.txt
+    

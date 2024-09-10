@@ -59,6 +59,7 @@ urlpatterns = [
     path('searchtopicsnewnews/',views.AutoCompleteSearchTopicsViewNewNews.as_view()),
     path('newsContent/',views.NewsContent.as_view()),
     path('newsContentAdditional/',views.NewsContentAdditional.as_view()),
+    path('newsContentPre/',views.NewsContentPre.as_view()),
     path('searchtopicsnewnewsForImg/',views.AutoCompleteSearchTopicsViewNewNewsForImg.as_view()),
     path('searchtopicsnewnewsForImgRelated/',views.AutoCompleteSearchTopicsViewNewNewsForImgRelated.as_view()),
     path('searchtopicsnewtrending/',views.AutoCompleteSearchTopicsViewNewTrending.as_view()),
