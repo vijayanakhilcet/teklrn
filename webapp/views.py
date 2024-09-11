@@ -2994,6 +2994,7 @@ class NewsContent(FormView):
             soup = BeautifulSoup(content, 'html.parser')
 
             search = soup.find(id = 'search')
+            
             for link in search.find_all('a'):
                 d = link['href']
                 if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d or "reddit" in d:
