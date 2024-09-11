@@ -83,7 +83,7 @@ $(function () {
    .always(function(data) {
       if (!document.getElementById("para-ins").innerHTML.toLowerCase().includes('<hr>'.toLocaleLowerCase())){
       $.ajax({
-         url: "/newsContent", // the url where we want to POST
+         url: "/newsContentAdditional", // the url where we want to POST
          data: {
             "heading": course_name
          }, // our data object
@@ -97,6 +97,7 @@ $(function () {
            });
            
       })
+      
       }
           
    });

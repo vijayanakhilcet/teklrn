@@ -2819,16 +2819,17 @@ class NewsContentAdditional(FormView):
         if data.get('heading'):
             heading = data.get('heading')
         urlLink = ''
-        # try:
-        #     urlLink = UrlLink.objects.get(name=heading)
-        #     course_json = {}
-        #     course_json['para'] = urlLink.para
-        #     results.append(course_json)
-        #     data = json.dumps(results)
-        #     mimetype = 'application/json'
-        #     return HttpResponse(data, mimetype)
-        # except UrlLink.DoesNotExist:
-        #     kl=0
+        try:
+            urlLink = UrlLink.objects.get(name=heading)
+            course_json = {}
+            if urlLink.para:
+                course_json['para'] = urlLink.para
+                results.append(course_json)
+                data = json.dumps(results)
+                mimetype = 'application/json'
+                return HttpResponse(data, mimetype)
+        except UrlLink.DoesNotExist:
+            kl=0
             
         try:
             search = heading
@@ -2865,9 +2866,9 @@ class NewsContentAdditional(FormView):
                           pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
 
                     if len(pElement.split())>=200:
-                        if f==0:
-                            f=f+1                            
-                            continue  
+                        # if f==0:
+                        #     f=f+1                            
+                        #     continue  
                         f=f+1
                         course_json = {}
                         course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
