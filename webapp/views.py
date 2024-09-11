@@ -2901,7 +2901,7 @@ class NewsContentPre(FormView):
             heading = data.get('heading')
         urlLink = ''
         try:
-            urlLink = urlLink = RandomTechNews.objects.order_by("?").first()
+            urlLink = RandomTechNews.objects.order_by("?").first()
             course_json = {}
             course_json['para'] = urlLink.txt
             results.append(course_json)
@@ -2930,6 +2930,7 @@ class NewsContentPre(FormView):
                 if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d or "reddit" in d:
                     continue
                 try:
+
                     soup = BeautifulSoup(requests.get(d).content, features="html5lib")
                     pElement = '<div style="font-size:1.4em !important;">'
                     i=0
