@@ -2902,65 +2902,27 @@ class NewsContentPre(FormView):
             heading = data.get('heading')
         urlLink = ''
         try:
+            urlLink1 = UrlLink.objects.get(name=heading)
+            if not urlLink1.para:
+                urlLink = RandomTechNews.objects.order_by("?").first()
+                course_json = {}
+                course_json['para'] = urlLink.txt
+                results.append(course_json)
+                data = json.dumps(results)
+                mimetype = 'application/json'
+            else:
+                course_json = {}
+                course_json['para'] = ''
+                results.append(course_json)
+                mimetype = 'application/json'
+        except UrlLink.DoesNotExist:
             urlLink = RandomTechNews.objects.order_by("?").first()
             course_json = {}
             course_json['para'] = urlLink.txt
             results.append(course_json)
             data = json.dumps(results)
             mimetype = 'application/json'
-            return HttpResponse(data, mimetype)
-        except UrlLink.DoesNotExist:
-            kl=0
-            
-        try:
-            url = 'https://www.google.com/search'
-
-            headers = {
-                'Accept' : '*/*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
-            }
-            parameters = {'q': heading}
-
-            content = requests.get(url, headers = headers, params = parameters).text
-            soup = BeautifulSoup(content, 'html5lib')
-
-            search = soup.find(id = 'search')
-            for link in search.find_all('a'):
-                d = link['href']
-                if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d or "reddit" in d:
-                    continue
-                try:
-
-                    soup = BeautifulSoup(requests.get(d).content, features="html5lib")
-                    pElement = '<div style="font-size:1.4em !important;">'
-                    i=0
-                    for all_p in soup.find_all('p'):
-                        lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
-                        if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscri' not in lower_p and 'all rights reserved' not in  lower_p:
-                          pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-                    if len(pElement.split())>=200:
-                        course_json = {}
-                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement)
-                        try:
-                            urlLink = UrlLink.objects.get(name=heading)            
-                        except UrlLink.DoesNotExist:
-                            urlLink = UrlLink(name=heading)
-                            urlLink.save()
-                        urlLink.para = course_json['para']
-                        urlLink.save()
-                        results.append(course_json)
-                        break
-                except:
-                    continue
-        except Exception as e:
-            course_json = {}
-            course_json['para'] = ''
-            results.append(course_json)
-                
-       # random.shuffle(results)
-        data = json.dumps(results)
-        mimetype = 'application/json'
+        
         return HttpResponse(data, mimetype)
 
 class NewsContent(FormView):
