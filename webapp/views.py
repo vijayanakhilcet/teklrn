@@ -1965,7 +1965,10 @@ class EntertainmentMatchingTheSearchNewView(FormView):
             if len(a.text.strip().split(' '))>4:
                 course_json = {}
                 img = '/static/image/test/certificate.jpg'
-                course_json['technology'] = a['href']
+                try:
+                    course_json['technology'] = a['href']
+                except:
+                    continue
                 course_json['description'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("’", "").replace(",", " ").replace(":", " ").strip()
                 if len(course_json['description'].split(" "))<5:
                     continue 
@@ -2768,7 +2771,10 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
                 course_json = {} 
                 e = unquote(entry.replace(stringVal+'-img-', ''))
                 course_json['title'] = stringVal+'-img-'+e
-                srch_txt = translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')
+                try:
+                    srch_txt = translator.translate(e.lstrip(digits), dest='en').text.replace(':', ' ').replace('-', ' ').replace(',', ' ').replace('"', '').replace('\'', '').replace('’', '')
+                except:
+                    continue
                 try:
                     course_json['src'] =  bing_image_urls(srch_txt, limit=1)[0]
                 except:
