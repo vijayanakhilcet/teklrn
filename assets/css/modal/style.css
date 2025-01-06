@@ -8495,3 +8495,22 @@ textarea.form-control {
   --color: rgba(255,255,255,.4); }
   .form-check.disabled .fill-checkbox .fill-control-description {
     color: rgba(255, 255, 255, 0.4); }
+
+    #div-s{
+      padding-left: 5px !important;padding-right: 5px !important; padding-top: 5px !important; color: white !important; font-family: 'Muli', sans-serif !important;
+    }
+    
+    #para-ins, #para-ins-additional{
+      margin-left: 3% !important; color: #4d4c4c;font-size:13px !important;display: block;  line-height: 1.8em;
+    }
+
+    #new-p, #new-p1{
+      font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;
+    }
+
+    #title-ins{
+      margin-left:3% !important;padding-top: 2% ;font-weight: 450 !important; font-family: 'Poppins', sans-serif; font-size: 14px !important;  color:black !important;
+    }
+    #title-div{
+      font-weight: 300 !important; font-family: 'Poppins', sans-serif; font-size: 16px !important;  color:black !important;
+    }
