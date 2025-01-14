@@ -24,7 +24,7 @@
     
     <main style="background-color: white !important; height: 100% !important; ">
       
-      <nav style="padding-left: 0px !important;padding-right: 0px !important;padding-top: 1px !important;z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-style">
         <div style="flex-direction: column;display: flex;" class="container-fluid">
 
             <div style="width: 100%;">
@@ -64,9 +64,9 @@
             </div>
    
           </nav>
-    <img style="padding-top: 280px;margin-left: 10px;z-index: 311; width: 22px;  position: fixed;" onclick="history.back()" src="/static/image/images/back_b.png">
+    <img style="width: 22px;" class="back_style" onclick="history.back()" src="/static/image/images/back_b.png">
      
-      <div style="padding-top: 0%;margin-top:10px;" style="padding: 1rem 0;" class="site-section">
+      <div lass="site-section site-sel">
         
         <div class="container">
 
@@ -80,15 +80,15 @@
                 
                
                 <div id="mgc2" class="MagicScroll" data-options="mode: cover-flow; height: 95px;" style="background-color: white;pointer-events: all;">
-                  <div class="mcs-item" data-item="0" style="width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;">
+                  <div class="mcs-item msc-item-1" data-item="0">
                      <div onclick="gotoTechnology('Carbon Capture Technology')" style="opacity: 1; visibility: visible;"></div>
-                     <canvas width="312" height="52" class="mcs-reflection" style="opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;"></canvas>
+                     <canvas width="312" height="52" class="mcs-reflection" class="canvas-style"></canvas>
                   </div>
                </div>
                 <div id="ttitle-div" class="d-flex post-entry"><div class="post-content"><div id="title-div"><div id="title-ins">{{technology}}</div>
              
          
-              <p style="margin: 3% !important;font-size: x-small;">By Black and Blue, Teklrn Inc., Published on {% now "" %}  <a href="#scan_clicker" style="text-decoration: underline;font-style: italic;font-size: 11px;color: #5A4FCF;margin-left: 5px; pointer-events: all;">Related News </a></p>
+              <p style="margin: 3% !important;font-size: x-small;">By Black and Blue, Teklrn Inc., Published on {% now "" %}  <a class="related-nws" style="pointer-events: all;" href="#scan_clicker">Related News </a></p>
             
               <p id="para-ins"></p></div><hr><p id="new-p"></p><div class="post-meta"> </div><div class="post-meta"><span></span></div></div></div></div></div>
               <p id="para-ins-additional"></p></div><hr><p id="new-p1"></p><div class="post-meta"> </div><div class="post-meta"><span></span></div></div></div></div></div>
@@ -124,7 +124,7 @@
         </div>
 
     </main>
-    <section style="padding-left: 0px !important; padding-right: 0px !important;" class="p-0 md-p-5">
+    <section class="p-0 md-p-5 section-style">
       <div id="initial"  class="flex flex-wrap">
     
       </div>

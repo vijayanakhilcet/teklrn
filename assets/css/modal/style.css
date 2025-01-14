@@ -8425,6 +8425,29 @@ textarea.form-control {
 .modal-dialog {
   max-width: 450px; }
 
+  .canvas-style{
+    opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;
+  }
+  .nav-style{
+    padding-left: 0px !important;padding-right: 0px !important;padding-top: 1px !important;z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;
+  }
+
+  .back_style{
+    padding-top: 280px;margin-left: 10px;z-index: 311; position: fixed;
+  }
+  .msc-item-1{
+    width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;
+  }
+
+  .related-nws{
+    text-decoration: underline;font-style: italic;font-size: 11px;color: #5A4FCF;margin-left: 5px;
+  }
+  .site-sel{
+    padding-top: 0%;margin-top:10px;padding: 1rem 0;
+  }
+  .section-style{
+    padding-left: 0px !important; padding-right: 0px !important;
+  }
 .modal-content {
   border: none;
   position: relative;
