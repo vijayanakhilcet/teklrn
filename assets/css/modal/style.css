@@ -2689,7 +2689,7 @@ input[type="button"].btn-block {
 }
 
 .marq-style{
-  text-transform: uppercase;padding-left: 6px !important; padding-bottom: 7px !important; font-size: .6rem !important;   font-family: 'Poppins', sans-serif; color:white !important; height: 30px !important;width: 100% !important; float: right !important;
+  text-transform: uppercase;padding-left: 6px !important; padding-bottom: 7px !important;    color:white !important; height: 30px !important;width: 100% !important; float: right !important;
 }
 
 .dropdown-menu {
