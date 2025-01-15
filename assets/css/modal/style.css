@@ -188,6 +188,8 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
@@ -2681,6 +2683,14 @@ input[type="button"].btn-block {
     border-left: 0.3em solid transparent; }
   .dropdown-toggle:empty::after {
     margin-left: 0; }
+
+.p-style{
+  margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%;
+}
+
+.marq-style{
+  text-transform: uppercase; background-color: #4976c8;padding-left: 6px !important; padding-bottom: 7px !important; font-size: .6rem !important;   font-family: 'Poppins', sans-serif; color:white !important; height: 30px !important;width: 100% !important; float: right !important;
+}
 
 .dropdown-menu {
   position: absolute;
