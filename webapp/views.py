@@ -2836,27 +2836,35 @@ class NewsContentAdditional(FormView):
                 return HttpResponse(data, mimetype)
         except UrlLink.DoesNotExist:
             kl=0
-            
+        search = heading    
         try:
-            search = heading
-            url = 'https://www.google.com/search'
+            try:
+                
+                url = 'https://www.google.com/search'
 
-            headers = {
-                'Accept' : '*/*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
-            }
-            parameters = {'q': search}
+                headers = {
+                    'Accept' : '*/*',
+                    'Accept-Language': 'en-US,en;q=0.5',
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+                }
+                parameters = {'q': search}
 
-            content = requests.get(url, headers = headers, params = parameters).text
+                content = requests.get(url, headers = headers, params = parameters).text
             soup = BeautifulSoup(content, 'html.parser')
 
-            search = soup.find(id = 'search')
+                search = soup.find(id = 'search')
+                search.find_all('a')
+                print('search1: '+search)
+            except:
+                url  = "https://search.yahoo.com/search?p="+heading
+                r = requests.get(url)
+                soup = BeautifulSoup(r.content, features='lxml')
+                search = soup
+
             f = 0
-            for link in search.find_all('a'):               
+            for link in search.find_all('a'):                               
                 d = link['href']
-                # print(d)
-                if "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
+                if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
                     continue
                 try:
                     r = requests.get(d)
@@ -3105,24 +3113,28 @@ class RelatedNewsView(FormView):
                 course_json['newtitle'] = datatotest
                 results.append(course_json)
         if len(results)<10:
-            url = 'https://www.google.com/search'
-            headers = {
-                'Accept' : '*/*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
-            }
-            parameters = {'q': courseName}
-            content = requests.get(url, headers = headers, params = parameters).text
-            soup = BeautifulSoup(content, 'html.parser')
-            search = soup.find(id = 'search')
-            for a in search.find_all('span'):
-                 data_text = a.text.lower()
-                 datatotest = data_text.split('.')[0].replace("'", "").strip()
-                 if len(datatotest.split(' '))>4 and 'www.' not in data_text and '›' not in data_text and 'searches related to' not in data_text and ' ago' not in data_text:
-                    course_json = {}
-                    course_json['newtitle'] = datatotest
-                    course_json['img'] = False
-                    results.append(course_json)
+            try:
+                url = 'https://www.google.com/search'
+                headers = {
+                    'Accept' : '*/*',
+                    'Accept-Language': 'en-US,en;q=0.5',
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82',
+                }
+                parameters = {'q': courseName}
+                content = requests.get(url, headers = headers, params = parameters).text
+                soup = BeautifulSoup(content, 'html.parser')
+                search = soup.find(id = 'search')
+                for a in search.find_all('span'):
+                    data_text = a.text.lower()
+                    datatotest = data_text.split('.')[0].replace("'", "").strip()
+                    if len(datatotest.split(' '))>4 and 'www.' not in data_text and '›' not in data_text and 'searches related to' not in data_text and ' ago' not in data_text:
+                        course_json = {}
+                        course_json['newtitle'] = datatotest
+                        course_json['img'] = False
+                        results.append(course_json)
+            except:
+                ghj=1
+
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
