@@ -2850,7 +2850,7 @@ class NewsContentAdditional(FormView):
                 parameters = {'q': search}
 
                 content = requests.get(url, headers = headers, params = parameters).text
-            soup = BeautifulSoup(content, 'html.parser')
+                soup = BeautifulSoup(content, 'html.parser')
 
                 search = soup.find(id = 'search')
                 search.find_all('a')
@@ -2868,7 +2868,7 @@ class NewsContentAdditional(FormView):
                     continue
                 try:
                     r = requests.get(d)
-                    soup = BeautifulSoup(r.content, features="lxml")
+                    soup = BeautifulSoup(r.content)
                     pElement = '<hr>'
                     pElement1 = '<div style="font-size:1.4em !important;">'
                     
@@ -2878,7 +2878,6 @@ class NewsContentAdditional(FormView):
                         if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
                           pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
                           pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-
 
                     if len(pElement.split())>=200:
                         # if f==0:
