@@ -188,6 +188,8 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
@@ -2681,6 +2683,14 @@ input[type="button"].btn-block {
     border-left: 0.3em solid transparent; }
   .dropdown-toggle:empty::after {
     margin-left: 0; }
+
+.p-style{
+  margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%;
+}
+
+.marq-style{
+  text-transform: uppercase;padding-left: 6px !important; padding-bottom: 7px !important;    color:white !important; height: 30px !important;width: 100% !important; float: right !important;
+}
 
 .dropdown-menu {
   position: absolute;
@@ -8425,6 +8435,29 @@ textarea.form-control {
 .modal-dialog {
   max-width: 450px; }
 
+  .canvas-style{
+    opacity: 1; top: 175px; left: 0px; width: 312px; transition: opacity 1000ms ease 0s;
+  }
+  .nav-style{
+    padding-left: 0px !important;padding-right: 0px !important;padding-top: 1px !important;
+  }
+
+  .back_style{
+    padding-top: 280px;margin-left: 10px;z-index: 311; position: fixed;
+  }
+  .msc-item-1{
+    width: 24.3716%; position: absolute; transform: translate3d(-451.95px, 0px, -350px) rotateX(0deg) rotateY(60deg); z-index: 31512;
+  }
+
+  .related-nws{
+    text-decoration: underline;font-style: italic;font-size: 11px;color: #5A4FCF;margin-left: 5px;
+  }
+  .site-sel{
+    padding-top: 0%;margin-top:10px;padding: 1rem 0;
+  }
+  .section-style{
+    padding-left: 0px !important; padding-right: 0px !important;
+  }
 .modal-content {
   border: none;
   position: relative;
@@ -8495,3 +8528,29 @@ textarea.form-control {
   --color: rgba(255,255,255,.4); }
   .form-check.disabled .fill-checkbox .fill-control-description {
     color: rgba(255, 255, 255, 0.4); }
+
+    #div-s{
+      padding-left: 5px !important;padding-right: 5px !important; padding-top: 5px !important; color: white !important; font-family: 'Muli', sans-serif !important;
+    }
+    
+    #para-ins, #para-ins-additional{
+      margin-left: 3% !important; color: #4d4c4c;font-size:13px !important;display: block;  line-height: 1.8em;
+    }
+
+    #new-p, #new-p1{
+      font-size:13px;display: block; text-overflow: ellipsis;  word-wrap: break-word;  overflow: hidden;  max-height: 3.6em;  line-height: 1.8em;
+    }
+
+    #title-ins{
+      margin-left:3% !important;padding-top: 2% ;font-weight: 450 !important; font-family: 'Poppins', sans-serif; font-size: 14px !important;  color:black !important;
+    }
+    #title-div{
+      font-weight: 300 !important; font-family: 'Poppins', sans-serif; font-size: 16px !important;  color:black !important;
+    }
+    #ttitle-div{
+    padding-left: 0px !important;padding-right: 0px !important;padding:10px;
+    }
+
+    #course-search{
+      height: 32px !important;width: 100% !important;padding: .375rem .75rem !important;font-weight: bolder;font-weight: 900; font-family: 'Font Awesome 5 Free';color:#131312; font-size: 17px !important;
+    }
