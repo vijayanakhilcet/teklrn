@@ -2879,6 +2879,7 @@ class NewsContentAdditional(FormView):
                           pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
                           pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
 
+
                     if len(pElement.split())>=200:
                         # if f==0:
                         #     f=f+1                            
