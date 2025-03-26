@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from googlenewsdecoder import gnewsdecoder
 from googletrans import Translator
 from bing_image_urls import bing_image_urls
 from string import digits
@@ -2839,25 +2840,28 @@ class NewsContentAdditional(FormView):
         search = heading    
         try:
             scraper = googleNewsFeedScraper(search.replace(' ', '+'))
-            results = scraper.scrape_google_news_feed_relatedContent()
-            if len(results)>0:
-                for link in results:                               
-                    d = link['newtitle']  
+            results_temp = scraper.scrape_google_news_feed_relatedContent()
+            if len(results_temp)>0:
+                f = 0
+                for link in results_temp:   
+                    decoded_url = gnewsdecoder(link, interval=8)
+                    d = decoded_url["decoded_url"]  
                     if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
                         continue
                     try:
                         r = requests.get(d)
-                        soup = BeautifulSoup(r.content, features="html5lib")
+                        soup = BeautifulSoup(r.content, features="html.parser")
                         pElement = '<hr>'
-                        pElement1 = '<div style="font-size:1.4em !important;">'
-                        
+                        pElement1 = '<div style="font-size:1.4em !important;">'                        
                         i=0
+                        
+                        
                         for all_p in soup.find_all('p'):
                             lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
                             if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
                                 pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
                                 pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-
+                                
                         if len(pElement.split())>=200:
                             # if f==0:
                             #     f=f+1                            
@@ -2870,11 +2874,11 @@ class NewsContentAdditional(FormView):
                             except UrlLink.DoesNotExist:
                                 urlLink = UrlLink(name=heading)
                                 urlLink.save()
-                            urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                            urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement[:9880])
                             urlLink.save()
                             results.append(course_json)
                             break
-                    except:
+                    except Exception as e:
                         continue
                    
 
@@ -3155,16 +3159,7 @@ class googleNewsFeedScraper:
         results= []
         if feed.entries:
             for entry in feed.entries:
-                course_json = {}
-                title = entry.title
-                link = entry.link
-                description = entry.description
-                pubdate = entry.published
-                source = entry.source
-                # print(f"Title: {title}\nLink: {link}\nDescription: {description}\nPublished: {pubdate}\nSource: {source}")
-                # print("-+-")                
-                course_json['newtitle'] = link
-                results.append(course_json)
+                results.append(entry.link)
         else:
             print("Nothing Found!")
         return results
