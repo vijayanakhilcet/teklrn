@@ -2498,6 +2498,41 @@ class AllAdvertisementsForUserView(FormView):
         return HttpResponse(data, mimetype)
 
 class NewsMatchingTheSearchView(FormView):
+    # def get(self,request,*args,**kwargs):
+    #     cate = 'GENERAL'
+    #     results= []
+    #     data = request.GET
+    #     topic = data.get("search_string")  
+    #     technologies = re.split(r'[;,\s]\s*', topic.strip())
+    #     results = []
+    #     for technology in technologies:
+    #         courses =  News.objects.filter(name__icontains=technology).order_by("-id")
+    #         if courses:
+    #             for tech in courses:
+    #                 course_json = {}
+    #                 course_json['name'] = tech.name
+    #                 course_json['category'] = tech.category
+    #                 course_json['contentType'] = tech.contentType
+    #                 course_json['imageLink'] = tech.imageLink
+
+    #                 #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+    #                 results.append(course_json)
+
+    #     if not results:
+
+    #         technologies = News.objects.all().order_by("-id")
+    #         for technology in technologies:
+    #             course_json = {}
+    #             course_json['name'] = technology.name
+    #             course_json['category'] = technology.category
+    #             course_json['contentType'] = technology.contentType
+    #             course_json['imageLink'] = technology.imageLink
+    #             #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+    #             results.append(course_json)
+    #     random.shuffle(results)
+    #     data = json.dumps(results)
+    #     mimetype = 'application/json'
+    #     return HttpResponse(data, mimetype)
     def get(self,request,*args,**kwargs):
         cate = 'GENERAL'
         results= []
@@ -2505,29 +2540,15 @@ class NewsMatchingTheSearchView(FormView):
         topic = data.get("search_string")  
         technologies = re.split(r'[;,\s]\s*', topic.strip())
         results = []
+        technologies = FinancialRelatedNews.objects.all().order_by("-id")
         for technology in technologies:
-            courses =  News.objects.filter(name__icontains=technology).order_by("-id")
-            if courses:
-                for tech in courses:
-                    course_json = {}
-                    course_json['name'] = tech.name
-                    course_json['category'] = tech.category
-                    course_json['contentType'] = tech.contentType
-                    course_json['imageLink'] = tech.imageLink
-
-                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
-                    results.append(course_json)
-
-        if not results:
-
-            technologies = News.objects.all().order_by("-id")
-            for technology in technologies:
+            if technology.imgLink != '':
                 course_json = {}
-                course_json['name'] = technology.name
-                course_json['category'] = technology.category
-                course_json['contentType'] = technology.contentType
-                course_json['imageLink'] = technology.imageLink
-                #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
+                course_json['name'] = technology.txt
+                course_json['category'] = technology.txt
+                course_json['contentType'] = technology.txt
+                course_json['imageLink'] = technology.imgLink
+                    #course_json['videoLink'] = CourseLevel.objects.get(course=tech, level_number=1).videoLink
                 results.append(course_json)
         random.shuffle(results)
         data = json.dumps(results)
