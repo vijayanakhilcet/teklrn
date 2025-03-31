@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from googlenewsdecoder import gnewsdecoder
+# from googlenewsdecoder import gnewsdecoder
 from googletrans import Translator
 from bing_image_urls import bing_image_urls
 from string import digits
@@ -2865,7 +2865,7 @@ class NewsContentAdditional(FormView):
             if len(results_temp)>0:
                 f = 0
                 for link in results_temp:   
-                    decoded_url = gnewsdecoder(link, interval=8)
+                    # decoded_url = gnewsdecoder(link, interval=8)
                     d = decoded_url["decoded_url"]  
                     if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
                         continue

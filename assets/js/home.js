@@ -94,6 +94,7 @@ function getAllNews(){
     var elm = document.getElementById("trending_lst");
     var html_message ="";
     var mrqelem = document.getElementById('marq');    
+    title_temp = ""
     var html_message_marq="";
     $.ajax({
         url         : "/getNewsMatchingTheSearch", // the url where we want to POST
@@ -105,11 +106,14 @@ function getAllNews(){
         .done(function(data) {
             elm.innerHTML="";  
             $.each(data, function(index) {
+                title_temp = data[index].name;
                  if(index % 2 == 0) {
-                 html_message +='<div class="row"><div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none;  height: 300px; object-fit: cover;"  src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div>';
+                    
+                 html_message +='<div class="row"><div class="6u"><section class="special"><a style="pointer-events: all;"  onclick="gotoTechnology1(\''+data[index].name+'\',\''+data[index].name+'\',\''+'RelatedTest2Nws'+index+'---'+data[index].name+'\')"  class="image fit"><img style="pointer-events: all;  height: 300px; object-fit: cover;" id="RelatedTest2Nws'+index+'---'+title_temp+'"  src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a style-"pointer-events: all" onclick="gotoTechnology1(\''+data[index].name+'\',\''+data[index].name+'\',\''+'RelatedTest2Nws'+index+'---'+data[index].name+'\')"  class="button alt">Read More</a></li></ul></section></div>';
                  }
                  else{
-                    html_message +='<div class="6u"><section class="special"><a href="trendingnews/technology?technology='+data[index].name+'" class="image fit"><img style="pointer-events: none; height: 300px; object-fit: cover;" src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a href="/trendingnews/technology?technology='+data[index].name+'" class="button alt">Read More</a></li></ul></section></div></div>';
+
+                    html_message +='<div class="6u"><section class="special"><a style="pointer-events: all;"  onclick="gotoTechnology1(\''+data[index].name+'\',\''+data[index].name+'\',\''+'RelatedTest2Nws'+index+'---'+data[index].name+'\')" class="image fit"><img style="pointer-events: all; height: 300px; object-fit: cover;" id="RelatedTest2Nws'+index+'---'+title_temp+'" src="'+data[index].imageLink+'" alt=""></a><h3>'+''+'</h3><p>'+data[index].name+'</p><ul class="actions"><li><a style-"pointer-events: all" onclick="gotoTechnology1(\''+data[index].name+'\',\''+data[index].name+'\',\''+'RelatedTest2Nws'+index+'---'+data[index].name+'\')"  class="button alt">Read More</a></li></ul></section></div></div>';
   
                  }
                  html_message_marq +='<img onerror="this.src=\'/static/image/test/certificate.jpg\'"  src="'+data[index].imageLink+'" style="vertical-align: middle !important;padding-left:5px; padding-right: 5px; width: 100px; height: 40px; object-fit: cover;" id="'+'marq'+data[index].name+'"/>'+'<span style="vertical-align: middle !important;">'+data[index].name+'</span>';
@@ -141,6 +145,13 @@ function doLaunch(event, section_data) {
                                 });
         event.preventDefault();
 }
+
+ 
+function gotoTechnology1(pg, url, img){   
+    window.stop();
+    window.open(window.location.origin+"/news/technology?technology="+pg+"&Code="+$("#countryCode option:selected").val()+"&url="+url+"&image="+document.getElementById(img).src.replaceAll('&', '-----'), "_self");
+   
+ }
 
 function doLaunchCareer(event) {
         $.ajax({
