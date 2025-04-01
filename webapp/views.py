@@ -2863,7 +2863,7 @@ class NewsContentAdditional(FormView):
             try:        
                 url = 'https://www.bing.com/search?q='+heading
                 content = requests.get(url).text
-                soup = BeautifulSoup(content, 'html.parser')
+                soup = BeautifulSoup(content, 'html5lib')
                 soup.prettify()
                 search.find_all('a')
             except:
