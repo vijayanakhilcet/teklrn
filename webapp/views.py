@@ -2863,7 +2863,7 @@ class NewsContentAdditional(FormView):
             try:        
                 url = 'https://www.bing.com/search?q='+heading
                 content = requests.get(url).text
-                soup = BeautifulSoup(content, 'lxml')
+                soup = BeautifulSoup(content)
                 soup.prettify()
                 search.find_all('a')
             except:
@@ -2889,7 +2889,7 @@ class NewsContentAdditional(FormView):
                     search = soup
 
             f = 0
-            for link in search.find_all('a'):                               
+            for link in search.find_all('a', href=True):                               
                 d = link['href']
                 if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
                     continue
