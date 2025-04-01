@@ -2848,67 +2848,27 @@ class NewsContentAdditional(FormView):
             heading = data.get('heading')
         urlLink = ''
         try:
-            urlLink = UrlLink.objects.get(name=heading)
-            course_json = {}
-            if urlLink.para:
-                course_json['para'] = urlLink.para
-                results.append(course_json)
-                data = json.dumps(results)
-                mimetype = 'application/json'
-                return HttpResponse(data, mimetype)
-        except UrlLink.DoesNotExist:
-            kl=0
-        search = heading    
-        try:
-            scraper = googleNewsFeedScraper(search.replace(' ', '+'))
-            results_temp = scraper.scrape_google_news_feed_relatedContent()
-            if len(results_temp)>0:
-                f = 0
-                for link in results_temp:   
-                    # decoded_url = gnewsdecoder(link, interval=8)
-                    d = decoded_url["decoded_url"]  
-                    if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
-                        continue
-                    try:
-                        r = requests.get(d)
-                        soup = BeautifulSoup(r.content, features="html.parser")
-                        pElement = '<hr>'
-                        pElement1 = '<div style="font-size:1.4em !important;">'                        
-                        i=0
-                        
-                        
-                        for all_p in soup.find_all('p'):
-                            lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
-                            if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
-                                pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-                                pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-                                
-                        if len(pElement.split())>=200:
-                            # if f==0:
-                            #     f=f+1                            
-                            #     continue  
-                            f=f+1
-                            course_json = {}
-                            course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
-                            try:
-                                urlLink = UrlLink.objects.get(name=heading)            
-                            except UrlLink.DoesNotExist:
-                                urlLink = UrlLink(name=heading)
-                                urlLink.save()
-                            urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement[:9880])
-                            urlLink.save()
-                            results.append(course_json)
-                            break
-                    except Exception as e:
-                        continue
-                   
-
-            else:       
-                
-                try:             
-                    
+            try:
+                urlLink = UrlLink.objects.get(name=heading)
+                course_json = {}
+                if urlLink.para:
+                    course_json['para'] = urlLink.para
+                    results.append(course_json)
+                    data = json.dumps(results)
+                    mimetype = 'application/json'
+                    return HttpResponse(data, mimetype)
+            except UrlLink.DoesNotExist:
+                kl=0
+            search = heading    
+            try:        
+                url = 'https://www.bing.com/search?q='+heading
+                content = requests.get(url).text
+                soup = BeautifulSoup(content, 'html.parser')
+                soup.prettify()
+                search.find_all('a')
+            except:
+                try:        
                     url = 'https://www.google.com/search'
-
                     headers = {
                         'Accept' : '*/*',
                         'Accept-Language': 'en-US,en;q=0.5',
@@ -2918,49 +2878,51 @@ class NewsContentAdditional(FormView):
 
                     content = requests.get(url, headers = headers, params = parameters).text
                     soup = BeautifulSoup(content, 'html.parser')
+                    soup.prettify()
                     search = soup.find(id = 'search')
                     search.find_all('a')
                 except:
-                    url  = "https://search.yahoo.com/search?p="+heading
+                    url  = "https://search.yahoo.com/search?p"+heading
                     r = requests.get(url)
                     soup = BeautifulSoup(r.content, features='lxml')
+                    soup.prettify()
                     search = soup
 
-                f = 0
-                for link in search.find_all('a'):                               
-                    d = link['href']
-                    if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
-                        continue
-                    try:
-                        r = requests.get(d)
-                        soup = BeautifulSoup(r.content)
-                        pElement = '<hr>'
-                        pElement1 = '<div style="font-size:1.4em !important;">'
-                        
-                        i=0
-                        for all_p in soup.find_all('p'):
-                            lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
-                            if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
-                                pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-                                pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+            f = 0
+            for link in search.find_all('a'):                               
+                d = link['href']
+                if "yahoo" in d or "wikipedia" in d or "ft-com" in d or "ft.com" in d or "twitter.com" in d or "youtube.com" in d  or "linkedin.com" in d:
+                    continue
+                try:
+                    r = requests.get(d)
+                    soup = BeautifulSoup(r.content)
+                    pElement = '<hr>'
+                    pElement1 = '<div style="font-size:1.4em !important;">'
+                            
+                    i=0
+                    for all_p in soup.find_all('p'):
+                        lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
+                        if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
+                            pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+                            pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
 
-                        if len(pElement.split())>=200:
-                            # if f==0:
-                            #     f=f+1                            
-                            #     continue  
-                            f=f+1
-                            course_json = {}
-                            course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
-                            try:
-                                urlLink = UrlLink.objects.get(name=heading)            
-                            except UrlLink.DoesNotExist:
-                                urlLink = UrlLink(name=heading)
-                                urlLink.save()
-                            urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                    if len(pElement.split())>=200:
+                                # if f==0:
+                                #     f=f+1                            
+                                #     continue  
+                        f=f+1
+                        course_json = {}
+                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
+                        try:
+                            urlLink = UrlLink.objects.get(name=heading)            
+                        except UrlLink.DoesNotExist:
+                            urlLink = UrlLink(name=heading)
                             urlLink.save()
-                            results.append(course_json)
-                    except:
-                        continue
+                        urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                        urlLink.save()
+                        results.append(course_json)
+                except:
+                    continue
         except Exception as e:
             pElement = ''
             course_json = {}
