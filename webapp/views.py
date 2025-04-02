@@ -2861,12 +2861,15 @@ class NewsContentAdditional(FormView):
                 kl=0
             search = heading    
             try:        
-                url = 'https://www.bing.com/search?q='+heading
+                url = 'https://www.bing.com/search?q='+heading.replace(' ', '+')
                 content = requests.get(url).text
                 soup = BeautifulSoup(content, 'html5lib')
                 soup.prettify()
-                search.find_all('a')
-            except:
+                search=soup
+                soup.find_all('a', href=True)
+                
+            except Exception as e:
+                print("Except Except")
                 try:        
                     url = 'https://www.google.com/search'
                     headers = {
