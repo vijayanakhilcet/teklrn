@@ -2863,7 +2863,7 @@ class NewsContentAdditional(FormView):
             try:        
                 url = 'https://www.bing.com/search?q='+heading
                 content = requests.get(url).text
-                soup = BeautifulSoup(content)
+                soup = BeautifulSoup(content, 'html5lib')
                 soup.prettify()
                 search.find_all('a')
             except:
@@ -2877,14 +2877,14 @@ class NewsContentAdditional(FormView):
                     parameters = {'q': search}
 
                     content = requests.get(url, headers = headers, params = parameters).text
-                    soup = BeautifulSoup(content, 'html.parser')
+                    soup = BeautifulSoup(content, 'html5lib')
                     soup.prettify()
                     search = soup.find(id = 'search')
                     search.find_all('a')
                 except:
                     url  = "https://search.yahoo.com/search?p"+heading
                     r = requests.get(url)
-                    soup = BeautifulSoup(r.content, features='lxml')
+                    soup = BeautifulSoup(r.content, features='html5lib')
                     soup.prettify()
                     search = soup
 
@@ -2895,7 +2895,7 @@ class NewsContentAdditional(FormView):
                     continue
                 try:
                     r = requests.get(d)
-                    soup = BeautifulSoup(r.content)
+                    soup = BeautifulSoup(r.content, 'html5lib')
                     pElement = '<hr>'
                     pElement1 = '<div style="font-size:1.4em !important;">'
                             
