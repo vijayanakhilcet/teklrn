@@ -2839,8 +2839,92 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
-
+    
 class NewsContentAdditional(FormView):
+        def get(self,request,*args,**kwargs):
+            flag = False
+            results= []
+            data = request.GET        
+            if data.get('heading'):
+                heading = data.get('heading')
+            urlLink = ''
+            try:
+                try:
+                    urlLink = UrlLink.objects.get(name=heading)
+                    course_json = {}
+                    if urlLink.para:
+                        course_json['para'] = urlLink.para
+                        results.append(course_json)
+                        data = json.dumps(results)
+                        mimetype = 'application/json'
+                        return HttpResponse(data, mimetype)
+                except UrlLink.DoesNotExist:
+                    kl=0
+                search = heading 
+                headers = {
+                                "User-Agent":
+                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+                            }
+               
+                r = requests.get('https://apnews.com/search?q='+heading.replace(' ', '+'), headers=headers)
+                soup = BeautifulSoup(r.content)
+                soup = soup.find('div', {'class': 'PageList-items'})
+                for a in soup.find_all('a', href=True):  
+                    if len(a.text.strip().split(' '))>6:
+                        d=''
+                        try:
+                            d = a['href']
+                            
+                        except Exception as e1:
+                            break
+                            kkk=0
+                        if 'https://apnews.com' in d:   
+                            try:
+                                r = requests.get(d)
+                                soup1 = BeautifulSoup(r.content)
+                                pElement = '<hr>'
+                                pElement1 = '<div style="font-size:1.4em !important;">'
+                                
+                                i=0
+                                for all_p in soup1.find_all('p'):
+                                    lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
+                                    if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
+                                        pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+                                        pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+
+                                    if len(pElement.split())>=200:
+                                        course_json = {}
+                                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
+                                        try:
+                                            urlLink = UrlLink.objects.get(name=heading)            
+                                        except UrlLink.DoesNotExist:
+                                            urlLink = UrlLink(name=heading)
+                                            urlLink.save()
+                                        urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                                        urlLink.save()
+                                        results.append(course_json)
+                                        flag = True
+                                        break
+                            except:
+                                continue
+                    if flag:
+                        break        
+            except Exception as e:
+                pElement = ''
+                course_json = {}
+                course_json['para'] = pElement
+                results.append(course_json)
+                
+                    
+        # random.shuffle(results)
+            data = json.dumps(results)
+            mimetype = 'application/json'
+            return HttpResponse(data, mimetype)
+
+
+
+
+class NewsContentAdditionalDirect(FormView):
     def get(self,request,*args,**kwargs):
         results= []
         data = request.GET        
@@ -2861,15 +2945,13 @@ class NewsContentAdditional(FormView):
                 kl=0
             search = heading    
             try:        
-                url = 'https://www.bing.com/search?q='+heading.replace(' ', '+')
+                url = 'https://www.bing.com/search?q='+heading
                 content = requests.get(url).text
-                soup = BeautifulSoup(content, 'html5lib')
+                soup = BeautifulSoup(content)
                 soup.prettify()
                 search=soup
-                soup.find_all('a', href=True)
-                
-            except Exception as e:
-                print("Except Except")
+                search.find_all('a', href=True)
+            except:
                 try:        
                     url = 'https://www.google.com/search'
                     headers = {
@@ -2880,14 +2962,14 @@ class NewsContentAdditional(FormView):
                     parameters = {'q': search}
 
                     content = requests.get(url, headers = headers, params = parameters).text
-                    soup = BeautifulSoup(content, 'html5lib')
+                    soup = BeautifulSoup(content, 'html.parser')
                     soup.prettify()
                     search = soup.find(id = 'search')
                     search.find_all('a')
                 except:
                     url  = "https://search.yahoo.com/search?p"+heading
                     r = requests.get(url)
-                    soup = BeautifulSoup(r.content, features='html5lib')
+                    soup = BeautifulSoup(r.content, features='lxml')
                     soup.prettify()
                     search = soup
 
@@ -2898,7 +2980,7 @@ class NewsContentAdditional(FormView):
                     continue
                 try:
                     r = requests.get(d)
-                    soup = BeautifulSoup(r.content, 'html5lib')
+                    soup = BeautifulSoup(r.content)
                     pElement = '<hr>'
                     pElement1 = '<div style="font-size:1.4em !important;">'
                             
@@ -2936,8 +3018,8 @@ class NewsContentAdditional(FormView):
         data = json.dumps(results)
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
-
-
+    
+    
 class NewsContentPre(FormView):
     def get(self,request,*args,**kwargs):
         results= []
@@ -3130,8 +3212,6 @@ class googleNewsFeedScraper:
                 description = entry.description
                 pubdate = entry.published
                 source = entry.source
-                # print(f"Title: {title}\nLink: {link}\nDescription: {description}\nPublished: {pubdate}\nSource: {source}")
-                # print("-+-")                
                 course_json['newtitle'] = title
                 results.append(course_json)
         else:
@@ -3161,8 +3241,6 @@ class googleNewsFeedScraper:
                 description = entry.description
                 pubdate = entry.published
                 source = entry.source
-                print(f"Title: {title}\nLink: {link}\nDescription: {description}\nPublished: {pubdate}\nSource: {source}")
-                print("-+-")
         else:
             print("Nothing Found!")
             
@@ -3271,8 +3349,6 @@ class AutoCompleteViewNew(FormView):
                     course_json['name'] = course
                     course_json['description'] = course
                     results.append(course_json)
-        # if not results:
-                # print("No results"+courseName)
         
         data = json.dumps(results)
         mimetype = 'application/json'
@@ -3591,8 +3667,6 @@ class UploadFileUsingClientView(FormView):
         request.session['count'] =count
         request.session['display'] = '** Advertisement ' +str(count) + '  (Optional)'
         return render(request, 'webapp/businesslogin.html', {'skip':True,'display': request.session['display'], 'count': count})
-
-        # pprint(response)  # prints None
 
 class LoginStudentView(FormView):
     def post(self,request,*args,**kwargs):
