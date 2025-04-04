@@ -2876,7 +2876,7 @@ class NewsContentAdditional(FormView):
                             d = a['href']
                             
                         except Exception as e1:
-                            break
+                            continue
                             kkk=0
                         if 'https://apnews.com' in d:   
                             try:
@@ -2892,23 +2892,21 @@ class NewsContentAdditional(FormView):
                                         pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
                                         pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
 
-                                    if len(pElement.split())>=200:
-                                        course_json = {}
-                                        course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
-                                        try:
-                                            urlLink = UrlLink.objects.get(name=heading)            
-                                        except UrlLink.DoesNotExist:
-                                            urlLink = UrlLink(name=heading)
-                                            urlLink.save()
-                                        urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                                if len(pElement.split())>=200:
+                                    course_json = {}
+                                    course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
+                                    try:
+                                        urlLink = UrlLink.objects.get(name=heading)            
+                                    except UrlLink.DoesNotExist:
+                                        urlLink = UrlLink(name=heading)
                                         urlLink.save()
-                                        results.append(course_json)
-                                        flag = True
-                                        break
+                                    urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                                    urlLink.save()
+                                    results.append(course_json)
+                                    break
                             except:
                                 continue
-                    if flag:
-                        break        
+                          
             except Exception as e:
                 pElement = ''
                 course_json = {}
