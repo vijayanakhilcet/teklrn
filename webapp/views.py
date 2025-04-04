@@ -2882,6 +2882,7 @@ class NewsContentAdditional(FormView):
                             try:
                                 r = requests.get(d)
                                 soup1 = BeautifulSoup(r.content)
+                                soup1 = soup1.find('div', {'class': 'RichTextStoryBody RichTextBody'})
                                 # pElement = '<hr>'
                                 pElement1 = '<div style="font-size:1.4em !important;">'
                                 pElement=''
