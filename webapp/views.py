@@ -2882,25 +2882,26 @@ class NewsContentAdditional(FormView):
                             try:
                                 r = requests.get(d)
                                 soup1 = BeautifulSoup(r.content)
-                                pElement = '<hr>'
+                                # pElement = '<hr>'
                                 pElement1 = '<div style="font-size:1.4em !important;">'
+                                pElement=''
                                 
                                 i=0
                                 for all_p in soup1.find_all('p'):
                                     lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
                                     if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
                                         pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
-                                        pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+                                        # pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
 
                                 if len(pElement.split())>=200:
                                     course_json = {}
-                                    course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1)
+                                    course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1+pElement)
                                     try:
                                         urlLink = UrlLink.objects.get(name=heading)            
                                     except UrlLink.DoesNotExist:
                                         urlLink = UrlLink(name=heading)
                                         urlLink.save()
-                                    urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement)
+                                    urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement1+pElement)
                                     urlLink.save()
                                     results.append(course_json)
                                     break
