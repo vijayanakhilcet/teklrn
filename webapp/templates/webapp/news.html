@@ -10,7 +10,7 @@
     <meta name="keywords" content="Technology, Learning, Latest, Science, Education, Quality" />
     <meta property="og:image" content="{{img}}" />
     <meta property="og:title" content="{{technology_desc}}">
-    <meta property="og:description" content="{{technology_desc}}">
+    <meta property="og:description" content="{{technology_desc}}">` ` 
   <link async rel="stylesheet" href="{% static 'css/style1.css' %}" type="text/css" />  
   </head>
   <body style="background-color: white !important; box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);">
@@ -24,7 +24,7 @@
     
     <main style="background-color: white !important; height: 100% !important; ">
       
-      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-style">
+      <nav style="z-index:200; position: fixed; top: 0; width: 100%; background-color:white !important;" class="navbar navbar-expand-lg navbar-light bg-light nav-style">
         <div style="flex-direction: column;display: flex;" class="container-fluid">
 
             <div style="width: 100%;">
@@ -34,7 +34,7 @@
             <a id="Current_c"></a>
             
             
-            <p style="margin-bottom:0%!important; margin-top: .2% ;float: left;width:100%;"> <marquee id="marq"  style="text-transform: uppercase; background-color: #4976c8;padding-left: 6px !important; padding-bottom: 7px !important; font-size: .6rem !important;   font-family: 'Poppins', sans-serif; color:white !important; height: 30px !important;width: 100% !important; float: right !important;" scrollamount="4" loop="infinite"></marquee>
+            <p class="p-style"> <marquee id="marq" style=" background-color: #4976c8; font-family: 'Poppins', sans-serif; font-size: .6rem !important;"  class="marq-style" scrollamount="4" loop="infinite"></marquee>
           
             <div style="padding-left: 10px !important;padding-right: 10px !important;">
                 <div>
@@ -95,9 +95,7 @@
 
               
              <div id="div-s">
-              <div id="ads" style="margin-top: -230px; height: 230px;">
-    
-                </div>
+              
               <ul class="tree">
                 <li>
                   <input type="checkbox"  id="c1" />
