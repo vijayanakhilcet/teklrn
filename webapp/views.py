@@ -1839,45 +1839,64 @@ class MatchingTheSearchNewView(FormView):
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
         }
         contentType= 'Search Results: '+data.get("srch")
-        r = requests.get('https://apnews.com/search?q='+searchData, headers=headers)
-        soup = BeautifulSoup(r.content)
-        for a in soup.find_all('span', {'class' : 'PagePromoContentIcons-text'}):    
-            if len(a.text.strip().split(' '))>6:
-                course_json = {}
-                course_json['technology'] = a.text.strip()
-                course_json['description'] =  course_json['technology']                 
-                course_json['contentType'] = contentType
-                course_json['count'] = 9999
-                results.append(course_json)
-        if not results:
-            url  = "https://search.yahoo.com/search?p="+searchData
-            r = requests.get(url, headers=headers)
-            soup = BeautifulSoup(r.content)
-            for a in soup.find_all('a'):
-                if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text and 'See All' not in a.text:
+        #new
+        url = "https://search.yahoo.com/search?p=" + query.replace(" ", "+")
+        headers = {"User-Agent": "Mozilla/5.0"}
+        r = requests.get(url, headers=headers)
+        soup = BeautifulSoup(r.text, "html.parser")
+        for item in soup.select(".dd.algo"):
+            title = item.select_one("h3")
+            link = item.select_one("a")
+            if title and link:
+                if ('britannica' not in link and 'wiki' not in link and 'imdb' not in link ):
+                    link = urllib.parse.unquote(link.split('/RO=10/RU=')[1].split('/RK=2')[0])
                     course_json = {}
-                    # img = '/static/image/test/certificate.jpg'
-                    course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("\"", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                    course_json['technology'] = title
                     course_json['description'] =  course_json['technology']                 
                     course_json['contentType'] = contentType
                     course_json['count'] = 9999
                     results.append(course_json)
-            # results=[]
+        if not results:    
+                    #new
+            r = requests.get('https://apnews.com/search?q='+searchData, headers=headers)
+            soup = BeautifulSoup(r.content)
+            for a in soup.find_all('span', {'class' : 'PagePromoContentIcons-text'}):    
+                if len(a.text.strip().split(' '))>6:
+                    course_json = {}
+                    course_json['technology'] = a.text.strip()
+                    course_json['description'] =  course_json['technology']                 
+                    course_json['contentType'] = contentType
+                    course_json['count'] = 9999
+                    results.append(course_json)
             if not results:
                 url  = "https://search.yahoo.com/search?p="+searchData
                 r = requests.get(url, headers=headers)
-                for a in soup.find_all('span'):
-                    # if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
-                    if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text:
+                soup = BeautifulSoup(r.content)
+                for a in soup.find_all('a'):
+                    if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text and 'See All' not in a.text:
                         course_json = {}
                         # img = '/static/image/test/certificate.jpg'
                         course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("\"", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
-                        course_json['description'] =  course_json['technology'] 
-                        if len(course_json['description'].split(" "))<5:
-                            continue 
+                        course_json['description'] =  course_json['technology']                 
                         course_json['contentType'] = contentType
                         course_json['count'] = 9999
                         results.append(course_json)
+                # results=[]
+                if not results:
+                    url  = "https://search.yahoo.com/search?p="+searchData
+                    r = requests.get(url, headers=headers)
+                    for a in soup.find_all('span'):
+                        # if len(a.text.strip().split(' '))>4 and 'www.' not in a.text and '›' not in a.text:
+                        if len(a.text.strip().split(' '))>5 and 'www.' not in a.text and '›' not in a.text:
+                            course_json = {}
+                            # img = '/static/image/test/certificate.jpg'
+                            course_json['technology'] = ' '.join(a.text.split()).replace("'", "").replace("‘", "").replace("\"", "").replace("’", "").replace(",", " ").replace(":", " ").replace("opinion content.", "").replace("review.", "").replace("video content.", "").replace("tech tonic.", "").strip()
+                            course_json['description'] =  course_json['technology'] 
+                            if len(course_json['description'].split(" "))<5:
+                                continue 
+                            course_json['contentType'] = contentType
+                            course_json['count'] = 9999
+                            results.append(course_json)
 
         random.shuffle(results)
         data = json.dumps(results)
@@ -2840,6 +2859,87 @@ class AutoCompleteSearchTopicsViewNewNewsForImg(FormView):
         mimetype = 'application/json'
         return HttpResponse(data, mimetype)
     
+# class NewsContentAdditional(FormView):
+#         def get(self,request,*args,**kwargs):
+#             flag = False
+#             results= []
+#             data = request.GET        
+#             if data.get('heading'):
+#                 heading = data.get('heading')
+#             urlLink = ''
+#             try:
+#                 try:
+#                     urlLink = UrlLink.objects.get(name=heading)
+#                     course_json = {}
+#                     if urlLink.para:
+#                         course_json['para'] = urlLink.para
+#                         results.append(course_json)
+#                         data = json.dumps(results)
+#                         mimetype = 'application/json'
+#                         return HttpResponse(data, mimetype)
+#                 except UrlLink.DoesNotExist:
+#                     kl=0
+#                 search = heading 
+#                 headers = {
+#                                 "User-Agent":
+#                                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+#                             }
+               
+#                 r = requests.get('https://apnews.com/search?q='+heading.replace(' ', '+'), headers=headers)
+#                 soup = BeautifulSoup(r.content)
+#                 soup = soup.find('div', {'class': 'PageList-items'})
+#                 for a in soup.find_all('a', href=True):  
+#                     if len(a.text.strip().split(' '))>6:
+#                         d=''
+#                         try:
+#                             d = a['href']
+                            
+#                         except Exception as e1:
+#                             continue
+#                             kkk=0
+#                         if 'https://apnews.com' in d:   
+#                             try:
+#                                 r = requests.get(d)
+#                                 soup1 = BeautifulSoup(r.content)
+#                                 soup1 = soup1.find('div', {'class': 'RichTextStoryBody RichTextBody'})
+#                                 # pElement = '<hr>'
+#                                 pElement1 = '<div style="font-size:1.4em !important;">'
+#                                 pElement=''
+                                
+#                                 i=0
+#                                 for all_p in soup1.find_all('p'):
+#                                     lower_p = re.sub("[\(\[].*?[\)\]]", "", all_p.text.lower().replace('/n', ' ').replace('\r', ' '))
+#                                     if len(all_p.text.strip().split())>=10 and 'updated on:' not in lower_p  and 'weekly newsletter' not in lower_p and 'the information you requested is not available at this time' not in lower_p  and 'photograph:' not in lower_p and 'website uses cookies' not in lower_p and 'disable the ad blocking' not in lower_p and 'financial times' not in lower_p and 'sign up for' not in lower_p and 'daily newsletter' not in lower_p and '©' not in lower_p and 'www.' not in lower_p and 'privacy policy' not in lower_p and 'subscription' not in lower_p and 'subscribe' not in lower_p and 'all rights reserved' not in  lower_p:
+#                                         pElement = pElement+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+#                                         # pElement1 = pElement1+ '<p style="font-size: 1.2em !important;font-family: -apple-system !important;padding-top:1% !important;padding-bottom:1% !important;color:black;">'+all_p.text.strip()+'</p>'
+
+#                                 if len(pElement.split())>=200:
+#                                     course_json = {}
+#                                     course_json['para'] = re.sub("[\(\[].*?[\)\]]", "", pElement1+pElement)
+#                                     try:
+#                                         urlLink = UrlLink.objects.get(name=heading)            
+#                                     except UrlLink.DoesNotExist:
+#                                         urlLink = UrlLink(name=heading)
+#                                         urlLink.save()
+#                                     urlLink.para = urlLink.para+re.sub("[\(\[].*?[\)\]]", "", pElement1+pElement)
+#                                     urlLink.save()
+#                                     results.append(course_json)
+#                                     break
+#                             except:
+#                                 continue
+                          
+#             except Exception as e:
+#                 pElement = ''
+#                 course_json = {}
+#                 course_json['para'] = pElement
+#                 results.append(course_json)
+                
+                    
+#         # random.shuffle(results)
+#             data = json.dumps(results)
+#             mimetype = 'application/json'
+#             return HttpResponse(data, mimetype)
+
 class NewsContentAdditional(FormView):
         def get(self,request,*args,**kwargs):
             flag = False
@@ -2857,33 +2957,35 @@ class NewsContentAdditional(FormView):
                         results.append(course_json)
                         data = json.dumps(results)
                         mimetype = 'application/json'
+                    
                         return HttpResponse(data, mimetype)
                 except UrlLink.DoesNotExist:
                     kl=0
                 search = heading 
-                headers = {
-                                "User-Agent":
-                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
-                            }
-               
-                r = requests.get('https://apnews.com/search?q='+heading.replace(' ', '+'), headers=headers)
-                soup = BeautifulSoup(r.content)
-                soup = soup.find('div', {'class': 'PageList-items'})
-                for a in soup.find_all('a', href=True):  
-                    if len(a.text.strip().split(' '))>6:
-                        d=''
-                        try:
-                            d = a['href']
+                url = "https://search.yahoo.com/search?p=" + heading.replace(" ", "+")
+                headers = {"User-Agent": "Mozilla/5.0"}               
+                r = requests.get(url, headers=headers)
+                soup = BeautifulSoup(r.text, "html.parser")
+                for a in soup.select(".dd.algo"): 
+                    title = a.select_one("h3")
+                    title = title.text
+                    link = a.select_one("a")
+                    link = link["href"]
+                    if title and link:                        
+                        if ('britannica' not in link and 'wiki' not in link and 'imdb' not in link ):
                             
-                        except Exception as e1:
-                            continue
+                            d=''
+                            try:
+                                d = urllib.parse.unquote(link.split('/RO=10/RU=')[1].split('/RK=2')[0])
+                                 
+                            except Exception as e1:
+                                continue
                             kkk=0
-                        if 'https://apnews.com' in d:   
+                        
                             try:
                                 r = requests.get(d)
+                                print("Link is "+d)  
                                 soup1 = BeautifulSoup(r.content)
-                                soup1 = soup1.find('div', {'class': 'RichTextStoryBody RichTextBody'})
-                                # pElement = '<hr>'
                                 pElement1 = '<div style="font-size:1.4em !important;">'
                                 pElement=''
                                 
@@ -2920,8 +3022,6 @@ class NewsContentAdditional(FormView):
             data = json.dumps(results)
             mimetype = 'application/json'
             return HttpResponse(data, mimetype)
-
-
 
 
 class NewsContentAdditionalDirect(FormView):
